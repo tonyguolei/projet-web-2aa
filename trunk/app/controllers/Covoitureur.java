@@ -11,9 +11,9 @@ public class Covoitureur extends Controller {
         render();
     }
 
-    public static void sinscrire(String nom,String prenom,int age,String email) {
+    public static void sinscrire(String nom,String prenom,int age,String email,String mdp) {
         //TODO création du membre
-        new models.Membre(nom,prenom,age,email).save();
+        new Membre(nom,prenom,mdp,age,email).save();
         Application.index();
     }
 
