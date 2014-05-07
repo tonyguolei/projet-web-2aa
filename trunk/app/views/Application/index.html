@@ -1,5 +1,71 @@
-#{extends 'main.html' /}
-#{set title:'Accueil' /}
+<!DOCTYPE html>
 
-<h1>Accueil</h1>
-<a href="@{Covoitureur.index()}">S'inscrire</a>
+<html>
+<head>
+    <title>Accueil</title>
+    <meta charset="${_response_encoding}">
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="@{'/public/javascripts/semantic.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    <script src="@{'/public/javascripts/accueil.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/semantic.css'}">
+    <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+</head>
+
+<body>
+    <header id="header">
+        <h1 class="ui green header">
+            Projet Web
+            <div class="sub header">Tu peux faire ce que tu veux ici</div>
+            <div class="ui facebook button">
+                <i class="facebook icon"></i>
+                Facebook
+            </div>
+            <div class="ui google plus button">
+                <i class="google plus icon"></i>
+                Google Plus
+            </div>
+            <div class="ui linkedin button">
+                <i class="linkedin icon"></i>
+                LinkedIn
+             </div>
+            <div class="ui youtube button">
+                <i class="youtube icon"></i>
+                YouTube
+            </div>
+        </h1>
+    </header>
+
+    <div class="ui divider"></div>
+
+    <div id="menu" class="ui menu">
+        <a class="active green inverted item" href="@{Application.index()}">
+            <i class="home icon"></i> Accueil
+        </a>
+        <a class="active red item" href="@{Application.conduire()}">
+            <i class="truck icon"></i> Conduire
+        </a>
+        <a class="active blue item" href="@{Application.sefaireconduire()}">
+            <i class="user icon"></i> Se faire conduire
+        </a>
+        <a class="active teal item" href="@{Application.nous()}">
+            <i class="question icon"></i> Qui sommes-nous ?
+        </a>
+        <a class="active purple item" href="@{Application.contact()}">
+            <i class="mail icon"></i> Contact
+        </a>
+    </div>
+
+    <div id="main">
+        <div class="ui green segment">
+            <p>bla bla bla</p>
+            <p>bla bla bla</p>
+            <p>bla bla bla</p>
+            <p>bla bla bla</p>
+            <p>bla bla bla</p>
+        </div>
+    </div>
+
+    <footer id="footer" class="ui item">pied de page</footer>
+
+</body>
+</html>
