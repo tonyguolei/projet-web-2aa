@@ -18,6 +18,7 @@ public class Membre extends Model {
 
     public String nom;
     public String prenom;
+    public String motDePasse;
     public int age;
     @play.data.validation.Email
     public String email;
@@ -26,7 +27,7 @@ public class Membre extends Model {
     @ManyToMany()
     public List<Parcours> lesParcours;
 
-    public Membre(String nom, String prenom, int age, String email) {
+    public Membre(String nom, String prenom,String motDePasse, int age, String email) {
         this.nom = nom;
         this.prenom = prenom;
         this.age = age;
