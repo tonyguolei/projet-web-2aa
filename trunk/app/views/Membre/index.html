@@ -1,0 +1,12 @@
+#{extends 'main.html' /}
+#{set title:'Accueil' /}
+
+<h1>S'inscrire</h1>
+
+<form action="@{Membre.sinscrire()}" method="POST">
+    <label>Nom:</label><input type="text" name="nom" />
+    <label>Prénom:</label><input type="text" name="prenom" />
+    <label>Age:</label><input type="text" name="age" />
+    <label>Email:</label><input type="text" name="email" />
+    <input type="submit" value="S'inscrire" />
+</form>

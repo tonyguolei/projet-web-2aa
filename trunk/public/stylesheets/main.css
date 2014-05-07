@@ -1,0 +1,76 @@
+
+body{
+    background-image: url("/public/images/rond.jpg");
+    background-repeat: repeat;
+    background-size:0.5%;
+}
+
+/* Haut de page */
+#top{
+    border:1px lightgrey solid;
+    height: 100px;
+}
+
+/* Menu du site */
+#menu ul{
+    padding: 0;
+    clear:both;
+    height:25px;
+    border: solid 1px white;
+}
+
+#menu ul li{
+    margin: 0;
+    list-style: none;
+    float:left;
+    display:block;
+    height: 25px;
+    border-top:1px solid darkslategrey;
+    border-bottom:1px solid darkslategrey;
+}
+
+#menu ul li a{
+    display: block;
+    padding: 8px 8px 0 8px;
+    height: 25px;
+    text-decoration:none;
+    color:white;
+}
+
+#menu ul{
+    position:relative;
+}
+
+#menu ul li:nth-child(1){
+    background-color:lightgrey;
+}
+#menu ul li:nth-child(2){
+    background-color:darkgray;
+}
+#menu ul li:nth-child(3){
+    background-color:dimgray;
+}
+#menu ul li:nth-child(4){
+    background-color:darkslategrey;
+}
+#menu ul li:nth-child(5){
+    background-color:seagreen;
+}
+
+/* Contenu de la page */
+#main{
+    width:70%;
+    display:inline-block;
+}
+
+.content{
+    width:90%;
+    background-color:whitesmoke;
+}
+
+/* Pied de page */
+#bottom{
+    margin-top:15px;
+    border:1px lightgrey solid;
+    height:80px;
+}
