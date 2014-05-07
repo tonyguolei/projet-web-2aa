@@ -6,6 +6,7 @@ import play.db.jpa.*;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,9 +19,11 @@ public class Membre extends Model {
     public String nom;
     public String prenom;
     public int age;
+    @play.data.validation.Email
     public String email;
     public Date dateInscription;
     public boolean desinscrit;
+    @ManyToMany()
     public List<Parcours> lesParcours;
 
     public Membre(String nom, String prenom, int age, String email) {
@@ -30,6 +33,7 @@ public class Membre extends Model {
         this.email = email;
         this.dateInscription = new Date();
         this.desinscrit = false;
+        this.lesParcours = null;
     }
 
 }
