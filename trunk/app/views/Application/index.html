@@ -2,5 +2,20 @@
 #{set title:'Accueil' /}
 
 <div class="ui green segment">
-
+#{ifnot m1}
+    Aucun parcours enregistré pour ce membre
+#{/ifnot}
+    ${m1.nom}
+    ${m1.prenom}
+    <ul>
+    #{list items:m1.lesParcours, as:'resultat'}
+        <li>
+    ${resultat.createur}
+    ${resultat.prix}
+    ${resultat.nbPlaces}
+    ${resultat.dep}
+    ${resultat.arr}
+    ${resultat.dateParcours}</li>
+    #{/list}
+    </ul>
 </div>
