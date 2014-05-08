@@ -22,9 +22,9 @@ public class Application extends Controller {
         Membre m2 = new Membre("guo","lei","123456",22,"lg@clu.fr").save();
         Membre m3 = new Membre("laforest","yann","123456",20,"yl@clu.fr").save();
 
-        /*new Parcours(m1,v1,v2,28,1).save();
-        new Parcours(m1,v2,v3,28,2).save();
-        new Parcours(m1,v3,v1,28,3).save(); */
+        Parcours p1 = new Parcours(m1,v1,v2,28,1).save();
+        Parcours p2 = new Parcours(m1,v2,v3,28,2).save();
+        Parcours p3 = new Parcours(m1,v3,v1,28,3).save();
 
     }
 
