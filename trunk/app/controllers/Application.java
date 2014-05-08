@@ -34,7 +34,8 @@ public class Application extends Controller {
 
     public static void sefaireconduire(String villeDépart,String villeArrivee,String Date) {
         List<Parcours> p = Parcours.findAll();
-        render(p);
+        List<Membre> m = Membre.findAll();
+        render(p, m);
     }
 
     public static void nous() {
