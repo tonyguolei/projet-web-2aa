@@ -23,10 +23,10 @@ public class Parcours extends Model {
     public int nbPlaces;
     public Date dateParcours;
     public boolean supprime;
-    @OneToOne
+    @ManyToOne
     public Membre createur;
-    @ManyToMany
-    public List<Membre> lesCovoitures = new ArrayList<Membre>();
+//    @ManyToMany
+//    public List<Membre> lesCovoitures;
 
     public Parcours(Membre createur, Ville dep, Ville arr,float prix,int nbPlaces) {
         this.createur = createur;
@@ -51,8 +51,8 @@ public class Parcours extends Model {
         this.supprime = supprime;
     }
 
-    public void addCovoiture(Membre covoiture) {
-        this.lesCovoitures.add(covoiture);
-        covoiture.addParcoursChoisi(this);
-    }
+//    public void addCovoiture(Membre covoiture) {
+//        this.lesCovoitures.add(covoiture);
+//        covoiture.addParcoursChoisi(this);
+//    }
 }

@@ -2,7 +2,7 @@
 #{set title:'Accueil' /}
 
 <div class="ui green segment">
-#{ifnot m1}
+*{#{ifnot m1}
     Aucun parcours enregistré pour ce membre
 #{/ifnot}
 
@@ -20,5 +20,19 @@
     ${resultat.dateParcours}</li>
     #{/list}
     </ul>
-     #{/if}
+     #{/if}}*
+
+    #{ifnot m}
+        Aucun membre dans la base
+    #{/ifnot}
+    <ul>
+    #{list items:m, as:'resultat'}
+    <li>
+        ${resultat.nom}
+        ${resultat.prenom}
+        ${resultat.lesParcoursCrees}
+    </li>
+    #{/list}
+    </ul>
+
 </div>
