@@ -36,7 +36,7 @@ public class Parcours extends Model {
         this.nbPlaces = nbPlaces;
         this.dateParcours = new Date();
         this.supprime = false;
-        createur.addParcoursCree(this);
+//        createur.addParcoursCree(this);
     }
 
     public void setPrix(float prix) {
