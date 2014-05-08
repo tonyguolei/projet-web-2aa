@@ -10,7 +10,7 @@ public class Application extends Controller {
 
     public static void index() {
         initBase();
-        //render();
+        render();
     }
 
     private static void initBase() {
@@ -19,7 +19,7 @@ public class Application extends Controller {
         Membre.deleteAll();
         Parcours.deleteAll();  */
 
-        Ville v1 = new Ville("Grenoble",38000).save();
+        /*Ville v1 = new Ville("Grenoble",38000).save();
         Ville v2 = new Ville("Lyon",69000).save();
         Ville v3 = new Ville("Marseille",13000).save();
 
@@ -29,7 +29,7 @@ public class Application extends Controller {
 
         Parcours p1 = new Parcours(m1,v1,v2,28,1).save();
         Parcours p2 = new Parcours(m2,v2,v3,28,2).save();
-        Parcours p3 = new Parcours(m3,v3,v1,28,3).save();
+        Parcours p3 = new Parcours(m3,v3,v1,28,3).save();*/
 
         /*p2.addCovoiture(m1);
         p3.addCovoiture(m1); */
@@ -40,7 +40,7 @@ public class Application extends Controller {
         p1.addCovoiture(m3);
         p2.addCovoiture(m3);*/
 
-        m1.save();
+        /*m1.save();
         m2.save();
         m3.save();
 
@@ -48,7 +48,7 @@ public class Application extends Controller {
         p2.save();
         p3.save();
 
-        render(m1);
+        render(m1);*/
     }
 
     public static void conduire() {
