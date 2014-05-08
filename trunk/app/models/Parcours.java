@@ -14,6 +14,9 @@ import java.util.Locale;
 
 @Entity
 public class Parcours extends Model {
+
+    @OneToOne
+    public Membre createur;
     @ManyToOne
     public Ville dep;
     @ManyToOne
@@ -24,6 +27,7 @@ public class Parcours extends Model {
     public boolean supprime;
 
     public Parcours(Membre createur, Ville dep, Ville arr,float prix,int nbPlaces) {
+        this.createur = createur;
         this.dep = dep;
         this.arr = arr;
         this.prix = prix;

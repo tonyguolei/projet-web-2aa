@@ -26,4 +26,10 @@ public class Covoitureur extends Controller {
         Application.index();
 
     }
+
+    public static void consulterMembres(){
+        //List<Membre> m = Membre.findAll();
+        //render(p, m);
+    }
+
 }

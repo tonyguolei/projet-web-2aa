@@ -15,19 +15,17 @@ Aucun résultat
 #{/ifnot}
 
 <ul>
-    <li>Test pour Parcours</li>
 #{list items:p, as:'resultat'}
-    <li>${resultat.prix}</li>
+    <li>
+    ${resultat.createur}
+    ${resultat.prix}
+    ${resultat.nbPlaces}
+    ${resultat.dep}
+    ${resultat.arr}
+    ${resultat.dateParcours}</li>
 #{/list}
 </ul>
 
 #{ifnot m}
 Aucun résultat
 #{/ifnot}
-
-<ul>
-    <li>Test pour Membre</li>
-#{list items:m, as:'membre'}
-    <li>${membre.nom} ${membre.prenom}</li>
-#{/list}
-</ul>
