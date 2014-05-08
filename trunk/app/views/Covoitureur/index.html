@@ -1,6 +1,8 @@
 #{extends 'main.html' /}
 #{set title:'Accueil' /}
 
+<div class="ui segment">
+
 <h1>S'inscrire</h1>
 
 <form action="@{Covoitureur.sinscrire()}" method="POST">
@@ -11,3 +13,4 @@
     <label>Mot de passe:</label><input type="text" name="mdp" />
     <input type="submit" value="S'inscrire" />
 </form>
+</div>

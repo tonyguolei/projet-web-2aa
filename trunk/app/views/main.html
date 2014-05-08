@@ -15,22 +15,8 @@
 <header id="header">
     <h1 class="ui green header">
         Auto'Matic
-        <div class="sub header">Haut de page</div>
-        <div class="ui facebook button">
-            <i class="facebook icon"></i>
-            Facebook
-        </div>
-        <div class="ui google plus button">
-            <i class="google plus icon"></i>
-            Google Plus
-        </div>
-        <div class="ui linkedin button">
-            <i class="linkedin icon"></i>
-            LinkedIn
-        </div>
-        <div class="ui youtube button">
-            <i class="youtube icon"></i>
-            YouTube
+        <div class="sub header">
+            Haut de page
         </div>
     </h1>
 </header>
@@ -41,26 +27,41 @@
     <a class="active green inverted item" href="@{Application.index()}">
         <i class="home icon"></i> Accueil
     </a>
-    <a class="active red item" href="@{Application.conduire()}">
+    <a class="active blue item" href="@{Application.conduire()}">
         <i class="truck icon"></i> Conduire
     </a>
-    <a class="active blue item" href="@{Application.sefaireconduire()}">
+    <a class="active teal item" href="@{Application.sefaireconduire()}">
         <i class="user icon"></i> Se faire conduire
     </a>
-    <a class="active teal item" href="@{Application.nous()}">
+    <a class="active purple item" href="@{Application.nous()}">
         <i class="question icon"></i> Qui sommes-nous ?
     </a>
-    <a class="active purple item" href="@{Application.contact()}">
+    <a class="active red item" href="@{Application.contact()}">
         <i class="mail icon"></i> Contact
     </a>
 </div>
 
 <div id="main">
-    <div class="ui red segment">
     #{doLayout /}
-    </div>
 </div>
-
-<footer id="footer">pied de page</footer>
+<div class="ui divider"></div>
+<footer id="footer">pied de page
+    <div class="ui facebook button">
+        <i class="facebook icon"></i>
+        Facebook
+    </div>
+    <div class="ui google plus button">
+        <i class="google plus icon"></i>
+        Google Plus
+    </div>
+    <div class="ui linkedin button">
+        <i class="linkedin icon"></i>
+        LinkedIn
+    </div>
+    <div class="ui youtube button">
+        <i class="youtube icon"></i>
+        YouTube
+    </div>
+</footer>
 </body>
 </html>

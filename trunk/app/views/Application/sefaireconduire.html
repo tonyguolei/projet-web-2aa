@@ -1,6 +1,8 @@
 #{extends 'main.html' /}
 #{set title:'Se faire conduire' /}
 
+<div class="ui teal segment">
+
 <form action="@{Application.sefaireconduire()}" method="POST">
     <label>Ville de départ: </label><input type="text" name="Départ"/>
     <label>Ville d'arrivée: </label><input type="text" name="Arrivée"/>
@@ -8,12 +10,9 @@
     <input type="submit" value="Chercher"/>
 </form>
 
-<div class="ui divider"></div>
-
 #{ifnot p}
-Aucun résultat
+Aucun parcours enregistré
 #{/ifnot}
-
 <ul>
 #{list items:p, as:'resultat'}
     <li>
@@ -26,6 +25,4 @@ Aucun résultat
 #{/list}
 </ul>
 
-#{ifnot m}
-Aucun résultat
-#{/ifnot}
+</div>
