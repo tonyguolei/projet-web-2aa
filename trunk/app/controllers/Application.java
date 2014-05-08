@@ -17,7 +17,7 @@ public class Application extends Controller {
 
         /*Ville.deleteAll();
         Membre.deleteAll();
-        Parcours.deleteAll(); */
+        Parcours.deleteAll();  */
 
         Ville v1 = new Ville("Grenoble",38000).save();
         Ville v2 = new Ville("Lyon",69000).save();
@@ -31,24 +31,19 @@ public class Application extends Controller {
         Parcours p2 = new Parcours(m2,v2,v3,28,2).save();
         Parcours p3 = new Parcours(m3,v3,v1,28,3).save();
 
-        m1.setLesParcours(p2);
-        p2.setLesCovoitures(m1);
-        /*m1.setLesParcours(p3);
-        p3.setLesCovoitures(m1);
+        /*p2.addCovoiture(m1);
+        p3.addCovoiture(m1); */
 
-        m2.setLesParcours(p3);
-        p3.setLesCovoitures(m2);
-        m2.setLesParcours(p1);
-        p1.setLesCovoitures(m2);
+        /*p1.addCovoiture(m2);
+        p3.addCovoiture(m2);
 
-        m3.setLesParcours(p1);
-        p1.setLesCovoitures(m3);
-        m3.setLesParcours(p2);
-        p2.setLesCovoitures(m3);
-        */
+        p1.addCovoiture(m3);
+        p2.addCovoiture(m3);*/
+
         m1.save();
         m2.save();
         m3.save();
+
         p1.save();
         p2.save();
         p3.save();

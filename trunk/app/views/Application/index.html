@@ -5,6 +5,8 @@
 #{ifnot m1}
     Aucun parcours enregistré pour ce membre
 #{/ifnot}
+
+    #{if m1}#
     ${m1.nom}
     ${m1.prenom}
     <ul>
@@ -18,4 +20,5 @@
     ${resultat.dateParcours}</li>
     #{/list}
     </ul>
+     #{/if}
 </div>

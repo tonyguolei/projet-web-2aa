@@ -15,8 +15,6 @@ import java.util.Locale;
 @Entity
 public class Parcours extends Model {
 
-    @OneToOne
-    public Membre createur;
     @ManyToOne
     public Ville dep;
     @ManyToOne
@@ -25,7 +23,9 @@ public class Parcours extends Model {
     public int nbPlaces;
     public Date dateParcours;
     public boolean supprime;
-    @OneToMany
+    @OneToOne
+    public Membre createur;
+    @ManyToMany
     public List<Membre> lesCovoitures = new ArrayList<Membre>();
 
     public Parcours(Membre createur, Ville dep, Ville arr,float prix,int nbPlaces) {
@@ -36,6 +36,7 @@ public class Parcours extends Model {
         this.nbPlaces = nbPlaces;
         this.dateParcours = new Date();
         this.supprime = false;
+        createur.addParcoursCree(this);
     }
 
     public void setPrix(float prix) {
@@ -50,7 +51,8 @@ public class Parcours extends Model {
         this.supprime = supprime;
     }
 
-    public void setLesCovoitures(Membre covoiture) {
+    public void addCovoiture(Membre covoiture) {
         this.lesCovoitures.add(covoiture);
+        covoiture.addParcoursChoisi(this);
     }
 }
