@@ -2,20 +2,18 @@
 
 <html>
 <head>
-    <title>#{get 'title' /}</title>
+    <title>Conduire</title>
     <meta charset="${_response_encoding}">
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="@{'/public/javascripts/semantic.js'}" type="text/javascript" charset="${_response_encoding}"></script>
-#{get 'moreScripts' /}
     <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/semantic.css'}">
-#{get 'moreStyles' /}
 </head>
 
 <body>
 <header id="header">
     <h1 class="ui green header">
-        Auto'Matic
-        <div class="sub header">Haut de page</div>
+        Projet Web
+        <div class="sub header">Tu peux faire ce que tu veux ici</div>
         <div class="ui facebook button">
             <i class="facebook icon"></i>
             Facebook
@@ -34,8 +32,24 @@
         </div>
     </h1>
 </header>
+<form action="@{Application.sefaireconduire()}" method="POST">
+    <label>Ville de départ: </label><input type="text" name="Départ"/>
+    <label>Ville d'arrivée: </label><input type="text" name="Arrivée"/>
+    <label>Date: </label><input type="text" name="Date"/>
+    <input type="submit" value="Chercher"/>
+</form>
 
 <div class="ui divider"></div>
+
+#{ifnot p}
+Aucun résultat
+#{/ifnot}
+
+<ul>
+#{list items:p, as:'resultat'}
+    <li>${resultat.prix}</li>
+#{/list}
+</ul>
 
 <div id="menu" class="ui menu">
     <a class="active green inverted item" href="@{Application.index()}">
@@ -56,8 +70,12 @@
 </div>
 
 <div id="main">
-    <div class="ui red segment">
-    #{doLayout /}
+    <div class="ui blue segment">
+        <p>bla bla bla</p>
+        <p>bla bla bla</p>
+        <p>bla bla bla</p>
+        <p>bla bla bla</p>
+        <p>bla bla bla</p>
     </div>
 </div>
 

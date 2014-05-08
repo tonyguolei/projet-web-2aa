@@ -6,10 +6,22 @@
 /*}*/
 
 /* Haut de page */
+#top{
+    border:1px lightgrey solid;
+    height: 100px;
+    display:block;
+}
+
+.connection{
+    width:30%;
+    border:1px #41b271 solid;
+}
+
 /*#top{*/
     /*border:1px lightgrey solid;*/
     /*height: 100px;*/
 /*}*/
+
 
 /* Menu du site */
 /*#menu ul{*/

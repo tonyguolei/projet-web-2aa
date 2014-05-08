@@ -18,9 +18,9 @@ public class Parcours extends Model {
     public Membre createur;
     public Ville dep;
     public Ville arr;
-    public Date dateParcours;
     public float prix;
     public int nbPlaces;
+    public Date dateParcours;
     public boolean supprime;
 
     public Parcours(Membre createur, Ville dep, Ville arr,float prix,int nbPlaces) {
