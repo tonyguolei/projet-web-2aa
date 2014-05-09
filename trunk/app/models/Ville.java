@@ -2,6 +2,8 @@ package models;
 
 import java.util.*;
 import javax.persistence.*;
+
+import com.google.gson.annotations.Expose;
 import play.db.jpa.*;
 
 /**
@@ -11,8 +13,9 @@ import play.db.jpa.*;
 
 @Entity
 public class Ville extends Model {
-
+    @Expose
     public String nom;
+    @Expose
     public int codePostal;
 
     public Ville(String nom, int codePostal) {

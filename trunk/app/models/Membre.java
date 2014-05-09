@@ -1,6 +1,8 @@
 package models;
 
 import javax.persistence.*;
+
+import com.google.gson.annotations.Expose;
 import play.db.jpa.*;
 import java.util.*;
 
@@ -11,13 +13,19 @@ import java.util.*;
 
 @Entity
 public class Membre extends Model {
-
+    @Expose
     public String nom;
+    @Expose
     public String prenom;
+    @Expose
     public String motDePasse;
+    @Expose
     public int age;
+    @Expose
     public String email;
+    @Expose
     public Date dateInscription;
+    @Expose
     public boolean desinscrit;
     @OneToMany(mappedBy="createur", cascade=CascadeType.ALL)
     public List<Parcours> lesParcoursCrees = new ArrayList<Parcours>();

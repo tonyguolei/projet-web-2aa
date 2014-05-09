@@ -2,6 +2,8 @@ package models;
 
 import java.util.*;
 import javax.persistence.*;
+
+import com.google.gson.annotations.Expose;
 import play.db.jpa.*;
 import java.text.DateFormat;
 import java.util.Date;
@@ -14,15 +16,21 @@ import java.util.Locale;
 
 @Entity
 public class Parcours extends Model {
-
+    @Expose
     @ManyToOne
     public Ville dep;
+    @Expose
     @ManyToOne
     public Ville arr;
+    @Expose
     public float prix;
+    @Expose
     public int nbPlaces;
+    @Expose
     public Date dateParcours;
+    @Expose
     public boolean supprime;
+    @Expose
     @ManyToOne
     public Membre createur;
 //    @ManyToMany
@@ -36,7 +44,6 @@ public class Parcours extends Model {
         this.nbPlaces = nbPlaces;
         this.dateParcours = new Date();
         this.supprime = false;
-//        createur.addParcoursCree(this);
     }
 
     public void setPrix(float prix) {

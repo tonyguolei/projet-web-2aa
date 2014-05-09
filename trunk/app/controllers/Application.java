@@ -5,6 +5,7 @@ import play.*;
 import play.mvc.*;
 import java.util.*;
 import models.*;
+import com.google.gson.*;
 
 public class Application extends Controller {
 
@@ -54,8 +55,11 @@ public class Application extends Controller {
     }
 
     public static void conduire() {
+        List<Membre> m = Membre.findAll();
+        render(m);
         render();
     }
+
 
     public static void sefaireconduire(String villeDépart,String villeArrivee,String Date) {
         List<Parcours> p = Parcours.findAll();

@@ -4,6 +4,7 @@
 
 # Home page
 GET     /                                       Application.index
+GET     /testAjax                               Conduire.testAjax
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
