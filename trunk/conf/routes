@@ -5,7 +5,8 @@
 # Home page
 GET     /                                       Application.index
 GET     /testAjax                               Conduire.testAjax
-GET     /tousLesParcours                        Sefaireconduire.tousLesParcours
+GET     /tousLesParcours                        Application.tousLesParcours
+GET     /toutesLesVilles                        Application.toutesLesVilles
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
