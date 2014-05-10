@@ -3,9 +3,20 @@
 <script src="@{'/public/javascripts/sefaireconduire.js'}" type="text/javascript" charset="${_response_encoding}"></script>
 <div class="ui teal segment">
 
-    <label>Ville de départ: </label><input type="text" name="Départ"/>
-    <label>Ville d'arrivée: </label><input type="text" name="Arrivée"/>
-    <label>Date: </label><input type="text" name="Date"/>
-    <input type="button" id="boutonChercherParcours" name="boutonChercherParcours" value="Chercher"/>
+    <div class="ui form">
+        <div class="inline field">
+            <label>Ville de départ</label>
+            <input placeholder="Exemple : Grenoble" type="text" name="Depart">
+            <label>Ville de départ</label>
+            <input placeholder="Exemple : Annecy" type="text" name="Arrivee">
+            <label>Date</label>
+            <input type="text" name="Date">
+            <input type="button" id="boutonChercherParcours" class="ui button" name="boutonChercherParcours" value="Chercher"/>
+        </div>
+    </div>
+
+
+    <div class="ui divided list">
+    </div>
 
 </div>
