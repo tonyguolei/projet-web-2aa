@@ -17,7 +17,7 @@ public class Sefaireconduire extends Controller {
 
     public static Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 
-    public static void tousLesParcours(){
+    public static void initBase(){
         Membre m1 = new Membre("ag","Lei","123456",23,"ag@gmail.com").save();
         Membre m2 = new Membre("ag1","Lei","123456",23,"ag@gmail.com").save();
         Membre m3 = new Membre("ag2","Lei","123456",23,"ag@gmail.com").save();
@@ -28,11 +28,17 @@ public class Sefaireconduire extends Controller {
         Parcours p1 = new Parcours(m1,v1,v2,12,1).save();
         Parcours p2 = new Parcours(m1,v1,v2,13,2).save();
         Parcours p3 = new Parcours(m2,v1,v2,14,3).save();
+    }
+
+    public static void tousLesParcours(){
+        initBase();
+
+        List<Parcours> listp = Parcours.findAll();
 
         JSONSerializer serializer = new JSONSerializer();
 
         //test pour parcours
-        renderJSON(serializer.include("membresInscrits").exclude("*.class").transform(new DateTransformer("yyyy/MM/dd hh:mm:ss"), "dateParcours").serialize(p1));
+        renderJSON(serializer.include("membresInscrits").exclude("*.class").transform(new DateTransformer("yyyy/MM/dd hh:mm:ss"), "dateParcours").serialize(listp));
     }
 
 }

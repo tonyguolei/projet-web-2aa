@@ -2,19 +2,7 @@
 #{set title:'Conduire' /}
 <script src="@{'/public/javascripts/conduire.js'}" type="text/javascript" charset="${_response_encoding}"></script>
 <div class="ui blue segment">
-*{#{ifnot p}}*
-    *{Aucun resultat}*
-*{#{/ifnot}}*
-    *{<ul>}*
-    *{#{list items:p, as:'resultat'}}*
-    *{<li>}*
-        *{${resultat} :}*
-    *{</li>}*
-    *{<li>}*
-        *{${resultat.membresInscrit.nom}}*
-    *{</li>}*
-    *{#{/list}}*
-    *{</ul>}*
+
 
     Tu peux regarder les resultats de AJAX dans console de developper tool, car j'utilise console.log pour afficher les reponses.
 </div>

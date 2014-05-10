@@ -3,26 +3,9 @@
 <script src="@{'/public/javascripts/sefaireconduire.js'}" type="text/javascript" charset="${_response_encoding}"></script>
 <div class="ui teal segment">
 
-<form action="@{Application.sefaireconduire()}" method="POST">
     <label>Ville de départ: </label><input type="text" name="Départ"/>
     <label>Ville d'arrivée: </label><input type="text" name="Arrivée"/>
     <label>Date: </label><input type="text" name="Date"/>
-    <input type="submit" value="Chercher"/>
-</form>
-
-*{#{ifnot p}
-Aucun parcours enregistré
-#{/ifnot}
-<ul>
-#{list items:p, as:'resultat'}
-    <li>
-    ${resultat.createur}
-    ${resultat.prix}
-    ${resultat.nbPlaces}
-    ${resultat.dep}
-    ${resultat.arr}
-    ${resultat.dateParcours}</li>
-#{/list}
-</ul>   }*
+    <input type="button" id="boutonChercherParcours" name="boutonChercherParcours" value="Chercher"/>
 
 </div>

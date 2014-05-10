@@ -5,11 +5,19 @@
  */
 
 $( document ).ready(function() {
-    $.ajax( "/tousLesParcours" )
-        .done(function(data) {
-            console.log(data);
-        })
-        .fail(function(error) {
-            console.log("error");
-        })
+    $("#boutonChercherParcours").click(function(){
+        alert("bouton");
+        $.ajax( "/tousLesParcours" )
+            .done(function(data) {
+                console.log(data);
+            })
+            .fail(function(error) {
+                console.log("error");
+            })
+    })
+
+
 });
+
+
+
