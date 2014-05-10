@@ -5,16 +5,20 @@
  */
 
 $( document ).ready(function() {
-    $("#boutonChercherParcours").click(function(){
-        alert("bouton");
-        $.ajax( "/tousLesParcours" )
-            .done(function(data) {
-                console.log(data);
-            })
-            .fail(function(error) {
-                console.log("error");
-            })
-    })
+
+    function searchTrip(){
+        $("#boutonChercherParcours").click(function(){
+            //TODO Recuperer les champs du form
+            alert("boutonChercherParcours");
+            $.ajax( "/tousLesParcours" )
+                .done(function(data) {
+                    console.log(data);
+                })
+                .fail(function(error) {
+                    console.log("error");
+                })
+        })
+    }
 
 
 });

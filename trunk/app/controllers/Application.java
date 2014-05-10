@@ -6,22 +6,21 @@ import play.mvc.*;
 import java.util.*;
 import models.*;
 import com.google.gson.*;
+import play.test.Fixtures;
 
 public class Application extends Controller {
 
     public static void index() {
-        initBase();
+        //initBase();
+        Fixtures.deleteDatabase();
         List<Membre> m = Membre.findAll();
         render(m);
     }
 
     private static void initBase() {
+        Fixtures.deleteDatabase();
 
-        /*Ville.deleteAll();
-        Membre.deleteAll();
-        Parcours.deleteAll(); */
-
-        /*Ville v1 = new Ville("Grenoble",38000).save();
+        Ville v1 = new Ville("Grenoble",38000).save();
         Ville v2 = new Ville("Lyon",69000).save();
         Ville v3 = new Ville("Marseille",13000).save();
 
@@ -32,7 +31,7 @@ public class Application extends Controller {
         Parcours p1 = new Parcours(m1,v1,v2,28,1).save();
         Parcours p2 = new Parcours(m2,v2,v3,28,2).save();
         Parcours p3 = new Parcours(m3,v3,v1,28,3).save();
-        Parcours p4 = new Parcours(m1,v1,v2,28,1).save();  */
+        Parcours p4 = new Parcours(m1,v1,v2,28,1).save();
 
         /*p2.addCovoiture(m1);
         p3.addCovoiture(m1); */

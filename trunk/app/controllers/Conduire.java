@@ -10,6 +10,8 @@ import play.mvc.Controller;
 import java.util.List;
 import flexjson.JSONSerializer;
 import flexjson.transformer.DateTransformer;
+import play.test.Fixtures;
+
 /**
  * Created by tonyguolei on 5/9/14.
  */
@@ -18,6 +20,8 @@ public class Conduire extends Controller {
     public static Gson gson = new GsonBuilder().excludeFieldsWithoutExposeAnnotation().create();
 
     public static void testAjax(){
+        Fixtures.deleteDatabase();
+
         Membre m1 = new Membre("Guo","Lei","123456",23,"tonyguolei@gmail.com").save();
         Membre m2 = new Membre("membreInscrit1","Lei","123456",23,"tonyguolei@gmail.com").save();
         Membre m3 = new Membre("membreInscrit2","Lei","123456",23,"tonyguolei@gmail.com").save();
