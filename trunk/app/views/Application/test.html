@@ -26,3 +26,36 @@ Aucun parcours enregistré
 *{</li>}*
 *{#{/list}}*
 *{</ul>}*
+
+*{#{ifnot m1}
+    Aucun parcours enregistré pour ce membre
+#{/ifnot}
+
+    #{if m1}#
+    ${m1.nom}
+    ${m1.prenom}
+    <ul>
+    #{list items:m1.lesParcours, as:'resultat'}
+        <li>
+    ${resultat.createur}
+    ${resultat.prix}
+    ${resultat.nbPlaces}
+    ${resultat.dep}
+    ${resultat.arr}
+    ${resultat.dateParcours}</li>
+    #{/list}
+    </ul>
+     #{/if}}*
+
+#{ifnot m}
+Aucun membre dans la base
+#{/ifnot}
+<ul>
+#{list items:m, as:'resultat'}
+    <li>
+    ${resultat.nom}
+        ${resultat.prenom}
+        ${resultat.lesParcoursCrees}
+    </li>
+#{/list}
+</ul>

@@ -12,9 +12,7 @@ public class Application extends Controller {
 
     public static void index() {
         //initBase();
-        Fixtures.deleteDatabase();
-        List<Membre> m = Membre.findAll();
-        render(m);
+        render();
     }
 
     private static void initBase() {
