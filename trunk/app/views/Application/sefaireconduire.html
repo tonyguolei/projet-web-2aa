@@ -1,6 +1,6 @@
 #{extends 'main.html' /}
 #{set title:'Se faire conduire' /}
-
+<script src="@{'/public/javascripts/sefaireconduire.js'}" type="text/javascript" charset="${_response_encoding}"></script>
 <div class="ui teal segment">
 
 <form action="@{Application.sefaireconduire()}" method="POST">
@@ -10,7 +10,7 @@
     <input type="submit" value="Chercher"/>
 </form>
 
-#{ifnot p}
+*{#{ifnot p}
 Aucun parcours enregistré
 #{/ifnot}
 <ul>
@@ -23,6 +23,6 @@ Aucun parcours enregistré
     ${resultat.arr}
     ${resultat.dateParcours}</li>
 #{/list}
-</ul>
+</ul>   }*
 
 </div>

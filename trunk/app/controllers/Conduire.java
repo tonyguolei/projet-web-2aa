@@ -26,14 +26,12 @@ public class Conduire extends Controller {
         Parcours p1 = new Parcours(m1,v1,v2,25,1).save();
         Parcours p2 = new Parcours(m1,v1,v2,28,1).save();
         Parcours p3 = new Parcours(m2,v1,v2,30,1).save();
+        //Createur auto dans le parcours
 
-        m1.addParcoursCree(p1);
-        m1.addParcoursCree(p2);
-
-        m1.addParcoursChoisi(p3);
-
-        p1.addmembreInscrit(m2);
-        p1.addmembreInscrit(m3);
+        p3.ajouterMembreInscrit(m1);
+        p1.ajouterMembreInscrit(m2);
+        p1.ajouterMembreInscrit(m3);
+        //Lien entre parcours et membre deja fait (cf méthode)
 
         JSONSerializer serializer = new JSONSerializer();
 

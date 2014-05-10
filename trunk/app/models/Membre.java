@@ -36,23 +36,23 @@ public class Membre extends Model {
         this.lesParcoursCrees = new ArrayList<Parcours>();
     }
 
-    public void addParcoursCree(Parcours p) {
+    public void ajouterParcoursCree(Parcours p) {
         this.lesParcoursCrees.add(p);
     }
 
-    public void addParcoursChoisi(Parcours p) {
+    public void ajouterParcoursChoisi(Parcours p) {
         this.lesParcoursChoisis.add(p);
     }
 
-    public void setDesinscrit(boolean desinscrit) {
+    public void modifierDesinscrit(boolean desinscrit) {
         this.desinscrit = desinscrit;
     }
 
-    public void setEmail(String email) {
+    public void modifierEmail(String email) {
         this.email = email;
     }
 
-    public void setAge(int age) {
+    public void modifierAge(int age) {
         this.age = age;
     }
 

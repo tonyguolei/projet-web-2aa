@@ -27,10 +27,11 @@ public class Parcours extends Model {
     @ManyToOne
     public Membre createur;
     @ManyToMany(mappedBy ="lesParcoursChoisis")
-    public List<Membre> membresInscrit = new ArrayList<Membre>();
+    public List<Membre> membresInscrits = new ArrayList<Membre>();
 //    @ManyToMany
 //    public List<Membre> lesCovoitures;
 
+    //ON DOIT TOUJOURS PARTIR DU PARCOURS POUR FAIRE LE LIEN AVEC UN MEMBRE (géré en auto aprés)
     public Parcours(Membre createur, Ville dep, Ville arr,float prix,int nbPlaces) {
         this.createur = createur;
         this.dep = dep;
@@ -39,26 +40,38 @@ public class Parcours extends Model {
         this.nbPlaces = nbPlaces;
         this.dateParcours = new Date();
         this.supprime = false;
+        createur.ajouterParcoursCree(this);
     }
 
-    public void addmembreInscrit(Membre m) {
-        this.membresInscrit.add(m);
+    public void ajouterMembreInscrit(Membre m) {
+        //TODO Verifier le nombre de places restantes
+        this.membresInscrits.add(m);
+        m.ajouterParcoursChoisi(this);
     }
 
-    public void setPrix(float prix) {
+    public void modifierPrix(float prix) {
         this.prix = prix;
     }
 
-    public void setNbPlaces(int nbPlaces) {
+    public void modifierNbPlaces(int nbPlaces) {
         this.nbPlaces = nbPlaces;
     }
 
-    public void setSupprime(boolean supprime) {
+    public void modifierSupprime(boolean supprime) {
         this.supprime = supprime;
     }
 
-//    public void addCovoiture(Membre covoiture) {
-//        this.lesCovoitures.add(covoiture);
-//        covoiture.addParcoursChoisi(this);
-//    }
+    @Override
+    public String toString() {
+        return "Parcours{" +
+                "dep=" + dep +
+                ", arr=" + arr +
+                ", prix=" + prix +
+                ", nbPlaces=" + nbPlaces +
+                ", dateParcours=" + dateParcours +
+                ", supprime=" + supprime +
+                ", createur=" + createur +
+                ", membresInscrits=" + membresInscrits +
+                '}';
+    }
 }

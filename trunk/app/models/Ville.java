@@ -22,4 +22,12 @@ public class Ville extends Model {
         this.nom = nom;
         this.codePostal = codePostal;
     }
+
+    @Override
+    public String toString() {
+        return "Ville{" +
+                "nom='" + nom + '\'' +
+                ", codePostal=" + codePostal +
+                '}';
+    }
 }
