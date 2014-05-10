@@ -1,5 +1,7 @@
 package controllers;
 
+import flexjson.JSONSerializer;
+import flexjson.transformer.DateTransformer;
 import models.*;
 import play.*;
 import play.mvc.*;
@@ -40,25 +42,14 @@ public class Application extends Controller {
         p1.addCovoiture(m3);
         p2.addCovoiture(m3);*/
 
-        /*m1.save();
-        m2.save();
-        m3.save();
-
-        p1.save();
-        p2.save();
-        p3.save();
-
-        render(m1);*/
     }
 
     public static void conduire() {
         render();
     }
 
-
     public static void sefaireconduire(String villeDépart,String villeArrivee,String Date) {
-        List<Parcours> p = Parcours.findAll();
-        render(p);
+        render();
     }
 
     public static void nous() {
@@ -68,5 +59,19 @@ public class Application extends Controller {
     public static void contact() {
         render();
     }
+
+    public static void tousLesParcours(){
+        List<Parcours> listp = Parcours.findAll();
+        JSONSerializer serializer = new JSONSerializer();
+        //renderJSON(serializer.include("membresInscrits").exclude("*.class").transform(new DateTransformer("yyyy/MM/dd hh:mm:ss"), "dateParcours").serialize(listp));
+        renderJSON(serializer.exclude("*.class").transform(new DateTransformer("yyyy/MM/dd hh:mm:ss"), "dateParcours").serialize(listp));
+    }
+
+    public static void toutesLesVilles(){
+        List<Ville> listv = Ville.findAll();
+        JSONSerializer serializer = new JSONSerializer();
+        renderJSON(serializer.exclude("*.class").serialize(listv));
+    }
+
 
 }

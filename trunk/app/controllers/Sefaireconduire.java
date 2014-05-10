@@ -33,15 +33,5 @@ public class Sefaireconduire extends Controller {
         Parcours p3 = new Parcours(m2,v1,v2,14,3).save();
     }
 
-    public static void tousLesParcours(){
-        initBase();
-
-        List<Parcours> listp = Parcours.findAll();
-
-        JSONSerializer serializer = new JSONSerializer();
-
-        //test pour parcours
-        renderJSON(serializer.include("membresInscrits").exclude("*.class").transform(new DateTransformer("yyyy/MM/dd hh:mm:ss"), "dateParcours").serialize(listp));
-    }
 
 }
