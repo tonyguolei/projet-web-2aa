@@ -13,24 +13,17 @@ import java.util.*;
 
 @Entity
 public class Membre extends Model {
-    @Expose
     public String nom;
-    @Expose
     public String prenom;
-    @Expose
     public String motDePasse;
-    @Expose
     public int age;
-    @Expose
     public String email;
-    @Expose
     public Date dateInscription;
-    @Expose
     public boolean desinscrit;
     @OneToMany(mappedBy="createur", cascade=CascadeType.ALL)
     public List<Parcours> lesParcoursCrees = new ArrayList<Parcours>();
-//    @ManyToMany
-//    public List<Parcours> lesParcoursChoisis = new ArrayList<Parcours>();
+    @ManyToMany
+    public List<Parcours> lesParcoursChoisis = new ArrayList<Parcours>();
 
     public Membre(String nom, String prenom,String motDePasse, int age, String email) {
         this.nom = nom;
@@ -47,9 +40,9 @@ public class Membre extends Model {
         this.lesParcoursCrees.add(p);
     }
 
-//    public void addParcoursChoisi(Parcours p) {
-//        this.lesParcoursChoisis.add(p);
-//    }
+    public void addParcoursChoisi(Parcours p) {
+        this.lesParcoursChoisis.add(p);
+    }
 
     public void setDesinscrit(boolean desinscrit) {
         this.desinscrit = desinscrit;

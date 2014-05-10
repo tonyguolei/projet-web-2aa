@@ -55,8 +55,6 @@ public class Application extends Controller {
     }
 
     public static void conduire() {
-        List<Membre> m = Membre.findAll();
-        render(m);
         render();
     }
 
