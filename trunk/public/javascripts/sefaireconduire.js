@@ -4,17 +4,19 @@
  * Date: 10/05/14
  */
 
-$( document ).ready(function() {
+$(document).bind("ready", function () {
     searchCity();
-    $("#boutonChercherParcours").bind("click", searchTravel());
+    $("#boutonChercherParcours").bind("click", searchTravel);
 });
-
 
 function searchTravel(){
     //TODO Recuperer les champs du form
-
     var list = document.getElementsByClassName("ui divided list")[0];
-    $(".ui divided list .item").remove();
+    var item = list.getElementsByClassName("item");
+
+    if (item.length != 0){
+        item.remove();
+    }
 
     $.ajax( "/tousLesParcours" )
         .done(function(data) {
