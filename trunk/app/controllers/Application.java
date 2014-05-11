@@ -66,19 +66,19 @@ public class Application extends Controller {
     public static void chercherParcours(String depart,String arrivee,String date){
         //TODO Rechercher approximativement ?
 
-        if(depart!="" && arrivee!=""){
-            //TODO Si chiffres = codepostal
-            List<Ville> dep = Ville.find("byNomLike","%"+depart+"%").fetch();
-            List<Ville> arr = Ville.find("byNomLike","%"+arrivee+"%").fetch();
-            List<Parcours> listp = Parcours.find("byDepartAndArrivee", dep, arr).fetch();
-            if(date!=""){
-                //Parcours.find("byDateParcours",date).fetch();
-            }
+                //TODO Si chiffres = codepostal
+                List<Ville> dep = Ville.find("byNomLike","%"+depart+"%").fetch();
+                List<Ville> arr = Ville.find("byNomLike","%"+arrivee+"%").fetch();
+                List<Parcours> listp = Parcours.find("byDepartAndArrivee", dep, arr).fetch();
 
-            JSONSerializer serializer = new JSONSerializer();
-            //renderJSON(serializer.include("membresInscrits").exclude("*.class").transform(new DateTransformer("yyyy/MM/dd hh:mm:ss"), "dateParcours").serialize(listp));
-            renderJSON(serializer.exclude("*.class").transform(new DateTransformer("yyyy/MM/dd hh:mm:ss"), "dateParcours").serialize(listp));
-        }
+                //TODO Rechercher avec la date
+                if(date!=""){
+                    //Parcours.find("byDateParcours",date).fetch();
+                }
+
+                JSONSerializer serializer = new JSONSerializer();
+                //renderJSON(serializer.include("membresInscrits").exclude("*.class").transform(new DateTransformer("yyyy/MM/dd hh:mm:ss"), "dateParcours").serialize(listp));
+                renderJSON(serializer.exclude("*.class").transform(new DateTransformer("yyyy/MM/dd hh:mm:ss"), "dateParcours").serialize(listp));
 
     }
 
