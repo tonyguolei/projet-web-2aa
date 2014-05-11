@@ -17,11 +17,11 @@ import java.util.Locale;
 @Entity
 public class Parcours extends Model {
     @ManyToOne
-    public Ville dep;
+    public Ville depart;
     @ManyToOne
-    public Ville arr;
+    public Ville arrivee;
     public float prix;
-    public int nbPlaces;
+    public int nbPlacesInitiales;
     public Date dateParcours;
     public boolean supprime;
     @ManyToOne
@@ -32,19 +32,19 @@ public class Parcours extends Model {
 //    public List<Membre> lesCovoitures;
 
     //ON DOIT TOUJOURS PARTIR DU PARCOURS POUR FAIRE LE LIEN AVEC UN MEMBRE (géré en auto aprés)
-    public Parcours(Membre createur, Ville dep, Ville arr,float prix,int nbPlaces) {
+    public Parcours(Membre createur, Ville dep, Ville arr,float prix,int nbPlacesInitiales) {
         this.createur = createur;
-        this.dep = dep;
-        this.arr = arr;
+        this.depart = dep;
+        this.arrivee = arr;
         this.prix = prix;
-        this.nbPlaces = nbPlaces;
+        this.nbPlacesInitiales = nbPlacesInitiales;
         this.dateParcours = new Date();
         this.supprime = false;
         createur.ajouterParcoursCree(this);
     }
 
     public void ajouterMembreInscrit(Membre m) {
-        //TODO Verifier le nombre de places restantes
+        //TODO Verifier le nombre d'inscrits par rapport au nb de places initiales
         this.membresInscrits.add(m);
         m.ajouterParcoursChoisi(this);
     }
@@ -54,7 +54,7 @@ public class Parcours extends Model {
     }
 
     public void modifierNbPlaces(int nbPlaces) {
-        this.nbPlaces = nbPlaces;
+        this.nbPlacesInitiales = nbPlaces;
     }
 
     public void modifierSupprime(boolean supprime) {
@@ -64,10 +64,10 @@ public class Parcours extends Model {
     @Override
     public String toString() {
         return "Parcours{" +
-                "dep=" + dep +
-                ", arr=" + arr +
+                "depart=" + depart +
+                ", arrivee=" + arrivee +
                 ", prix=" + prix +
-                ", nbPlaces=" + nbPlaces +
+                ", nbPlacesInitiales=" + nbPlacesInitiales +
                 ", dateParcours=" + dateParcours +
                 ", supprime=" + supprime +
                 ", createur=" + createur +

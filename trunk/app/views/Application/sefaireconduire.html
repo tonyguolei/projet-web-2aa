@@ -1,22 +1,21 @@
 #{extends 'main.html' /}
 #{set title:'Se faire conduire' /}
+<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <script src="@{'/public/javascripts/sefaireconduire.js'}" type="text/javascript" charset="${_response_encoding}"></script>
 <div class="ui teal segment">
-
     <div class="ui form">
         <div class="inline field">
             <label>Ville de départ</label>
-            <input placeholder="Exemple : Grenoble" type="text" name="Depart">
+            <input placeholder="Exemple : Grenoble, 38000" type="text" name="depart">
             <label>Ville de départ</label>
-            <input placeholder="Exemple : Annecy" type="text" name="Arrivee">
+            <input placeholder="Exemple : Annecy, 74000" type="text" name="arrivee">
             <label>Date</label>
-            <input type="text" name="Date">
+            <input type="text" name="date" id="date">
             <input type="button" id="boutonChercherParcours" class="ui button" name="boutonChercherParcours" value="Chercher"/>
         </div>
     </div>
-
-
     <div class="ui divided list">
     </div>
-
 </div>

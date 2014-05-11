@@ -1,10 +1,10 @@
 package models;
 
 import javax.persistence.*;
-
 import com.google.gson.annotations.Expose;
 import play.db.jpa.*;
 import java.util.*;
+import java.text.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -31,6 +31,7 @@ public class Membre extends Model {
         this.motDePasse = motDePasse;
         this.age = age;
         this.email = email;
+        //TODO Mettre la date en format FR
         this.dateInscription = new Date();
         this.desinscrit = false;
         this.lesParcoursCrees = new ArrayList<Parcours>();

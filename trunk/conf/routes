@@ -6,6 +6,7 @@
 GET     /                                       Application.index
 GET     /testAjax                               Conduire.testAjax
 GET     /tousLesParcours                        Application.tousLesParcours
+GET     /chercherParcours                       Application.chercherParcours
 GET     /toutesLesVilles                        Application.toutesLesVilles
 
 # Ignore favicon requests
