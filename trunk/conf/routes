@@ -9,6 +9,7 @@ GET     /recupererMembreInscrit                 Conduire.recupererMembreInscrit
 GET     /tousLesParcours                        Application.tousLesParcours
 GET     /chercherParcours                       Application.chercherParcours
 GET     /toutesLesVilles                        Application.toutesLesVilles
+GET     /initbase                               Application.initBase
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

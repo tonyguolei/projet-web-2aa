@@ -14,11 +14,11 @@ import play.test.Fixtures;
 public class Application extends Controller {
 
     public static void index() {
-        initBase();
+        //initBase();
         render();
     }
 
-    private static void initBase() {
+    public static void initBase() {
         Fixtures.deleteDatabase();
 
         Ville v1 = new Ville("Annecy",74000).save();
