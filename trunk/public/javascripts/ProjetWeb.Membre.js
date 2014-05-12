@@ -42,7 +42,7 @@ ProjetWeb.Membre.prototype = {
                 cb_success(data);
             })
             .fail(function(error) {
-                console.log("error recepererMembreInfo");
+                console.log("error recupererMembreInfo");
                 cb_error(error);
             })
     },
