@@ -41,12 +41,15 @@ public class Parcours extends Model {
         this.dateParcours = new Date();
         this.supprime = false;
         createur.ajouterParcoursCree(this);
+        createur.save();
     }
 
     public void ajouterMembreInscrit(Membre m) {
         //TODO Verifier le nombre d'inscrits par rapport au nb de places initiales
         this.membresInscrits.add(m);
         m.ajouterParcoursChoisi(this);
+        this.save();
+        m.save();
     }
 
     public void modifierPrix(float prix) {

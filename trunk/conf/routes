@@ -4,7 +4,8 @@
 
 # Home page
 GET     /                                       Application.index
-GET     /testAjax                               Conduire.testAjax
+GET     /recupererMembreInfo                    Conduire.recupererMembreInfo
+GET     /recupererMembreInscrit                 Conduire.recupererMembreInscrit
 GET     /tousLesParcours                        Application.tousLesParcours
 GET     /chercherParcours                       Application.chercherParcours
 GET     /toutesLesVilles                        Application.toutesLesVilles
