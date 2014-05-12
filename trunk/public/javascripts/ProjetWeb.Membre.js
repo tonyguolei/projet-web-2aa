@@ -33,9 +33,12 @@ ProjetWeb.Membre = function() {
 
 /*methodes of class Membre*/
 ProjetWeb.Membre.prototype = {
-    recupererMembreInfo: function(cb_success, cb_error) {
+    recupererMembreInfo: function(email, cb_success, cb_error) {
         var self = this;
-        $.ajax( "/recupererMembreInfo" )
+        $.ajax({
+            url: "/recupererMembreInfo",
+            data: {email: email}
+        })
             .done(function(data) {
                 console.log(data);
                 self.constructor(data.id, data.nom, data.prenom, data.age, data.email, data.dateInscription, data.lesParcoursCrees, data.lesParcoursChoisis);

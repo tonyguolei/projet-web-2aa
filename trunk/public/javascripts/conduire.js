@@ -67,7 +67,7 @@ function addEventPourParcour(membre) {
 }
 
 $( document ).ready(function() {
-    membre1.recupererMembreInfo(
+    membre1.recupererMembreInfo("al@clu.fr",
         function() {
             afficherMembreInfo(membre1);
             afficherParcourPropose(membre1);
