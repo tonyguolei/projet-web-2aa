@@ -5,33 +5,63 @@
 <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
 <script src="@{'/public/javascripts/sefaireconduire.js'}" type="text/javascript" charset="${_response_encoding}"></script>
 <div class="ui teal segment">
-    <div class="ui form">
-        <div class="inline field">
-            <label>Ville de départ</label>
-            <input placeholder="Exemple : Grenoble, 38000" type="text" name="depart">
-            <label>Ville de départ</label>
-            <input placeholder="Exemple : Annecy, 74000" type="text" name="arrivee">
-            <label>Date</label>
-            <input type="text" name="date" id="date">
-            <input type="button" id="boutonChercherParcours" class="ui button" name="boutonChercherParcours" value="Chercher"/>
+    <div class="ui grid">
+        <div class="three wide column">
+            <div class="field">
+                <label>Email</label>
+
+                <div class="ui left labeled icon input">
+                    <input placeholder="Username" type="text">
+                    <i class="user icon"></i>
+
+                    <div class="ui corner label">
+                        <i class="icon asterisk"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="field">
+                <label>Mot de passe</label>
+
+                <div class="ui left labeled icon input">
+                    <input type="password">
+                    <i class="lock icon"></i>
+
+                    <div class="ui corner label">
+                        <i class="icon asterisk"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="ui error message">
+                <div class="header">We noticed some issues</div>
+            </div>
+            <div class="ui blue submit button">Se connecter</div>
+        </div>
+        <div class="thirteen wide column">
+            <div class="ui form">
+                <div class="inline field">
+                    <label>Ville de départ</label>
+                    <input placeholder="Exemple : Grenoble, 38000" type="text" name="depart">
+                    <label>Ville de départ</label>
+                    <input placeholder="Exemple : Annecy, 74000" type="text" name="arrivee">
+                    <label>Date</label>
+                    <input type="text" name="date" id="date">
+                    <input type="button" id="boutonChercherParcours" class="ui button" name="boutonChercherParcours" value="Chercher"/>
+                </div>
+            </div>
+            <div class="ui warning message">Adding a classname of <code>ascending</code> or <code>descending</code> to the <code>th</code> will show the user the direction of sort. This example uses a modified version of the kylefox's <a href="https://github.com/kylefox/jquery-tablesort">tablesort plugin</a> to provide the proper class names.
+            </div>
+            <table class="ui sortable table segment" id="listeParcours">
+                <thead>
+                <tr><th>Départ</th>
+                    <th>Arrivée</th>
+                    <th>Date</th>
+                    <th>Nombre de places restantes</th>
+                    <th>Prix</th>
+                    <th>...</th>
+                </tr></thead>
+                <tbody>
+                </tbody>
+            </table>
         </div>
     </div>
-    *{<div class="ui divided list">
-    </div>  }*
-
-    <div class="ui warning message">Adding a classname of <code>ascending</code> or <code>descending</code> to the <code>th</code> will show the user the direction of sort. This example uses a modified version of the kylefox's <a href="https://github.com/kylefox/jquery-tablesort">tablesort plugin</a> to provide the proper class names.
-    </div>
-    <table class="ui sortable table segment" id="listeParcours">
-        <thead>
-        <tr><th>Départ</th>
-            <th>Arrivée</th>
-            <th>Date</th>
-            <th>Nombre de places restantes</th>
-            <th>Prix</th>
-            <th>...</th>
-        </tr></thead>
-        <tbody>
-        </tbody>
-    </table>
-
 </div>
