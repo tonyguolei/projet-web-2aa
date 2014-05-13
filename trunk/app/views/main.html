@@ -6,6 +6,7 @@
     <meta charset="${_response_encoding}">
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="@{'/public/javascripts/semantic.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    <script src="@{'/public/javascripts/main.js'}" type="text/javascript" charset="${_response_encoding}"></script>
 #{get 'moreScripts' /}
     <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/semantic.css'}">
 #{get 'moreStyles' /}
@@ -43,7 +44,7 @@
 
 <div id="main">
             <div class="ui grid">
-                <div class="three wide column">
+                <div class="four wide column">
                     <div class="field">
                         <label>Email</label>
 
@@ -71,12 +72,12 @@
                     <div class="ui error message">
                         <div class="header">We noticed some issues</div>
                     </div>
-                    <div class="ui buttons">
-                        <div class="ui blue submit button">Se connecter</div>
-                        <div class="ui positive submit button">S'inscrire</div>
+                    <div class="ui vertical buttons">
+                        <div class="ui button">Se connecter</div>
+                        <div class="ui button">S'inscrire</div>
                     </div>
                 </div>
-                <div class="thirteen wide column">
+                <div class="twelve wide column">
                 #{doLayout /}
                 </div>
             </div>
@@ -92,15 +93,10 @@
         <i class="google plus icon"></i>
         Google Plus
     </div>
-    <div class="ui linkedin button">
-        <i class="linkedin icon"></i>
-        LinkedIn
+    <div class="ui twitter button">
+        <i class="twitter icon"></i>
+        Twitter
     </div>
-    <div class="ui youtube button">
-        <i class="youtube icon"></i>
-        YouTube
-    </div>
-
 </footer>
 </body>
 </html>
