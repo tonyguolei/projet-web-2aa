@@ -44,7 +44,7 @@ public class Application extends Controller {
         render();
     }
 
-    public static void sefaireconduire(String villeDépart,String villeArrivee,String Date) {
+    public static void sefaireconduire() {
         render();
     }
 
@@ -88,5 +88,9 @@ public class Application extends Controller {
         renderJSON(serializer.exclude("*.class").serialize(listv));
     }
 
+    public static void sinscrire(String nom,String prenom,int age,String email,String mdp) {
+        new Membre(nom,prenom,mdp,age,email).save();
+        Application.index();
+    }
 
 }

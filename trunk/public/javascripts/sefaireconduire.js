@@ -8,6 +8,10 @@ $(document).bind("ready", function () {
     manageDate();
     displayAllTravels();
     $("#boutonChercherParcours").bind("click", searchTravel);
+
+    $('#boutonconnect')
+        .modal('show');
+    ;
 });
 
 function displayAllTravels(){

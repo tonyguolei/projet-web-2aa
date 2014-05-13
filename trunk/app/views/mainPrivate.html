@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>#{get 'title' /}</title>
+    <meta charset="${_response_encoding}">
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="@{'/public/javascripts/semantic.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+#{get 'moreScripts' /}
+    <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/semantic.css'}">
+#{get 'moreStyles' /}
+</head>
+
+<body>
+<header id="header">
+    <h1 class="ui green header">
+        Auto'Matic
+        <div class="sub header">
+        Haut de page
+        </div>
+    </h1>
+</header>
+
+<div class="ui divider"></div>
+
+<div id="menu" class="ui menu">
+    <a class="active green inverted item" href="@{Utilisateur.index()}">
+        <i class="home icon"></i> Accueil
+    </a>
+    <a class="active blue item" href="@{Utilisateur.conduire()}">
+        <i class="truck icon"></i> Conduire
+    </a>
+    <a class="active teal item" href="@{Utilisateur.sefaireconduire()}">
+        <i class="user icon"></i> Se faire conduire
+    </a>
+    <a class="active purple item" href="@{Utilisateur.nous()}">
+        <i class="question icon"></i> Qui sommes-nous ?
+    </a>
+    <a class="active red item" href="@{Utilisateur.contact()}">
+        <i class="mail icon"></i> Contact
+    </a>
+</div>
+
+<div id="main">
+    <div class="ui grid">
+        <div class="three wide column">
+
+        </div>
+        <div class="thirteen wide column">
+        #{doLayout /}
+        </div>
+    </div>
+</div>
+</div>
+<div class="ui divider"></div>
+<footer id="footer">
+    <div class="ui facebook button">
+        <i class="facebook icon"></i>
+        Facebook
+    </div>
+    <div class="ui google plus button">
+        <i class="google plus icon"></i>
+        Google Plus
+    </div>
+    <div class="ui linkedin button">
+        <i class="linkedin icon"></i>
+        LinkedIn
+    </div>
+    <div class="ui youtube button">
+        <i class="youtube icon"></i>
+        YouTube
+    </div>
+
+</footer>
+</body>
+</html>
