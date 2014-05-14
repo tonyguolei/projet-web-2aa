@@ -17,11 +17,11 @@ public class Conduire extends Controller {
 
     public static void recupererMembreInfo(){
         String email = params.get("email");
-        System.out.println(email);
+        //System.out.println(email);
         Membre m = Membre.find("byEmail", email).first();
         // return reponse en format json
         JSONSerializer serializer = new JSONSerializer();
-        System.out.println("1" +m.lesParcoursChoisis);
+        //System.out.println("1" +m.lesParcoursChoisis);
         renderJSON(serializer.include("lesParcoursCrees", "lesParcoursChoisis").exclude("*.class").transform(new DateTransformer("dd/MM/yyyy"), "dateInscription").serialize(m));
     }
 

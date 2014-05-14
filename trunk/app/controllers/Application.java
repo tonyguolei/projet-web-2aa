@@ -25,9 +25,9 @@ public class Application extends Controller {
         Ville v2 = new Ville("Gap",05000).save();
         Ville v3 = new Ville("Marseille",13000).save();
 
-        Membre m1 = new Membre("jack","pom","123456",23,"al@clu.fr").save();
-        Membre m2 = new Membre("harry","ruse","123456",22,"lg@clu.fr").save();
-        Membre m3 = new Membre("mel","soun","123456",20,"yl@clu.fr").save();
+        Membre m1 = new Membre("jack","pom","123456",23,"al@clu.fr","M").save();
+        Membre m2 = new Membre("harry","ruse","123456",22,"lg@clu.fr","M").save();
+        Membre m3 = new Membre("mel","soun","123456",20,"yl@clu.fr","F").save();
 
         Parcours p1 = new Parcours(m1,v1,v2,28,1).save();
         Parcours p2 = new Parcours(m2,v2,v3,28,2).save();
@@ -53,7 +53,8 @@ public class Application extends Controller {
     }
 
     public static void contact() {
-        render();
+
+
     }
 
     public static void tousLesParcours(){
@@ -88,9 +89,23 @@ public class Application extends Controller {
         renderJSON(serializer.exclude("*.class").serialize(listv));
     }
 
-    public static void sinscrire(String nom,String prenom,int age,String email,String mdp) {
-        new Membre(nom,prenom,mdp,age,email).save();
+    public static void sinscrire(String nom,String prenom,int age,String email,String mdp,String sexe) {
+        new Membre(nom,prenom,mdp,age,email,sexe).save();
         Application.index();
+    }
+
+    public static void seconnecter(){
+        Membre m = Membre.find("byNom","harry").first();
+
+        if(m!=null){
+            session.put("idUser",m.id);
+            session.put("nameUser",m.nom);
+            session.put("fnameUser",m.prenom);
+            Utilisateur.index();
+        }
+        else{
+            Application.index();
+        }
     }
 
 }

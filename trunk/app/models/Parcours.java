@@ -5,6 +5,7 @@ import javax.persistence.*;
 
 import com.google.gson.annotations.Expose;
 import play.db.jpa.*;
+import play.data.validation.*;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -20,16 +21,16 @@ public class Parcours extends Model {
     public Ville depart;
     @ManyToOne
     public Ville arrivee;
+    @Required
     public float prix;
+    @Required
     public int nbPlacesInitiales;
     public Date dateParcours;
     public boolean supprime;
     @ManyToOne
     public Membre createur;
     @ManyToMany(mappedBy ="lesParcoursChoisis")
-    public List<Membre> membresInscrits = new ArrayList<Membre>();
-//    @ManyToMany
-//    public List<Membre> lesCovoitures;
+    public Set<Membre> membresInscrits = new HashSet();
 
     //ON DOIT TOUJOURS PARTIR DU PARCOURS POUR FAIRE LE LIEN AVEC UN MEMBRE (géré en auto aprés)
     public Parcours(Membre createur, Ville dep, Ville arr,float prix,int nbPlacesInitiales) {
@@ -60,21 +61,8 @@ public class Parcours extends Model {
         this.nbPlacesInitiales = nbPlaces;
     }
 
-    public void modifierSupprime(boolean supprime) {
-        this.supprime = supprime;
+    public void annulerParcours(){
+        this.supprime = true;
     }
 
-    @Override
-    public String toString() {
-        return "Parcours{" +
-                "depart=" + depart +
-                ", arrivee=" + arrivee +
-                ", prix=" + prix +
-                ", nbPlacesInitiales=" + nbPlacesInitiales +
-                ", dateParcours=" + dateParcours +
-                ", supprime=" + supprime +
-                ", createur=" + createur +
-                ", membresInscrits=" + membresInscrits +
-                '}';
-    }
 }
