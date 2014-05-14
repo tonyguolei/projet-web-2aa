@@ -22,7 +22,7 @@ public class Parcours extends Model {
     @ManyToOne
     public Ville arrivee;
     @Required
-    public float prix;
+    public double prix;
     @Required
     public int nbPlacesInitiales;
     public Date dateParcours;
@@ -47,13 +47,19 @@ public class Parcours extends Model {
 
     public void ajouterMembreInscrit(Membre m) {
         //TODO Verifier le nombre d'inscrits par rapport au nb de places initiales
-        this.membresInscrits.add(m);
-        m.ajouterParcoursChoisi(this);
-        this.save();
-        m.save();
+        if(verifieDispoPlaces()){
+            this.membresInscrits.add(m);
+            m.ajouterParcoursChoisi(this);
+            this.save();
+            m.save();
+        }
     }
 
-    public void modifierPrix(float prix) {
+    private boolean verifieDispoPlaces(){
+         return(this.nbPlacesInitiales < this.membresInscrits.size());
+    }
+
+    public void modifierPrix(double prix) {
         this.prix = prix;
     }
 

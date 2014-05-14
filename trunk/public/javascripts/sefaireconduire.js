@@ -1,157 +1,23 @@
 /**
  * Created with IntelliJ IDEA.
  * User: lepeteil
- * Date: 10/05/14
+ * Date: 14/05/14
+ * Time: 18:28
+ * To change this template use File | Settings | File Templates.
  */
 
+/*Instance de la classe Parcours */
+var parcours1 = new ProjetWeb.Parcours();
+
 $(document).bind("ready", function () {
-    manageDate();
-    displayAllTravels();
-    $("#boutonChercherParcours").bind("click", searchTravel);
+    var listeParcours = document.getElementById("listeParcours");
+    var tbody = listeParcours.getElementsByTagName("tbody")[0];
+    obtenirDate();
+    afficherTousLesParcours(tbody);
+    //$("#boutonChercherParcours").bind("click", rechercherParcours(tbody));
 });
 
-function displayAllTravels(){
-    var listeParcours = document.getElementById("listeParcours");
-    var tbody = listeParcours.getElementsByTagName("tbody")[0];
-
-    $.ajax( "/tousLesParcours")
-        .done(function(data) {
-            if(data.length<=0){
-                alert("aucun résultat");
-            }
-            $.each(data, function (key, value) {
-                var newline = document.createElement('tr');
-                var departtmp = document.createElement('td');
-                departtmp.innerHTML = value.depart.nom;
-                var arrivetmp = document.createElement('td');
-                arrivetmp.innerHTML = value.arrivee.nom;
-                var datetmp = document.createElement('td');
-                datetmp.innerHTML = value.date;
-                var prixtmp = document.createElement('td');
-                prixtmp.innerHTML = value.prix;
-                //TODO Récuperer le nb de places restantes
-                //Si 0 place class="negative" + bouton activé
-                //Si toutes les places class="positive"
-                var nbplacestmp = document.createElement('td');
-                nbplacestmp.innerHTML = value.nbplacesinitiales;
-                var buttontmp = document.createElement('div');
-                buttontmp.setAttribute('class', 'right floated tiny teal ui button');
-                buttontmp.innerHTML = "Voyager";
-
-                tbody.appendChild(newline);
-                newline.appendChild(departtmp);
-                newline.appendChild(arrivetmp);
-                newline.appendChild(datetmp);
-                newline.appendChild(prixtmp);
-                newline.appendChild(nbplacestmp);
-                newline.appendChild(buttontmp);
-            });
-
-
-        })
-        .fail(function(error) {
-            console.log("error");
-        })
-}
-
-function searchTravel(){
-    var listeParcours = document.getElementById("listeParcours");
-    var tbody = listeParcours.getElementsByTagName("tbody")[0];
-
-    var depart = document.getElementsByName("depart")[0].value;
-    var arrivee = document.getElementsByName("arrivee")[0].value;
-    var date = document.getElementsByName("date")[0].value;
-
-    $.ajax( "/chercherParcours?depart="+depart+"&arrivee="+arrivee+"&date="+date)
-        .done(function(data) {
-            if(data.length<=0){
-                alert("aucun résultat");
-            }
-            else{
-                tbody.remove();
-            }
-
-            $.each(data, function (key, value) {
-                var newline = document.createElement('tr');
-                var departtmp = document.createElement('td');
-                departtmp.innerHTML = value.depart.nom;
-                var arrivetmp = document.createElement('td');
-                arrivetmp.innerHTML = value.arrivee.nom;
-                var datetmp = document.createElement('td');
-                datetmp.innerHTML = value.date;
-                var prixtmp = document.createElement('td');
-                prixtmp.innerHTML = value.prix;
-                //TODO Récuperer le nb de places restantes
-                //Si 0 place class="negative" + bouton activé
-                //Si toutes les places class="positive"
-                var nbplacestmp = document.createElement('td');
-                nbplacestmp.innerHTML = value.nbplacesinitiales;
-                var buttontmp = document.createElement('div');
-                buttontmp.setAttribute('class', 'right floated tiny teal ui button');
-                buttontmp.innerHTML = "Voyager";
-
-                tbody.appendChild(newline);
-                newline.appendChild(departtmp);
-                newline.appendChild(arrivetmp);
-                newline.appendChild(datetmp);
-                newline.appendChild(prixtmp);
-                newline.appendChild(nbplacestmp);
-                newline.appendChild(buttontmp);
-            });
-
-
-        })
-        .fail(function(error) {
-            console.log("error");
-        })
-}
-
-function searchTravel2(){
-    var depart = document.getElementsByName("depart")[0].value;
-    var arrivee = document.getElementsByName("arrivee")[0].value;
-    var date = document.getElementsByName("date")[0].value;
-
-    /*var list = document.getElementsByClassName("ui divided list")[0];
-    var item = list.getElementsByClassName("item");
-
-    if (item.length != 0){
-        item.remove();
-    }*/
-
-    var listeParcours = document.getElementById("listeParcours");
-
-    $.ajax( "/chercherParcours?depart="+depart+"&arrivee="+arrivee+"&date="+date)
-        .done(function(data) {
-            $.each(data, function (key, value) {
-                var newdivitem = document.createElement('div');
-                newdivitem.setAttribute('class', 'item');
-                var newdivbutton = document.createElement('div');
-                newdivbutton.setAttribute('class', 'right floated tiny teal ui button');
-                newdivbutton.innerHTML = "S'inscrire";
-                //TODO Bouton activé si encore des places dispos
-                var newdivcontent = document.createElement('div');
-                newdivcontent.setAttribute('class', 'content');
-                var newdivheader = document.createElement('div');
-                newdivheader.setAttribute('class', 'header');
-                newdivheader.innerHTML = value.depart.nom + ' ' +  value.arrivee.nom + ' ' + value.dateParcours;
-
-                list.appendChild(newdivitem);
-                newdivitem.appendChild(newdivbutton);
-                newdivitem.appendChild(newdivcontent);
-                newdivcontent.appendChild(newdivheader);
-            });
-
-            if(data.length<=0){
-                alert("aucun résultat");
-            }
-        })
-        .fail(function(error) {
-            console.log("error");
-        })
-}
-
-
-function manageDate(){
+function obtenirDate(){
     $("#date").datepicker({
         dateFormat: 'dd/mm/yy'
     });
@@ -169,4 +35,63 @@ function manageDate(){
     return prettyDate;
 }
 
+/*functions pour page conduire*/
+function afficherTousLesParcours(eltparent) {
+    //TODO Récuperer le nb de places restantes
+    //Si 0 place class="negative" + bouton activé
+    //Si toutes les places class="positive"
+
+    $.ajax( "/tousLesParcours")
+        .done(function(data) {
+            if(data.length<=0){
+                alert("aucun résultat");
+            }
+            $.each(data, function (key, value) {
+                $(eltparent).append(
+                    "<tr>"+
+                        "<td>"+ value.depart.nom +"</td>"+
+                        "<td>"+ value.arrivee.nom +"</td>"+
+                        "<td>"+ value.dateparcours+"</td>"+
+                        "<td>"+ value.prix+"</td>"+
+                        "<td>"+ value.nbplacesinitiales +"</td>"+
+                        "<td><div class='right floated tiny teal ui button'>Voyager</div></td>"+
+                    "</tr>"
+                );
+            });
+        })
+        .fail(function(error) {
+            console.log("error");
+        })
+}
+
+function rechercherParcours(eltparent){
+    var depart = document.getElementsByName("depart")[0].value;
+    var arrivee = document.getElementsByName("arrivee")[0].value;
+    var date = document.getElementsByName("date")[0].value;
+
+    $.ajax( "/chercherParcours?depart="+depart+"&arrivee="+arrivee+"&date="+date)
+        .done(function(data) {
+            if(data.length<=0){
+                $(eltparent).append("<tr>Aucun résultat trouvé !</tr>");
+            }
+            else{
+                eltparent.remove();
+            }
+            $.each(data, function (key, value) {
+                $(eltparent).append(
+                    "<tr>"+
+                        "<td>"+ value.depart.nom +"</td>"+
+                        "<td>"+ value.arrivee.nom +"</td>"+
+                        "<td>"+ value.dateparcours+"</td>"+
+                        "<td>"+ value.prix+"</td>"+
+                        "<td>"+ value.nbplacesinitiales +"</td>"+
+                        "<td><div class='right floated tiny teal ui button'>Voyager</div></td>"+
+                        "</tr>"
+                );
+            });
+        })
+        .fail(function(error) {
+            console.log("error");
+        })
+}
 

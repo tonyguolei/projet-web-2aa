@@ -15,6 +15,9 @@ import flexjson.transformer.DateTransformer;
  */
 public class Conduire extends Controller {
 
+    /* CECI N EST PLUS UTILISE */
+    /* ATTENTION !!!!!!!!!!!!!!!!!*/
+    /* cf controllers/Appplication */
     public static void recupererMembreInfo(){
         String email = params.get("email");
         //System.out.println(email);
@@ -25,7 +28,10 @@ public class Conduire extends Controller {
         renderJSON(serializer.include("lesParcoursCrees", "lesParcoursChoisis").exclude("*.class").transform(new DateTransformer("dd/MM/yyyy"), "dateInscription").serialize(m));
     }
 
-    public static void recupererMembreInscrit(){
+    /* CECI N EST PLUS UTILISE */
+    /* ATTENTION !!!!!!!!!!!!!!!!!*/
+    /* cf controllers/Appplication */
+    public static void recupererMembresInscrits(){
         String id = params.get("id");
         Parcours p = Parcours.findById(Long.parseLong(id, 10));
 

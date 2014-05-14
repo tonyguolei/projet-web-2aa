@@ -2,7 +2,7 @@
  * Created by tonyguolei on 5/9/14.
  */
 
-/*Instance of class User*/
+/*Instance de la classe Membre*/
 var membre1 = new ProjetWeb.Membre();
 
 /*functions pour page conduire*/
@@ -17,7 +17,7 @@ function afficherMembreInfo(membre) {
     );
 }
 
-function afficherParcourPropose(membre) {
+function afficherParcoursProposes(membre) {
     $.each( membre.lesParcoursCrees, function( key, value ) {
         $('#parcours_propose').append(
             "<a id="+value.id+">Click ici pour afficher membres Inscrits pour ce parcour en bas</a>" +
@@ -32,7 +32,7 @@ function afficherParcourPropose(membre) {
     });
 }
 
-function afficherParcourChosis(membre) {
+function afficherParcoursChosis(membre) {
     $.each( membre.lesParcoursChoisis, function( key, value ) {
         $('#parcours_choisis').append(
             "<p>Parcour ID: " + value.id + "</p>" +
@@ -46,9 +46,9 @@ function afficherParcourChosis(membre) {
     });
 }
 
-function addEventPourParcour(membre) {
+function addEventPourParcours(membre) {
     $("a").click(function(){
-        membre.recupererMembreInscrit(this.id,
+        membre.recupererMembresInscrits(this.id,
             function(data){
                 $.each( data.membresInscrits, function( key, value ) {
                     $('#membreInscrit_info').append(
@@ -70,9 +70,9 @@ $( document ).ready(function() {
     membre1.recupererMembreInfo("al@clu.fr",
         function() {
             afficherMembreInfo(membre1);
-            afficherParcourPropose(membre1);
-            addEventPourParcour(membre1);
-            afficherParcourChosis(membre1);
+            afficherParcoursProposes(membre1);
+            addEventPourParcours(membre1);
+            afficherParcoursChosis(membre1);
         } ,
         function() {
              //gerer error

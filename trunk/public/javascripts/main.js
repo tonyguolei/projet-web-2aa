@@ -12,8 +12,8 @@ $(document).bind("ready", function () {
 });
 
 function register(){
-    alert("connexion user")
-    $('#formInscript').modal('show');
+    alert("inscription user");
+    $('#formInscript').modal('show')
 }
 
 function connectUser(){

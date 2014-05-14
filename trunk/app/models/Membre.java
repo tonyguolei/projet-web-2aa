@@ -44,7 +44,7 @@ public class Membre extends Model {
         this.age = age;
         this.email = email;
         this.sexe = sexe;
-        //TODO Mettre la date en format FR
+        //TODO Mettre la date en format FR ???
         this.dateInscription = new Date();
         this.desinscrit = false;
     }
@@ -60,6 +60,28 @@ public class Membre extends Model {
     public void desinscrire() {
         this.desinscrit = true;
         //TODO modifier l'attribut de tous les parcours créés par ce membre
+        this.annulerTousLesParcours();
+    }
+
+    private void annulerTousLesParcours(){
+        //Gestion des parcours crees
+        Iterator<Parcours> itr = lesParcoursCrees.iterator();
+        while(itr.hasNext()) {
+            Parcours p = itr.next();
+            //TODO Prendre les parcours avec la dateParcours < dateAujourdhui
+            p.supprime = true;
+            p.save();
+        }
+
+        //Gestion des parcours choisis
+        Iterator<Parcours> itr1 = lesParcoursChoisis.iterator();
+        while(itr.hasNext()) {
+            Parcours p = itr.next();
+            //TODO Prendre les parcours avec la dateParcours < dateAujourdhui
+            p.membresInscrits.remove(this);
+            p.save();
+        }
+        this.save();
     }
 
     public void modifierEmail(String email) {

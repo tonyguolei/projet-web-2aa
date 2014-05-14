@@ -4,12 +4,16 @@
 
 # Home page
 GET     /                                       Application.index
-GET     /recupererMembreInfo                    Conduire.recupererMembreInfo
-GET     /recupererMembreInscrit                 Conduire.recupererMembreInscrit
+GET     /initbase                               Application.initBase
+
 GET     /tousLesParcours                        Application.tousLesParcours
 GET     /chercherParcours                       Application.chercherParcours
 GET     /toutesLesVilles                        Application.toutesLesVilles
-GET     /initbase                               Application.initBase
+
+GET     /recupererMembreInfo                    Utilisateur.recupererMembreInfo
+GET     /recupererMembresInscrits               Utilisateur.recupererMembresInscrits
+GET     /recupererParcoursInfo                  Utilisateur.recupererParcoursInfo
+GET     /recupererMembreCreateur                Utilisateur.recupererMembreCreateur
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
