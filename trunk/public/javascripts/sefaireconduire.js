@@ -35,8 +35,6 @@ function obtenirDate(){
 
 function afficherTousLesParcours() {
     //TODO Récuperer le nb de places restantes
-    //Si 0 place class="negative" + bouton activé
-    //Si toutes les places class="positive"
 
     $.ajax( "/tousLesParcours")
         .done(function(data) {
@@ -54,7 +52,7 @@ function afficherTousLesParcours() {
                         "<td>"+ value.dateParcours+"</td>"+
                         "<td> x /"+ value.nbPlacesInitiales+"</td>"+
                         "<td>"+ value.prix +"</td>"+
-                        "<td><div class='right floated tiny teal ui button' disabled='disabled'>Réserver</div></td>"+
+                        "<td><div class='right floated tiny teal ui button'>Réserver</div></td>"+
                     "</tr>"
                 );
             });

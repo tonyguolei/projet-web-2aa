@@ -7,15 +7,58 @@
  */
 
 $(document).bind("ready", function () {
-    $("#boutonSeconnecter").bind("click", connectUser);
-    $("#boutonSinscrire").bind("click", register);
+    $("#boutonSeconnecter").bind("click", seconnecter);
+    $("#boutonSinscrire").bind("click", sinscrire);
 });
 
-function register(){
-    alert("inscription user");
+function sinscrire(){
     $('#formInscript').modal('show');
 }
 
-function connectUser(){
-    alert("connexion user");
+function seconnecter(){
+
 }
+
+    $('#formInscript')
+        .form({
+            prenom: {
+                identifier  : 'prenom',
+                rules: [
+                    {
+                        type   : 'empty',
+                        prompt : 'Merci de saisir votre prénom!'
+                    }
+                ]
+            },
+            nom: {
+                identifier  : 'nom',
+                rules: [
+                    {
+                        type   : 'empty',
+                        prompt : 'Merci de saisir votre nom!'
+                    }
+                ]
+            },
+            motdepasse: {
+                identifier : 'motdepasse',
+                rules: [
+                    {
+                        type   : 'empty',
+                        prompt : 'Merci de saisir votre mot de passe!'
+                    },
+                    {
+                        type   : 'Taille <= 20',
+                        prompt : 'Votre mot de passe doit avoir 20 caractères.'
+                    }
+                ]
+            },
+            age: {
+                identifier : 'age',
+                rules: [
+                    {
+                        type   : 'empty',
+                        prompt : 'Votre age doit être un chiffre.'
+                    }
+                ]
+            }
+        });
