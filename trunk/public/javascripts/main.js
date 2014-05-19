@@ -13,7 +13,7 @@ $(document).bind("ready", function () {
 
 function register(){
     alert("inscription user");
-    //$('#formInscript').modal('show');
+    $('#formInscript').modal('show');
 }
 
 function connectUser(){

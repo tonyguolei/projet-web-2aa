@@ -20,23 +20,28 @@ public class Utilisateur extends Controller {
     }*/
 
     public static void index() {
-        render();
+        Membre m = Membre.findById(Long.parseLong("1", 10));
+        render(m);
     }
 
     public static void conduire() {
-        render();
+        Membre m = Membre.findById(Long.parseLong("1", 10));
+        render(m);
     }
 
     public static void sefaireconduire() {
-        render();
+        Membre m = Membre.findById(Long.parseLong("1", 10));
+        render(m);
     }
 
     public static void nous() {
-        render();
+        Membre m = Membre.findById(Long.parseLong("1", 10));
+        render(m);
     }
 
     public static void contact() {
-        render();
+        Membre m = Membre.findById(Long.parseLong("1", 10));
+        render(m);
     }
 
     public static void monprofil() {
