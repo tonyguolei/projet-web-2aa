@@ -55,23 +55,7 @@ public class Parcours extends Model {
         createur.save();
     }
 
-    public Parcours(Membre createur, Ville dep, Ville arr,float prix,int nbPlacesInitiales,
-                    int heure,int min) {
-        this.createur = createur;
-        this.depart = dep;
-        this.arrivee = arr;
-        this.prix = prix;
-        this.nbPlacesInitiales = nbPlacesInitiales;
-        this.heure = heure;
-        this.min = min;
-        this.dateParcours = new Date();
-        this.supprime = false;
-        createur.ajouterParcoursCree(this);
-        createur.save();
-    }
-
     public void ajouterMembreInscrit(Membre m) {
-        //TODO Verifier le nombre d'inscrits par rapport au nb de places initiales
         if(verifieDispoPlaces()){
             this.membresInscrits.add(m);
             m.ajouterParcoursChoisi(this);
