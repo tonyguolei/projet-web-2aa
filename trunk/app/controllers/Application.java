@@ -2,16 +2,16 @@ package controllers;
 
 import flexjson.JSONSerializer;
 import flexjson.transformer.DateTransformer;
+import models.Ville;
+import models.Membre;
+import models.Parcours;
 import models.*;
 import oauth.signpost.http.HttpRequest;
 import org.apache.commons.lang.StringUtils;
 import play.*;
 import play.mvc.*;
 import org.apache.commons.*;
-
 import java.util.*;
-
-import models.*;
 import com.google.gson.*;
 import play.test.Fixtures;
 

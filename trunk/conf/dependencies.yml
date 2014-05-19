@@ -2,4 +2,5 @@
 
 require:
     - play
-    - net.sf.flexjson -> flexjson 2.1
+    - net.sf.flexjson -> flexjson 2.
+    - play -> crud

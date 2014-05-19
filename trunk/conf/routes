@@ -15,6 +15,12 @@ GET     /recupererMembresInscrits               Utilisateur.recupererMembresInsc
 GET     /recupererParcoursInfo                  Utilisateur.recupererParcoursInfo
 GET     /recupererMembreCreateur                Utilisateur.recupererMembreCreateur
 
+# Import CRUD routes
+*      /admin                                   module:crud
+
+# Import Secure routes
+*       /                                       module:secure
+
 # Ignore favicon requests
 GET     /favicon.ico                            404
 
@@ -23,3 +29,4 @@ GET     /public/                                staticDir:public
 
 # Catch all
 *       /{controller}/{action}                  {controller}.{action}
+
