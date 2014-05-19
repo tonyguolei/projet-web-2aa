@@ -29,7 +29,7 @@ public class Application extends Controller {
 
         Membre m1 = new Membre("jack", "pom", "123456", 23, "al@clu.fr", "M").save();
         Membre m2 = new Membre("harry", "ruse", "123456", 22, "lg@clu.fr", "M").save();
-        Membre m3 = new Membre("mel", "soun", "123456", 20, "yl@clu.fr", "F").save();
+        Membre m3 = new Membre("alice", "grange", "123456", 20, "alice@gmail.com", "F").save();
 
         Parcours p1 = new Parcours(m1, v1, v2, 12, 1,14,00).save();
         Parcours p2 = new Parcours(m2, v5, v3, 14, 2,13,50).save();
@@ -86,22 +86,29 @@ public class Application extends Controller {
         String depart = params.get("depart");
         String arrivee = params.get("arrivee");
         String date = params.get("date");
+        String textfind = "";
 
-        List<Parcours> listp = null;
-
-        if(depart.matches("[0-9]+") && arrivee.matches("[0-9]+")){
-            //2 code postaux
-            listp = Parcours.find("depart.codePostal like ? and arrivee.codePostal like ?  ",
-                    "%"+ depart+"%",
-                    "%"+ arrivee+"%").fetch();
+        if(depart.matches("[0-9]+")){
+            //code postal saisi pour la ville de départ
+            textfind = "depart.codePostal like ? ";
         }
         else{
-            //2 villes
-            listp = Parcours.find("depart.nom like ? and arrivee.nom like ?  ",
-                    "%"+ StringUtils.capitalize(depart)+"%",
-                    "%"+StringUtils.capitalize(arrivee)+"%").fetch();
+            //nom saisi pour la ville de depart
+            textfind = "depart.nom like ? ";
+            depart = StringUtils.capitalize(depart);
         }
 
+        if(arrivee.matches("[0-9]+")){
+            //code postal saisi pour la ville darrivee
+            textfind = textfind + "and arrivee.codePostal like ? ";
+        }
+        else{
+            //nom saisi pour la ville darrivee
+            textfind = textfind +"and arrivee.nom like ? ";
+            arrivee = StringUtils.capitalize(arrivee);
+        }
+
+        List<Parcours> listp = Parcours.find(textfind,"%"+ depart+"%","%"+ arrivee+"%").fetch();
         JSONSerializer serializer = new JSONSerializer();
         renderJSON(serializer.exclude("*.class").exclude("createur").transform(new DateTransformer("yyyy/MM/dd hh:mm:ss"), "dateParcours").serialize(listp));
 
@@ -122,6 +129,8 @@ public class Application extends Controller {
         System.out.println(emailform);
         System.out.println(motdepasseform);
         if (Security.authenticate(emailform, motdepasseform)) {
+            System.out.println("Membre ok");
+            session.put("username",emailform);
             Utilisateur.index();
         } else {
             Application.index();

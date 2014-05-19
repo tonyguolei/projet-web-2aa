@@ -9,64 +9,42 @@ import play.mvc.*;
 
 import javax.servlet.http.*;
 
-public class Utilisateur extends Controller {
+public class Utilisateur extends Controller  {
 
-    /*
     @Before
-    public static boolean verifierSession(){
-        if (session.get("email")!=""){
-            return true;
-        }
-    }*/
+    public static void isConnected(){
+        System.out.println("session" + session.get("username"));
+        if(!Security.isConnected())
+            //redirection
+            Application.index();
+    }
 
     public static void index() {
-        if(Security.isConnected()){
-            System.out.println("test") ;
-            render();
-        }else
-            Application.index();
+        render();
     }
 
     public static void conduire() {
-        if(Security.isConnected())
-            render();
-        else
-            Application.index();
+        render();
     }
 
     public static void sefaireconduire() {
-        if(Security.isConnected())
-            render();
-        else
-            Application.index();
+        render();
     }
 
     public static void nous() {
-        if(Security.isConnected())
-            render();
-        else
-            Application.index();
+        render();
     }
 
     public static void contact() {
-        if(Security.isConnected())
-            render();
-        else
-            Application.index();
+        render();
     }
 
     public static void monprofil() {
-        if(Security.isConnected())
-            render();
-        else
-            Application.index();
+        render();
     }
 
     public static void mesparcours() {
-        if(Security.isConnected())
-            render();
-        else
-            Application.index();
+        render();
     }
 
     /* COTE MEMBRE ----------------------------------*/
