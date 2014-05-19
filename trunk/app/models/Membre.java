@@ -50,6 +50,16 @@ public class Membre extends Model {
         this.desinscrit = false;
     }
 
+    public static boolean connect(String username, String password) {
+        System.out.println(Membre.find("email = ? and motDePasse = ?",username, password).first());
+        if(Membre.find("email = ? and motDePasse = ?",username, password).first() != null){
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     public void ajouterParcoursCree(Parcours p) {
         this.lesParcoursCrees.add(p);
     }

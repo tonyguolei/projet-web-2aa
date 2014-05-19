@@ -118,13 +118,10 @@ public class Application extends Controller {
         Application.index();
     }
 
-    public static void seconnecter() {
-        Membre m = Membre.find("byNom", "harry").first();
-
-        if (m != null) {
-            session.put("idUser", m.id);
-            session.put("nameUser", m.nom);
-            session.put("fnameUser", m.prenom);
+    public static void seconnecter(String emailform,String motdepasseform) {
+        System.out.println(emailform);
+        System.out.println(motdepasseform);
+        if (Security.authenticate(emailform, motdepasseform)) {
             Utilisateur.index();
         } else {
             Application.index();
