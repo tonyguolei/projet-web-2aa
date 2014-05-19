@@ -45,6 +45,7 @@
 <div id="main">
             <div class="ui grid">
                 <div class="four wide column">
+                    <form id="formconnexion" action="@{Application.seconnecter()}">
                     <div class="field">
                         <label>Email</label>
                         <div class="ui left labeled icon input">
@@ -73,10 +74,11 @@
                     </div>
                     <div class="ui vertical buttons">
                         <div class="ui button" id="boutonSeconnecter">
-                            <a href="@{Application.seconnecter()}">Se connecter</a>
+                            <button type="submit"><i class="sign in icon"></i>Se connecter</button>
                             </div>
                         <div class="ui button" id="boutonSinscrire">S'inscrire</div>
                     </div>
+                    </form>
                 </div>
                 <div class="twelve wide column">
                 #{doLayout /}
