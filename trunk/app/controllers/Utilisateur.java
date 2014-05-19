@@ -20,38 +20,53 @@ public class Utilisateur extends Controller {
     }*/
 
     public static void index() {
-        Membre m = Membre.findById(Long.parseLong("1", 10));
-        render(m);
+        if(Security.isConnected()){
+            System.out.println("test") ;
+            render();
+        }else
+            Application.index();
     }
 
     public static void conduire() {
-        Membre m = Membre.findById(Long.parseLong("1", 10));
-        render(m);
+        if(Security.isConnected())
+            render();
+        else
+            Application.index();
     }
 
     public static void sefaireconduire() {
-        Membre m = Membre.findById(Long.parseLong("1", 10));
-        render(m);
+        if(Security.isConnected())
+            render();
+        else
+            Application.index();
     }
 
     public static void nous() {
-        Membre m = Membre.findById(Long.parseLong("1", 10));
-        render(m);
+        if(Security.isConnected())
+            render();
+        else
+            Application.index();
     }
 
     public static void contact() {
-        Membre m = Membre.findById(Long.parseLong("1", 10));
-        render(m);
+        if(Security.isConnected())
+            render();
+        else
+            Application.index();
     }
 
     public static void monprofil() {
-        Membre m = Membre.findById(Long.parseLong("1", 10));
-        render(m);
+        if(Security.isConnected())
+            render();
+        else
+            Application.index();
     }
 
     public static void mesparcours() {
-        Membre m = Membre.findById(Long.parseLong("1", 10));
-        render(m);
+        if(Security.isConnected())
+            render();
+        else
+            Application.index();
     }
 
     /* COTE MEMBRE ----------------------------------*/
