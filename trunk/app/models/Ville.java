@@ -16,9 +16,9 @@ public class Ville extends Model {
     @Expose
     public String nom;
     @Expose
-    public int codePostal;
+    public String codePostal;
 
-    public Ville(String nom, int codePostal) {
+    public Ville(String nom, String codePostal) {
         this.nom = nom;
         this.codePostal = codePostal;
     }

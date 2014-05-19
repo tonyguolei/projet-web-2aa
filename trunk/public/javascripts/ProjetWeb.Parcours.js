@@ -19,16 +19,21 @@ ProjetWeb.Parcours = function() {
     this.prix = null;
     this.nbplacesinitiales = null;
     this.dateparcours = null;
+    this.heure = null;
+    this.min = null;
     this.supprime = null;
     this.createur = null;
     this.membresInscrits = {};
 
     /*constructeur de la classe Parcours*/
-    this.constructor = function(id, depart, arrivee, prix, nbplacesinitiales, dateparcours, supprime, createur, membresinscrits){
+    this.constructor = function(id, depart, arrivee, prix, nbplacesinitiales,
+                                dateparcours, heure, min, supprime, createur, membresinscrits){
         this.id = id;
         this.depart = depart;
         this.arrivee = arrivee;
         this.prix = prix;
+        this.heure = heure;
+        this.min = min;
         this.nbplacesinitiales = nbplacesinitiales;
         this.dateparcours = dateparcours;
         this.supprime = supprime;
@@ -48,7 +53,9 @@ ProjetWeb.Parcours.prototype = {
         })
             .done(function(data) {
                 console.log(data);
-                self.constructor(data.id,data.depart,data.arrivee,data.prix,data.nbplacesinitiales,data.dateparcours,data.supprime,data.createur,data.membresinscrits);
+                self.constructor(data.id,data.depart,data.arrivee,data.prix,
+                    data.nbplacesinitiales,data.dateparcours,data.heure,
+                    data.min,data.supprime,data.createur,data.membresinscrits);
                 cb_success(data);
             })
             .fail(function(error) {

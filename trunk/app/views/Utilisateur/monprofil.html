@@ -1,0 +1,55 @@
+#{extends 'mainPrivate.html' /}
+#{set title:'Mon profil' /}
+
+<div class="ui black segment">
+    <div id="formProfil">
+        <div class="ui raised segment">
+            <div class="ui black ribbon label">Mon profil</div>
+        <div class="content">
+            <div class="ui error form segment">
+                <div class="ui error message">
+                    <div class="header">Action Forbidden</div>
+                    <p>You can only sign up for an account once with a given e-mail address.</p>
+                </div>
+                <div class="two fields">
+                    <div class="field">
+                        <label>Prénom</label>
+                        <input placeholder="Prénom" type="text" value="${m.prenom}">
+                    </div>
+                    <div class="field">
+                        <label>Nom</label>
+                        <input placeholder="Nom" type="text" value="${m.nom}">
+                    </div>
+                </div>
+                <div class="two fields">
+                    <div class="field">
+                        <label>Age</label>
+                        <input placeholder="Age" type="text" value="${m.age}">
+                    </div>
+                    <div class="field">
+                        <label>Sexe</label>
+                        <div class="ui fluid selection dropdown">
+                            <div class="text">Selectionner</div>
+                            <i class="dropdown icon"></i>
+                            <input name="sexe" type="hidden">
+                            <div class="menu">
+                                <div class="item" data-value="Homme">Masculin</div>
+                                <div class="item" data-value="Femme">Feminin</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="field">
+                    <label>Email</label>
+                    <input placeholder="Email" type="text" value="${m.email}" disabled>
+                </div>
+                <div class="field">
+                    <label>Mot de passe</label>
+                    <input type="password">
+                </div>
+                <div class="ui blue submit button">Modifier</div>
+            </div>
+        </div>
+    </div>
+</div>

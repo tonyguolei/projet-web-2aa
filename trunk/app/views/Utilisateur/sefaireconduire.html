@@ -4,4 +4,29 @@
 <div class="ui teal segment">
     S’enregistrer sur un parcours en tant que passager
     Consulter tous les parcours
+    <div class="ui form">
+        <div class="inline field">
+            <label>Ville de départ</label>
+            <input placeholder="Exemple : Grenoble, 38000" type="text" name="depart">
+            <label>Ville d'arrivée</label>
+            <input placeholder="Exemple : Annecy, 74000" type="text" name="arrivee">
+            <label>Date</label>
+            <input type="text" name="date" id="date">
+            <input type="button" id="boutonChercherParcours" class="ui button" name="boutonChercherParcours" value="Chercher"/>
+        </div>
+    </div>
+    <div class="ui warning message">Adding a classname of <code>ascending</code> or <code>descending</code> to the <code>th</code> will show the user the direction of sort. This example uses a modified version of the kylefox's <a href="https://github.com/kylefox/jquery-tablesort">tablesort plugin</a> to provide the proper class names.
+    </div>
+    <table class="ui sortable table segment" id="listeParcours">
+        <thead>
+        <tr><th>Départ</th>
+            <th>Arrivée</th>
+            <th>Date</th>
+            <th>Nombre de places restantes</th>
+            <th>Prix</th>
+            <th>Options</th>
+        </tr></thead>
+        <tbody id="tabcontenu">
+        </tbody>
+    </table>
 </div>

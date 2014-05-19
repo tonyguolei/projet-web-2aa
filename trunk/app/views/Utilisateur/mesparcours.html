@@ -1,0 +1,65 @@
+#{extends 'mainPrivate.html' /}
+#{set title:'Mes parcours' /}
+
+<div class="ui black segment">
+    <div class="ui raised segment">
+        <div class="ui black ribbon label">Mes parcours choisis</div>
+        <div id="p_proposes">
+        #{if m!=null}
+            <table class="ui sortable table segment" id="listeParcoursChoisis">
+                <thead>
+                <tr><th>Départ</th>
+                    <th>Arrivée</th>
+                    <th>Date</th>
+                    <th>Nombre de places restantes</th>
+                    <th>Prix</th>
+                    <th>Options</th>
+                </tr></thead>
+                <tbody id="tabcontenu">
+                #{list items:m.lesParcoursChoisis, as:'pchoisis'}
+                <tr>
+                <td>${pchoisis.depart.nom}</td>
+                <td>${pchoisis.arrivee.nom}</td>
+                <td>${pchoisis.dateParcours}
+                ${pchoisis.heure}
+                ${pchoisis.min}</td>
+                <td>A rajouter</td>
+                <td>${pchoisis.prix}</td>
+                <td>Bouton voir</td>
+                </tr>
+                #{/list}
+            </tbody>
+            </table>
+        #{/if}
+        </div>
+        <div class="ui black ribbon label">Mes parcours créés</div>
+        <div id="p_crees">
+        #{if m!=null}
+            <table class="ui sortable table segment" id="listeParcoursCrees">
+                <thead>
+                <tr><th>Départ</th>
+                    <th>Arrivée</th>
+                    <th>Date</th>
+                    <th>Nombre de places restantes</th>
+                    <th>Prix</th>
+                    <th>Options</th>
+                </tr></thead>
+                <tbody id="tabcontenu">
+            #{list items:m.lesParcoursCrees, as:'pcrees'}
+            <tr>
+            <td>${pcrees.depart.nom}</td>
+            <td>${pcrees.arrivee.nom}</td>
+            <td>${pcrees.dateParcours}
+                ${pcrees.heure}
+                ${pcrees.min}</td>
+            <td>A rajouter</td>
+            <td>${pcrees.prix}</td>
+            <td>Bouton voir</td>
+            </tr>
+            #{/list}
+                </tbody>
+            </table>
+        #{/if}
+        </div>
+    </div>
+</div>

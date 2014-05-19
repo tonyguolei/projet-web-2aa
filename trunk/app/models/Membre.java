@@ -16,7 +16,8 @@ import java.text.*;
 @Table(uniqueConstraints =
         {@UniqueConstraint(
                 columnNames = {"email"
-                })})
+                })},
+        name="Membre")
 public class Membre extends Model {
     @Required
     public String nom;
@@ -82,10 +83,6 @@ public class Membre extends Model {
             p.save();
         }
         this.save();
-    }
-
-    public void modifierEmail(String email) {
-        this.email = email;
     }
 
     public void modifierAge(int age) {

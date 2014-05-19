@@ -45,16 +45,31 @@
 <div id="main">
     <div class="ui grid">
         <div class="four wide column">
-            Nom/Prénom/Sexe
-            Mes parcours
-            Mes infos persos
+            <div class="ui vertical labeled icon menu">
+                <h4 class="ui black block header">
+                    Bienvenue Nom prénom !
+                </h4>
+                <a class="red item" href="@{Utilisateur.monprofil()}">
+                    <i class="user icon"></i>
+                    Mon profil
+                </a>
+                <a class="teal item" href="@{Utilisateur.mesparcours()}">
+                    <i class="dashboard icon"></i>
+                    Mes parcours
+                </a>
+                <a class="teal item">
+                    <i class="sign out icon"></i>
+                    Déconnexion
+                </a>
+            </div>
+
         </div>
         <div class="twelve wide column">
         #{doLayout /}
         </div>
     </div>
 </div>
-</div>
+
 <div class="ui divider"></div>
 <footer id="footer">
     <div class="ui facebook button">

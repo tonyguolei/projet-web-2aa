@@ -10,11 +10,9 @@
 var parcours1 = new ProjetWeb.Parcours();
 
 $(document).bind("ready", function () {
-    var listeParcours = document.getElementById("listeParcours");
-    var tbody = listeParcours.getElementsByTagName("tbody")[0];
     obtenirDate();
-    afficherTousLesParcours(tbody);
-    //$("#boutonChercherParcours").bind("click", rechercherParcours(tbody));
+    afficherTousLesParcours();
+    $("#boutonChercherParcours").bind("click", rechercherParcours);
 });
 
 function obtenirDate(){
@@ -35,8 +33,7 @@ function obtenirDate(){
     return prettyDate;
 }
 
-/*functions pour page conduire*/
-function afficherTousLesParcours(eltparent) {
+function afficherTousLesParcours() {
     //TODO Récuperer le nb de places restantes
     //Si 0 place class="negative" + bouton activé
     //Si toutes les places class="positive"
@@ -44,17 +41,20 @@ function afficherTousLesParcours(eltparent) {
     $.ajax( "/tousLesParcours")
         .done(function(data) {
             if(data.length<=0){
-                alert("aucun résultat");
+                $("#tabcontenu").append("<tr>Aucun résultat trouvé !</tr>");
+            }
+            else{
+                $("#tabcontenu").empty();
             }
             $.each(data, function (key, value) {
-                $(eltparent).append(
+                $("#tabcontenu").append(
                     "<tr>"+
                         "<td>"+ value.depart.nom +"</td>"+
                         "<td>"+ value.arrivee.nom +"</td>"+
-                        "<td>"+ value.dateparcours+"</td>"+
-                        "<td>"+ value.prix+"</td>"+
-                        "<td>"+ value.nbplacesinitiales +"</td>"+
-                        "<td><div class='right floated tiny teal ui button'>Voyager</div></td>"+
+                        "<td>"+ value.dateParcours+"</td>"+
+                        "<td> x /"+ value.nbPlacesInitiales+"</td>"+
+                        "<td>"+ value.prix +"</td>"+
+                        "<td><div class='right floated tiny teal ui button' disabled='disabled'>Réserver</div></td>"+
                     "</tr>"
                 );
             });
@@ -64,29 +64,34 @@ function afficherTousLesParcours(eltparent) {
         })
 }
 
-function rechercherParcours(eltparent){
+function rechercherParcours(){
     var depart = document.getElementsByName("depart")[0].value;
     var arrivee = document.getElementsByName("arrivee")[0].value;
     var date = document.getElementsByName("date")[0].value;
 
-    $.ajax( "/chercherParcours?depart="+depart+"&arrivee="+arrivee+"&date="+date)
+    $.ajax({
+        url: "/chercherParcours",
+        data: {depart:depart,
+                arrivee:arrivee,
+                date:date}
+    })
         .done(function(data) {
             if(data.length<=0){
-                $(eltparent).append("<tr>Aucun résultat trouvé !</tr>");
+                $("#tabcontenu").append("<tr>Aucun résultat trouvé !</tr>");
             }
             else{
-                eltparent.remove();
+                $("#tabcontenu").empty();
             }
             $.each(data, function (key, value) {
-                $(eltparent).append(
+                $("#tabcontenu").append(
                     "<tr>"+
                         "<td>"+ value.depart.nom +"</td>"+
                         "<td>"+ value.arrivee.nom +"</td>"+
-                        "<td>"+ value.dateparcours+"</td>"+
-                        "<td>"+ value.prix+"</td>"+
-                        "<td>"+ value.nbplacesinitiales +"</td>"+
-                        "<td><div class='right floated tiny teal ui button'>Voyager</div></td>"+
-                        "</tr>"
+                        "<td>"+ value.dateParcours+"</td>"+
+                        "<td> x /"+ value.nbPlacesInitiales+"</td>"+
+                        "<td>"+ value.prix +"</td>"+
+                        "<td><div class='right floated tiny teal ui button' disabled='disabled'>Réserver</div></td>"+
+                    "</tr>"
                 );
             });
         })
