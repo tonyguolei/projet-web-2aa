@@ -137,6 +137,7 @@ public class Application extends Controller {
         //TODO Verifier les champs pour l'inscription
         System.out.println("Inscription");
         new Membre(nom, prenom, mdp, age, email, sexe).save();
+        Application.index();
     }
 
     public static void seconnecter(String emailform,String motdepasseform) {

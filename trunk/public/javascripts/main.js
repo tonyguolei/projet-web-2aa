@@ -18,7 +18,7 @@ function sinscrire(){
     ;
 }
 
-function validerInscription(){
+/*function validerInscription(){
     //TODO Verifier la validite des champs saisis
     var nom = $("#nom").val();
     var prenom = $("#prenom").val();
@@ -48,7 +48,7 @@ function validerInscription(){
         .fail(function(error) {
             console.log("error");
         })
-}
+} */
 
     $('#formInscript')
         .form({
