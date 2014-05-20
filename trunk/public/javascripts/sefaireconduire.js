@@ -60,10 +60,15 @@ function rechercherParcours(){
                         "<tr>"+
                             "<td>"+ value.depart.nom +"</td>"+
                             "<td>"+ value.arrivee.nom +"</td>"+
-                            "<td>"+ value.dateParcours+"</td>"+
+                            "<td>" +
+                            "<div class='ui divided list'>" +
+                            "<div class='item'>"+value.dateParcours+"</div>"+
+                            "<div class='item'>"+value.heure + "h" + value.min + "</div>" +
+                            "</div>" +
+                            "</td>"+
                             "<td>" + value.nbPlacesInitiales+"</td>"+
                             "<td>"+ value.prix +"</td>"+
-                            "<td><div class='ui negative disabled button'>Réserver</div></td>"+
+                            "<td><div class='ui small negative disabled button'>Réserver</div></td>"+
                             "</tr>"
                     );
                 });

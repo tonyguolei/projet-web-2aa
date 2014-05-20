@@ -1,10 +1,7 @@
 #{extends 'mainPrivate.html' /}
 #{set title:'Se faire conduire' /}
-<link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-<script src="//code.jquery.com/jquery-1.10.2.js"></script>
-<script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-<script src="@{'/public/javascripts/ProjetWeb.Parcours.js'}" type="text/javascript" charset="${_response_encoding}"></script>
-<script src="@{'/public/javascripts/sefaireconduire_2.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+
+<script src="@{'/public/javascripts/sefaireconduire_private.js'}" type="text/javascript" charset="${_response_encoding}"></script>
 
 <div class="ui teal segment">
     <div class="ui teal ribbon label">Se faire conduire</div>
@@ -18,7 +15,7 @@
             <input placeholder="Exemple : Annecy, 74000" type="text" name="arrivee">
             <label>Date</label>
             <input type="text" name="date" id="date">
-            <input type="button" id="boutonChercherParcours" class="ui button" name="boutonChercherParcours" value="Chercher"/>
+            <input type="button" id="boutonChercherParcours" class="ui small button" name="boutonChercherParcours" value="Chercher"/>
         </div>
     </div>
     <div class="ui warning message">Adding a classname of <code>ascending</code> or <code>descending</code> to the <code>th</code> will show the user the direction of sort. This example uses a modified version of the kylefox's <a href="https://github.com/kylefox/jquery-tablesort">tablesort plugin</a> to provide the proper class names.

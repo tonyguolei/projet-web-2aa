@@ -5,16 +5,15 @@
     <title>#{get 'title' /}</title>
     <meta charset="${_response_encoding}">
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
     <script src="@{'/public/javascripts/semantic.js'}" type="text/javascript" charset="${_response_encoding}"></script>
     <script src="@{'/public/javascripts/main.js'}" type="text/javascript" charset="${_response_encoding}"></script>
-    <script src="@{'/public/javascripts/ProjetWeb.Membre.js'}" type="text/javascript"
-            charset="${_response_encoding}"></script>
-    <script src="@{'/public/javascripts/ProjetWeb.Parcours.js'}" type="text/javascript"
-            charset="${_response_encoding}"></script>
 #{get 'moreScripts' /}
     <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/semantic.css'}">
+    <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
 #{get 'moreStyles' /}
-</head>
 
 <body>
 <header id="header">
@@ -77,10 +76,10 @@
                         <div class="header">Erreur a mettre ici</div>
                     </div>
                     <div class="ui vertical buttons">
-                        <button type="submit" class="ui button" id="boutonSeconnecter">
+                        <button class="ui small button" type="submit"  id="boutonSeconnecter">
                             <i class="sign in icon"></i>Se connecter
                         </button>
-                        <div class="ui button" id="boutonSinscrire">
+                        <div class="ui small button" id="boutonSinscrire">
                             <i class="smile icon"></i>S'inscrire
                         </div>
                     </div>
@@ -104,17 +103,17 @@
             <div class="two fields">
                 <div class="field">
                     <label>Prénom</label>
-                    <input placeholder="Prénom" type="text">
+                    <input placeholder="Prénom" type="text" name="prenom">
                 </div>
                 <div class="field">
                     <label>Nom</label>
-                    <input placeholder="Nom" type="text">
+                    <input placeholder="Nom" type="text" name="nom">
                 </div>
             </div>
             <div class="two fields">
                 <div class="field">
                     <label>Age</label>
-                    <input placeholder="Age" type="text" >
+                    <input placeholder="Age" type="text" name="age" >
                 </div>
                 <div class="field">
                     <label>Sexe</label>
@@ -138,7 +137,7 @@
                 <label>Mot de passe</label>
                 <input type="password" name="motdepasse">
             </div>
-            <button type="submit" class="ui blue submit button" id="boutonValidationSinscrire">
+            <button type="submit" class="ui small blue submit button" id="boutonValidationSinscrire">
                 Valider
             </button>
         </div>

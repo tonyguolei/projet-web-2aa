@@ -82,10 +82,10 @@ public class Application extends Controller {
     /*---------------Methodes contenu des pages -----------------------*/
 
     private static void tousLesParcoursActuels() {
-        //TODO Renvoyer seulement les parcours à partir de la date actuelle
-        List<Parcours> listp = Parcours.findAll();
+        //TODO Renvoyer seulement les parcours non supprimes à partir de la date actuelle
+        List<Parcours> listp = Parcours.find("supprime = ?",false).fetch();
         JSONSerializer serializer = new JSONSerializer();
-        renderJSON(serializer.exclude("*.class").exclude("createur").transform(new DateTransformer("yyyy/MM/dd hh:mm:ss"),
+        renderJSON(serializer.exclude("*.class").exclude("createur").include("membresInscrits").transform(new DateTransformer("yyyy/MM/dd hh:mm:ss"),
                 "dateParcours").serialize(listp));
     }
 
@@ -121,22 +121,22 @@ public class Application extends Controller {
 
             List<Parcours> listp = Parcours.find(textfind,"%"+ depart+"%","%"+ arrivee+"%").fetch();
             JSONSerializer serializer = new JSONSerializer();
-            renderJSON(serializer.exclude("*.class").exclude("createur").transform(new DateTransformer("yyyy/MM/dd hh:mm:ss"), "dateParcours").serialize(listp));
+            renderJSON(serializer.exclude("*.class").include("membresInscrits").exclude("createur").transform(new DateTransformer("yyyy/MM/dd hh:mm:ss"), "dateParcours").serialize(listp));
         }
 
-
     }
 
-    public static void toutesLesVilles() {
-        List<Ville> listv = Ville.findAll();
-        JSONSerializer serializer = new JSONSerializer();
-        renderJSON(serializer.exclude("*.class").serialize(listv));
-    }
-
-    public static void sinscrire(String nom, String prenom, int age, String email, String mdp, String sexe) {
-        //TODO Verifier les champs pour l'inscription
-        System.out.println("Inscription");
-        new Membre(nom, prenom, mdp, age, email, sexe).save();
+    public static void sinscrire(String nom, String prenom, int age, String email, String motdepasse, String sexe) {
+        if(nom!="" & prenom!="" & age>17 & age<99 & email != "" & motdepasse!="" & sexe!=""){
+            Membre tmp = Membre.find("byEmail",email).first();
+            if(tmp==null) {
+                //Aucun membre existant avec cet email
+                Membre m = new Membre(nom, prenom, motdepasse, age, email, sexe).save();
+                if(m!=null)
+                    //Creation reussie
+                    Application.seconnecter(email,motdepasse);
+            }
+        }
         Application.index();
     }
 
@@ -147,13 +147,6 @@ public class Application extends Controller {
         } else {
             Application.index();
         }
-    }
-
-    public static boolean isInteger(String s, int radix) {
-        Scanner sc = new Scanner(s.trim());
-        if(!sc.hasNextInt(radix)) return false;
-        sc.nextInt(radix);
-        return !sc.hasNext();
     }
 
 }
