@@ -70,11 +70,46 @@ public class Membre extends Model {
         this.save();
     }
 
-    public void desinscrire() {
+    public void supprimerCompte() {
         this.desinscrit = true;
-        //TODO modifier l'attribut de tous les parcours créés par ce membre
         this.annulerTousLesParcours();
         this.save();
+    }
+
+    public void seDesinscrireParcours(Parcours p){
+        if(verifierParcoursChoisiExiste(p)){
+            this.lesParcoursChoisis.remove(p);
+            p.supprimerMembreInscrit(this);
+            this.save();
+            p.save();
+        }
+    }
+
+    public void annulerParcours(Parcours p){
+
+        if(verifierParcoursCreeExiste(p)){
+            p.supprimerParcoursCree();
+            p.save();
+            this.save();
+        }
+    }
+
+    private boolean verifierParcoursCreeExiste(Parcours p){
+        Iterator<Parcours> itr = lesParcoursCrees.iterator();
+        while(itr.hasNext()) {
+            if(itr.next().equals(p))
+                return true;
+        }
+        return false;
+    }
+
+    private boolean verifierParcoursChoisiExiste(Parcours p){
+        Iterator<Parcours> itr = lesParcoursChoisis.iterator();
+        while(itr.hasNext()) {
+            if(itr.next().equals(p))
+                return true;
+        }
+        return false;
     }
 
     private void annulerTousLesParcours(){

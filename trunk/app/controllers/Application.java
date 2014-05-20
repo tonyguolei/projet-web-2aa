@@ -31,12 +31,13 @@ public class Application extends Controller {
         Membre m2 = new Membre("harry", "ruse", "123456", 22, "lg@clu.fr", "M").save();
         Membre m3 = new Membre("alice", "grange", "123456", 20, "alice@gmail.com", "F").save();
 
-        Parcours p1 = new Parcours(m1, v1, v2, 12, 1,14,00).save();
+        Parcours p1 = new Parcours(m1, v1, v2, 120, 1,14,00).save();
         Parcours p2 = new Parcours(m2, v5, v3, 14, 2,13,50).save();
-        Parcours p3 = new Parcours(m3, v4, v1, 15, 3,8,15).save();
+        Parcours p3 = new Parcours(m3, v4, v1, 157, 3,8,15).save();
         Parcours p4 = new Parcours(m1, v1, v4, 16, 1,22,18).save();
         Parcours p5 = new Parcours(m2, v2, v5, 17, 2,14,17).save();
-        Parcours p6 = new Parcours(m3, v3, v1, 18, 3,17,30).save();
+        Parcours p6 = new Parcours(m3, v3, v1, 118, 3,17,30).save();
+        Parcours p7 = new Parcours(m2, v5, v4, 13, 3,17,30).save();
 
         p1.ajouterMembreInscrit(m2);
 
@@ -49,6 +50,12 @@ public class Application extends Controller {
         p4.ajouterMembreInscrit(m2);
 
         p5.ajouterMembreInscrit(m1);
+        p5.ajouterMembreInscrit(m3);
+
+        p6.ajouterMembreInscrit(m2);
+
+        p7.ajouterMembreInscrit(m3);
+        m2.annulerParcours(p7);
 
     }
 
@@ -74,7 +81,8 @@ public class Application extends Controller {
     }
     /*---------------Methodes contenu des pages -----------------------*/
 
-    public static void tousLesParcours() {
+    private static void tousLesParcoursActuels() {
+        //TODO Renvoyer seulement les parcours à partir de la date actuelle
         List<Parcours> listp = Parcours.findAll();
         JSONSerializer serializer = new JSONSerializer();
         renderJSON(serializer.exclude("*.class").exclude("createur").transform(new DateTransformer("yyyy/MM/dd hh:mm:ss"),
@@ -88,29 +96,34 @@ public class Application extends Controller {
         String date = params.get("date");
         String textfind = "";
 
-        if(depart.matches("[0-9]+")){
-            //code postal saisi pour la ville de départ
-            textfind = "depart.codePostal like ? ";
-        }
+        if(depart=="" && arrivee=="" && date=="")
+            tousLesParcoursActuels();
         else{
-            //nom saisi pour la ville de depart
-            textfind = "depart.nom like ? ";
-            depart = StringUtils.capitalize(depart);
+            if(depart.matches("[0-9]+")){
+                //code postal saisi pour la ville de départ
+                textfind = "depart.codePostal like ? ";
+            }
+            else{
+                //nom saisi pour la ville de depart
+                textfind = "depart.nom like ? ";
+                depart = StringUtils.capitalize(depart);
+            }
+
+            if(arrivee.matches("[0-9]+")){
+                //code postal saisi pour la ville darrivee
+                textfind = textfind + "and arrivee.codePostal like ? ";
+            }
+            else{
+                //nom saisi pour la ville darrivee
+                textfind = textfind +"and arrivee.nom like ? ";
+                arrivee = StringUtils.capitalize(arrivee);
+            }
+
+            List<Parcours> listp = Parcours.find(textfind,"%"+ depart+"%","%"+ arrivee+"%").fetch();
+            JSONSerializer serializer = new JSONSerializer();
+            renderJSON(serializer.exclude("*.class").exclude("createur").transform(new DateTransformer("yyyy/MM/dd hh:mm:ss"), "dateParcours").serialize(listp));
         }
 
-        if(arrivee.matches("[0-9]+")){
-            //code postal saisi pour la ville darrivee
-            textfind = textfind + "and arrivee.codePostal like ? ";
-        }
-        else{
-            //nom saisi pour la ville darrivee
-            textfind = textfind +"and arrivee.nom like ? ";
-            arrivee = StringUtils.capitalize(arrivee);
-        }
-
-        List<Parcours> listp = Parcours.find(textfind,"%"+ depart+"%","%"+ arrivee+"%").fetch();
-        JSONSerializer serializer = new JSONSerializer();
-        renderJSON(serializer.exclude("*.class").exclude("createur").transform(new DateTransformer("yyyy/MM/dd hh:mm:ss"), "dateParcours").serialize(listp));
 
     }
 

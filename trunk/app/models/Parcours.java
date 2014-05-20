@@ -79,6 +79,12 @@ public class Parcours extends Model {
         }
     }
 
+    public void supprimerMembreInscrit(Membre m){
+        if(this.membresInscrits.contains(m)){
+            this.membresInscrits.remove(m);
+        }
+    }
+
     private boolean verifieDispoPlaces(){
          return(this.membresInscrits.size() < this.nbPlacesInitiales);
     }
@@ -91,7 +97,7 @@ public class Parcours extends Model {
         this.nbPlacesInitiales = nbPlaces;
     }
 
-    public void annulerParcours(){
+    public void supprimerParcoursCree(){
         this.supprime = true;
     }
 

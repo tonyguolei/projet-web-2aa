@@ -49,7 +49,7 @@ ProjetWeb.Parcours.prototype = {
         var self = this;
         $.ajax({
             url: "/recupererParcoursInfo",
-            data: {email: email}
+            data: {id: parcour_id}
         })
             .done(function(data) {
                 console.log(data);

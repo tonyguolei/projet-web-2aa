@@ -8,28 +8,48 @@
         #{if m}
             <table class="ui sortable table segment" id="listeParcoursChoisis">
                 <thead>
-                <tr><th>Départ</th>
+                <tr>
+                    <th>Départ</th>
                     <th>Arrivée</th>
                     <th>Date</th>
                     <th>Nombre de places restantes</th>
                     <th>Prix</th>
                     <th>Options</th>
-                </tr></thead>
-                <tbody id="tabcontenu">
-                #{list items:m.lesParcoursChoisis, as:'pchoisis'}
-                <tr>
-                <td>${pchoisis.depart.nom}</td>
-                <td>${pchoisis.arrivee.nom}</td>
-                <td>${pchoisis.dateParcours}
-                ${pchoisis.heure}
-                ${pchoisis.min}</td>
-                <td>A rajouter</td>
-                <td>${pchoisis.prix}</td>
-                <td><div class='right floated tiny black ui button'>Consulter</div>
-                    <div class='right floated tiny black ui button'>Annuler</div></td>
                 </tr>
-                #{/list}
-            </tbody>
+                </thead>
+                <tbody id="tabcontenu">
+                    #{list items:m.lesParcoursChoisis, as:'pchoisis'}
+                    <tr>
+                        <input type="hidden" name="pchoisisid" value="${pchoisis.id}">
+                        <td>${pchoisis.depart.nom}</td>
+                        <td>${pchoisis.arrivee.nom}</td>
+                        <td>
+                            <div class="ui divided list">
+                                <div class="item">${pchoisis.dateParcours.dateString}</div>
+                                <div class="item">${pchoisis.heure}h ${pchoisis.min}</div>
+                            </div>
+                        </td>
+                        <td>${ pchoisisnbPlacesRest = pchoisis.nbPlacesInitiales - pchoisis.membresInscrits.size()}</td>
+                        <td>${pchoisis.prix}</td>
+                        <td>
+                        <div class="ui vertical buttons">
+                            <div class='ui black button consulter'>
+                                <i class="unhide icon"></i>Consulter
+                            </div>
+                            #{if pchoisis.supprime != false}
+                            <div class='ui negative disabled button'>
+                                <i class="warning users icon"></i>Annulé
+                            </div>
+                            #{/if}
+                            #{else }
+                                <div class='ui positive button desinscrire'>
+                                    <i class="remove icon"></i>Me désinscrire</div>
+                            #{/else}
+                        </div>
+                        </td>
+                    </tr>
+                    #{/list}
+                </tbody>
             </table>
         #{/if}
         #{else }
@@ -41,27 +61,41 @@
         #{if m!=null}
             <table class="ui sortable table segment" id="listeParcoursCrees">
                 <thead>
-                <tr><th>Départ</th>
+                <tr>
+                    <th>Départ</th>
                     <th>Arrivée</th>
                     <th>Date</th>
                     <th>Nombre de places restantes</th>
                     <th>Prix</th>
                     <th>Options</th>
-                </tr></thead>
+                </tr>
+                </thead>
                 <tbody id="tabcontenu">
-            #{list items:m.lesParcoursCrees, as:'pcrees'}
-            <tr>
-            <td>${pcrees.depart.nom}</td>
-            <td>${pcrees.arrivee.nom}</td>
-            <td>${pcrees.dateParcours}
-                ${pcrees.heure}
-                ${pcrees.min}</td>
-            <td>A rajouter</td>
-            <td>${pcrees.prix}</td>
-            <td><div class='right floated tiny black ui button'>Consulter</div>
-                <div class='right floated tiny black ui button'>Annuler</div></td>
-            </tr>
-            #{/list}
+                    #{list items:m.lesParcoursCrees, as:'pcrees'}
+                    <tr>
+                        <input type="hidden" name="pcreesid" value="${pcrees.id}">
+                        <td>${pcrees.depart.nom}</td>
+                        <td>${pcrees.arrivee.nom}</td>
+                        <td>
+                            <div class="ui divided list">
+                                <div class="item">${pcrees.dateParcours.dateString}</div>
+                                <div class="item">${pcrees.heure}h ${pcrees.min}</div>
+                            </div>
+                        </td>
+                        <td>${pcrees.nbPlacesInitiales - pcrees.membresInscrits.size()}</td>
+                        <td>${pcrees.prix}</td>
+                        <td>
+                            <div class="ui vertical buttons">
+                                <div class='ui black button consulter'>
+                                    <i class="unhide icon"></i>Consulter
+                                </div>
+                                <div class='ui black button annuler'>
+                                    <i class="remove icon"></i>Annuler
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                    #{/list}
                 </tbody>
             </table>
         #{/if}

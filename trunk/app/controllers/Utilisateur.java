@@ -9,13 +9,12 @@ import play.mvc.*;
 
 import javax.servlet.http.*;
 
-@With(Secure.class)
 public class Utilisateur extends Controller  {
 
     @Before
     public static void isConnected(){
+        //redirection si le membre n'est plus en ligne
         if(!Security.isConnected()){
-            //redirection si le membre n'est plus en ligne
             Application.index();
         }
     }

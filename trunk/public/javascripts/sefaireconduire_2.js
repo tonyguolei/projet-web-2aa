@@ -1,11 +1,22 @@
 /**
  * Created with IntelliJ IDEA.
  * User: lepeteil
+ * Date: 20/05/14
+ * Time: 18:54
+ * To change this template use File | Settings | File Templates.
+ */
+
+/**
+ * Created with IntelliJ IDEA.
+ * User: lepeteil
  * Date: 14/05/14
  * Time: 18:28
  * To change this template use File | Settings | File Templates.
  */
+
 var init = true;
+/*Instance de la classe Parcours*/
+var parcours1 = new ProjetWeb.Parcours();
 
 $(document).bind("ready", function () {
     obtenirDate();
@@ -46,8 +57,8 @@ function rechercherParcours(){
     $.ajax({
         url: "/chercherParcours",
         data: {depart:depart,
-               arrivee:arrivee,
-               date:date}
+            arrivee:arrivee,
+            date:date}
     })
         .done(function(data) {
             if(data.length<=0){
@@ -63,7 +74,7 @@ function rechercherParcours(){
                             "<td>"+ value.dateParcours+"</td>"+
                             "<td>" + value.nbPlacesInitiales+"</td>"+
                             "<td>"+ value.prix +"</td>"+
-                            "<td><div class='ui negative disabled button'>Réserver</div></td>"+
+                            "<td><div class='ui teal button'>Réserver</div></td>"+
                             "</tr>"
                     );
                 });
