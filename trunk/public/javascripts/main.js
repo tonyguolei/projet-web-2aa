@@ -7,16 +7,47 @@
  */
 
 $(document).bind("ready", function () {
-    $("#boutonSeconnecter").bind("click", seconnecter);
     $("#boutonSinscrire").bind("click", sinscrire);
+    //$("#boutonValidationSinscrire").bind("click", validerInscription);
 });
 
 function sinscrire(){
-    $('#formInscript').modal('show');
+    $('.small.modal').modal('show');
+    $('.ui.selection.dropdown')
+        .dropdown()
+    ;
 }
 
-function seconnecter(){
+function validerInscription(){
+    //TODO Verifier la validite des champs saisis
+    var nom = $("#nom").val();
+    var prenom = $("#prenom").val();
+    var age = $("#age").val();
+    var mdp = $("#motdepasse").val();
+    var email = $("#email").val();
+    var sexe = $("#sexe").val();
 
+
+    $.ajax({
+        url: "/sinscrire",
+        data: {nom:nom,
+            prenom:prenom,
+            mdp:mdp,
+            age:age,
+            email:email,
+            sexe:sexe}
+    })
+        .done(function(data) {
+            if(data.length<=0){
+                //TODO Afficher message pas trouvé
+            }
+            else{
+
+            }
+        })
+        .fail(function(error) {
+            console.log("error");
+        })
 }
 
     $('#formInscript')

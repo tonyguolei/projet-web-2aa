@@ -134,15 +134,13 @@ public class Application extends Controller {
     }
 
     public static void sinscrire(String nom, String prenom, int age, String email, String mdp, String sexe) {
+        //TODO Verifier les champs pour l'inscription
+        System.out.println("Inscription");
         new Membre(nom, prenom, mdp, age, email, sexe).save();
-        Application.index();
     }
 
     public static void seconnecter(String emailform,String motdepasseform) {
-        System.out.println(emailform);
-        System.out.println(motdepasseform);
         if (Security.authenticate(emailform, motdepasseform)) {
-            System.out.println("Membre ok");
             session.put("username",emailform);
             Utilisateur.index();
         } else {

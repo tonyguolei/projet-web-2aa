@@ -93,27 +93,28 @@
         </div>
 </div>
 
-<div class="ui small modal" id="formInscript" >
+<div class="ui small modal">
     <i class="close icon">Close</i>
     <div class="header">
         Votre inscription
     </div>
-    <div class="content">
+    <div class="content" >
+        <form id="formInscript" action="@{Application.sinscrire()}" method="post">
         <div class="ui error form segment">
             <div class="two fields">
                 <div class="field">
                     <label>Prénom</label>
-                    <input placeholder="Prénom" type="text" name="prenom">
+                    <input placeholder="Prénom" type="text">
                 </div>
                 <div class="field">
                     <label>Nom</label>
-                    <input placeholder="Nom" type="text" name="nom">
+                    <input placeholder="Nom" type="text">
                 </div>
             </div>
             <div class="two fields">
                 <div class="field">
                     <label>Age</label>
-                    <input placeholder="Age" type="text" name="age">
+                    <input placeholder="Age" type="text" >
                 </div>
                 <div class="field">
                     <label>Sexe</label>
@@ -122,8 +123,8 @@
                         <i class="dropdown icon"></i>
                         <input name="sexe" type="hidden">
                         <div class="menu">
-                            <div class="item" data-value="Homme">Masculin</div>
-                            <div class="item" data-value="Femme">Feminin</div>
+                            <div class="item" data-value="H">Masculin</div>
+                            <div class="item" data-value="F">Feminin</div>
                         </div>
                     </div>
                 </div>
@@ -137,8 +138,11 @@
                 <label>Mot de passe</label>
                 <input type="password" name="motdepasse">
             </div>
-            <div class="ui blue submit button" id="boutonMinscrire">M'inscrire</div>
+            <div class="ui blue submit button" id="boutonValidationSinscrire">
+                Valider
+            </div>
         </div>
+        </form>
     </div>
 </div>
 
