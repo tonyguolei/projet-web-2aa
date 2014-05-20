@@ -62,16 +62,19 @@ public class Membre extends Model {
 
     public void ajouterParcoursCree(Parcours p) {
         this.lesParcoursCrees.add(p);
+        this.save();
     }
 
     public void ajouterParcoursChoisi(Parcours p) {
         this.lesParcoursChoisis.add(p);
+        this.save();
     }
 
     public void desinscrire() {
         this.desinscrit = true;
         //TODO modifier l'attribut de tous les parcours créés par ce membre
         this.annulerTousLesParcours();
+        this.save();
     }
 
     private void annulerTousLesParcours(){

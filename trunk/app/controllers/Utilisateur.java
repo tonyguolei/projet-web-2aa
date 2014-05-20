@@ -9,55 +9,66 @@ import play.mvc.*;
 
 import javax.servlet.http.*;
 
+@With(Secure.class)
 public class Utilisateur extends Controller  {
 
     @Before
     public static void isConnected(){
-        System.out.println("session" + session.get("username"));
-        if(!Security.isConnected())
-            //redirection
+        if(!Security.isConnected()){
+            //redirection si le membre n'est plus en ligne
             Application.index();
+        }
+    }
+
+    public static void deconnexion(){
+        session.clear();
+        Application.index();
     }
 
     public static void index() {
-        render();
+        Membre m = Membre.find("byEmail",session.get("username")).first();
+        render(m);
     }
 
     public static void conduire() {
-        render();
+        Membre m = Membre.find("byEmail",session.get("username")).first();
+        render(m);
     }
 
     public static void sefaireconduire() {
-        render();
+        Membre m = Membre.find("byEmail",session.get("username")).first();
+        render(m);
     }
 
     public static void nous() {
-        render();
+        Membre m = Membre.find("byEmail",session.get("username")).first();
+        render(m);
     }
 
     public static void contact() {
-        render();
+        Membre m = Membre.find("byEmail",session.get("username")).first();
+        render(m);
     }
 
     public static void monprofil() {
-        render();
+        Membre m = Membre.find("byEmail",session.get("username")).first();
+        render(m);
     }
 
     public static void mesparcours() {
-        render();
+        Membre m = Membre.find("byEmail",session.get("username")).first();
+        render(m);
     }
 
     /* COTE MEMBRE ----------------------------------*/
     public static void recupererMembreInfo() {
-        String email = params.get("email");
-        Membre m = Membre.find("byEmail", email).first();
+        Membre m = Membre.find("byEmail",session.get("username")).first();
         JSONSerializer serializer = new JSONSerializer();
         renderJSON(serializer.include("lesParcoursCrees", "lesParcoursChoisis").exclude("*.class").transform(new DateTransformer("dd/MM/yyyy"), "dateInscription").serialize(m));
     }
 
     public static void recupererMembreInfoPerso() {
-        String email = params.get("email");
-        Membre m = Membre.find("byEmail", email).first();
+        Membre m = Membre.find("byEmail",session.get("username")).first();
         JSONSerializer serializer = new JSONSerializer();
         renderJSON(serializer.transform(new DateTransformer("dd/MM/yyyy"), "dateInscription").serialize(m));
     }
@@ -82,8 +93,6 @@ public class Utilisateur extends Controller  {
 
         JSONSerializer serializer = new JSONSerializer();
         renderJSON(serializer.include("membresInscrits").exclude("*.class").transform(new DateTransformer("yyyy/MM/dd hh:mm:ss"), "dateParcours").serialize(p));
-
-
     }
 
     public static void recupererMembreCreateur() {

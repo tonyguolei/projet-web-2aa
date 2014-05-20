@@ -80,7 +80,7 @@ public class Parcours extends Model {
     }
 
     private boolean verifieDispoPlaces(){
-         return(this.nbPlacesInitiales < this.membresInscrits.size());
+         return(this.membresInscrits.size() < this.nbPlacesInitiales);
     }
 
     public void modifierPrix(double prix) {

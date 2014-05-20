@@ -44,13 +44,13 @@
 
 <div id="main">
     <div class="ui grid">
-        <div class="four wide column">
+        <div class="three wide column">
             <div class="ui vertical labeled icon menu">
                 <h4 class="ui black block header">
                     Bienvenue
                 #{if m!=null}
                     ${m.nom} ${m.prenom}
-                    #{/if}
+                #{/if}
                 </h4>
                 <a class="red item" href="@{Utilisateur.monprofil()}">
                     <i class="user icon"></i>
@@ -60,14 +60,14 @@
                     <i class="dashboard icon"></i>
                     Mes parcours
                 </a>
-                <a class="teal item">
+                <a class="teal item" href="@{Utilisateur.deconnexion()}">
                     <i class="sign out icon"></i>
                     Déconnexion
                 </a>
             </div>
 
         </div>
-        <div class="twelve wide column">
+        <div class="thirteen wide column">
         #{doLayout /}
         </div>
     </div>

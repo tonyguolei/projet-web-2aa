@@ -5,7 +5,7 @@
     <div class="ui raised segment">
         <div class="ui black ribbon label">Mes parcours choisis</div>
         <div id="p_proposes">
-        #{if m!=null}
+        #{if m}
             <table class="ui sortable table segment" id="listeParcoursChoisis">
                 <thead>
                 <tr><th>Départ</th>
@@ -32,6 +32,9 @@
             </tbody>
             </table>
         #{/if}
+        #{else }
+            Erreur sur la page
+        #{/else}
         </div>
         <div class="ui black ribbon label">Mes parcours créés</div>
         <div id="p_crees">
@@ -62,6 +65,9 @@
                 </tbody>
             </table>
         #{/if}
+        #{else }
+            Erreur sur la page
+        #{/else}
         </div>
     </div>
 </div>

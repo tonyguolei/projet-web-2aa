@@ -5,12 +5,16 @@
     <div id="formProfil">
         <div class="ui raised segment">
             <div class="ui black ribbon label">Mon profil</div>
+
         <div class="content">
+        #{if m!=null}
             <div class="ui error form segment">
+
                 <div class="ui error message">
                     <div class="header">Action Forbidden</div>
                     <p>You can only sign up for an account once with a given e-mail address.</p>
                 </div>
+
                 <div class="two fields">
                     <div class="field">
                         <label>Prénom</label>
@@ -49,7 +53,14 @@
                     <input type="password">
                 </div>
                 <div class="ui blue submit button">Modifier</div>
+
             </div>
+        #{/if}
+        #{else }
+            Erreur sur la page
+        #{/else}
         </div>
+
+    </div>
     </div>
 </div>
