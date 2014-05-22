@@ -91,14 +91,17 @@ public class Parcours extends Model {
 
     public void modifierPrix(double prix) {
         this.prix = prix;
+        this.save();
     }
 
     public void modifierNbPlaces(int nbPlaces) {
         this.nbPlacesInitiales = nbPlaces;
+        this.save();
     }
 
     public void supprimerParcoursCree(){
         this.supprime = true;
+        this.save();
     }
 
 }

@@ -63,6 +63,7 @@ function rechercherParcours(){
                     if(nbplacesrestantes<=0){
                         $("#tabcontenu").append(
                             "<tr>"+
+                                "<input name='idparcours' type='hidden' value='" +value.id + "'/>"+
                                 "<td>"+ value.depart.nom +"</td>"+
                                 "<td>"+ value.arrivee.nom +"</td>"+
                                 "<td>" +
@@ -74,27 +75,43 @@ function rechercherParcours(){
                                 "<td>"+ nbplacesrestantes + "/" + value.nbPlacesInitiales+"</td>"+
                                 "<td>"+ value.prix +"</td>"+
                                 "<td><div class='ui small negative disabled button'>" +
-                                "<i class='warning users icon'></i>Réserver</div></td>"+
+                                "<i class='warning users icon'></i>Complet</div></td>"+
                                 "</tr>"
                         );
                     }
                     else{
                         $("#tabcontenu").append(
                             "<tr>"+
+                                "<input name='idparcours' type='hidden' value='" +value.id + "'/>"+
                                 "<td>"+ value.depart.nom +"</td>"+
                                 "<td>"+ value.arrivee.nom +"</td>"+
                                 "<td>"+ value.dateParcours+"</td>"+
                                 "<td>"+ nbplacesrestantes + "/" + value.nbPlacesInitiales+"</td>"+
                                 "<td>"+ value.prix +"</td>"+
-                                "<td><div class='ui small teal button'>Réserver</div></td>"+
+                                "<td><div class='ui vertical buttons'>"+
+                                    "<div class='ui small green button consulter'>"+
+                                        "<i class='unhide icon'></i>Consulter"+
+                                    "</div>"+
+                                    "<div class='ui small teal button reserver'>Réserver</div>"+
+                                "</div></td>"+
                                 "</tr>"
                         );
                     }
 
                 });
+                $('.button.reserver').bind("click",reserverParcours);
             }
         })
         .fail(function(error) {
             console.log("error");
         })
+
+}
+
+function reserverParcours(){
+    var tr = this.parentNode.parentNode.parentNode;
+    var idp = tr.getElementsByTagName('input')[0].value;
+
+    //var membre1 = new ProjetMembre.Membre();
+    //membre1.reserverParcours();
 }

@@ -52,31 +52,88 @@ ProjetWeb.Membre.prototype = {
             })
     },
 
-    //TODO A mettre plutot dans PARCOURS !
-    recupererMembresInscrits: function(parcour_id, cb_success, cb_error) {
-        var self = this;
-        $.ajax( {
-            url: "/recupererMembresInscrits",
-            data: { id: parcour_id }
-        } )
-        .done(function(data) {
-            console.log(data);
-            cb_success(data);
-        })
-        .fail(function(error) {
-            console.log("error recupererMembresInscrits");
-            cb_error(error);
-        })
-    },
 
     //TODO Recuperer les parcours créés
+    recupererParcoursCrees: function(email, cb_success, cb_error) {
+        var self = this;
+        $.ajax({
+            url: "/recupererParcoursCrees",
+            data: {email: email}
+        })
+            .done(function(data) {
+                //console.log(data);
+                cb_success(data);
+            })
+            .fail(function(error) {
+                console.log("error recupererMembreInfo");
+                cb_error(error);
+            })
+    },
 
     //TODO Recuperer les parchours choisis
+    recupererParcoursChoisis: function(email, cb_success, cb_error) {
+        var self = this;
+        $.ajax({
+            url: "/recupererParcoursChoisis",
+            data: {email: email}
+        })
+            .done(function(data) {
+                //console.log(data);
+                cb_success(data);
+            })
+            .fail(function(error) {
+                console.log("error recupererMembreInfo");
+                cb_error(error);
+            })
+    },
+    //creerParcours : function() {},
 
-    creerParcours : function() {},
+    reserverParcours : function(parcour_id, cb_success, cb_error) {
+        var self = this;
+        $.ajax( {
+            url: "/reserverParcours",
+            data: { id: parcour_id }
+        } )
+            .done(function(data) {
+                console.log(data);
+                cb_success(data);
+            })
+            .fail(function(error) {
+                console.log("erreur reserverParcours");
+                cb_error(error);
+            })
+    },
 
-    supprimerParcours : function() {},
+    annulerReservationParcours : function(parcour_id, cb_success, cb_error) {
+        var self = this;
+        $.ajax( {
+            url: "/annulerReservation",
+            data: { id: parcour_id }
+        } )
+            .done(function(data) {
+                console.log(data);
+                cb_success(data);
+            })
+            .fail(function(error) {
+                console.log("erreur annulerReservation");
+                cb_error(error);
+            })
+    },
 
-    modifierParcours : function() {}
+    supprimerParcours : function(parcour_id, cb_success, cb_error) {
+        var self = this;
+        $.ajax( {
+            url: "/supprimerParcours",
+            data: { id: parcour_id }
+        } )
+            .done(function(data) {
+                console.log(data);
+                cb_success(data);
+            })
+            .fail(function(error) {
+                console.log("error supprimerParcours");
+                cb_error(error);
+            })
+    }
 
 }

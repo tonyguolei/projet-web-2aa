@@ -11,6 +11,9 @@ GET     /recupererMembreInfo                    Utilisateur.recupererMembreInfo
 GET     /recupererMembresInscrits               Utilisateur.recupererMembresInscrits
 GET     /recupererParcoursInfo                  Utilisateur.recupererParcoursInfo
 GET     /recupererMembreCreateur                Utilisateur.recupererMembreCreateur
+GET     /annulerReservation                     Utilisateur.annulerReservation
+GET     /supprimerParcours                      Utilisateur.supprimerParcours
+GET     /reserverParcours                       Utilisateur.reserverParcours
 
 # Import CRUD routes
 *      /admin                                   module:crud

@@ -17,6 +17,7 @@ public class Utilisateur extends Controller  {
         if(!Security.isConnected()){
             Application.index();
         }
+
     }
 
     public static void deconnexion(){
@@ -70,6 +71,27 @@ public class Utilisateur extends Controller  {
         Membre m = Membre.find("byEmail",session.get("username")).first();
         JSONSerializer serializer = new JSONSerializer();
         renderJSON(serializer.transform(new DateTransformer("dd/MM/yyyy"), "dateInscription").serialize(m));
+    }
+
+    public static void annulerReservation(){
+        String id = params.get("id");
+        Membre m = Membre.find("byEmail",session.get("username")).first();
+        Parcours p = Parcours.findById(Long.parseLong(id, 10));
+        m.seDesinscrireParcours(p);
+    }
+
+    public static void supprimerParcours(){
+        String id = params.get("id");
+        Membre m = Membre.find("byEmail",session.get("username")).first();
+        Parcours p = Parcours.findById(Long.parseLong(id, 10));
+        m.supprimerParcours(p);
+    }
+
+    public static void reserverParcours(){
+        String id = params.get("id");
+        Membre m = Membre.find("byEmail",session.get("username")).first();
+        Parcours p = Parcours.findById(Long.parseLong(id, 10));
+        p.ajouterMembreInscrit(m);
     }
 
     /* COTE PARCOURS ---------------------------------*/

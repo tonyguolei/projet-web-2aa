@@ -17,6 +17,12 @@ import play.test.Fixtures;
 
 public class Application extends Controller {
 
+    private static void verifieNonConnexion(){
+        if (Security.isConnected()){
+            session.clear();
+        }
+    }
+
     /*---------------------Initialisation de la base--------------------*/
     public static void initBase() {
         Fixtures.deleteDatabase();
@@ -27,16 +33,16 @@ public class Application extends Controller {
         Ville v4 = new Ville("Grenoble", "38000").save();
         Ville v5 = new Ville("Lyon", "69000").save();
 
-        Membre m1 = new Membre("jack", "pom", "123456", 23, "al@clu.fr", "M").save();
-        Membre m2 = new Membre("harry", "ruse", "123456", 22, "lg@clu.fr", "M").save();
-        Membre m3 = new Membre("alice", "grange", "123456", 20, "alice@gmail.com", "F").save();
+        Membre m1 = new Membre("lei", "guo", "123", 22, "lei@gmai.com", "M").save();
+        Membre m2 = new Membre("yann", "laforest", "456", 20, "yann@gmail.com", "M").save();
+        Membre m3 = new Membre("alice", "grange", "789", 23, "alice@gmail.com", "F").save();
 
-        Parcours p1 = new Parcours(m1, v1, v2, 120, 1,14,00).save();
+        Parcours p1 = new Parcours(m1, v1, v2, 8, 1,14,00).save();
         Parcours p2 = new Parcours(m2, v5, v3, 14, 2,13,50).save();
-        Parcours p3 = new Parcours(m3, v4, v1, 157, 3,8,15).save();
-        Parcours p4 = new Parcours(m1, v1, v4, 16, 1,22,18).save();
+        Parcours p3 = new Parcours(m3, v4, v1, 15, 3,8,15).save();
+        Parcours p4 = new Parcours(m1, v1, v4, 4, 1,22,18).save();
         Parcours p5 = new Parcours(m2, v2, v5, 17, 2,14,17).save();
-        Parcours p6 = new Parcours(m3, v3, v1, 118, 3,17,30).save();
+        Parcours p6 = new Parcours(m3, v3, v1, 18, 3,17,30).save();
         Parcours p7 = new Parcours(m2, v5, v4, 13, 3,17,30).save();
 
         p1.ajouterMembreInscrit(m2);
@@ -55,28 +61,33 @@ public class Application extends Controller {
         p6.ajouterMembreInscrit(m2);
 
         p7.ajouterMembreInscrit(m3);
-        m2.annulerParcours(p7);
+        m2.supprimerParcours(p7);
 
     }
 
     /*----------------Affichage des pages coté public -----------------*/
     public static void index() {
+        verifieNonConnexion();
         render();
     }
 
     public static void conduire() {
+        verifieNonConnexion();
         render();
     }
 
     public static void sefaireconduire() {
+        verifieNonConnexion();
         render();
     }
 
     public static void nous() {
+        verifieNonConnexion();
         render();
     }
 
     public static void contact() {
+        verifieNonConnexion();
         render();
     }
     /*---------------Methodes contenu des pages -----------------------*/

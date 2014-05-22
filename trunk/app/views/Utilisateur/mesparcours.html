@@ -1,6 +1,6 @@
 #{extends 'mainPrivate.html' /}
 #{set title:'Mes parcours' /}
-
+<script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <div class="ui black segment">
     <div class="ui raised segment">
         <div class="ui black ribbon label">Mes parcours choisis</div>
@@ -11,8 +11,7 @@
                 <tr>
                     <th>Départ</th>
                     <th>Arrivée</th>
-                    <th>Date</th>
-                    <th>Nombre de places restantes</th>
+                    <th>Date et heure</th>
                     <th>Prix</th>
                     <th>Options</th>
                 </tr>
@@ -29,7 +28,6 @@
                                 <div class="item">${pchoisis.heure}h ${pchoisis.min}</div>
                             </div>
                         </td>
-                        <td>${ pchoisisnbPlacesRest = pchoisis.nbPlacesInitiales - pchoisis.membresInscrits.size()}</td>
                         <td>${pchoisis.prix}</td>
                         <td>
                         <div class="ui vertical buttons">
@@ -73,7 +71,7 @@
                 <tbody id="tabcontenu">
                     #{list items:m.lesParcoursCrees, as:'pcrees'}
                     <tr>
-                        <input type="hidden" name="pcreesid" value="${pcrees.id}">
+                        <input type="hidden" name="pcreesid" value="${pcrees.id}"/>
                         <td>${pcrees.depart.nom}</td>
                         <td>${pcrees.arrivee.nom}</td>
                         <td>

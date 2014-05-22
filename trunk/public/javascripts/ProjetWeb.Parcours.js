@@ -54,8 +54,8 @@ ProjetWeb.Parcours.prototype = {
             .done(function(data) {
                 console.log(data);
                 self.constructor(data.id,data.depart,data.arrivee,data.prix,
-                    data.nbplacesinitiales,data.dateparcours,data.heure,
-                    data.min,data.supprime,data.createur,data.membresinscrits);
+                    data.nbPlacesInitiales,data.dateParcours,data.heure,
+                    data.min,data.supprime,data.createur,data.membresInscrits);
                 cb_success(data);
             })
             .fail(function(error) {

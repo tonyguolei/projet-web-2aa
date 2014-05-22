@@ -60,22 +60,34 @@ public class Membre extends Model {
         }
     }
 
+    /*
+    Creation d'un parcours en tant que conducteur
+     */
     public void ajouterParcoursCree(Parcours p) {
         this.lesParcoursCrees.add(p);
         this.save();
     }
 
+    /*
+    Selection d'un parcours comme passager
+     */
     public void ajouterParcoursChoisi(Parcours p) {
         this.lesParcoursChoisis.add(p);
         this.save();
     }
 
+    /*
+    Desinscription du membre
+     */
     public void supprimerCompte() {
         this.desinscrit = true;
         this.annulerTousLesParcours();
         this.save();
     }
 
+    /*
+    Annulation d'une reservation pour un parcours donne
+     */
     public void seDesinscrireParcours(Parcours p){
         if(verifierParcoursChoisiExiste(p)){
             this.lesParcoursChoisis.remove(p);
@@ -85,7 +97,10 @@ public class Membre extends Model {
         }
     }
 
-    public void annulerParcours(Parcours p){
+    /*
+    Suppression d'un parcours créé au préalable
+     */
+    public void supprimerParcours(Parcours p){
 
         if(verifierParcoursCreeExiste(p)){
             p.supprimerParcoursCree();
@@ -94,6 +109,9 @@ public class Membre extends Model {
         }
     }
 
+    /*
+    Verification du lien entre le membre et le parcours créé
+     */
     private boolean verifierParcoursCreeExiste(Parcours p){
         Iterator<Parcours> itr = lesParcoursCrees.iterator();
         while(itr.hasNext()) {
@@ -103,6 +121,9 @@ public class Membre extends Model {
         return false;
     }
 
+    /*
+    Verification du lien entre le membre et le parcours reservé
+     */
     private boolean verifierParcoursChoisiExiste(Parcours p){
         Iterator<Parcours> itr = lesParcoursChoisis.iterator();
         while(itr.hasNext()) {
