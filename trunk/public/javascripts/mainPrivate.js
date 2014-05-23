@@ -63,18 +63,27 @@ function supprimerParcoursCree(){
 /*----------------------FONCTION----------------------------*/
 function afficherParcoursInfo(parcours) {
     var nbplacesrestantes = parcours.nbplacesinitiales - parcours.membresInscrits.length;
+    var listmembres = '';
+    for(var i=0;i<parcours.membresInscrits.length;i++)
+    {
+      listmembres = listmembres + '<p>'+parcours.membresInscrits[i].prenom+parcours.membresInscrits[i].nom+'</p>';
+    }
     $('#resparcours').append(
             '<p>depart: ' + parcours.depart.nom + parcours.depart.codePostal + '</p>' +
             '<p>arrivee: ' + parcours.arrivee.nom + parcours.arrivee.codePostal + '</p>'+
             '<div class="ui teal inverted segment">' +
             '<p>createur: ' + parcours.createur.nom + parcours.createur.prenom + '</p>'+
             '</div>'+
+            '<div class="ui green inverted segment">membres: ' + listmembres + '</div>'+
             '<div class="ui secondary segment">' +
             '<p>date: ' + parcours.dateparcours + '</p>'+
             '<p>heure : ' + parcours.heure + 'h ' + parcours.min +'</p>'+
+            '<p>prix: ' + parcours.prix + '</p>'+
             '<p>nbplacesinit: ' + parcours.nbplacesinitiales + '</p>'+
             '<p>nb places restantes: ' + nbplacesrestantes + '</p>'+
-                '</div>'
+            '</div>'+
+
+            '</div>'
     );
 }
 
