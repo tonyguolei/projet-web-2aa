@@ -1,32 +1,45 @@
 #{extends 'mainPrivate.html' /}
 #{set title:'Conduire' /}
 
-<div class="ui blue segment">
-    <div class="ui blue ribbon label">Conduire</div>
-    Créer un parcours
-    <div class="ui form">
-        <div class="inline field">
-            <label>Ville de départ</label>
-            <input placeholder="Exemple : Grenoble, 38000" type="text" name="depart">
+<script src="@{'/public/javascripts/conduire_private.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+
+<form id="formProproserParcours" class="ui blue segment" method="post" action="">
+    <div id="message_success_creer_parcours" class="ui primary inverted blue segment">Vous avez crée un parcours!!!</div>
+    <div id="message_failed_creer_parcours" class="ui primary inverted red segment">Vous avez une error de creation d'un parcours!!!</div>
+    <div class="ui blue ribbon label">Créer un parcours</div>
+    <div class="ui form segment">
+        <div class="two fields">
+            <div class="inline field">
+                <label>Ville de départ</label>
+                <input placeholder="Exemple : Grenoble, 38000" type="text" name="depart">
             </div>
             <div class="inline field">
-            <label>Ville d'arrivée</label>
-            <input placeholder="Exemple : Annecy, 74000" type="text" name="arrivee">
+                <label>Ville d'arrivée</label>
+                <input placeholder="Exemple : Annecy, 74000" type="text" name="arrivee">
+            </div>
         </div>
-        <div class="inline field">
-            <label>Date</label>
-            <input type="text" name="date" id="date">
-            <label>Heure</label>
-            <input type="text" name="heure" id="heure">
-            <label>Min</label>
-            <input type="text" name="min" id="min">
+        <div class="three fields">
+            <div class="inline field">
+                <label>Date</label>
+                <input type="text" name="date" id="date">
+            </div>
+            <div class="inline field">
+                <label>Heure</label>
+                <input type="text" name="heure" id="heure">
+            </div>
+            <div class="inline field">
+                <label>Min</label>
+                <input type="text" name="min" id="min">
+            </div>
         </div>
         <div class="inline field ">
             <label>Prix</label>
             <input type="text" name="prix" id="prix">
+        </div>
+        <div class="inline field ">
             <label>Nombre de places proposés</label>
             <input type="text" name="nbplaces" id="nbplaces">
         </div>
-        <input type="button" id="boutonProposer" class="ui small button" name="boutonProposer" value="Proposer"/>
+        <input type="submit" id="boutonProposer" class="ui small button" name="boutonProposer" value="Proposer"/>
     </div>
-</div>
+</form>

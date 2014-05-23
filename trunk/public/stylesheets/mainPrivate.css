@@ -1,0 +1,11 @@
+*{
+    font-family: Awesome;
+}
+
+#message_success_creer_parcours{
+     display:none;
+}
+
+#message_failed_creer_parcours{
+    display:none;
+}

@@ -19,6 +19,7 @@ GET     /annulerReservation                     Utilisateur.annulerReservation
 GET     /supprimerParcours                      Utilisateur.supprimerParcours
 GET     /reserverParcours                       Utilisateur.reserverParcours
 GET     /reactiverParcours                      Utilisateur.reactiverParcours
+POST     /proposerParcours                      Utilisateur.proposerParcours
 
 # Import CRUD routes
 *      /admin                                   module:crud
