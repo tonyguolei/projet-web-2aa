@@ -80,13 +80,11 @@ function handle_submitForm() {
 var settings = {
     inline : true,
     onSuccess : function() {
+        event.preventDefault();
         handle_submitForm();
     }
 }
 
 $( document ).ready(function() {
-    $("#formProproserParcours").submit(function(event){
-        event.preventDefault();
-        $('#formProproserParcours').form(rules, settings)
-    });
-});
+    $('#formProproserParcours').form(rules, settings);
+})
