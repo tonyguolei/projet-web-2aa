@@ -6,7 +6,7 @@
         <div class="ui black ribbon label">Mes parcours choisis</div>
         <div id="p_proposes">
         #{if m}
-            <table class="ui sortable table segment" id="listeParcoursChoisis">
+            <table class="ui sortable table segment" >
                 <thead>
                 <tr>
                     <th>Départ</th>
@@ -16,7 +16,7 @@
                     <th>Options</th>
                 </tr>
                 </thead>
-                <tbody id="tabcontenu">
+                <tbody id="listeParcoursChoisis">
                     #{list items:m.lesParcoursChoisis, as:'pchoisis'}
                     <tr>
                         <input type="hidden" name="pchoisisid" value="${pchoisis.id}">
@@ -31,10 +31,10 @@
                         <td>${pchoisis.prix}</td>
                         <td>
                         <div class="ui vertical buttons">
-                            <div class='ui small black button consulter'>
+                            <div class='ui small blue button consulter'>
                                 <i class="unhide icon"></i>Consulter
                             </div>
-                            #{if pchoisis.supprime != false}
+                            #{if pchoisis.supprime}
                             <div class='ui small negative disabled button'>
                                 <i class="warning users icon"></i>Annulé
                             </div>
@@ -57,7 +57,7 @@
         <div class="ui black ribbon label">Mes parcours créés</div>
         <div id="p_crees">
         #{if m!=null}
-            <table class="ui sortable table segment" id="listeParcoursCrees">
+            <table class="ui sortable table segment" >
                 <thead>
                 <tr>
                     <th>Départ</th>
@@ -68,7 +68,7 @@
                     <th>Options</th>
                 </tr>
                 </thead>
-                <tbody id="tabcontenu">
+                <tbody id="listeParcoursCrees">
                     #{list items:m.lesParcoursCrees, as:'pcrees'}
                     <tr>
                         <input type="hidden" name="pcreesid" value="${pcrees.id}"/>
@@ -84,12 +84,19 @@
                         <td>${pcrees.prix}</td>
                         <td>
                             <div class="ui vertical buttons">
-                                <div class='ui small black button consulter'>
+                                <div class='ui small blue button consulter'>
                                     <i class="unhide icon"></i>Consulter
                                 </div>
-                                <div class='ui small black button annuler'>
+                            #{if !pcrees.supprime}
+                                <div class='ui small purple button annuler'>
                                     <i class="remove icon"></i>Annuler
                                 </div>
+                            #{/if}
+                            #{else }
+                                <div class='ui small red button reactiver'>
+                                    <i class="backward icon"></i>Réactiver
+                                </div>
+                            #{/else}
                             </div>
                         </td>
                     </tr>

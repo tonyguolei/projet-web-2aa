@@ -35,15 +35,15 @@ ProjetWeb.Membre = function() {
 
 /*methodes of class Membre*/
 ProjetWeb.Membre.prototype = {
-    recupererMembreInfo: function(email, cb_success, cb_error) {
+    recupererMembreInfo: function(cb_success, cb_error) {
         var self = this;
         $.ajax({
-            url: "/recupererMembreInfo",
-            data: {email: email}
+            url: "/recupererMembreInfo"
         })
             .done(function(data) {
                 console.log(data);
-                self.constructor(data.id, data.nom, data.prenom, data.age, data.email,data.sexe, data.dateInscription, data.lesParcoursCrees, data.lesParcoursChoisis);
+                self.constructor(data.id, data.nom, data.prenom, data.age, data.email,data.sexe,
+                    data.dateInscription, data.lesParcoursCrees, data.lesParcoursChoisis);
                 cb_success(data);
             })
             .fail(function(error) {
@@ -52,16 +52,15 @@ ProjetWeb.Membre.prototype = {
             })
     },
 
-
-    //TODO Recuperer les parcours créés
-    recupererParcoursCrees: function(email, cb_success, cb_error) {
+    //TODO Recuperer les parcours créés - PAS UTILE
+    recupererParcoursCrees: function(cb_success, cb_error) {
         var self = this;
         $.ajax({
-            url: "/recupererParcoursCrees",
-            data: {email: email}
+            url: "/recupererParcoursCrees"
         })
             .done(function(data) {
-                //console.log(data);
+                console.log(data);
+                this.lesParcoursCrees = data;
                 cb_success(data);
             })
             .fail(function(error) {
@@ -70,15 +69,15 @@ ProjetWeb.Membre.prototype = {
             })
     },
 
-    //TODO Recuperer les parchours choisis
-    recupererParcoursChoisis: function(email, cb_success, cb_error) {
+    //TODO Recuperer les parchours choisis -PAS UTILE
+    recupererParcoursChoisis: function(cb_success, cb_error) {
         var self = this;
         $.ajax({
-            url: "/recupererParcoursChoisis",
-            data: {email: email}
+            url: "/recupererParcoursChoisis"
         })
             .done(function(data) {
-                //console.log(data);
+                console.log(data);
+                this.lesParcoursChoisis = data;
                 cb_success(data);
             })
             .fail(function(error) {
@@ -96,6 +95,8 @@ ProjetWeb.Membre.prototype = {
         } )
             .done(function(data) {
                 console.log(data);
+                self.constructor(data.id, data.nom, data.prenom, data.age, data.email,data.sexe,
+                    data.dateInscription, data.lesParcoursCrees, data.lesParcoursChoisis);
                 cb_success(data);
             })
             .fail(function(error) {
@@ -112,6 +113,9 @@ ProjetWeb.Membre.prototype = {
         } )
             .done(function(data) {
                 console.log(data);
+                //self.constructor(data.id, data.nom, data.prenom, data.age, data.email,data.sexe,
+                    //data.dateInscription, data.lesParcoursCrees, data.lesParcoursChoisis);
+                self.lesParcoursChoisis = data;
                 cb_success(data);
             })
             .fail(function(error) {
@@ -127,11 +131,30 @@ ProjetWeb.Membre.prototype = {
             data: { id: parcour_id }
         } )
             .done(function(data) {
-                console.log(data);
+                //self.constructor(data.id, data.nom, data.prenom, data.age, data.email,data.sexe,
+                    //data.dateInscription, data.lesParcoursCrees, data.lesParcoursChoisis);
+                self.lesParcoursCrees = data;
                 cb_success(data);
             })
             .fail(function(error) {
                 console.log("error supprimerParcours");
+                cb_error(error);
+            })
+    },
+    reactiverParcours : function(parcour_id, cb_success, cb_error) {
+        var self = this;
+        $.ajax( {
+            url: "/reactiverParcours",
+            data: { id: parcour_id }
+        } )
+            .done(function(data) {
+                //self.constructor(data.id, data.nom, data.prenom, data.age, data.email,data.sexe,
+                    //data.dateInscription, data.lesParcoursCrees, data.lesParcoursChoisis);
+                self.lesParcoursCrees = data;
+                cb_success(data);
+            })
+            .fail(function(error) {
+                console.log("error reactiverParcours");
                 cb_error(error);
             })
     }

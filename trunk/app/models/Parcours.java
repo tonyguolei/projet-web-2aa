@@ -104,4 +104,9 @@ public class Parcours extends Model {
         this.save();
     }
 
+    public void reactiverParcoursCree(){
+        this.supprime = false;
+        this.save();
+    }
+
 }

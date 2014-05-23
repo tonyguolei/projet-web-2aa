@@ -12,12 +12,18 @@ var calculate;
 var direction;
 
 $(document).bind('ready', function () {
+    gererEvenements();
+});
+
+function gererEvenements(){
     $('.button.consulter').bind('click', consulterParcoursMembre);
     $('.button.annuler').bind('click', supprimerParcoursCree);
     $('.button.desinscrire').bind('click', annulerReservationParcours);
-});
-/*----------------------EVENEMENTS--------------------------*/
+    $('.button.reactiver').bind('click', reactiverParcoursCree);
+}
+/*----------------------LIES A DES EVENEMENTS--------------------------*/
 function consulterParcoursMembre(){
+    //Consulter un parcours (créé ou réservé)
     var tr = this.parentNode.parentNode.parentNode;
     var idp = tr.getElementsByTagName('input')[0].value;
     var parcours1 = new ProjetWeb.Parcours();
@@ -37,7 +43,7 @@ function annulerReservationParcours(){
     var membre1 = new ProjetWeb.Membre();
     membre1.annulerReservationParcours(idp,
         function() {
-            console.log("annulation resa parcours");
+            afficherMesParcoursChoisis(membre1);
         },
         function() {
             //gerer erreur
@@ -45,13 +51,13 @@ function annulerReservationParcours(){
         });
 }
 function supprimerParcoursCree(){
-    //Annuler la creation
+    //Annuler la creation du parcours
     var tr = this.parentNode.parentNode.parentNode;
     var idp = tr.getElementsByTagName('input')[0].value;
     var membre1 = new ProjetWeb.Membre();
     membre1.supprimerParcours(idp,
         function() {
-              console.log("suppression parcours");
+            afficherMesParcoursCrees(membre1);
         },
         function() {
             //gerer erreur
@@ -59,13 +65,113 @@ function supprimerParcoursCree(){
         });
 
 }
+function reactiverParcoursCree(){
+    //Annuler la suppression du parcours cree
+    var tr = this.parentNode.parentNode.parentNode;
+    var idp = tr.getElementsByTagName('input')[0].value;
+    var membre1 = new ProjetWeb.Membre();
+    membre1.reactiverParcours(idp,
+        function() {
+            afficherMesParcoursCrees(membre1);
+        },
+        function() {
+            //gerer erreur
+            console.log("erreur fonction");
+        });
+}
 
 /*----------------------FONCTION----------------------------*/
+function afficherMesParcoursCrees(membre){
+    $('#listeParcoursCrees').empty();
+
+    for(var j=0;j<membre.lesParcoursCrees.length;j++){
+        var pcrees = membre.lesParcoursCrees[j];
+
+        if(!pcrees.supprime){
+            var listoptions = '<div class="ui small purple button annuler">'  +
+                '<i class="remove icon"></i>Annuler'  +
+                '</div>';
+        }
+        else{
+            var listoptions = '<div class="ui small red button reactiver">'+
+                '<i class="backward icon"></i>Réactiver'+
+                '</div>';
+        }
+        var nbplacesrestantes = pcrees.nbPlacesInitiales - pcrees.membresInscrits.length;
+        $('#listeParcoursCrees').append(
+        '<tr>'+
+            '<input type="hidden" name="pcreesid" value="'+pcrees.id+'"/>'+
+            '<td>'+pcrees.depart.nom+'</td>'+
+            '<td>'+pcrees.arrivee.nom+'</td>'+
+            '<td>'+
+                '<div class="ui divided list">'+
+                    //TODO Convertir date!
+                    //'<div class="item">'+pcrees.dateParcours+'</div>'  +
+                    '<div class="item">'+pcrees.heure + 'h' + pcrees.min+'</div>'+
+                '</div>'+
+            '</td>'+
+            '<td>'+nbplacesrestantes+'</td>'+
+            '<td>'+pcrees.prix+'</td>'+
+            '<td>'+
+                '<div class="ui vertical buttons">' +
+                    '<div class="ui small blue button consulter">' +
+                        '<i class="unhide icon"></i>Consulter'  +
+                    '</div>'+
+                    listoptions+
+                '</div>' +
+            '</td>'+
+        '</tr>'
+    );
+    }
+    gererEvenements();
+}
+
+function afficherMesParcoursChoisis(membre){
+    $('#listeParcoursChoisis').empty();
+
+    for(var j=0;j<membre.lesParcoursChoisis.length;j++){
+        var pchoisis = membre.lesParcoursChoisis[j];
+        if (pchoisis.supprime == true){
+            var listoptions = '<div class="ui small negative disabled button">'+
+                '<i class="warning users icon"></i>Annulé'+
+                '</div>';
+        }else{
+            var listoptions = '<div class="ui small positive button desinscrire">'  +
+                '<i class="remove icon"></i>Me désinscrire'  +
+                '</div>';
+        }
+
+        $('#listeParcoursChoisis').append(
+            '<tr>'+
+                '<input type="hidden" name="pcreesid" value="'+pcrees.id+'"/>'+
+                '<td>'+pchoisis.depart.nom+'</td>'+
+                '<td>'+pchoisis.arrivee.nom+'</td>'+
+                '<td>'+
+                '<div class="ui divided list">'+
+                //TODO Convertir date en string
+                '<div class="item">'+pchoisis.dateParcours+'</div>'  +
+                '<div class="item">'+pchoisis.heure + 'h' + pchoisis.min+'</div>'+
+                '</div>'+
+                '</td>'+
+                '<td>'+pchoisis.prix+'</td>'+
+                '<td>' +
+                '<div class="ui vertical buttons">' +
+                    '<div class="ui small blue button consulter">' +
+                    '<i class="unhide icon"></i>Consulter'  +
+                    '</div>'+
+                    listoptions+
+                '</div>'+
+                '</td>'+
+            '</tr>'
+        );
+    }
+    gererEvenements();
+}
+
 function afficherParcoursInfo(parcours) {
     var nbplacesrestantes = parcours.nbplacesinitiales - parcours.membresInscrits.length;
     var listmembres = '';
-    for(var i=0;i<parcours.membresInscrits.length;i++)
-    {
+    for(var i=0;i<parcours.membresInscrits.length;i++){
       listmembres = listmembres + '<p>'+parcours.membresInscrits[i].prenom+parcours.membresInscrits[i].nom+'</p>';
     }
     $('#resparcours').append(

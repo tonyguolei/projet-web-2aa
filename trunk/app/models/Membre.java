@@ -110,6 +110,17 @@ public class Membre extends Model {
     }
 
     /*
+    Réactivation du parcours créé mais annulé précédemment
+     */
+    public void reactiverParcours(Parcours p){
+        if(verifierParcoursCreeExiste(p)){
+            p.reactiverParcoursCree();
+            p.save();
+            this.save();
+        }
+    }
+
+    /*
     Verification du lien entre le membre et le parcours créé
      */
     private boolean verifierParcoursCreeExiste(Parcours p){
