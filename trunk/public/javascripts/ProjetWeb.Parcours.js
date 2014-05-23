@@ -8,9 +8,6 @@
 
 /*La Classe Parcours*/
 
-/*NameSpace*/
-var ProjetWeb = {}
-
 ProjetWeb.Parcours = function() {
     /*propriétés de la classe Parcours*/
     this.id = null;
