@@ -6,49 +6,49 @@ var rules = {
         identifier : 'depart',
         rules : [{
             type : 'empty',
-            prompt : 'depart est vide'
+            prompt : 'La ville de départ est vide'
         }]
     },
     arrivee : {
         identifier : 'arrivee',
         rules : [{
             type : 'empty',
-            prompt : 'arrivee est vide'
+            prompt : "La ville d'arrivée est vide"
         }]
     },
     date : {
         identifier : 'date',
         rules : [{
             type : 'empty',
-            prompt : 'date est vide'
+            prompt : 'La date est vide'
         }]
     },
     heure : {
         identifier : 'heure',
         rules : [{
             type : 'empty',
-            prompt : 'heure est vide'
+            prompt : "L'heure est vide"
         }]
     },
     min : {
         identifier : 'min',
         rules : [{
             type : 'empty',
-            prompt : 'min est vide'
+            prompt : 'Les minutes sont vides'
         }]
     },
     prix : {
         identifier : 'prix',
         rules : [{
             type : 'empty',
-            prompt : 'prix est vide'
+            prompt : 'Le prix est vide'
         }]
     },
     nbplaces : {
         identifier : 'nbplaces',
         rules : [{
             type : 'empty',
-            prompt : 'nbplaces est vide'
+            prompt : 'Le nombre de places est vide'
         }]
     }
 };

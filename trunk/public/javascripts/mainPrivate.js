@@ -20,6 +20,12 @@ function gererEvenements(){
     $('.button.annuler').bind('click', supprimerParcoursCree);
     $('.button.desinscrire').bind('click', annulerReservationParcours);
     $('.button.reactiver').bind('click', reactiverParcoursCree);
+    $(".cp").bind("keyup", function () {
+        var inputcp = this;
+        setTimeout(function () {
+            rechercherVille(inputcp);
+        }, 1000);
+    });
 }
 /*----------------------LIES A DES EVENEMENTS--------------------------*/
 function consulterParcoursMembre(){
@@ -78,6 +84,48 @@ function reactiverParcoursCree(){
             //gerer erreur
             console.log("erreur fonction");
         });
+}
+function rechercherVille(cp){
+    var parent = cp.parentNode;
+    var type = parent.getAttribute("name");
+    var list = parent.getElementsByClassName('dropdown')[0];
+
+    $.ajax({
+        url: "http://api.zippopotam.us/fr/"+cp.value,
+        cache: false,
+        dataType: "json",
+        type: "POST",
+        success: function(result, success) {
+            suggestions = [];
+            //TODO Désactiver la sélection
+            for ( ii in result['places']){
+                suggestions.push(result['places'][ii]['place name']);
+            }
+            if ( suggestions.length > 0){
+
+                $(".dropdown."+ type).empty();
+                //resultats de ville avec le code postal saisi
+                $(".dropdown."+ type).append(
+                    '<div class="text">Selectionner</div>'+
+                    '<i class="dropdown icon"></i>'+
+                    '<input name="cp" type="hidden">' +
+                    '<div class="menu '+type+'"></div>');
+                for(var i=0;i<suggestions.length;i++){
+                    $(".menu."+type).append(
+                    "<div class='item' data-value='" + suggestions[i] + "'>" + suggestions[i] + "</div>"
+                    );
+                }
+                $('.ui.selection.dropdown.'+type).dropdown();
+            }
+
+        },
+        error: function(result, success) {
+            console.log("erreur recherche villes");
+        }
+    });
+
+
+
 }
 
 /*----------------------FONCTION----------------------------*/

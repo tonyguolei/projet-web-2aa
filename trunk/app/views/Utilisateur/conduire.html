@@ -9,13 +9,17 @@
     <div class="ui blue ribbon label">Créer un parcours</div>
     <div class="ui form segment">
         <div class="two fields">
-            <div class="inline field">
+            <div class="inline field" name="depart">
                 <label>Ville de départ</label>
-                <input placeholder="Exemple : Grenoble, 38000" type="text" name="depart">
+                <input placeholder="Exemple : 38000, 05000" type="text" name="depart" class="cp" maxlength="5">
+                <div class="ui fluid selection dropdown depart">
+                </div>
             </div>
-            <div class="inline field">
+            <div class="inline field arrivee" name="arrivee">
                 <label>Ville d'arrivée</label>
-                <input placeholder="Exemple : Annecy, 74000" type="text" name="arrivee">
+                <input placeholder="Exemple : 74000, 69000" type="text" name="arrivee" class="cp" maxlength="5">
+                <div class="ui fluid selection dropdown arrivee">
+                </div>
             </div>
         </div>
         <div class="three fields">
