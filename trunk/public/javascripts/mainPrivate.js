@@ -94,7 +94,7 @@ function rechercherVille(cp){
         url: "http://api.zippopotam.us/fr/"+cp.value,
         cache: false,
         dataType: "json",
-        type: "POST",
+        type: "GET",
         success: function(result, success) {
             suggestions = [];
             //TODO Désactiver la sélection
