@@ -21,24 +21,24 @@
         <div class="three fields">
             <div class="inline field">
                 <label>Date</label>
-                <input type="text" name="date" id="date">
+                <input type="date" name="date" id="date">
             </div>
             <div class="inline field">
                 <label>Heure</label>
-                <input type="text" name="heure" id="heure">
+                <input type="number" name="heure" min=0 id="heure">
             </div>
             <div class="inline field">
                 <label>Min</label>
-                <input type="text" name="min" id="min">
+                <input type="number" name="min" min=0 id="min">
             </div>
         </div>
         <div class="inline field ">
             <label>Prix</label>
-            <input type="text" name="prix" id="prix">
+            <input type="number" step="any" min=0 name="prix" id="prix">
         </div>
         <div class="inline field ">
             <label>Nombre de places proposés</label>
-            <input type="text" name="nbplaces" id="nbplaces">
+            <input type="number" name="nbplaces" min=1 id="nbplaces">
         </div>
         <input type="submit" id="boutonProposer" class="ui small button" name="boutonProposer" value="Proposer"/>
     </div>
