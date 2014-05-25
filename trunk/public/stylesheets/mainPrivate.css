@@ -9,3 +9,11 @@
 #message_failed_creer_parcours{
     display:none;
 }
+
+#message_success_modify_profil{
+    display:none;
+}
+
+#message_failed_modify_profil{
+    display:none;
+}

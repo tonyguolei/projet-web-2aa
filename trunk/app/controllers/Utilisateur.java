@@ -167,4 +167,16 @@ public class Utilisateur extends Controller  {
         JSONSerializer serializer = new JSONSerializer();
         renderJSON(serializer.exclude("*.class").transform(new DateTransformer("dd/MM/yyyy"), "dateInscription").serialize(p));
     }
+
+    public static void modifierMonProfil() {
+        Membre m = Membre.find("byEmail",session.get("username")).first();
+        m.prenom = params.get("prenom");
+        m.nom =  params.get("nom");
+        m.age =  Integer.parseInt(params.get("age"));
+        m.sexe =  params.get("sexe");
+        m.motDePasse = params.get("new_password");
+        m.save();
+        JSONSerializer serializer = new JSONSerializer();
+        renderJSON(serializer.exclude("*.class").transform(new DateTransformer("dd/MM/yyyy"), "dateInscription").serialize(m));
+    }
 }
