@@ -73,7 +73,7 @@ function handle_submitForm() {
             $("#message_success_creer_parcours").show().delay(5000).fadeOut();
         })
         .fail(function (e) {
-            console.log("proproser parcour error");
+            $("#message_failed_creer_parcours").show().delay(5000).fadeOut();
         })
 };
 
