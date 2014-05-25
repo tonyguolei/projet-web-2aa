@@ -12,7 +12,8 @@ var calculate;
 var direction;
 
 $(document).bind('ready', function () {
-    gererEvenements();
+    obtenirDate();
+    gererEvenements();;
 });
 
 function gererEvenements(){
@@ -28,6 +29,24 @@ function gererEvenements(){
     });
 }
 /*----------------------LIES A DES EVENEMENTS--------------------------*/
+function obtenirDate(){
+    $("#date").datepicker({
+        dateFormat: 'dd/mm/yy'
+    });
+    var myDate = new Date();
+    var month = myDate.getMonth() + 1;
+    var day = myDate.getDate();
+
+    if(month < 11){
+        var prettyDate = day + '/0' + month + '/' + myDate.getFullYear();
+    }
+    else{
+        var prettyDate = day + '/' + month + '/' + myDate.getFullYear();
+    }
+    $("#date").val(prettyDate);
+    return prettyDate;
+}
+
 function consulterParcoursMembre(){
     //Consulter un parcours (créé ou réservé)
     var tr = this.parentNode.parentNode.parentNode;
@@ -44,6 +63,8 @@ function consulterParcoursMembre(){
 }
 function annulerReservationParcours(){
     //Annuler sa reservation
+
+    if(confirm("Etes-vous sur de vouloir vous désinscrire de ce parcours ?")){
     var tr = this.parentNode.parentNode.parentNode;
     var idp = tr.getElementsByTagName('input')[0].value;
     var membre1 = new ProjetWeb.Membre();
@@ -55,9 +76,12 @@ function annulerReservationParcours(){
             //gerer erreur
             console.log("erreur fonction");
         });
+    }
+
 }
 function supprimerParcoursCree(){
     //Annuler la creation du parcours
+    if(confirm("Etes-vous sur de vouloir supprimer ce parcours ?")){
     var tr = this.parentNode.parentNode.parentNode;
     var idp = tr.getElementsByTagName('input')[0].value;
     var membre1 = new ProjetWeb.Membre();
@@ -69,10 +93,11 @@ function supprimerParcoursCree(){
             //gerer erreur
             console.log("erreur fonction");
         });
-
+    }
 }
 function reactiverParcoursCree(){
     //Annuler la suppression du parcours cree
+    if(confirm("Etes-vous sur de vouloir réactiver ce parcours ?")){
     var tr = this.parentNode.parentNode.parentNode;
     var idp = tr.getElementsByTagName('input')[0].value;
     var membre1 = new ProjetWeb.Membre();
@@ -84,6 +109,7 @@ function reactiverParcoursCree(){
             //gerer erreur
             console.log("erreur fonction");
         });
+    }
 }
 function rechercherVille(cp){
     var parent = cp.parentNode;
@@ -97,7 +123,7 @@ function rechercherVille(cp){
         type: "GET",
         success: function(result, success) {
             suggestions = [];
-            //TODO Désactiver la sélection
+
             for ( ii in result['places']){
                 suggestions.push(result['places'][ii]['place name']);
             }
@@ -123,9 +149,6 @@ function rechercherVille(cp){
             console.log("erreur recherche villes");
         }
     });
-
-
-
 }
 
 /*----------------------FONCTION----------------------------*/
@@ -191,7 +214,7 @@ function afficherMesParcoursChoisis(membre){
 
         $('#listeParcoursChoisis').append(
             '<tr>'+
-                '<input type="hidden" name="pcreesid" value="'+pcrees.id+'"/>'+
+                '<input type="hidden" name="pcreesid" value="'+pchoisis.id+'"/>'+
                 '<td>'+pchoisis.depart.nom+'</td>'+
                 '<td>'+pchoisis.arrivee.nom+'</td>'+
                 '<td>'+
@@ -236,7 +259,6 @@ function afficherParcoursInfo(parcours) {
             '<p>nbplacesinit: ' + parcours.nbplacesinitiales + '</p>'+
             '<p>nb places restantes: ' + nbplacesrestantes + '</p>'+
             '</div>'+
-
             '</div>'
     );
 }

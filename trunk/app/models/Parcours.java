@@ -39,7 +39,10 @@ public class Parcours extends Model {
     @ManyToMany(mappedBy ="lesParcoursChoisis")
     public Set<Membre> membresInscrits = new HashSet();
 
-    //ON DOIT TOUJOURS PARTIR DU PARCOURS POUR FAIRE LE LIEN AVEC UN MEMBRE (géré en auto aprés)
+    /**
+     * Crée un parcours
+     * @param  createur,ville de départ,ville d'arrivée, prix, nombre de places proposées, date, heure, minute
+     */
     public Parcours(Membre createur, Ville dep, Ville arr,float prix,int nbPlacesInitiales,
                     Date dateParcours, int heure,int min) {
         this.createur = createur;
@@ -55,6 +58,10 @@ public class Parcours extends Model {
         createur.save();
     }
 
+    /**
+     * Crée un parcours à la date du jour
+     * @param  createur,ville de départ,ville d'arrivée, prix, nombre de places proposées, heure, minute
+    */
     public Parcours(Membre createur, Ville dep, Ville arr,float prix,int nbPlacesInitiales,
                     int heure,int min) {
         this.createur = createur;
@@ -70,40 +77,66 @@ public class Parcours extends Model {
         createur.save();
     }
 
-    public void ajouterMembreInscrit(Membre m) {
+    /**
+     * Inscrit un membre sur le parcours
+     * @param membre
+    */
+    public void ajouterMembreInscrit(Membre membre) {
         if(verifieDispoPlaces()){
-            this.membresInscrits.add(m);
-            m.ajouterParcoursChoisi(this);
+            this.membresInscrits.add(membre);
+            membre.ajouterParcoursChoisi(this);
             this.save();
-            m.save();
+            membre.save();
         }
     }
 
-    public void supprimerMembreInscrit(Membre m){
-        if(this.membresInscrits.contains(m)){
-            this.membresInscrits.remove(m);
+    /**
+     * Desinscrit un membre sur le parcours
+     * @param membre
+     */
+    public void supprimerMembreInscrit(Membre membre){
+        if(this.membresInscrits.contains(membre)){
+            this.membresInscrits.remove(membre);
         }
     }
 
+    /**
+     * Vérifie la disponibilité sur le parcours par rapport au nombre de places initiales
+     * @return vrai s'il reste une disponibilité, faux sinon
+     */
     private boolean verifieDispoPlaces(){
-         return(this.membresInscrits.size() < this.nbPlacesInitiales);
+         return(this.membresInscrits.size() < this.nbPlacesInitiales && !this.supprime);
     }
 
+    /**
+     * Modifie le prix fixé par le créateur
+     * @param prix
+     */
     public void modifierPrix(double prix) {
         this.prix = prix;
         this.save();
     }
 
+    /**
+     * Modifie le nombre de places fixé par le créateur
+     * @param nbPlaces
+     */
     public void modifierNbPlaces(int nbPlaces) {
         this.nbPlacesInitiales = nbPlaces;
         this.save();
     }
 
+    /**
+     * Supprime temporairement le parcours créé
+     */
     public void supprimerParcoursCree(){
         this.supprime = true;
         this.save();
     }
 
+    /**
+     * Réactiver le parcours créé précédemment
+     */
     public void reactiverParcoursCree(){
         this.supprime = false;
         this.save();

@@ -38,6 +38,15 @@ public class Membre extends Model {
     @ManyToMany
     public Set<Parcours> lesParcoursChoisis =new HashSet();
 
+    /**
+     * Créé un membre
+     * @param nom
+     * @param prenom
+     * @param motDePasse
+     * @param age
+     * @param email
+     * @param sexe
+     */
     public Membre(String nom, String prenom,String motDePasse, int age, String email,String sexe) {
         this.nom = nom;
         this.prenom = prenom;
@@ -50,9 +59,15 @@ public class Membre extends Model {
         this.desinscrit = false;
     }
 
-    public static boolean connect(String username, String password) {
-        System.out.println(Membre.find("email = ? and motDePasse = ?",username, password).first());
-        if(Membre.find("email = ? and motDePasse = ?",username, password).first() != null){
+    /**
+     * Vérifie lors de la tentative d'authentification l'existence de l'utilisateur en base
+     * @param email
+     * @param motdepasse
+     * @return vrai si le membre est en ligne / connecté sur l'application
+     */
+    public static boolean connect(String email, String motdepasse) {
+        System.out.println(Membre.find("email = ? and motDePasse = ?",email, motdepasse).first());
+        if(Membre.find("email = ? and motDePasse = ?",email, motdepasse).first() != null){
             return true;
         }
         else {
@@ -60,24 +75,26 @@ public class Membre extends Model {
         }
     }
 
-    /*
-    Creation d'un parcours en tant que conducteur
+    /**
+     * Créé un parcours en tant que conducteur
+     * @param parcours
      */
-    public void ajouterParcoursCree(Parcours p) {
-        this.lesParcoursCrees.add(p);
+    public void ajouterParcoursCree(Parcours parcours) {
+        this.lesParcoursCrees.add(parcours);
         this.save();
     }
 
-    /*
-    Selection d'un parcours comme passager
+    /**
+     * Selectionne un parcours comme passager
+     * @param parcours
      */
-    public void ajouterParcoursChoisi(Parcours p) {
-        this.lesParcoursChoisis.add(p);
+    public void ajouterParcoursChoisi(Parcours parcours) {
+        this.lesParcoursChoisis.add(parcours);
         this.save();
     }
 
-    /*
-    Desinscription du membre
+    /**
+     * Desinscrit le membre
      */
     public void supprimerCompte() {
         this.desinscrit = true;
@@ -85,65 +102,75 @@ public class Membre extends Model {
         this.save();
     }
 
-    /*
-    Annulation d'une reservation pour un parcours donne
+    /**
+     * Annule une reservation pour le parcours
+     * @param parcours
      */
-    public void seDesinscrireParcours(Parcours p){
-        if(verifierParcoursChoisiExiste(p)){
-            this.lesParcoursChoisis.remove(p);
-            p.supprimerMembreInscrit(this);
+    public void seDesinscrireParcours(Parcours parcours){
+        if(verifierParcoursChoisiExiste(parcours)){
+            this.lesParcoursChoisis.remove(parcours);
+            parcours.supprimerMembreInscrit(this);
             this.save();
-            p.save();
+            parcours.save();
         }
     }
 
-    /*
-    Suppression d'un parcours créé au préalable
+    /**
+     * Supprime temporairement le parcours créé au préalable
+     * @param parcours
      */
-    public void supprimerParcours(Parcours p){
+    public void supprimerParcours(Parcours parcours){
 
-        if(verifierParcoursCreeExiste(p)){
-            p.supprimerParcoursCree();
-            p.save();
-            this.save();
-        }
-    }
-
-    /*
-    Réactivation du parcours créé mais annulé précédemment
-     */
-    public void reactiverParcours(Parcours p){
-        if(verifierParcoursCreeExiste(p)){
-            p.reactiverParcoursCree();
-            p.save();
+        if(verifierParcoursCreeExiste(parcours)){
+            parcours.supprimerParcoursCree();
+            parcours.save();
             this.save();
         }
     }
 
-    /*
-    Verification du lien entre le membre et le parcours créé
+    /**
+     * Réactive le parcours créé mais annulé précédemment
+     * @param parcours
      */
-    private boolean verifierParcoursCreeExiste(Parcours p){
+    public void reactiverParcours(Parcours parcours){
+        if(verifierParcoursCreeExiste(parcours)){
+            parcours.reactiverParcoursCree();
+            parcours.save();
+            this.save();
+        }
+    }
+
+    /**
+     * Verifie le lien entre le membre et le parcours créé
+     * @param parcours
+     * @return vrai si le parcours a bien été créé par le membre
+     */
+    private boolean verifierParcoursCreeExiste(Parcours parcours){
         Iterator<Parcours> itr = lesParcoursCrees.iterator();
         while(itr.hasNext()) {
-            if(itr.next().equals(p))
+            if(itr.next().equals(parcours))
                 return true;
         }
         return false;
     }
 
-    /*
-    Verification du lien entre le membre et le parcours reservé
+    /**
+     * Verifie le lien entre le membre et le parcours reservé
+     * @param parcours
+     * @return vrai si le parcours a bien été réservé par le membre
      */
-    private boolean verifierParcoursChoisiExiste(Parcours p){
+    private boolean verifierParcoursChoisiExiste(Parcours parcours){
         Iterator<Parcours> itr = lesParcoursChoisis.iterator();
         while(itr.hasNext()) {
-            if(itr.next().equals(p))
+            if(itr.next().equals(parcours))
                 return true;
         }
         return false;
     }
 
+    /**
+     * Annule tous les parcours proposés par le membre
+     */
     private void annulerTousLesParcours(){
         //Gestion des parcours crees
         Iterator<Parcours> itr = lesParcoursCrees.iterator();
@@ -165,22 +192,42 @@ public class Membre extends Model {
         this.save();
     }
 
+    /**
+     * Modifie l'age du membre
+     * @param age
+     */
     public void modifierAge(int age) {
         this.age = age;
     }
 
+    /**
+     * Modifie le mot de passe du membre
+     * @param motDePasse
+     */
     public void modifierMotDePasse(String motDePasse) {
         this.motDePasse = motDePasse;
     }
 
+    /**
+     * Modifie le prénom du membre
+     * @param prenom
+     */
     public void modifierPrenom(String prenom) {
         this.prenom = prenom;
     }
 
+    /**
+     * Modifie le nom du membre
+     * @param nom
+     */
     public void modifierNom(String nom) {
         this.nom = nom;
     }
 
+    /**
+     * Modifie le sexe du membre
+     * @param sexe
+     */
     public void modifierSexe(String sexe){
         this.sexe = sexe;
     }

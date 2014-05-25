@@ -18,16 +18,14 @@ public class Ville extends Model {
     @Expose
     public String codePostal;
 
+    /**
+     * Créé une ville
+     * @param nom
+     * @param codePostal
+     */
     public Ville(String nom, String codePostal) {
         this.nom = nom;
         this.codePostal = codePostal;
     }
 
-    @Override
-    public String toString() {
-        return "Ville{" +
-                "nom='" + nom + '\'' +
-                ", codePostal=" + codePostal +
-                '}';
-    }
 }

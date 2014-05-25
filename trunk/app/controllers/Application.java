@@ -93,11 +93,42 @@ public class Application extends Controller {
     /*---------------Methodes contenu des pages -----------------------*/
 
     private static void tousLesParcoursActuels() {
-        //TODO Renvoyer seulement les parcours non supprimes à partir de la date actuelle
+        //TODO Renvoyer seulement les parcours non supprimes à partir de la date actuelle => si non connecté
+
+        //TODO Renvoyer les parcours non réservés => si connecté
         List<Parcours> listp = Parcours.find("supprime = ?",false).fetch();
         JSONSerializer serializer = new JSONSerializer();
         renderJSON(serializer.exclude("*.class").exclude("createur").include("membresInscrits").transform(new DateTransformer("yyyy/MM/dd hh:mm:ss"),
                 "dateParcours").serialize(listp));
+    }
+
+    private static void certainsParcoursActuels(String depart,String arrivee,String date){
+        String textfind = "";
+
+        if(depart.matches("[0-9]+")){
+            //code postal saisi pour la ville de départ
+            textfind = "depart.codePostal like ? ";
+        }
+        else{
+            //nom saisi pour la ville de depart
+            textfind = "depart.nom like ? ";
+            depart = StringUtils.capitalize(depart);
+        }
+
+        if(arrivee.matches("[0-9]+")){
+            //code postal saisi pour la ville darrivee
+            textfind = textfind + "and arrivee.codePostal like ? ";
+        }
+        else{
+            //nom saisi pour la ville darrivee
+            textfind = textfind +"and arrivee.nom like ? ";
+            arrivee = StringUtils.capitalize(arrivee);
+        }
+        //TODO Ne pas renvoyer les parcours déjà réservés => si connecté
+        List<Parcours> listp = Parcours.find(textfind,"%"+ depart+"%","%"+ arrivee+"%").fetch();
+        JSONSerializer serializer = new JSONSerializer();
+        renderJSON(serializer.exclude("*.class").include("membresInscrits").exclude("createur").transform(new DateTransformer("yyyy/MM/dd hh:mm:ss"), "dateParcours").serialize(listp));
+
     }
 
     public static void chercherParcours() {
@@ -105,34 +136,11 @@ public class Application extends Controller {
         String depart = params.get("depart");
         String arrivee = params.get("arrivee");
         String date = params.get("date");
-        String textfind = "";
 
         if(depart=="" && arrivee=="" && date=="")
             tousLesParcoursActuels();
         else{
-            if(depart.matches("[0-9]+")){
-                //code postal saisi pour la ville de départ
-                textfind = "depart.codePostal like ? ";
-            }
-            else{
-                //nom saisi pour la ville de depart
-                textfind = "depart.nom like ? ";
-                depart = StringUtils.capitalize(depart);
-            }
-
-            if(arrivee.matches("[0-9]+")){
-                //code postal saisi pour la ville darrivee
-                textfind = textfind + "and arrivee.codePostal like ? ";
-            }
-            else{
-                //nom saisi pour la ville darrivee
-                textfind = textfind +"and arrivee.nom like ? ";
-                arrivee = StringUtils.capitalize(arrivee);
-            }
-
-            List<Parcours> listp = Parcours.find(textfind,"%"+ depart+"%","%"+ arrivee+"%").fetch();
-            JSONSerializer serializer = new JSONSerializer();
-            renderJSON(serializer.exclude("*.class").include("membresInscrits").exclude("createur").transform(new DateTransformer("yyyy/MM/dd hh:mm:ss"), "dateParcours").serialize(listp));
+            certainsParcoursActuels(depart,arrivee,date);
         }
 
     }

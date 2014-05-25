@@ -85,10 +85,12 @@ public class Utilisateur extends Controller  {
     }
 
     public static void reserverParcours(){
+        System.out.println("reserver parcours");
         String id = params.get("id");
         Membre m = Membre.find("byEmail",session.get("username")).first();
         Parcours p = Parcours.findById(Long.parseLong(id, 10));
         p.ajouterMembreInscrit(m);
+        System.out.println("ajouter membre inscrit");
         JSONSerializer serializer = new JSONSerializer();
         renderJSON(serializer.transform(new DateTransformer("dd/MM/yyyy"), "dateInscription").serialize(m));
     }

@@ -11,29 +11,16 @@ var init = true;
 var parcours1 = new ProjetWeb.Parcours();
 
 $(document).bind("ready", function () {
-    obtenirDate();
     rechercherParcours();
     $("#boutonChercherParcours").bind("click", rechercherParcours);
+    gererEvenementsRecherche();
 });
-
-function obtenirDate(){
-    $("#date").datepicker({
-        dateFormat: 'dd/mm/yy'
-    });
-    var myDate = new Date();
-    var month = myDate.getMonth() + 1;
-    var day = myDate.getDate();
-
-    if(month < 11){
-        var prettyDate = day + '/0' + month + '/' + myDate.getFullYear();
-    }
-    else{
-        var prettyDate = day + '/' + month + '/' + myDate.getFullYear();
-    }
-    $("#date").val(prettyDate);
-    return prettyDate;
+/*----------------------FONCTION----------------------------*/
+function gererEvenementsRecherche(){
+    $('.button.consulter1').bind('click', consulterParcours);
+    $('.button.reserver').bind('click', reserverParcours);
 }
-
+/*----------------------LIES A DES EVENEMENTS--------------------------*/
 function rechercherParcours(){
     var depart = document.getElementsByName("depart")[0].value;
     var arrivee = document.getElementsByName("arrivee")[0].value;
@@ -60,58 +47,71 @@ function rechercherParcours(){
                 $("#tabcontenu").empty();
                 $.each(data, function (key, value) {
                     var nbplacesrestantes = value.nbPlacesInitiales - value.membresInscrits.length;
+
                     if(nbplacesrestantes<=0){
-                        $("#tabcontenu").append(
-                            "<tr>"+
-                                "<input name='idparcours' type='hidden' value='" +value.id + "'/>"+
-                                "<td>"+ value.depart.nom +"</td>"+
-                                "<td>"+ value.arrivee.nom +"</td>"+
-                                "<td>" +
-                                "<div class='ui divided list'>" +
-                                "<div class='item'>"+value.dateParcours+"</div>"+
-                                "<div class='item'>"+value.heure + "h" + value.min + "</div>" +
-                                "</div>" +
-                                "</td>"+
-                                "<td>"+ nbplacesrestantes + "/" + value.nbPlacesInitiales+"</td>"+
-                                "<td>"+ value.prix +"</td>"+
-                                "<td><div class='ui small negative disabled button'>" +
-                                "<i class='warning users icon'></i>Complet</div></td>"+
-                                "</tr>"
-                        );
+                        var listoptions = "<td><div class='ui small negative disabled button'>" +
+                            "<i class='warning users icon'></i>Complet</div></td>";
                     }
                     else{
-                        $("#tabcontenu").append(
-                            "<tr>"+
-                                "<input name='idparcours' type='hidden' value='" +value.id + "'/>"+
-                                "<td>"+ value.depart.nom +"</td>"+
-                                "<td>"+ value.arrivee.nom +"</td>"+
-                                "<td>"+ value.dateParcours+"</td>"+
-                                "<td>"+ nbplacesrestantes + "/" + value.nbPlacesInitiales+"</td>"+
-                                "<td>"+ value.prix +"</td>"+
-                                "<td><div class='ui vertical buttons'>"+
-                                    "<div class='ui small green button consulter'>"+
-                                        "<i class='unhide icon'></i>Consulter"+
-                                    "</div>"+
-                                    "<div class='ui small teal button reserver'>Réserver</div>"+
-                                "</div></td>"+
-                                "</tr>"
-                        );
+                        var listoptions = "<td><div class='ui vertical buttons'>"+
+                            "<div class='ui small green button consulter1'>"+
+                            "<i class='unhide icon'></i>Consulter"+
+                            "</div>"+
+                            "<div class='ui small teal button reserver'>Réserver</div>"+
+                            "</div></td>";
                     }
-
+                    $("#tabcontenu").append(
+                        "<tr>"+
+                            "<input name='idparcours' type='hidden' value='" +value.id + "'/>"+
+                            "<td>"+ value.depart.nom +"</td>"+
+                            "<td>"+ value.arrivee.nom +"</td>"+
+                            "<td>"+
+                            "<div class='ui divided list'>" +
+                            "<div class='item'>"+value.dateParcours+"</div>"+
+                            "<div class='item'>"+value.heure + "h" + value.min + "</div>" +
+                            "</div>" +
+                            "</td>"+
+                            "<td>"+ nbplacesrestantes + "/" + value.nbPlacesInitiales+"</td>"+
+                            "<td>"+ value.prix +"</td>"+
+                            listoptions +
+                            "</tr>"
+                    );
                 });
-                $('.button.reserver').bind("click",reserverParcours);
+                gererEvenementsRecherche();
             }
         })
         .fail(function(error) {
             console.log("error");
         })
+}
 
+function consulterParcours(){
+    var tr = this.parentNode.parentNode.parentNode;
+    var idp = tr.getElementsByTagName('input')[0].value;
+
+    var parcours1 = new ProjetWeb.Parcours();
+    parcours1.recupererParcoursInfo(idp,
+        function() {
+            //afficherCarte(parcours1);
+            //afficherParcoursInfo(parcours1);
+        },
+        function() {
+            //gerer erreur
+        });
 }
 
 function reserverParcours(){
     var tr = this.parentNode.parentNode.parentNode;
     var idp = tr.getElementsByTagName('input')[0].value;
 
-    //var membre1 = new ProjetMembre.Membre();
-    //membre1.reserverParcours();
+    if(confirm("Etes-vous sur de vouloir vous inscrire sur ce parcours ?")){
+    var membre1 = new ProjetWeb.Membre();
+    membre1.reserverParcours(idp,
+        function() {
+
+        },
+        function() {
+            //gerer erreur
+        })
+    }
 }

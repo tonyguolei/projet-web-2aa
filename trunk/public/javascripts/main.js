@@ -7,16 +7,37 @@
  */
 
 $(document).bind("ready", function () {
+    obtenirDate();
     $("#boutonSinscrire").bind("click", sinscrire);
     //$("#boutonValidationSinscrire").bind("click", validerInscription);
 });
 
+/*----------------------LIES A DES EVENEMENTS--------------------------*/
 function sinscrire(){
     $('.small.modal').modal('show');
     $('.ui.selection.dropdown')
         .dropdown()
     ;
 }
+function obtenirDate(){
+    $("#date").datepicker({
+        dateFormat: 'dd/mm/yy'
+    });
+    var myDate = new Date();
+    var month = myDate.getMonth() + 1;
+    var day = myDate.getDate();
+
+    if(month < 11){
+        var prettyDate = day + '/0' + month + '/' + myDate.getFullYear();
+    }
+    else{
+        var prettyDate = day + '/' + month + '/' + myDate.getFullYear();
+    }
+    $("#date").val(prettyDate);
+    return prettyDate;
+}
+
+/*----------------------FONCTION----------------------------*/
 
 /*function validerInscription(){
     //TODO Verifier la validite des champs saisis
@@ -50,7 +71,7 @@ function sinscrire(){
         })
 } */
 
-    $('#formInscript')
+  /*  $('#formInscript')
         .form({
             prenom: {
                 identifier  : 'prenom',
@@ -93,3 +114,4 @@ function sinscrire(){
                 ]
             }
         });
+         */
