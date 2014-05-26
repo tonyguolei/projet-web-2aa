@@ -8,6 +8,9 @@ import play.db.jpa.*;
 import play.mvc.*;
 
 import javax.servlet.http.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Utilisateur extends Controller  {
 
@@ -144,9 +147,20 @@ public class Utilisateur extends Controller  {
             arrivee = new Ville(params.get("arrivee"), params.get("arriveecp")).save();
         }
 
-        Parcours p = new Parcours(createur, depart, arrivee, Float.parseFloat(params.get("prix")), Integer.parseInt(params.get("nbplaces")),Integer.parseInt(params.get("heure")),Integer.parseInt(params.get("min"))).save();
-        JSONSerializer serializer = new JSONSerializer();
-        renderJSON(serializer.exclude("*.class").transform(new DateTransformer("dd/MM/yyyy"), "dateInscription").serialize(p));
+        //convertir la date de parcour de type string a type Date
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date = simpleDateFormat.parse(params.get("date"));
+            System.out.println("Example of SimpleDateFormat");
+            System.out.println("===================================================================");
+            System.out.println("Before formatting [default format   ]: "+ params.get("date"));
+            System.out.println("After formatting  [dd/MM/yyyy format]: " + date);
+            Parcours p = new Parcours(createur, depart, arrivee, Float.parseFloat(params.get("prix")), Integer.parseInt(params.get("nbplaces")),date, Integer.parseInt(params.get("heure")),Integer.parseInt(params.get("min"))).save();
+            JSONSerializer serializer = new JSONSerializer();
+            renderJSON(serializer.exclude("*.class").transform(new DateTransformer("dd/MM/yyyy"), "dateInscription").serialize(p));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     //TODO => Inutilisé
