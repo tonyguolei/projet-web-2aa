@@ -17,7 +17,6 @@ public class Utilisateur extends Controller  {
         if(!Security.isConnected()){
             Application.index();
         }
-
     }
 
     public static void deconnexion(){
@@ -85,12 +84,10 @@ public class Utilisateur extends Controller  {
     }
 
     public static void reserverParcours(){
-        System.out.println("reserver parcours");
         String id = params.get("id");
         Membre m = Membre.find("byEmail",session.get("username")).first();
         Parcours p = Parcours.findById(Long.parseLong(id, 10));
         p.ajouterMembreInscrit(m);
-        System.out.println("ajouter membre inscrit");
         JSONSerializer serializer = new JSONSerializer();
         renderJSON(serializer.transform(new DateTransformer("dd/MM/yyyy"), "dateInscription").serialize(m));
     }
@@ -117,7 +114,6 @@ public class Utilisateur extends Controller  {
         Parcours p = Parcours.findById(Long.parseLong(id, 10));
         m.reactiverParcours(p);
         JSONSerializer serializer = new JSONSerializer();
-        //renderJSON(serializer.transform(new DateTransformer("dd/MM/yyyy"), "dateInscription").serialize(m));
         renderJSON(serializer.include("membresInscrits").serialize(m.lesParcoursCrees));
     }
 
@@ -136,29 +132,6 @@ public class Utilisateur extends Controller  {
                 transform(new DateTransformer("dd//MM/yyyy"), "dateParcours").serialize(p));
     }
 
-    public static void recupererMembresInscrits() {
-        /*String id = params.get("id");
-        Parcours p = Parcours.findById(Long.parseLong(id, 10));
-        JSONSerializer serializer = new JSONSerializer();
-        //renderJSON(serializer.include("membresInscrits").exclude("*.class").
-        transform(new DateTransformer("dd/MM/yyyy"), "dateParcours").serialize(p));
-        renderJSON(serializer.serialize(p.membresInscrits));*/
-
-        String id = params.get("id");
-        Parcours p = Parcours.findById(Long.parseLong(id, 10));
-
-        JSONSerializer serializer = new JSONSerializer();
-        renderJSON(serializer.include("membresInscrits").exclude("*.class").
-                transform(new DateTransformer("dd/MM/yyyy"), "dateParcours").serialize(p));
-    }
-
-    public static void recupererMembreCreateur() {
-        String id = params.get("id");
-        Parcours p = Parcours.findById(Long.parseLong(id, 10));
-        JSONSerializer serializer = new JSONSerializer();
-        renderJSON(serializer.exclude("*.class").serialize(p.createur));
-    }
-
     public static void proposerParcours() {
         Membre createur = Membre.find("byEmail",session.get("username")).first();
         Ville depart =  Ville.find("byNom",params.get("depart")).first();
@@ -167,6 +140,25 @@ public class Utilisateur extends Controller  {
         JSONSerializer serializer = new JSONSerializer();
         renderJSON(serializer.exclude("*.class").transform(new DateTransformer("dd/MM/yyyy"), "dateInscription").serialize(p));
     }
+
+    //TODO => Inutilisé
+    public static void recupererMembresInscrits() {
+        String id = params.get("id");
+        Parcours p = Parcours.findById(Long.parseLong(id, 10));
+
+        JSONSerializer serializer = new JSONSerializer();
+        renderJSON(serializer.include("membresInscrits").exclude("*.class").
+                transform(new DateTransformer("dd/MM/yyyy"), "dateParcours").serialize(p));
+    }
+
+    //TODO => inutilisé
+    public static void recupererMembreCreateur() {
+        String id = params.get("id");
+        Parcours p = Parcours.findById(Long.parseLong(id, 10));
+        JSONSerializer serializer = new JSONSerializer();
+        renderJSON(serializer.exclude("*.class").serialize(p.createur));
+    }
+
 
     public static void modifierMonProfil() {
         Membre m = Membre.find("byEmail",session.get("username")).first();

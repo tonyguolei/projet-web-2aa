@@ -92,6 +92,9 @@ public class Application extends Controller {
     }
     /*---------------Methodes contenu des pages -----------------------*/
 
+    /**
+     * Renvoie tous les parcours enregistrés mais non supprimés
+     */
     private static void tousLesParcoursActuels() {
         //TODO Renvoyer seulement les parcours non supprimes à partir de la date actuelle => si non connecté
 
@@ -102,6 +105,12 @@ public class Application extends Controller {
                 "dateParcours").serialize(listp));
     }
 
+    /**
+     * Renvoie les parcours enregistrés non supprimés satisfaisants les critères
+     * @param depart
+     * @param arrivee
+     * @param date
+     */
     private static void certainsParcoursActuels(String depart,String arrivee,String date){
         String textfind = "";
 
@@ -126,11 +135,15 @@ public class Application extends Controller {
         }
         //TODO Ne pas renvoyer les parcours déjà réservés => si connecté
         List<Parcours> listp = Parcours.find(textfind,"%"+ depart+"%","%"+ arrivee+"%").fetch();
+
         JSONSerializer serializer = new JSONSerializer();
         renderJSON(serializer.exclude("*.class").include("membresInscrits").exclude("createur").transform(new DateTransformer("yyyy/MM/dd hh:mm:ss"), "dateParcours").serialize(listp));
 
     }
 
+    /**
+     * Cherche les parcours avec ou sans critères de sélection
+     */
     public static void chercherParcours() {
         //TODO Gerer la recherche avec la date
         String depart = params.get("depart");
@@ -145,6 +158,15 @@ public class Application extends Controller {
 
     }
 
+    /**
+     * Gère l'inscription d'un nouveau membre
+     * @param nom
+     * @param prenom
+     * @param age
+     * @param email
+     * @param motdepasse
+     * @param sexe
+     */
     public static void sinscrire(String nom, String prenom, int age, String email, String motdepasse, String sexe) {
         if(nom!="" & prenom!="" & age>17 & age<99 & email != "" & motdepasse!="" & sexe!=""){
             Membre tmp = Membre.find("byEmail",email).first();
@@ -159,6 +181,11 @@ public class Application extends Controller {
         Application.index();
     }
 
+    /**
+     * Gère la demande de connexion d'un utilisateur
+     * @param emailform
+     * @param motdepasseform
+     */
     public static void seconnecter(String emailform,String motdepasseform) {
         if (Security.authenticate(emailform, motdepasseform)) {
             session.put("username",emailform);

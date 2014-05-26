@@ -12,7 +12,7 @@ var calculate;
 var direction;
 
 $(document).bind('ready', function () {
-    obtenirDate();
+    //obtenirDate();
     gererEvenements();;
 });
 
@@ -29,24 +29,6 @@ function gererEvenements(){
     });
 }
 /*----------------------LIES A DES EVENEMENTS--------------------------*/
-function obtenirDate(){
-    $("#date").datepicker({
-        dateFormat: 'dd/mm/yy'
-    });
-    var myDate = new Date();
-    var month = myDate.getMonth() + 1;
-    var day = myDate.getDate();
-
-    if(month < 11){
-        var prettyDate = day + '/0' + month + '/' + myDate.getFullYear();
-    }
-    else{
-        var prettyDate = day + '/' + month + '/' + myDate.getFullYear();
-    }
-    $("#date").val(prettyDate);
-    return prettyDate;
-}
-
 function consulterParcoursMembre(){
     //Consulter un parcours (créé ou réservé)
     var tr = this.parentNode.parentNode.parentNode;
@@ -134,7 +116,7 @@ function rechercherVille(cp){
                 $(".dropdown."+ type).append(
                     '<div class="text">Selectionner</div>'+
                     '<i class="dropdown icon"></i>'+
-                    '<input name="cp" type="hidden">' +
+                    '<input name="'+type+'" type="hidden">' +
                     '<div class="menu '+type+'"></div>');
                 for(var i=0;i<suggestions.length;i++){
                     $(".menu."+type).append(

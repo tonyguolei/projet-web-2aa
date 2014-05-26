@@ -25,6 +25,7 @@ public class Membre extends Model {
     public String prenom;
     @Required
     public int age;
+    //TODO utiliser plutot une date? ou annee de naissance?
     @Required
     public String sexe;
     @Required
