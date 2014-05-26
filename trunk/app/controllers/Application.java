@@ -33,9 +33,9 @@ public class Application extends Controller {
         Ville v4 = new Ville("Grenoble", "38000").save();
         Ville v5 = new Ville("Lyon", "69000").save();
 
-        Membre m1 = new Membre("lei", "guo", "123", 22, "lei@gmai.com", "M").save();
-        Membre m2 = new Membre("yann", "laforest", "456", 20, "yann@gmail.com", "M").save();
-        Membre m3 = new Membre("alice", "grange", "789", 23, "alice@gmail.com", "F").save();
+        Membre m1 = new Membre("lei", "guo", "123456", 22, "lei@gmail.com", "M").save();
+        Membre m2 = new Membre("yann", "laforest", "123456", 20, "yann@gmail.com", "M").save();
+        Membre m3 = new Membre("alice", "grange", "123456", 23, "alice@gmail.com", "F").save();
 
         Parcours p1 = new Parcours(m1, v1, v2, 8, 1,14,00).save();
         Parcours p2 = new Parcours(m2, v5, v3, 14, 2,13,50).save();
