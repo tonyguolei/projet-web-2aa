@@ -136,6 +136,14 @@ public class Utilisateur extends Controller  {
         Membre createur = Membre.find("byEmail",session.get("username")).first();
         Ville depart =  Ville.find("byNom",params.get("depart")).first();
         Ville arrivee =  Ville.find("byNom",params.get("arrivee")).first();
+
+        if(depart==null) {
+            depart = new Ville(params.get("depart"), params.get("departcp")).save();
+        }
+        if(arrivee==null){
+            arrivee = new Ville(params.get("arrivee"), params.get("arriveecp")).save();
+        }
+
         Parcours p = new Parcours(createur, depart, arrivee, Float.parseFloat(params.get("prix")), Integer.parseInt(params.get("nbplaces")),Integer.parseInt(params.get("heure")),Integer.parseInt(params.get("min"))).save();
         JSONSerializer serializer = new JSONSerializer();
         renderJSON(serializer.exclude("*.class").transform(new DateTransformer("dd/MM/yyyy"), "dateInscription").serialize(p));
