@@ -70,6 +70,7 @@ function handle_submitForm() {
         data: formData
     })
         .done(function(data) {
+            console.log(data);
             $("#message_success_creer_parcours").show().delay(5000).fadeOut();
         })
         .fail(function (e) {
