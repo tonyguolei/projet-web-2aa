@@ -15,9 +15,13 @@ $(document).bind("ready", function () {
 /*----------------------LIES A DES EVENEMENTS--------------------------*/
 function sinscrire(){
     $('.small.modal').modal('show');
-    $('.ui.selection.dropdown')
-        .dropdown()
-    ;
+    $('#sexe_dropdown').dropdown({
+        onChange: function(val) {
+            sexe_value = val;
+        }
+    });
+    $('#formInscript').form(rules, settings);
+    $('.ui.selection.dropdown').dropdown();
 }
 function obtenirDate(){
     $("#date").datepicker({
@@ -39,79 +43,78 @@ function obtenirDate(){
 
 /*----------------------FONCTION----------------------------*/
 
-/*function validerInscription(){
-    //TODO Verifier la validite des champs saisis
-    var nom = $("#nom").val();
-    var prenom = $("#prenom").val();
-    var age = $("#age").val();
-    var mdp = $("#motdepasse").val();
-    var email = $("#email").val();
-    var sexe = $("#sexe").val();
+var rules = {
+    prenom : {
+        identifier : 'prenom',
+        rules : [{
+            type : 'empty',
+            prompt : 'Le prénom est vide'
+        }]
+    },
+    nom : {
+        identifier : 'nom',
+        rules : [{
+            type : 'empty',
+            prompt : "Le nom est vide"
+        }]
+    },
+    date : {
+        identifier : 'date',
+        rules : [{
+            type : 'empty',
+            prompt : 'La date de naissance est vide'
+        }]
+    },
+    email : {
+        identifier : 'email',
+        rules : [{
+            type : 'empty',
+            prompt : 'L\'email est vide'
+        }]
+    },
+    motdepasse : {
+        identifier : 'motdepasse',
+        rules : [
+            {
+                type : 'empty',
+                prompt : "Le mot de passe est vide"
+            },
+            {
+                type   : 'length[6]',
+                prompt : 'Le mot de passe est au mimimum de 6 lettres'
+            }
 
+        ]
+    }
+};
+var sexe_value;
 
+function handle_submitForm() {
+    var formData = {
+        'email' : $('input[name=email]').attr('placeholder'),
+        'prenom': $('input[name=prenom]').val(),
+        'nom': $('input[name=nom]').val(),
+        'date': $('input[name=date]').val(),
+        'sexe': sexe_value,
+        'motdepasse': $('input[name=motdepasse]').val()
+    };
     $.ajax({
-        url: "/sinscrire",
-        data: {nom:nom,
-            prenom:prenom,
-            mdp:mdp,
-            age:age,
-            email:email,
-            sexe:sexe}
+        type : 'POST',
+        url : "/sinscrire",
+        data: formData
     })
         .done(function(data) {
-            if(data.length<=0){
-                //TODO Afficher message pas trouvé
-            }
-            else{
-
-            }
+            $("#message_success_modify_profil").show().delay(5000).fadeOut();
         })
-        .fail(function(error) {
-            console.log("error");
+        .fail(function (e) {
+            $("#message_failed_modify_profil").show().delay(5000).fadeOut();
         })
-} */
+};
 
-  /*  $('#formInscript')
-        .form({
-            prenom: {
-                identifier  : 'prenom',
-                rules: [
-                    {
-                        type   : 'empty',
-                        prompt : 'Merci de saisir votre prénom!'
-                    }
-                ]
-            },
-            nom: {
-                identifier  : 'nom',
-                rules: [
-                    {
-                        type   : 'empty',
-                        prompt : 'Merci de saisir votre nom!'
-                    }
-                ]
-            },
-            motdepasse: {
-                identifier : 'motdepasse',
-                rules: [
-                    {
-                        type   : 'empty',
-                        prompt : 'Merci de saisir votre mot de passe!'
-                    },
-                    {
-                        type   : 'Taille <= 20',
-                        prompt : 'Votre mot de passe doit avoir 20 caractères.'
-                    }
-                ]
-            },
-            age: {
-                identifier : 'age',
-                rules: [
-                    {
-                        type   : 'empty',
-                        prompt : 'Votre age doit être un chiffre.'
-                    }
-                ]
-            }
-        });
-         */
+var settings = {
+    inline : true,
+    onSuccess : function() {
+        event.preventDefault();
+        handle_submitForm();
+    }
+}

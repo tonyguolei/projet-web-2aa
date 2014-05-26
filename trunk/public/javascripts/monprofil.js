@@ -17,11 +17,11 @@ var rules = {
             prompt : "Le nom est vide"
         }]
     },
-    age : {
-        identifier : 'age',
+    date : {
+        identifier : 'date',
         rules : [{
             type : 'empty',
-            prompt : 'L\'age est vide'
+            prompt : 'La date de naissance est vide'
         }]
     },
     new_password : {
@@ -60,7 +60,7 @@ function handle_submitForm() {
         'email' : $('input[name=email]').attr('placeholder'),
         'prenom': $('input[name=prenom]').val(),
         'nom': $('input[name=nom]').val(),
-        'age': $('input[name=age]').val(),
+        'date': $('input[name=date]').val(),
         'sexe': sexe_value,
         'new_password': $('input[name=new_password]').val()
     };

@@ -24,8 +24,7 @@ public class Membre extends Model {
     @Required
     public String prenom;
     @Required
-    public int age;
-    //TODO utiliser plutot une date? ou annee de naissance?
+    public Date dateNaissance;
     @Required
     public String sexe;
     @Required
@@ -44,18 +43,17 @@ public class Membre extends Model {
      * @param nom
      * @param prenom
      * @param motDePasse
-     * @param age
+     * @param dateNaissance
      * @param email
      * @param sexe
      */
-    public Membre(String nom, String prenom,String motDePasse, int age, String email,String sexe) {
+    public Membre(String nom, String prenom,String motDePasse, Date dateNaissance, String email,String sexe) {
         this.nom = nom;
         this.prenom = prenom;
         this.motDePasse = motDePasse;
-        this.age = age;
+        this.dateNaissance = dateNaissance;
         this.email = email;
         this.sexe = sexe;
-        //TODO Mettre la date en format FR ???
         this.dateInscription = new Date();
         this.desinscrit = false;
     }
@@ -194,11 +192,11 @@ public class Membre extends Model {
     }
 
     /**
-     * Modifie l'age du membre
-     * @param age
+     * Modifie la date de naissance
+     * @param dateNaissance
      */
-    public void modifierAge(int age) {
-        this.age = age;
+    public void modifierDateNaissance(Date dateNaissance) {
+        this.dateNaissance = dateNaissance;
     }
 
     /**

@@ -11,6 +11,9 @@ import org.apache.commons.lang.StringUtils;
 import play.*;
 import play.mvc.*;
 import org.apache.commons.*;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import com.google.gson.*;
 import play.test.Fixtures;
@@ -33,9 +36,9 @@ public class Application extends Controller {
         Ville v4 = new Ville("Grenoble", "38000").save();
         Ville v5 = new Ville("Lyon", "69000").save();
 
-        Membre m1 = new Membre("lei", "guo", "123456", 22, "lei@gmail.com", "M").save();
-        Membre m2 = new Membre("yann", "laforest", "123456", 20, "yann@gmail.com", "M").save();
-        Membre m3 = new Membre("alice", "grange", "123456", 23, "alice@gmail.com", "F").save();
+        Membre m1 = new Membre("lei", "guo", "123456", new Date(), "lei@gmail.com", "M").save();
+        Membre m2 = new Membre("yann", "laforest", "123456", new Date(), "yann@gmail.com", "M").save();
+        Membre m3 = new Membre("alice", "grange", "123456", new Date(), "alice@gmail.com", "F").save();
 
         Parcours p1 = new Parcours(m1, v1, v2, 8, 1,14,00).save();
         Parcours p2 = new Parcours(m2, v5, v3, 14, 2,13,50).save();
@@ -133,8 +136,17 @@ public class Application extends Controller {
             textfind = textfind +"and arrivee.nom like ? ";
             arrivee = StringUtils.capitalize(arrivee);
         }
+
+        List<Parcours> listp = null;
         //TODO Ne pas renvoyer les parcours déjà réservés => si connecté
-        List<Parcours> listp = Parcours.find(textfind,"%"+ depart+"%","%"+ arrivee+"%").fetch();
+        /*if(Security.isConnected()){
+            textfind = textfind + " and membresInscrits = ? ";
+            Membre m = Membre.find("byEmail",session.get("username")).first();
+            listp = Parcours.find(textfind,"%"+ depart+"%","%"+ arrivee+"%" + m).fetch();
+        }*/
+        //else{
+            listp = Parcours.find(textfind,"%"+ depart+"%","%"+ arrivee+"%").fetch();
+        //}
 
         JSONSerializer serializer = new JSONSerializer();
         renderJSON(serializer.exclude("*.class").include("membresInscrits").exclude("createur").transform(new DateTransformer("yyyy/MM/dd hh:mm:ss"), "dateParcours").serialize(listp));
@@ -160,19 +172,23 @@ public class Application extends Controller {
 
     /**
      * Gère l'inscription d'un nouveau membre
-     * @param nom
-     * @param prenom
-     * @param age
-     * @param email
-     * @param motdepasse
-     * @param sexe
      */
-    public static void sinscrire(String nom, String prenom, int age, String email, String motdepasse, String sexe) {
-        if(nom!="" & prenom!="" & age>17 & age<99 & email != "" & motdepasse!="" & sexe!=""){
+    public static void sinscrire() {
+        //TODO gérer date de naissance => + 18ans
+
+        String nom = params.get("nom");
+        String prenom = params.get("prenom");
+        String email = params.get("email");
+        String datenaissance = params.get("date");
+        String sexe = params.get("sexe");
+        String motdepasse = params.get("motdepasse");
+        Date daten = convertirStringDate(datenaissance);
+
+        if(nom!="" & prenom!="" & email != "" & motdepasse!="" & sexe!="" & datenaissance!=""){
             Membre tmp = Membre.find("byEmail",email).first();
             if(tmp==null) {
                 //Aucun membre existant avec cet email
-                Membre m = new Membre(nom, prenom, motdepasse, age, email, sexe).save();
+                Membre m = new Membre(nom, prenom, motdepasse, daten, email, sexe).save();
                 if(m!=null)
                     //Creation reussie
                     Application.seconnecter(email,motdepasse);
@@ -193,6 +209,17 @@ public class Application extends Controller {
         } else {
             Application.index();
         }
+    }
+
+    public static Date convertirStringDate(String d){
+        try {
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+            Date date = simpleDateFormat.parse(d);
+            return date;
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return new Date();
     }
 
 }

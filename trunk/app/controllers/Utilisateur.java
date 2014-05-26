@@ -146,21 +146,10 @@ public class Utilisateur extends Controller  {
         if(arrivee==null){
             arrivee = new Ville(params.get("arrivee"), params.get("arriveecp")).save();
         }
-
-        //convertir la date de parcour de type string a type Date
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        try {
-            Date date = simpleDateFormat.parse(params.get("date"));
-            System.out.println("Example of SimpleDateFormat");
-            System.out.println("===================================================================");
-            System.out.println("Before formatting [default format   ]: "+ params.get("date"));
-            System.out.println("After formatting  [dd/MM/yyyy format]: " + date);
+            Date date = Application.convertirStringDate(params.get("date"));
             Parcours p = new Parcours(createur, depart, arrivee, Float.parseFloat(params.get("prix")), Integer.parseInt(params.get("nbplaces")),date, Integer.parseInt(params.get("heure")),Integer.parseInt(params.get("min"))).save();
             JSONSerializer serializer = new JSONSerializer();
             renderJSON(serializer.exclude("*.class").transform(new DateTransformer("dd/MM/yyyy"), "dateInscription").serialize(p));
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
     }
 
     //TODO => Inutilisé
@@ -184,13 +173,14 @@ public class Utilisateur extends Controller  {
 
     public static void modifierMonProfil() {
         Membre m = Membre.find("byEmail",session.get("username")).first();
-        m.prenom = params.get("prenom");
-        m.nom =  params.get("nom");
-        m.age =  Integer.parseInt(params.get("age"));
-        m.sexe =  params.get("sexe");
-        m.motDePasse = params.get("new_password");
-        m.save();
-        JSONSerializer serializer = new JSONSerializer();
-        renderJSON(serializer.exclude("*.class").transform(new DateTransformer("dd/MM/yyyy"), "dateInscription").serialize(m));
+            m.prenom = params.get("prenom");
+            m.nom =  params.get("nom");
+            m.dateNaissance = Application.convertirStringDate(params.get("date"));
+            m.sexe =  params.get("sexe");
+            m.motDePasse = params.get("new_password");
+            m.save();
+            JSONSerializer serializer = new JSONSerializer();
+            renderJSON(serializer.exclude("*.class").
+                    transform(new DateTransformer("dd/MM/yyyy"), "dateInscription").serialize(m));
     }
 }

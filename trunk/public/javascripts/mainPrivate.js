@@ -12,7 +12,7 @@ var calculate;
 var direction;
 
 $(document).bind('ready', function () {
-    //obtenirDate();
+    obtenirDate();
     gererEvenements();;
 });
 
@@ -28,6 +28,25 @@ function gererEvenements(){
         }, 1000);
     });
 }
+
+function obtenirDate(){
+    $("#date").datepicker({
+        dateFormat: 'dd/mm/yy'
+    });
+    var myDate = new Date();
+    var month = myDate.getMonth() + 1;
+    var day = myDate.getDate();
+
+    if(month < 11){
+        var prettyDate = day + '/0' + month + '/' + myDate.getFullYear();
+    }
+    else{
+        var prettyDate = day + '/' + month + '/' + myDate.getFullYear();
+    }
+    $("#date").val(prettyDate);
+    return prettyDate;
+}
+
 /*----------------------LIES A DES EVENEMENTS--------------------------*/
 function consulterParcoursMembre(){
     //Consulter un parcours (créé ou réservé)

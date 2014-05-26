@@ -21,8 +21,8 @@
         </div>
         <div class="two fields">
             <div class="field">
-                <label>Age</label>
-                <input name="age" type="number" min=0 max="150" value="${m.age}">
+                <label>Date de naissance</label>
+                <input name="date" id="date" value="${m.dateNaissance.dateString}">
             </div>
             <div class="field">
                 <label>Sexe</label>
@@ -52,4 +52,5 @@
         </div>
         <input type="submit" id="boutonModifierProfil" class="ui small blue button" name="boutonModifierProfil" value="Modifier"/>
     </div>
+    <input id="boutonDesincription" class="ui small blue button" name="boutonDesincription" value="Fermer son compte"/>
 </form>

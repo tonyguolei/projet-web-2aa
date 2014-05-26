@@ -8,28 +8,9 @@
 var init = true;
 
 $(document).bind("ready", function () {
-    obtenirDate();
     rechercherParcours();
     $("#boutonChercherParcours").bind("click", rechercherParcours);
 });
-
-function obtenirDate(){
-    $("#date").datepicker({
-        dateFormat: 'dd/mm/yy'
-    });
-    var myDate = new Date();
-    var month = myDate.getMonth() + 1;
-    var day = myDate.getDate();
-
-    if(month < 11){
-        var prettyDate = day + '/0' + month + '/' + myDate.getFullYear();
-    }
-    else{
-        var prettyDate = day + '/' + month + '/' + myDate.getFullYear();
-    }
-    $("#date").val(prettyDate);
-    return prettyDate;
-}
 
 function rechercherParcours(){
     var depart = document.getElementsByName("depart")[0].value;
