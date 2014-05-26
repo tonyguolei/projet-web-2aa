@@ -1,7 +1,20 @@
 *{ You can use plain selenium command using the selenium tag }*
 
 #{selenium}
-    // Open the home page, and check that no error occured
+    //Charge la Base, et connecte un utilisateur enregistré
+    clearSession()
+    open('/initbase')
     open('/')
-    assertNotTitle('Application error')
+    type('emailform','yann@gmail.com')
+    type('motdepasseform','456')
+    clickAndWait('boutonSeconnecter')
+    assertTextPresent('Bienvenue yann laforest')
+
+    //Inscription d'un utilisateur
+    open('/')
+    click('boutonSinscrire')
+    type('prenom','François')
+    type('nom','Pignon')
+    type('age','28')
+
 #{/selenium}
