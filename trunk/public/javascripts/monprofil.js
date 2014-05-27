@@ -61,7 +61,7 @@ function handle_submitForm() {
         'prenom': $('input[name=prenom]').val(),
         'nom': $('input[name=nom]').val(),
         'date': $('input[name=date]').val(),
-        'sexe': sexe_value,
+        'sexe': $('input[name=sexe]').val(),
         'new_password': $('input[name=new_password]').val()
     };
 

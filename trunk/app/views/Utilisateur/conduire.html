@@ -1,5 +1,6 @@
 #{extends 'mainPrivate.html' /}
 #{set title:'Conduire' /}
+
 <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script src="@{'/public/javascripts/conduire_private.js'}" type="text/javascript" charset="${_response_encoding}"></script>
 
@@ -7,16 +8,16 @@
     <div class="ui blue ribbon label">Créer un parcours</div>
     <div id="message_success_creer_parcours" class="ui primary inverted blue segment">Vous avez crée un parcours!!!</div>
     <div id="message_failed_creer_parcours" class="ui primary inverted red segment">Vous avez une erreur de creation d'un parcours!!!</div>
-    <div class="ui form segment">
-        <div class="two fields">
-            <div class="inline field" name="depart">
+    <div class="ui fluid form segment">
+        <div class="ui two fields message">
+            <div class="field" name="depart">
                 <label>Ville de départ</label>
                 <input placeholder="Exemple : 38000, 05000" type="text" class="cp" name="departcp" maxlength="5">
                 <div class="ui fluid selection dropdown depart">
                     <div class="text">En attente du code postal</div>
                 </div>
             </div>
-            <div class="inline field arrivee" name="arrivee">
+            <div class="field" name="arrivee">
                 <label>Ville d'arrivée</label>
                 <input placeholder="Exemple : 74000, 69000" type="text" class="cp"  name="arriveecp"  maxlength="5">
                 <div class="ui fluid selection dropdown arrivee">
@@ -24,27 +25,30 @@
                 </div>
             </div>
         </div>
+        <div class="ui divider"></div>
         <div class="three fields">
-            <div class="inline field">
+            <div class="field">
                 <label>Date</label>
                 <input type="date" name="date" id="date">
             </div>
-            <div class="inline field">
+            <div class="field">
                 <label>Heure</label>
                 <input type="number" name="heure" min=0 max=23 id="heure">
             </div>
-            <div class="inline field">
-                <label>Min</label>
+            <div class="field">
+                <label>Minute</label>
                 <input type="number" name="min" min=0 max=59 id="min">
             </div>
         </div>
-        <div class="inline field ">
-            <label>Prix</label>
-            <input type="number" step="any" min=0 name="prix" id="prix">
-        </div>
-        <div class="inline field ">
-            <label>Nombre de places proposés</label>
-            <input type="number" name="nbplaces" min=1 id="nbplaces">
+        <div class="two fields">
+            <div class="field ">
+                <label>Prix</label>
+                <input type="number" step="any" min=0 name="prix" id="prix">
+            </div>
+            <div class="field ">
+                <label>Nombre de places proposés</label>
+                <input type="number" name="nbplaces" min=1 id="nbplaces">
+            </div>
         </div>
         <input type="submit" id="boutonProposer" class="ui small button" name="boutonProposer" value="Proposer"/>
     </div>

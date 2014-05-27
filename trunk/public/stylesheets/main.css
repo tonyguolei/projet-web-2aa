@@ -2,3 +2,48 @@
 *{
 font-family: Awesome;
 }
+
+#logo{
+    width:20%;
+    height:20%;
+}
+
+#piedpage{
+    width: 80%;
+}
+#main{
+    width:100%;
+}
+#menugauche{
+   width:100%;
+}
+#menuconnexion{
+    width:25%;
+}
+#contenu{
+    width:70%;
+}
+#date{
+    width:50%;
+}
+.cp{
+
+}
+
+
+/* Gestion des messages d'erreurs ou d'infos */
+#message_success_creer_parcours{
+    display:none;
+}
+
+#message_failed_creer_parcours{
+    display:none;
+}
+
+#message_success_modify_profil{
+    display:none;
+}
+
+#message_failed_modify_profil{
+    display:none;
+}

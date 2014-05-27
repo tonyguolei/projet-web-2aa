@@ -1,9 +1,10 @@
 #{extends 'mainPrivate.html' /}
 #{set title:'Mes parcours' /}
+#{set selectmesparcours :'active'/}
 <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
-<div class="ui black segment">
+<div class="ui orange segment">
     <div class="ui raised segment">
-        <div class="ui black ribbon label">Mes parcours choisis</div>
+        <div class="ui orange ribbon label">Mes parcours choisis</div>
         <div id="p_proposes">
         #{if m}
             <table class="ui sortable table segment" >
@@ -54,7 +55,7 @@
             Erreur sur la page
         #{/else}
         </div>
-        <div class="ui black ribbon label">Mes parcours créés</div>
+        <div class="ui orange ribbon label">Mes parcours créés</div>
         <div id="p_crees">
         #{if m!=null}
             <table class="ui sortable table segment" >

@@ -9,6 +9,7 @@
 $(document).bind("ready", function () {
     obtenirDate();
     $("#boutonSinscrire").bind("click", sinscrire);
+    $('#formInscript').form(rules, settings);
     //$("#boutonValidationSinscrire").bind("click", validerInscription);
 });
 
@@ -20,7 +21,6 @@ function sinscrire(){
             sexe_value = val;
         }
     });
-    $('#formInscript').form(rules, settings);
     $('.ui.selection.dropdown').dropdown();
 }
 function obtenirDate(){

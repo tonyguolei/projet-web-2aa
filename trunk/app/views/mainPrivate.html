@@ -17,7 +17,6 @@
 #{get 'moreScripts' /}
     <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/semantic.css'}">
     <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
-    <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/mainPrivate.css'}">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 #{get 'moreStyles' /}
 </head>
@@ -25,9 +24,9 @@
 <body>
 <header id="header">
     <h1 class="ui green header">
-        Auto'Matic
         <div class="sub header">
-        Haut de page
+            <img alt="Logo Auto'matic" id="logo" src="/public/images/logoAutoMatic.png"/>
+            <h1>Laissez-nous vous conduire !</h1>
         </div>
     </h1>
 </header>
@@ -55,16 +54,16 @@
 <div id="main">
     <div class="ui grid">
         <div class="three wide column">
-            <div class="ui vertical labeled icon menu">
+            <div class="ui vertical labeled icon menu" id="menugauche">
                 <h4 class="ui black block header">
                     Bienvenue<br/>
                     ${m.nom} ${m.prenom}
                 </h4>
-                <a class="red item" href="@{Utilisateur.monprofil()}">
+                <a class="#{get 'selectmonprofil' /} black item" href="@{Utilisateur.monprofil()}">
                     <i class="user icon"></i>
                     Mon profil
                 </a>
-                <a class="teal item" href="@{Utilisateur.mesparcours()}">
+                <a class="#{get 'selectmesparcours' /} orange item" href="@{Utilisateur.mesparcours()}">
                     <i class="dashboard icon"></i>
                     Mes parcours
                 </a>
@@ -75,13 +74,13 @@
             </div>
 
         </div>
-        <div class="thirteen wide column">
+        <div class="thirteen wide column" id="contenu">
         #{doLayout /}
         </div>
     </div>
 </div>
 
-<div class="ui divider"></div>
+<div class="ui divider" id="piedpage"></div>
 <footer id="footer">
     <div class="ui facebook button">
         <i class="facebook icon"></i>

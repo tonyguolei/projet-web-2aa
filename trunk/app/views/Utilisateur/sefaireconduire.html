@@ -1,20 +1,31 @@
 #{extends 'mainPrivate.html' /}
 #{set title:'Se faire conduire' /}
+#{set selectsefaireconduire :'active'/}
 <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
 <script src="@{'/public/javascripts/sefaireconduire_private.js'}" type="text/javascript" charset="${_response_encoding}"></script>
 
 <div class="ui teal segment">
     <div class="ui teal ribbon label">Se faire conduire</div>
-    <div class="ui form">
-        <div class="inline field">
-            <label>Ville de départ</label>
-            <input placeholder="Exemple : Grenoble, 38000" type="text" name="depart">
-            <label>Ville d'arrivée</label>
-            <input placeholder="Exemple : Annecy, 74000" type="text" name="arrivee">
-            <label>Date</label>
-            <input type="text" name="date" id="date">
-            <input type="button" id="boutonChercherParcours" class="ui small button" name="boutonChercherParcours" value="Chercher"/>
+    <div class="ui fluid form segment">
+        <div class="ui three fields message">
+            <div class="field">
+                <label>Ville de départ</label>
+                <input placeholder="Exemple : Grenoble, 38000" type="text" name="depart">
+            </div>
+            <div class="field">
+                <label>Ville d'arrivée</label>
+                <input placeholder="Exemple : Annecy, 74000" type="text" name="arrivee">
+            </div>
+            <div class="field">
+                <label>Date</label>
+                <input type="text" name="date" id="date">
+
+            </div>
+            <button class="ui small button" id="boutonChercherParcours" name="boutonChercherParcours">Chercher</button>
+
         </div>
+
+
     </div>
     <div class="ui warning message">Adding a classname of <code>ascending</code> or <code>descending</code> to the <code>th</code> will show the user the direction of sort. This example uses a modified version of the kylefox's <a href="https://github.com/kylefox/jquery-tablesort">tablesort plugin</a> to provide the proper class names.
     </div>

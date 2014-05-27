@@ -8,15 +8,15 @@ GET     /initbase                               Application.initBase
 GET     /chercherParcours                       Application.chercherParcours
 POST    /sinscrire                              Application.sinscrire
 
-#Actions du membre
 GET     /annulerReservation                     Utilisateur.annulerReservation
 GET     /supprimerParcours                      Utilisateur.supprimerParcours
 GET     /reserverParcours                       Utilisateur.reserverParcours
 GET     /reactiverParcours                      Utilisateur.reactiverParcours
-POST    /proposerParcours                       Utilisateur.proposerParcours
-POST    /modifierMonProfil                      Utilisateur.modifierMonProfil
 GET     /recupererParcoursCrees                 Utilisateur.recupererParcoursCrees
 GET     /recupererParcoursChoisis               Utilisateur.recupererParcoursChoisis
+
+POST    /proposerParcours                       Utilisateur.proposerParcours
+POST    /modifierMonProfil                      Utilisateur.modifierMonProfil
 
 GET     /recupererMembreInfo                    Utilisateur.recupererMembreInfo
 GET     /recupererMembresInscrits               Utilisateur.recupererMembresInscrits

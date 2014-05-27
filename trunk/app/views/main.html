@@ -18,9 +18,9 @@
 <body>
 <header id="header">
     <h1 class="ui green header">
-        Auto'Matic
         <div class="sub header">
-            Haut de page
+            <img alt="Logo Auto'matic" id="logo" src="/public/images/logoAutoMatic.png"/>
+            <h1>Laissez-nous vous conduire !</h1>
         </div>
     </h1>
 </header>
@@ -47,22 +47,21 @@
 
 <div id="main">
             <div class="ui grid">
-                <div class="four wide column">
+                <div class="four wide column" id="menuconnexion">
+                    <div class="ui form">
                     <form id="formconnexion" action="@{Application.seconnecter()}" method="post">
                     <div class="field">
-                        <label>Email</label>
+                        <label>Votre email</label>
                         <div class="ui left labeled icon input">
                             <input placeholder="Email" type="text" name="emailform">
                             <i class="user icon"></i>
-
                             <div class="ui corner label">
                                 <i class="icon asterisk"></i>
                             </div>
                         </div>
                     </div>
                     <div class="field">
-                        <label>Mot de passe</label>
-
+                        <label>Votre mot de passe</label>
                         <div class="ui left labeled icon input">
                             <input type="password" placeholder="Mot de passe" name="motdepasseform">
                             <i class="lock icon"></i>
@@ -81,68 +80,15 @@
                         </div>
                     </div>
                     </form>
+                    </div>
                 </div>
-                <div class="twelve wide column">
+                <div class="twelve wide column" id="contenu">
                 #{doLayout /}
                 </div>
             </div>
         </div>
 </div>
-
-<div class="ui small modal">
-    <i class="close icon">Close</i>
-    <div class="header">
-        Votre inscription
-    </div>
-    <div class="content" >
-        <form id="formInscript" action="" method="post">
-        <div class="ui error form segment">
-            <div class="two fields">
-                <div class="field">
-                    <label>Prénom</label>
-                    <input placeholder="Prénom" type="text" name="prenom">
-                </div>
-                <div class="field">
-                    <label>Nom</label>
-                    <input placeholder="Nom" type="text" name="nom">
-                </div>
-            </div>
-            <div class="two fields">
-                <div class="field">
-                    <label>Date de naissance</label>
-                    <input placeholder="Date de naissance" type="text" name="date" >
-                </div>
-                <div class="field">
-                    <label>Sexe</label>
-                    <div class="ui fluid selection dropdown">
-                        <div class="text">Selectionner</div>
-                        <i class="dropdown icon"></i>
-                        <input name="sexe" type="hidden">
-                        <div class="menu">
-                            <div class="item" data-value="H">Masculin</div>
-                            <div class="item" data-value="F">Feminin</div>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <div class="field">
-                <label>Email</label>
-                <input placeholder="Email" type="text" name="email">
-            </div>
-            <div class="field">
-                <label>Mot de passe</label>
-                <input type="password" name="motdepasse">
-            </div>
-            <button type="submit" class="ui small blue button" id="boutonValidationSinscrire">
-                Valider
-            </button>
-        </div>
-        </form>
-    </div>
-</div>
-
-<div class="ui divider"></div>
+<div class="ui divider" id="piedpage"></div>
 <footer id="footer">
     <div class="ui facebook button">
         <i class="facebook icon"></i>
@@ -157,5 +103,58 @@
         Twitter
     </div>
 </footer>
+
+<div class="ui small modal">
+    <i class="close icon">Close</i>
+    <div class="header">
+        Votre inscription
+    </div>
+    <div class="content" >
+        <form id="formInscript" action="" method="post">
+            <div class="ui error form segment">
+                <div class="two fields">
+                    <div class="field">
+                        <label>Prénom</label>
+                        <input placeholder="Prénom" type="text" name="prenom">
+                    </div>
+                    <div class="field">
+                        <label>Nom</label>
+                        <input placeholder="Nom" type="text" name="nom">
+                    </div>
+                </div>
+                <div class="two fields">
+                    <div class="field">
+                        <label>Date de naissance</label>
+                        <input placeholder="Date de naissance" type="text" name="date" >
+                    </div>
+                    <div class="field">
+                        <label>Sexe</label>
+                        <div class="ui fluid selection dropdown">
+                            <div class="text">Selectionner</div>
+                            <i class="dropdown icon"></i>
+                            <input name="sexe" type="hidden">
+                            <div class="menu">
+                                <div class="item" data-value="H">Masculin</div>
+                                <div class="item" data-value="F">Feminin</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="field">
+                    <label>Email</label>
+                    <input placeholder="Email" type="text" name="email">
+                </div>
+                <div class="field">
+                    <label>Mot de passe</label>
+                    <input type="password" name="motdepasse">
+                </div>
+                <button type="submit" class="ui small blue button" id="boutonValidationSinscrire">
+                    Valider
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
 </body>
 </html>

@@ -40,9 +40,9 @@ public class Application extends Controller {
         Membre m2 = new Membre("yann", "laforest", "123456", new Date(), "yann@gmail.com", "M").save();
         Membre m3 = new Membre("alice", "grange", "123456", new Date(), "alice@gmail.com", "F").save();
 
-        Parcours p1 = new Parcours(m1, v1, v2, 8, 1,14,00).save();
-        Parcours p2 = new Parcours(m2, v5, v3, 14, 2,13,50).save();
-        Parcours p3 = new Parcours(m3, v4, v1, 15, 3,8,15).save();
+        Parcours p1 = new Parcours(m1, v1, v2, 8, 1,convertirStringDate("15/05/2014"),14,00).save();
+        Parcours p2 = new Parcours(m2, v5, v3, 14, 2,convertirStringDate("10/05/2014"),13,50).save();
+        Parcours p3 = new Parcours(m3, v4, v1, 15, 3,convertirStringDate("01/05/2014"),8,15).save();
         Parcours p4 = new Parcours(m1, v1, v4, 4, 1,22,18).save();
         Parcours p5 = new Parcours(m2, v2, v5, 17, 2,14,17).save();
         Parcours p6 = new Parcours(m3, v3, v1, 18, 3,17,30).save();
@@ -99,12 +99,12 @@ public class Application extends Controller {
      * Renvoie tous les parcours enregistrés mais non supprimés
      */
     private static void tousLesParcoursActuels() {
-        //TODO Renvoyer seulement les parcours non supprimes à partir de la date actuelle => si non connecté
-
         //TODO Renvoyer les parcours non réservés => si connecté
-        List<Parcours> listp = Parcours.find("supprime = ?",false).fetch();
+        //List<Parcours> listp = Parcours.find("supprime = ? and dateParcours >= ?",false,new Date()).fetch();
+        List<Parcours> listp = Parcours.find("supprime = ? ",false).fetch();
         JSONSerializer serializer = new JSONSerializer();
-        renderJSON(serializer.exclude("*.class").exclude("createur").include("membresInscrits").transform(new DateTransformer("yyyy/MM/dd hh:mm:ss"),
+        renderJSON(serializer.exclude("*.class").exclude("createur").
+                include("membresInscrits").transform(new DateTransformer("yyyy/MM/dd hh:mm:ss"),
                 "dateParcours").serialize(listp));
     }
 
@@ -126,7 +126,6 @@ public class Application extends Controller {
             textfind = "depart.nom like ? ";
             depart = StringUtils.capitalize(depart);
         }
-
         if(arrivee.matches("[0-9]+")){
             //code postal saisi pour la ville darrivee
             textfind = textfind + "and arrivee.codePostal like ? ";
@@ -136,38 +135,38 @@ public class Application extends Controller {
             textfind = textfind +"and arrivee.nom like ? ";
             arrivee = StringUtils.capitalize(arrivee);
         }
-
+        textfind = textfind+ " and supprime = ? ";
+        textfind = textfind+ " and dateParcours = ? ";
         List<Parcours> listp = null;
         //TODO Ne pas renvoyer les parcours déjà réservés => si connecté
+
         /*if(Security.isConnected()){
             textfind = textfind + " and membresInscrits = ? ";
             Membre m = Membre.find("byEmail",session.get("username")).first();
             listp = Parcours.find(textfind,"%"+ depart+"%","%"+ arrivee+"%" + m).fetch();
         }*/
         //else{
-            listp = Parcours.find(textfind,"%"+ depart+"%","%"+ arrivee+"%").fetch();
+            listp = Parcours.find(textfind,"%"+ depart+"%","%"+ arrivee+"%",false,convertirStringDate(date)).fetch();
         //}
-
         JSONSerializer serializer = new JSONSerializer();
-        renderJSON(serializer.exclude("*.class").include("membresInscrits").exclude("createur").transform(new DateTransformer("yyyy/MM/dd hh:mm:ss"), "dateParcours").serialize(listp));
-
+        renderJSON(serializer.exclude("*.class").include("membresInscrits").exclude("createur").
+                transform(new DateTransformer("yyyy/MM/dd hh:mm:ss"), "dateParcours").serialize(listp));
     }
 
     /**
      * Cherche les parcours avec ou sans critères de sélection
      */
     public static void chercherParcours() {
-        //TODO Gerer la recherche avec la date
         String depart = params.get("depart");
         String arrivee = params.get("arrivee");
         String date = params.get("date");
 
-        if(depart=="" && arrivee=="" && date=="")
+        if(depart.equalsIgnoreCase("") && arrivee.equalsIgnoreCase("")){
             tousLesParcoursActuels();
+        }
         else{
             certainsParcoursActuels(depart,arrivee,date);
         }
-
     }
 
     /**
@@ -175,7 +174,7 @@ public class Application extends Controller {
      */
     public static void sinscrire() {
         //TODO gérer date de naissance => + 18ans
-
+         System.out.println("inscription");
         String nom = params.get("nom");
         String prenom = params.get("prenom");
         String email = params.get("email");
@@ -191,6 +190,7 @@ public class Application extends Controller {
                 Membre m = new Membre(nom, prenom, motdepasse, daten, email, sexe).save();
                 if(m!=null)
                     //Creation reussie
+                System.out.println("creation reussie");
                     Application.seconnecter(email,motdepasse);
             }
         }
@@ -211,11 +211,16 @@ public class Application extends Controller {
         }
     }
 
-    public static Date convertirStringDate(String d){
+    /**
+     *
+     * @param date
+     * @return Date
+     */
+    public static Date convertirStringDate(String date){
         try {
-            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            Date date = simpleDateFormat.parse(d);
-            return date;
+            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd/MM/yy");
+            Date dater = simpleDateFormat.parse(date);
+            return dater;
         } catch (ParseException e) {
             e.printStackTrace();
         }

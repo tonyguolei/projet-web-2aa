@@ -65,7 +65,6 @@ public class Membre extends Model {
      * @return vrai si le membre est en ligne / connecté sur l'application
      */
     public static boolean connect(String email, String motdepasse) {
-        System.out.println(Membre.find("email = ? and motDePasse = ?",email, motdepasse).first());
         if(Membre.find("email = ? and motDePasse = ?",email, motdepasse).first() != null){
             return true;
         }

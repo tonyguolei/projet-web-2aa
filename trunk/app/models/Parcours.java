@@ -82,7 +82,7 @@ public class Parcours extends Model {
      * @param membre
     */
     public void ajouterMembreInscrit(Membre membre) {
-        if(verifieDispoPlaces()){
+        if(verifieDispoPlaces() && this.createur != membre){
             this.membresInscrits.add(membre);
             membre.ajouterParcoursChoisi(this);
             this.save();
