@@ -38,7 +38,7 @@ public class Application extends Controller {
 
         Membre m1 = new Membre("lei", "guo", "123456", new Date(), "lei@gmail.com", "M").save();
         Membre m2 = new Membre("yann", "laforest", "123456", new Date(), "yann@gmail.com", "M").save();
-        Membre m3 = new Membre("alice", "grange", "123456", new Date(), "alice@gmail.com", "F").save();
+        Membre m3 = new Membre("alice", "grange", "123456", new Date(), "alice@gmail.com", "F", true).save();
 
         Parcours p1 = new Parcours(m1, v1, v2, 8, 1,convertirStringDate("15/05/2014"),14,00).save();
         Parcours p2 = new Parcours(m2, v5, v3, 14, 2,convertirStringDate("10/05/2014"),13,50).save();

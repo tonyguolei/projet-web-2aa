@@ -8,4 +8,10 @@ public class Security extends Secure.Security {
         return Membre.connect(username, password);
     }
 
+    static boolean check(String profile) {
+        if("admin".equals(profile)) {
+            return Membre.find("byEmail", connected()).<Membre>first().isAdmin;
+        }
+        return false;
+    }
 }

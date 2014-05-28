@@ -190,4 +190,8 @@ public class Utilisateur extends Controller {
         JSONSerializer serializer = new JSONSerializer();
         renderJSON(serializer.serialize(m));
     }
+
+    public static void admin() {
+        redirect("http://localhost:9000/admin");
+    }
 }

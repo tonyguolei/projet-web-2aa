@@ -38,6 +38,8 @@ public class Membre extends Model {
     public Set<Parcours> lesParcoursCrees = new HashSet();
     @ManyToMany
     public Set<Parcours> lesParcoursChoisis =new HashSet();
+    @Required
+    public boolean isAdmin;
 
     /**
      * Créé un membre
@@ -57,6 +59,19 @@ public class Membre extends Model {
         this.sexe = sexe;
         this.dateInscription = new Date();
         this.desinscrit = false;
+        this.isAdmin = false;
+    }
+
+    public Membre(String nom, String prenom,String motDePasse, Date dateNaissance, String email,String sexe, boolean isAdmin) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.motDePasse = motDePasse;
+        this.dateNaissance = dateNaissance;
+        this.email = email;
+        this.sexe = sexe;
+        this.dateInscription = new Date();
+        this.desinscrit = false;
+        this.isAdmin = isAdmin;
     }
 
     /**

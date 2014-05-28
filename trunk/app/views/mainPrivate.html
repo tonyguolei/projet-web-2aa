@@ -67,6 +67,12 @@
                     <i class="dashboard icon"></i>
                     Mes parcours
                 </a>
+                #{secure.check 'admin'}
+                <a class="blue item" href="@{Utilisateur.admin()}">
+                    <i class="doctor icon"></i>
+                    Admin Espace
+                </a>
+            #{/secure.check}
                 <a class="teal item" href="@{Utilisateur.deconnexion()}">
                     <i class="sign out icon"></i>
                     Déconnexion
