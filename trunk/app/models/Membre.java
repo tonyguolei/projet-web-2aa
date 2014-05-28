@@ -28,6 +28,7 @@ public class Membre extends Model {
     @Required
     public String sexe;
     @Required
+    @MinSize(6)
     public String motDePasse;
     @Email
     @Required
