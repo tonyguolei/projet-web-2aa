@@ -29,6 +29,7 @@ public class Membre extends Model {
     public String sexe;
     @Required
     public String motDePasse;
+    @Email
     @Required
     public String email;
     public Date dateInscription;
@@ -65,12 +66,7 @@ public class Membre extends Model {
      * @return vrai si le membre est en ligne / connecté sur l'application
      */
     public static boolean connect(String email, String motdepasse) {
-        if(Membre.find("email = ? and motDePasse = ?",email, motdepasse).first() != null){
-            return true;
-        }
-        else {
-            return false;
-        }
+        return(Membre.find("email = ? and motDePasse = ?",email, motdepasse).first() != null);
     }
 
     /**
