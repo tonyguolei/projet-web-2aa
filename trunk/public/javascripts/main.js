@@ -7,6 +7,7 @@
  */
 
 $(document).bind("ready", function () {
+    testBrowser();
     obtenirDate();
     $("#boutonSinscrire").bind("click", sinscrire);
     $('#formInscript').form(rules, settings);
@@ -41,6 +42,13 @@ function obtenirDate(){
     return prettyDate;
 }
 
+function testBrowser(){
+    if ($.browser.mozilla) {
+        alert("Vous etre en train d'utiliser Firefox, changez a chrome svp");
+    } else if ($.browser.msie) {
+        alert("Vous etre en train d'utiliser IE, changez a chrome svp");
+    }
+}
 /*----------------------FONCTION----------------------------*/
 
 var rules = {
