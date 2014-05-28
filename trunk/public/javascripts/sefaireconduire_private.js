@@ -30,6 +30,7 @@ function rechercherParcours(){
         init=false;
     else if (depart=="" & arrivee==""){
         //TODO Aucune saisie
+        alert("erreur de saisie");
         return;
     }
 
@@ -41,7 +42,7 @@ function rechercherParcours(){
     })
         .done(function(data) {
             if(data.length<=0){
-                //TODO Afficher message pas trouvé
+                $("#message_failed_search").show().delay(5000).fadeOut();
             }
             else{
                 $("#tabcontenu").empty();
@@ -81,7 +82,7 @@ function rechercherParcours(){
             }
         })
         .fail(function(error) {
-            console.log("error");
+            $("#message_failed_search").show().delay(5000).fadeOut();
         })
 }
 
@@ -108,10 +109,11 @@ function reserverParcours(){
     var membre1 = new ProjetWeb.Membre();
     membre1.reserverParcours(idp,
         function() {
-
+            init=true;
+            rechercherParcours();
         },
         function() {
-            //gerer erreur
+            $("#message_failed_update").show().delay(5000).fadeOut();
         })
     }
 }

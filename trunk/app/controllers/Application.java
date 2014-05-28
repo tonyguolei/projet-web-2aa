@@ -47,7 +47,8 @@ public class Application extends Controller {
         Parcours p5 = new Parcours(m2, v2, v5, 17, 2,14,17).save();
         Parcours p6 = new Parcours(m3, v3, v1, 18, 3,17,30).save();
         Parcours p7 = new Parcours(m2, v5, v4, 13, 3,17,30).save();
-
+        Parcours p8 = new Parcours(m1, v5, v4, 13, 3,17,30).save();
+        Parcours p9 = new Parcours(m1, v5, v4, 13, 3,17,30).save();
         p1.ajouterMembreInscrit(m2);
 
         p2.ajouterMembreInscrit(m1);
@@ -99,12 +100,21 @@ public class Application extends Controller {
      * Renvoie tous les parcours enregistrés mais non supprimés
      */
     private static void tousLesParcoursActuels() {
-        //TODO Renvoyer les parcours non réservés => si connecté
+        //TODO Regle pb dateParcours => date d'Aujourdhui
+        //TODO hors parcours créé par le membre
         //List<Parcours> listp = Parcours.find("supprime = ? and dateParcours >= ?",false,new Date()).fetch();
-        List<Parcours> listp = Parcours.find("supprime = ? ",false).fetch();
+        List<Parcours> listp = null;
+        if(Security.isConnected()){
+            //ne pas renvoyer les parcours deja réservés
+            Membre m = Membre.find("byEmail", session.get("username")).first();
+            listp = Parcours.find("supprime = ? and ? not in elements(membresInscrits) and createur != ?",false,m,m).fetch();
+        }
+        else{
+            listp = Parcours.find("supprime = ? ",false).fetch();
+        }
         JSONSerializer serializer = new JSONSerializer();
         renderJSON(serializer.exclude("*.class").exclude("createur").
-                include("membresInscrits").transform(new DateTransformer("yyyy/MM/dd hh:mm:ss"),
+                include("membresInscrits").transform(new DateTransformer("dd/MM/yyyy"),
                 "dateParcours").serialize(listp));
     }
 
@@ -124,7 +134,7 @@ public class Application extends Controller {
         else{
             //nom saisi pour la ville de depart
             textfind = "depart.nom like ? ";
-            depart = StringUtils.capitalize(depart);
+            depart = StringUtils.capitalize(depart);;
         }
         if(arrivee.matches("[0-9]+")){
             //code postal saisi pour la ville darrivee
@@ -138,19 +148,21 @@ public class Application extends Controller {
         textfind = textfind+ " and supprime = ? ";
         textfind = textfind+ " and dateParcours = ? ";
         List<Parcours> listp = null;
-        //TODO Ne pas renvoyer les parcours déjà réservés => si connecté
 
-        /*if(Security.isConnected()){
-            textfind = textfind + " and membresInscrits = ? ";
-            Membre m = Membre.find("byEmail",session.get("username")).first();
-            listp = Parcours.find(textfind,"%"+ depart+"%","%"+ arrivee+"%" + m).fetch();
-        }*/
-        //else{
+        if(Security.isConnected()){
+            //ne pas renvoyer les parcours déjà réservés ni créés par lui meme
+            //TODO ne pas renvoyer les parcours créé par lui m
+            Membre m = Membre.find("byEmail", session.get("username")).first();
+            listp = Parcours.find(textfind+" and ? not in elements(membresInscrits) and createur != ?)",
+                    "%"+ depart+"%","%"+ arrivee+"%",false,convertirStringDate(date),m,m).fetch();
+        }
+        else{
             listp = Parcours.find(textfind,"%"+ depart+"%","%"+ arrivee+"%",false,convertirStringDate(date)).fetch();
-        //}
+        }
+
         JSONSerializer serializer = new JSONSerializer();
         renderJSON(serializer.exclude("*.class").include("membresInscrits").exclude("createur").
-                transform(new DateTransformer("yyyy/MM/dd hh:mm:ss"), "dateParcours").serialize(listp));
+                transform(new DateTransformer("dd/MM/yyyy"), "dateParcours").serialize(listp));
     }
 
     /**
@@ -174,7 +186,7 @@ public class Application extends Controller {
      */
     public static void sinscrire() {
         //TODO gérer date de naissance => + 18ans
-         System.out.println("inscription");
+
         String nom = params.get("nom");
         String prenom = params.get("prenom");
         String email = params.get("email");
@@ -190,7 +202,6 @@ public class Application extends Controller {
                 Membre m = new Membre(nom, prenom, motdepasse, daten, email, sexe).save();
                 if(m!=null)
                     //Creation reussie
-                System.out.println("creation reussie");
                     Application.seconnecter(email,motdepasse);
             }
         }

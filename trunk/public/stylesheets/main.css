@@ -29,7 +29,9 @@ font-family: Awesome;
 .cp{
 
 }
-
+#sexe_dropdown{
+    width:30%;
+}
 
 /* Gestion des messages d'erreurs ou d'infos */
 #message_success_creer_parcours{
@@ -45,5 +47,12 @@ font-family: Awesome;
 }
 
 #message_failed_modify_profil{
+    display:none;
+}
+
+#message_failed_search{
+    display:none;
+}
+#message_failed_reservation{
     display:none;
 }

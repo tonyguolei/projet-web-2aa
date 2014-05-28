@@ -7,9 +7,8 @@
     <div class="ui raised segment">
         <div class="ui black ribbon label">Mon profil</div>
 <form id="formProfil" method="post" action="">
-    <div id="message_success_modify_profil" class="ui primary inverted blue segment">Vous avez modifié votre profil</div>
-    <div id="message_failed_modify_profil" class="ui primary inverted red segment">Vous avez une erreur de modification de votre profil</div>
-
+    <div id="message_success_modify_profil" class="ui primary inverted blue segment">Votre profil a bien été modifié</div>
+    <div id="message_failed_modify_profil" class="ui primary inverted red segment">Il y  une erreur de mise à jour de votre profil</div>
     <div class="ui form segment">
         <div class="two fields ui message">
             <div class="field">
@@ -21,6 +20,7 @@
                 <input name="nom" type="text" value="${m.nom}">
             </div>
         </div>
+        <div class="ui blue message">
         <div class="two fields ui blue message">
             <div class="field">
                 <label>Date de naissance</label>
@@ -39,18 +39,21 @@
                 </div>
             </div>
         </div>
-        <div class="field ui blue message">
-            <label>Email</label>
-            <input placeholder="${m.email}" name="email" type="text" readonly="readonly">
+
+            <div class="field">
+                <label>Email</label>
+                <input placeholder="${m.email}" name="email" type="text" readonly="readonly">
+            </div>
+            <div class="field ui blue message">
+                <label>Nouveau mot de passe</label>
+                <input type="password" name="new_password" value=${m.motDePasse}>
+            </div>
+            <div class="field ui blue message">
+                <label>Confirmer mot de passe</label>
+                <input type="password" name="confirm_password" value=${m.motDePasse}>
+            </div>
         </div>
-        <div class="field ui blue message">
-            <label>Nouveau mot de passe</label>
-            <input type="password" name="new_password" value=${m.motDePasse}>
-        </div>
-        <div class="field ui blue message">
-            <label>Confirmer mot de passe</label>
-            <input type="password" name="confirm_password" value=${m.motDePasse}>
-        </div>
+
         <input type="submit" id="boutonModifierProfil" class="ui small blue button" name="boutonModifierProfil" value="Modifier"/>
     </div>
     <input id="boutonDesincription" class="ui disabled small blue button" name="boutonDesincription" value="Fermer son compte"/>

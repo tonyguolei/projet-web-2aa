@@ -21,6 +21,7 @@ function rechercherParcours(){
         init=false;
     else if (depart=="" & arrivee==""){
         //TODO Aucune saisie
+        alert("aucune saisie");
         return;
     }
 
@@ -32,7 +33,7 @@ function rechercherParcours(){
     })
         .done(function(data) {
             if(data.length<=0){
-                //TODO Afficher message pas trouvé
+                $("#message_failed_search").show().delay(5000).fadeOut();
             }
             else{
                 $("#tabcontenu").empty();

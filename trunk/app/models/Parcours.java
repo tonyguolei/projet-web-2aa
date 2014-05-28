@@ -82,7 +82,7 @@ public class Parcours extends Model {
      * @param membre
     */
     public void ajouterMembreInscrit(Membre membre) {
-        if(verifieDispoPlaces() && this.createur != membre){
+        if(verifieDispoPlaces() && !this.createur.equals(membre)){
             this.membresInscrits.add(membre);
             membre.ajouterParcoursChoisi(this);
             this.save();
@@ -105,6 +105,8 @@ public class Parcours extends Model {
      * @return vrai s'il reste une disponibilité, faux sinon
      */
     private boolean verifieDispoPlaces(){
+        System.out.println(this.membresInscrits.size() < this.nbPlacesInitiales);
+        System.out.println(!this.supprime);
          return(this.membresInscrits.size() < this.nbPlacesInitiales && !this.supprime);
     }
 

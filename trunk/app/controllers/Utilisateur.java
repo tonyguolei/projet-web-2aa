@@ -63,13 +63,14 @@ public class Utilisateur extends Controller {
     }
 
     /* COTE MEMBRE ----------------------------------*/
+    //TODO verifier si utilisé
     public static void recupererMembreInfo() {
         Membre m = Membre.find("byEmail", session.get("username")).first();
         JSONSerializer serializer = new JSONSerializer();
         renderJSON(serializer.include("lesParcoursCrees", "lesParcoursChoisis").exclude("*.class").
                 transform(new DateTransformer("dd/MM/yyyy"), "dateInscription").serialize(m));
     }
-
+    //TODO Verifier si utilisé
     public static void recupererMembreInfoPerso() {
         Membre m = Membre.find("byEmail", session.get("username")).first();
         JSONSerializer serializer = new JSONSerializer();
@@ -98,7 +99,8 @@ public class Utilisateur extends Controller {
     public static void recupererParcoursChoisis() {
         Membre m = Membre.find("byEmail", session.get("username")).first();
         JSONSerializer serializer = new JSONSerializer();
-        renderJSON(serializer.include("membresInscrits").serialize(m.lesParcoursChoisis));
+        renderJSON(serializer.transform(new DateTransformer("dd/MM/yyyy"), "dateParcours")
+                .include("membresInscrits").serialize(m.lesParcoursChoisis));
     }
 
     //-------------------GESTION DES PARCOURS CREES---------------------------//
@@ -123,7 +125,8 @@ public class Utilisateur extends Controller {
     public static void recupererParcoursCrees() {
         Membre m = Membre.find("byEmail", session.get("username")).first();
         JSONSerializer serializer = new JSONSerializer();
-        renderJSON(serializer.include("membresInscrits").serialize(m.lesParcoursCrees));
+        renderJSON(serializer.transform(new DateTransformer("dd/MM/yyyy"), "dateParcours")
+                .include("membresInscrits").serialize(m.lesParcoursCrees));
     }
 
     /* COTE PARCOURS ---------------------------------*/
@@ -132,7 +135,7 @@ public class Utilisateur extends Controller {
         Parcours p = Parcours.findById(Long.parseLong(id, 10));
         JSONSerializer serializer = new JSONSerializer();
         renderJSON(serializer.include("membresInscrits").exclude("*.class").
-                transform(new DateTransformer("dd//MM/yyyy"), "dateParcours").serialize(p));
+                transform(new DateTransformer("dd/MM/yyyy"), "dateParcours").serialize(p));
     }
 
     public static void proposerParcours() {

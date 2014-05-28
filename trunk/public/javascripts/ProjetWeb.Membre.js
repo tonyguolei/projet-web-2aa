@@ -12,7 +12,7 @@ ProjetWeb.Membre = function() {
     this.id = null;
     this.nom = null;
     this.prenom = null;
-    this.age =null;
+    this.dateNaissance =null;
     this.email = null;
     this.sexe = null;
     this.dateInscription = null;
@@ -20,11 +20,11 @@ ProjetWeb.Membre = function() {
     this.lesParcoursChoisis = {};
 
     /*consctructor of class Membre*/
-    this.constructor = function(id, nom, prenom, age, email, sexe,dateInscription, lesParcoursCrees, lesParcoursChoisis){
+    this.constructor = function(id, nom, prenom, dateNaissance, email, sexe,dateInscription, lesParcoursCrees, lesParcoursChoisis){
         this.id = id;
         this.nom = nom;
         this.prenom = prenom;
-        this.age = age;
+        this.dateNaissance = dateNaissance;
         this.email = email;
         this.sexe = sexe;
         this.dateInscription = dateInscription;
@@ -42,7 +42,7 @@ ProjetWeb.Membre.prototype = {
         })
             .done(function(data) {
                 console.log(data);
-                self.constructor(data.id, data.nom, data.prenom, data.age, data.email,data.sexe,
+                self.constructor(data.id, data.nom, data.prenom, data.dateNaissance, data.email,data.sexe,
                     data.dateInscription, data.lesParcoursCrees, data.lesParcoursChoisis);
                 cb_success(data);
             })
@@ -95,7 +95,7 @@ ProjetWeb.Membre.prototype = {
         } )
             .done(function(data) {
                 console.log(data);
-                self.constructor(data.id, data.nom, data.prenom, data.age, data.email,data.sexe,
+                self.constructor(data.id, data.nom, data.prenom, data.dateNaissance, data.email,data.sexe,
                     data.dateInscription, data.lesParcoursCrees, data.lesParcoursChoisis);
                 cb_success(data);
             })
@@ -113,7 +113,7 @@ ProjetWeb.Membre.prototype = {
         } )
             .done(function(data) {
                 console.log(data);
-                //self.constructor(data.id, data.nom, data.prenom, data.age, data.email,data.sexe,
+                //self.constructor(data.id, data.nom, data.prenom, data.dateNaissance, data.email,data.sexe,
                     //data.dateInscription, data.lesParcoursCrees, data.lesParcoursChoisis);
                 self.lesParcoursChoisis = data;
                 cb_success(data);
@@ -131,7 +131,7 @@ ProjetWeb.Membre.prototype = {
             data: { id: parcour_id }
         } )
             .done(function(data) {
-                //self.constructor(data.id, data.nom, data.prenom, data.age, data.email,data.sexe,
+                //self.constructor(data.id, data.nom, data.prenom, data.dateNaissance, data.email,data.sexe,
                     //data.dateInscription, data.lesParcoursCrees, data.lesParcoursChoisis);
                 self.lesParcoursCrees = data;
                 cb_success(data);
@@ -148,7 +148,7 @@ ProjetWeb.Membre.prototype = {
             data: { id: parcour_id }
         } )
             .done(function(data) {
-                //self.constructor(data.id, data.nom, data.prenom, data.age, data.email,data.sexe,
+                //self.constructor(data.id, data.nom, data.prenom, data.dateNaissance, data.email,data.sexe,
                     //data.dateInscription, data.lesParcoursCrees, data.lesParcoursChoisis);
                 self.lesParcoursCrees = data;
                 cb_success(data);

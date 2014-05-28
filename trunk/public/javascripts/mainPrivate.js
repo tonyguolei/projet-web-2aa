@@ -13,10 +13,11 @@ var direction;
 
 $(document).bind('ready', function () {
     obtenirDate();
-    gererEvenements();;
+    gererEvenements();
+    ;
 });
 
-function gererEvenements(){
+function gererEvenements() {
     $('.button.consulter').bind('click', consulterParcoursMembre);
     $('.button.annuler').bind('click', supprimerParcoursCree);
     $('.button.desinscrire').bind('click', annulerReservationParcours);
@@ -29,7 +30,7 @@ function gererEvenements(){
     });
 }
 
-function obtenirDate(){
+function obtenirDate() {
     $("#date").datepicker({
         dateFormat: 'dd/mm/yy'
     });
@@ -37,10 +38,10 @@ function obtenirDate(){
     var month = myDate.getMonth() + 1;
     var day = myDate.getDate();
 
-    if(month < 11){
+    if (month < 11) {
         var prettyDate = day + '/0' + month + '/' + myDate.getFullYear();
     }
-    else{
+    else {
         var prettyDate = day + '/' + month + '/' + myDate.getFullYear();
     }
     $("#date").val(prettyDate);
@@ -48,194 +49,195 @@ function obtenirDate(){
 }
 
 /*----------------------LIES A DES EVENEMENTS--------------------------*/
-function consulterParcoursMembre(){
+function consulterParcoursMembre() {
     //Consulter un parcours (créé ou réservé)
     var tr = this.parentNode.parentNode.parentNode;
     var idp = tr.getElementsByTagName('input')[0].value;
     var parcours1 = new ProjetWeb.Parcours();
     parcours1.recupererParcoursInfo(idp,
-        function() {
+        function () {
             afficherCarte(parcours1);
             afficherParcoursInfo(parcours1);
         },
-        function() {
+        function () {
             //gerer erreur
         });
 }
-function annulerReservationParcours(){
+function annulerReservationParcours() {
     //Annuler sa reservation
 
-    if(confirm("Etes-vous sur de vouloir vous désinscrire de ce parcours ?")){
-    var tr = this.parentNode.parentNode.parentNode;
-    var idp = tr.getElementsByTagName('input')[0].value;
-    var membre1 = new ProjetWeb.Membre();
-    membre1.annulerReservationParcours(idp,
-        function() {
-            afficherMesParcoursChoisis(membre1);
-        },
-        function() {
-            //gerer erreur
-            console.log("erreur fonction");
-        });
+    if (confirm("Etes-vous sur de vouloir vous désinscrire de ce parcours ?")) {
+        var tr = this.parentNode.parentNode.parentNode;
+        var idp = tr.getElementsByTagName('input')[0].value;
+        var membre1 = new ProjetWeb.Membre();
+        membre1.annulerReservationParcours(idp,
+            function () {
+                afficherMesParcoursChoisis(membre1);
+            },
+            function () {
+                //gerer erreur
+                console.log("erreur fonction");
+            });
     }
 
 }
-function supprimerParcoursCree(){
+function supprimerParcoursCree() {
     //Annuler la creation du parcours
-    if(confirm("Etes-vous sur de vouloir supprimer ce parcours ?")){
-    var tr = this.parentNode.parentNode.parentNode;
-    var idp = tr.getElementsByTagName('input')[0].value;
-    var membre1 = new ProjetWeb.Membre();
-    membre1.supprimerParcours(idp,
-        function() {
-            afficherMesParcoursCrees(membre1);
-        },
-        function() {
-            //gerer erreur
-            console.log("erreur fonction");
-        });
+    if (confirm("Etes-vous sur de vouloir supprimer ce parcours ?")) {
+        var tr = this.parentNode.parentNode.parentNode;
+        var idp = tr.getElementsByTagName('input')[0].value;
+        var membre1 = new ProjetWeb.Membre();
+        membre1.supprimerParcours(idp,
+            function () {
+                afficherMesParcoursCrees(membre1);
+            },
+            function () {
+                //gerer erreur
+                console.log("erreur fonction");
+            });
     }
 }
-function reactiverParcoursCree(){
+function reactiverParcoursCree() {
     //Annuler la suppression du parcours cree
-    if(confirm("Etes-vous sur de vouloir réactiver ce parcours ?")){
-    var tr = this.parentNode.parentNode.parentNode;
-    var idp = tr.getElementsByTagName('input')[0].value;
-    var membre1 = new ProjetWeb.Membre();
-    membre1.reactiverParcours(idp,
-        function() {
-            afficherMesParcoursCrees(membre1);
-        },
-        function() {
-            //gerer erreur
-            console.log("erreur fonction");
-        });
+    if (confirm("Etes-vous sur de vouloir réactiver ce parcours ?")) {
+        var tr = this.parentNode.parentNode.parentNode;
+        var idp = tr.getElementsByTagName('input')[0].value;
+        var membre1 = new ProjetWeb.Membre();
+        membre1.reactiverParcours(idp,
+            function () {
+                afficherMesParcoursCrees(membre1);
+            },
+            function () {
+                //gerer erreur
+                console.log("erreur fonction");
+            });
     }
 }
-function rechercherVille(cp){
+function rechercherVille(cp) {
     var parent = cp.parentNode;
     var type = parent.getAttribute("name");
     var list = parent.getElementsByClassName('dropdown')[0];
 
     $.ajax({
-        url: "http://api.zippopotam.us/fr/"+cp.value,
+        url: "http://api.zippopotam.us/fr/" + cp.value,
         cache: false,
         dataType: "json",
         type: "GET",
-        success: function(result, success) {
+        success: function (result, success) {
             suggestions = [];
 
-            for ( ii in result['places']){
+            for (ii in result['places']) {
                 suggestions.push(result['places'][ii]['place name']);
             }
-            if ( suggestions.length > 0){
+            if (suggestions.length > 0) {
 
-                $(".dropdown."+ type).empty();
+                $(".dropdown." + type).empty();
                 //resultats de ville avec le code postal saisi
-                $(".dropdown."+ type).append(
-                    '<div class="text">Selectionner</div>'+
-                    '<i class="dropdown icon"></i>'+
-                    '<input name="'+type+'" type="hidden">' +
-                    '<div class="menu '+type+'"></div>');
-                for(var i=0;i<suggestions.length;i++){
-                    $(".menu."+type).append(
-                    "<div class='item' data-value='" + suggestions[i] + "'>" + suggestions[i] + "</div>"
+                $(".dropdown." + type).append(
+                    '<div class="text">Selectionner</div>' +
+                        '<i class="dropdown icon"></i>' +
+                        '<input name="' + type + '" type="hidden">' +
+                        '<div class="menu ' + type + '"></div>');
+                for (var i = 0; i < suggestions.length; i++) {
+                    $(".menu." + type).append(
+                        "<div class='item' data-value='" + suggestions[i] + "'>" + suggestions[i] + "</div>"
                     );
                 }
-                $('.ui.selection.dropdown.'+type).dropdown();
+                $('.ui.selection.dropdown.' + type).dropdown();
             }
 
         },
-        error: function(result, success) {
+        error: function (result, success) {
             console.log("erreur recherche villes");
         }
     });
 }
 
 /*----------------------FONCTION----------------------------*/
-function afficherMesParcoursCrees(membre){
+function afficherMesParcoursCrees(membre) {
     $('#listeParcoursCrees').empty();
 
-    for(var j=0;j<membre.lesParcoursCrees.length;j++){
+    for (var j = 0; j < membre.lesParcoursCrees.length; j++) {
         var pcrees = membre.lesParcoursCrees[j];
 
-        if(!pcrees.supprime){
-            var listoptions = '<div class="ui small purple button annuler">'  +
-                '<i class="remove icon"></i>Annuler'  +
+        if (!pcrees.supprime) {
+            var listoptions = '<div class="ui small purple button annuler">' +
+                '<i class="remove icon"></i>Annuler' +
                 '</div>';
         }
-        else{
-            var listoptions = '<div class="ui small red button reactiver">'+
-                '<i class="backward icon"></i>Réactiver'+
+        else {
+            var listoptions = '<div class="ui small red button reactiver">' +
+                '<i class="backward icon"></i>Réactiver' +
                 '</div>';
         }
         var nbplacesrestantes = pcrees.nbPlacesInitiales - pcrees.membresInscrits.length;
         $('#listeParcoursCrees').append(
-        '<tr>'+
-            '<input type="hidden" name="pcreesid" value="'+pcrees.id+'"/>'+
-            '<td>'+pcrees.depart.nom+'</td>'+
-            '<td>'+pcrees.arrivee.nom+'</td>'+
-            '<td>'+
-                '<div class="ui divided list">'+
-                    //TODO Convertir date!
-                    //'<div class="item">'+pcrees.dateParcours+'</div>'  +
-                    '<div class="item">'+pcrees.heure + 'h' + pcrees.min+'</div>'+
-                '</div>'+
-            '</td>'+
-            '<td>'+nbplacesrestantes+'</td>'+
-            '<td>'+pcrees.prix+'</td>'+
-            '<td>'+
-                '<div class="ui vertical buttons">' +
-                    '<div class="ui small blue button consulter">' +
-                        '<i class="unhide icon"></i>Consulter'  +
-                    '</div>'+
-                    listoptions+
+            '<tr>' +
+                '<input type="hidden" name="pcreesid" value="' + pcrees.id + '"/>' +
+                '<td>' + pcrees.depart.nom + '</td>' +
+                '<td>' + pcrees.arrivee.nom + '</td>' +
+                '<td>' +
+                '<div class="ui divided list">' +
+                //TODO Convertir date!
+                '<div class="item">' + pcrees.dateParcours + '</div>' +
+                '<div class="item">' + pcrees.heure + 'h' + pcrees.min + '</div>' +
                 '</div>' +
-            '</td>'+
-        '</tr>'
-    );
+                '</td>' +
+                '<td>' + nbplacesrestantes + '</td>' +
+                '<td>' + pcrees.prix + '</td>' +
+                '<td>' +
+                '<div class="ui vertical buttons">' +
+                '<div class="ui small blue button consulter">' +
+                '<i class="unhide icon"></i>Consulter' +
+                '</div>' +
+                listoptions +
+                '</div>' +
+                '</td>' +
+                '</tr>'
+        );
     }
     gererEvenements();
 }
 
-function afficherMesParcoursChoisis(membre){
+function afficherMesParcoursChoisis(membre) {
     $('#listeParcoursChoisis').empty();
 
-    for(var j=0;j<membre.lesParcoursChoisis.length;j++){
+    for (var j = 0; j < membre.lesParcoursChoisis.length; j++) {
         var pchoisis = membre.lesParcoursChoisis[j];
-        if (pchoisis.supprime == true){
-            var listoptions = '<div class="ui small negative disabled button">'+
-                '<i class="warning users icon"></i>Annulé'+
+        if (pchoisis.supprime == true) {
+            var listoptions = '<div class="ui small negative disabled button">' +
+                '<i class="warning users icon"></i>Annulé' +
                 '</div>';
-        }else{
-            var listoptions = '<div class="ui small positive button desinscrire">'  +
-                '<i class="remove icon"></i>Me désinscrire'  +
+        } else {
+            var listoptions = '<div class="ui small positive button desinscrire">' +
+                '<i class="remove icon"></i>Me désinscrire' +
                 '</div>';
         }
 
         $('#listeParcoursChoisis').append(
-            '<tr>'+
-                '<input type="hidden" name="pcreesid" value="'+pchoisis.id+'"/>'+
-                '<td>'+pchoisis.depart.nom+'</td>'+
-                '<td>'+pchoisis.arrivee.nom+'</td>'+
-                '<td>'+
-                '<div class="ui divided list">'+
+            '<tr>' +
+                '<input type="hidden" name="pcreesid" value="' + pchoisis.id + '"/>' +
+                '<td>' + pchoisis.depart.nom + '</td>' +
+                '<td>' + pchoisis.arrivee.nom + '</td>' +
+                '<td>' +
+                '<div class="ui divided list">' +
                 //TODO Convertir date en string
-                '<div class="item">'+pchoisis.dateParcours+'</div>'  +
-                '<div class="item">'+pchoisis.heure + 'h' + pchoisis.min+'</div>'+
-                '</div>'+
-                '</td>'+
-                '<td>'+pchoisis.prix+'</td>'+
+                '<div class="item">' + pchoisis.dateParcours + '</div>' +
+                '<div class="item">' + pchoisis.heure + 'h' + pchoisis.min + '</div>' +
+                '</div>' +
+                '</td>' +
+                '<td>' + pchoisis.prix + '</td>' +
                 '<td>' +
                 '<div class="ui vertical buttons">' +
-                    '<div class="ui small blue button consulter">' +
-                    '<i class="unhide icon"></i>Consulter'  +
-                    '</div>'+
-                    listoptions+
-                '</div>'+
-                '</td>'+
-            '</tr>'
+                '<div class="ui small blue button consulter">' +
+                '<i class="unhide icon"></i>Consulter' +
+                '</div>' +
+                listoptions +
+                '</div>' +
+                '</td>' +
+                '</tr>'
         );
+
     }
     gererEvenements();
 }
@@ -243,36 +245,80 @@ function afficherMesParcoursChoisis(membre){
 function afficherParcoursInfo(parcours) {
     var nbplacesrestantes = parcours.nbplacesinitiales - parcours.membresInscrits.length;
     var listmembres = '';
-    for(var i=0;i<parcours.membresInscrits.length;i++){
-      listmembres = listmembres + '<p>'+parcours.membresInscrits[i].prenom+parcours.membresInscrits[i].nom+'</p>';
+    for (var i = 0; i < parcours.membresInscrits.length; i++) {
+        listmembres = listmembres + '<div class="item"><i class="user icon"></i>' +
+            parcours.membresInscrits[i].prenom + ' ' + parcours.membresInscrits[i].nom + '</div>';
     }
-    $('#resparcours').append(
-            '<p>depart: ' + parcours.depart.nom + parcours.depart.codePostal + '</p>' +
-            '<p>arrivee: ' + parcours.arrivee.nom + parcours.arrivee.codePostal + '</p>'+
-            '<div class="ui teal inverted segment">' +
-            '<p>createur: ' + parcours.createur.nom + parcours.createur.prenom + '</p>'+
+    $('#lieu').append(
+        '<div class="ui one column page grid ">' +
+            '<div class="ui column">' +
+                '<div class="ui large label">' +
+                    '<i class=" circular inverted map marker icon"></i>Départ' +
+                '</div>'+
+                '<div class="ui small label">' +
+                    '<p>'+parcours.depart.nom + ' [ '+
+                    parcours.depart.codePostal+' ] </p>'+
+                '</div>' +
+            '</div>' +
+        '</div>' +
+            '<div class="ui one column page grid ">' +
+            '<div class="ui column">' +
+            '<div class="ui large label">' +
+            '<i class=" circular inverted map marker icon"></i>Arrivée' +
             '</div>'+
-            '<div class="ui green inverted segment">membres: ' + listmembres + '</div>'+
-            '<div class="ui secondary segment">' +
-            '<p>date: ' + parcours.dateparcours + '</p>'+
-            '<p>heure : ' + parcours.heure + 'h ' + parcours.min +'</p>'+
-            '<p>prix: ' + parcours.prix + '</p>'+
-            '<p>nbplacesinit: ' + parcours.nbplacesinitiales + '</p>'+
-            '<p>nb places restantes: ' + nbplacesrestantes + '</p>'+
-            '</div>'+
+            '<div class="ui small label">' +
+            '<p>'+parcours.arrivee.nom + ' ['+
+             parcours.arrivee.codePostal+' ] </p>'+
+            '</div>' +
+            '</div>' +
             '</div>'
     );
+
+    $('#resparcours').append(
+            '<div class="ui orange segment">' +
+                '<i class="circular inverted green truck icon"></i>Créateur' +
+                '<div class="ui list">'+
+                    '<div class="item">'+
+                            '<div class="content">'+
+                            parcours.createur.nom +' '+ parcours.createur.prenom +
+                           '</div>'+
+                    '</div>'+
+                '</div>'+
+            '</div>' +
+            '<div class="ui orange segment">' +
+            '<i class="circular inverted orange users icon"></i>Passagers' +
+            '<div class="ui list">' +
+            listmembres + '</div>' +
+            '</div>' +
+            '<div class="ui orange secondary segment">' +
+            '<p>Date: ' + parcours.dateparcours + '</p>' +
+            '<p>Heure : ' + parcours.heure + 'h ' + parcours.min + '</p>' +
+            '<p>Prix fixé: ' + parcours.prix + '€</p>' +
+            '<p>Nombre de places proposées: ' + parcours.nbplacesinitiales + '</p>' +
+            '<p>Nombre de places restantes: ' + nbplacesrestantes + '</p>' +
+            '</div>' +
+            '</div>'
+    );
+
 }
 
-function afficherCarte(parcours){
+function afficherCarte(parcours) {
     $('.raised.segment').empty();
     $('.raised.segment').append(
-        '<div class="ui two column top aligned relaxed grid basic segment">'+
-            '<div class="ui column">'+
-                '<div class="ui segment" id="map" style="height:300px"></div>' +
+        '<div class="ui two column top aligned relaxed grid basic segment">' +
+            '<div class="column">' +
+            '<div class="" id="lieu" >' +
             '</div>' +
-            '<div class="ui column">'+
-                '<div class="ui secondary inverted segment" id="resparcours" ></div>' +
+            '<div class="ui items">' +
+                '<div class="item" id="map" >' +
+                '</div>' +
+            '</div>' +
+            '</div>' +
+            '<div class="column">' +
+                '<div class="ui items">' +
+                    '<div class="item" id="resparcours"  >' +
+                    '</div>' +
+                '</div>' +
             '</div>' +
             '</div>'
     );
@@ -281,43 +327,43 @@ function afficherCarte(parcours){
 }
 
 /*-----------------------GESTION MAP--------------------------*/
-initialize = function(){
+initialize = function () {
     var latLng = new google.maps.LatLng(50.6371834, 3.063017400000035); // Correspond au coordonnées de Lille
     var myOptions = {
-        zoom      : 15, // Zoom par défaut
-        center    : latLng, // Coordonnées de départ de la carte de type latLng
-        mapTypeId : google.maps.MapTypeId.TERRAIN, // Type de carte, différentes valeurs possible HYBRID, ROADMAP, SATELLITE, TERRAIN
-        maxZoom   : 20
+        zoom: 15, // Zoom par défaut
+        center: latLng, // Coordonnées de départ de la carte de type latLng
+        mapTypeId: google.maps.MapTypeId.TERRAIN, // Type de carte, différentes valeurs possible HYBRID, ROADMAP, SATELLITE, TERRAIN
+        maxZoom: 20
     };
 
-    map      = new google.maps.Map(document.getElementById('map'), myOptions);
+    map = new google.maps.Map(document.getElementById('map'), myOptions);
     //panel    = document.getElementById('panel');
 
     var marker = new google.maps.Marker({
-        position : latLng,
-        map      : map
+        position: latLng,
+        map: map
         //title    : "Lille"
         //icon     : "marker_lille.gif" // Chemin de l'image du marqueur pour surcharger celui par défaut
     });
 
     direction = new google.maps.DirectionsRenderer({
-        map   : map
+        map: map
         //panel : panel // Dom element pour afficher les instructions d'itinéraire
     });
 };
 
-calculate = function(parcours){
-    origin      = parcours.depart.nom; // Le point départ
+calculate = function (parcours) {
+    origin = parcours.depart.nom; // Le point départ
     destination = parcours.arrivee.nom; // Le point d'arrivé
-    if(origin && destination){
+    if (origin && destination) {
         var request = {
-            origin      : origin,
-            destination : destination,
-            travelMode  : google.maps.DirectionsTravelMode.DRIVING // Mode de conduite
+            origin: origin,
+            destination: destination,
+            travelMode: google.maps.DirectionsTravelMode.DRIVING // Mode de conduite
         }
         var directionsService = new google.maps.DirectionsService(); // Service de calcul d'itinéraire
-        directionsService.route(request, function(response, status){ // Envoie de la requête pour calculer le parcours
-            if(status == google.maps.DirectionsStatus.OK){
+        directionsService.route(request, function (response, status) { // Envoie de la requête pour calculer le parcours
+            if (status == google.maps.DirectionsStatus.OK) {
                 direction.setDirections(response); // Trace l'itinéraire sur la carte et les différentes étapes du parcours
             }
         });

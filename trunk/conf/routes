@@ -14,16 +14,10 @@ GET     /reserverParcours                       Utilisateur.reserverParcours
 GET     /reactiverParcours                      Utilisateur.reactiverParcours
 GET     /recupererParcoursCrees                 Utilisateur.recupererParcoursCrees
 GET     /recupererParcoursChoisis               Utilisateur.recupererParcoursChoisis
+GET     /recupererParcoursInfo                  Utilisateur.recupererParcoursInfo
 
 POST    /proposerParcours                       Utilisateur.proposerParcours
 POST    /modifierMonProfil                      Utilisateur.modifierMonProfil
-
-GET     /recupererMembreInfo                    Utilisateur.recupererMembreInfo
-GET     /recupererMembresInscrits               Utilisateur.recupererMembresInscrits
-GET     /recupererParcoursInfo                  Utilisateur.recupererParcoursInfo
-GET     /recupererMembreCreateur                Utilisateur.recupererMembreCreateur
-
-
 
 # Import CRUD routes
 *      /admin                                   module:crud
