@@ -179,16 +179,34 @@ public class Utilisateur extends Controller {
     }
 
 
-    public static void modifierMonProfil() {
-        Membre m = Membre.find("byEmail", session.get("username")).first();
-        m.prenom = params.get("prenom");
-        m.nom = params.get("nom");
-        m.dateNaissance = Application.convertirStringDate(params.get("date"));
-        m.sexe = params.get("sexe");
-        m.motDePasse = params.get("new_password");
-        m.save();
-        JSONSerializer serializer = new JSONSerializer();
-        renderJSON(serializer.serialize(m));
+    @Catch(IllegalStateException.class)
+    public static void logIllegalState(Throwable throwable) {
+        Logger.error("Illegal state %s…", throwable);
+    }
+
+    public static void modifierMonProfil(String email, String prenom, String nom, String date, String sexe, String new_password) {
+        validation.required(email);
+        validation.email(email);
+        validation.required(prenom);
+        validation.required(nom);
+        validation.required(date);
+        validation.past(Application.convertirStringDate(date));
+        validation.required(sexe);
+        validation.required(new_password);
+        validation.minSize(new_password,6);
+        if(validation.hasErrors()){
+            throw new IllegalStateException("modifier mon profil erreur");
+        }else{
+            Membre m = Membre.find("byEmail", session.get("username")).first();
+            m.prenom = params.get("prenom");
+            m.nom = params.get("nom");
+            m.dateNaissance = Application.convertirStringDate(params.get("date"));
+            m.sexe = params.get("sexe");
+            m.motDePasse = params.get("new_password");
+            m.save();
+            JSONSerializer serializer = new JSONSerializer();
+            renderJSON(serializer.serialize(m));
+        }
     }
 
     public static void admin() {
