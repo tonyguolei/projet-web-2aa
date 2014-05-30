@@ -11,7 +11,6 @@ $(document).bind("ready", function () {
     obtenirDate();
     $("#boutonSinscrire").bind("click", sinscrire);
     $('#formInscript').form(rules, settings);
-    //$("#boutonValidationSinscrire").bind("click", validerInscription);
 });
 
 /*----------------------LIES A DES EVENEMENTS--------------------------*/
@@ -99,7 +98,7 @@ var sexe_value;
 
 function handle_submitForm() {
     var formData = {
-        'email' : $('input[name=email]').attr('placeholder'),
+        'email' : $('input[name=email]').val(),
         'prenom': $('input[name=prenom]').val(),
         'nom': $('input[name=nom]').val(),
         'date': $('input[name=date]').val(),
