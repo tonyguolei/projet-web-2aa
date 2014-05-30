@@ -10,18 +10,19 @@ $(document).bind("ready", function () {
     testBrowser();
     obtenirDate();
     $("#boutonSinscrire").bind("click", sinscrire);
+    //affectuer valeur par defaut pour sexe
+    sexe_value = $('#default_sexe_value').text();
+    $('#sexe_dropdown').dropdown({
+        onChange: function(val) {
+            sexe_value = val;
+        }
+    });
     $('#formInscript').form(rules, settings);
 });
 
 /*----------------------LIES A DES EVENEMENTS--------------------------*/
 function sinscrire(){
     $('.small.modal').modal('show');
-    $('#sexe_dropdown').dropdown({
-        onChange: function(val) {
-            sexe_value = val;
-        }
-    });
-    $('.ui.selection.dropdown').dropdown();
 }
 function obtenirDate(){
     $("#date").datepicker({
