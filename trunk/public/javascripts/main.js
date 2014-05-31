@@ -252,10 +252,11 @@ function handle_submitForm() {
         data: formData
     })
         .done(function(data) {
-            $("#message_success_modify_profil").show().delay(5000).fadeOut();
+            $("#message_success_sinscrire").show().delay(5000).fadeOut();
+            setTimeout(function(){$('.small.modal').modal('hide');},2000);
         })
         .fail(function (e) {
-            $("#message_failed_modify_profil").show().delay(5000).fadeOut();
+            $("#message_failed_sinscrire").show().delay(5000).fadeOut();
         })
 };
 

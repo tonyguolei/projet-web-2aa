@@ -3,6 +3,9 @@ package controllers;
 import flexjson.JSONSerializer;
 import flexjson.transformer.DateTransformer;
 import models.*;
+import org.joda.time.LocalDate;
+import org.joda.time.Period;
+import org.joda.time.PeriodType;
 import play.*;
 import play.db.jpa.*;
 import play.mvc.*;
@@ -190,7 +193,7 @@ public class Utilisateur extends Controller {
         validation.required(prix);
         validation.min(prix,0);
         validation.required(nbplaces);
-        validation.min(nbplaces,1);
+        validation.min(nbplaces, 1);
         if(validation.hasErrors() || depart.equals(arrivee)){
             throw new IllegalStateException("proposer parcours erreur");
         }
@@ -233,6 +236,25 @@ public class Utilisateur extends Controller {
         renderJSON(serializer.exclude("*.class").serialize(p.createur));
     }
 
+
+    /**
+     * calculer l'age
+     * @param date
+     */
+    public static Integer getAge(Date date) {
+        Integer returnAge = null;
+        try {
+            LocalDate personBirthdate = new LocalDate(date);
+            LocalDate sysDateDate = new LocalDate(new Date());
+            Period period = new Period(personBirthdate, sysDateDate, PeriodType
+                    .yearMonthDay());
+            returnAge = new Integer(period.getYears());
+        } catch (Exception e) {
+            System.out.println("Error while calculating Age … " + e);
+        }
+        return returnAge;
+    }
+
     /**
      * Modifie les informations personnelles du membre
      * @param email
@@ -248,6 +270,7 @@ public class Utilisateur extends Controller {
         validation.required(prenom);
         validation.required(nom);
         validation.required(date);
+        validation.min(getAge(Application.convertirStringDate(date)), 18);
         validation.past(Application.convertirStringDate(date));
         validation.required(sexe);
         validation.required(new_password);

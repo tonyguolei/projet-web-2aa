@@ -39,6 +39,14 @@ font-family: Awesome;
 
 
 /* Gestion des messages d'erreurs ou d'infos */
+#message_success_sinscrire{
+    display:none;
+}
+
+#message_failed_sinscrire{
+    display:none;
+}
+
 #message_success_creer_parcours{
     display:none;
 }

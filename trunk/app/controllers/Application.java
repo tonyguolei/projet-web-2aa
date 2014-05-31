@@ -18,9 +18,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.Date;
-
-import com.google.gson.*;
 import play.test.Fixtures;
+import org.joda.time.LocalDate;
+import org.joda.time.Years;
+import org.joda.time.Period;
+import org.joda.time.PeriodType;
 
 public class Application extends Controller {
 
@@ -176,30 +178,57 @@ public class Application extends Controller {
     }
 
     /**
+     * calculer l'age
+     * @param date
+     */
+    public static Integer getAge(Date date) {
+        Integer returnAge = null;
+        try {
+            LocalDate personBirthdate = new LocalDate(date);
+            LocalDate sysDateDate = new LocalDate(new Date());
+            Period period = new Period(personBirthdate, sysDateDate, PeriodType
+                    .yearMonthDay());
+            returnAge = new Integer(period.getYears());
+        } catch (Exception e) {
+            System.out.println("Error while calculating Age … " + e);
+        }
+        return returnAge;
+    }
+
+    /**
      * Gère l'inscription d'un nouveau membre
      */
-    public static void sinscrire() {
-        //TODO gérer date de naissance => + 18ans
-
-        String nom = params.get("nom");
-        String prenom = params.get("prenom");
-        String email = params.get("email");
-        String datenaissance = params.get("date");
-        String sexe = params.get("sexe");
-        String motdepasse = params.get("motdepasse");
-        Date daten = convertirStringDate(datenaissance);
-
-        if(nom!="" & prenom!="" & email != "" & motdepasse!="" & sexe!="" & datenaissance!=""){
+    public static void sinscrire(String nom, String prenom, String email, String date, String sexe, String motdepasse) {
+        System.out.println("test" + getAge(convertirStringDate(date)));
+        validation.required(nom);
+        validation.required(prenom);
+        validation.required(email);
+        validation.email(email);
+        validation.required(date);
+        validation.min(getAge(convertirStringDate(date)), 18);
+        validation.past(convertirStringDate(date));
+        validation.required(sexe);
+        validation.required(motdepasse);
+        validation.minSize(motdepasse, 6);
+        if(validation.hasErrors()){
+            throw new IllegalStateException("s'inscrire erreur");
+        }
+        else{
+            Date daten = convertirStringDate(date);
             Membre tmp = Membre.find("byEmail",email).first();
             if(tmp==null) {
                 //Aucun membre existant avec cet email
                 Membre m = new Membre(nom, prenom, motdepasse, daten, email, sexe).save();
-                if(m!=null)
-                    //Creation reussie
-                    Application.seconnecter(email,motdepasse);
+                if(m!=null){
+                    //TODO Ca ne parche pas la ligne en desous, je fais autre moyen, si tu veux, tu peux modifier avec ta solution
+                    //Application.seconnecter(email,motdepasse);
+                }else{
+                    throw new IllegalStateException("s'inscSrire erreur");
+                }
+            }else{
+                throw new IllegalStateException("s'inscrire erreur");
             }
         }
-        Application.index();
     }
 
     /**
