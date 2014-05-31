@@ -175,11 +175,12 @@ public class Utilisateur extends Controller {
         Ville depart = Ville.find("byNom", params.get("depart")).first();
         Ville arrivee = Ville.find("byNom", params.get("arrivee")).first();
 
-        if (depart == arrivee)
+        //if (depart == arrivee)
             //TODO Impossible => refuser la création
-            if (depart == null) {
-                depart = new Ville(params.get("depart"), params.get("departcp")).save();
-            }
+
+        if (depart == null) {
+            depart = new Ville(params.get("depart"), params.get("departcp")).save();
+        }
         if (arrivee == null) {
             arrivee = new Ville(params.get("arrivee"), params.get("arriveecp")).save();
         }
