@@ -169,28 +169,50 @@ public class Utilisateur extends Controller {
 
     /**
      * Permet de valider la création d'un parcours par le membre connecté
+     * @param depart
+     * @param arrivee
+     * @param date
+     * @param heure
+     * @param heure
+     * @param min
+     * @param prix
+     * @param nbplaces
      */
-    public static void proposerParcours() {
-        Membre createur = Membre.find("byEmail", session.get("username")).first();
-        Ville depart = Ville.find("byNom", params.get("depart")).first();
-        Ville arrivee = Ville.find("byNom", params.get("arrivee")).first();
-
-        //if (depart == arrivee)
-            //TODO Impossible => refuser la création
-
-        if (depart == null) {
-            depart = new Ville(params.get("depart"), params.get("departcp")).save();
+    public static void proposerParcours(String depart, String departcp, String arrivee, String arriveecp, String date, String heure, String min, String prix, String nbplaces) {
+        validation.required(depart);
+        validation.required(arrivee);
+        validation.required(date);
+        validation.future(Application.convertirStringDate(date));
+        validation.required(heure);
+        validation.range(heure, 0, 23);
+        validation.required(min);
+        validation.range(heure, 0, 59);
+        validation.required(prix);
+        validation.min(prix,0);
+        validation.required(nbplaces);
+        validation.min(nbplaces,1);
+        if(validation.hasErrors() || depart.equals(arrivee)){
+            throw new IllegalStateException("proposer parcours erreur");
         }
-        if (arrivee == null) {
-            arrivee = new Ville(params.get("arrivee"), params.get("arriveecp")).save();
+        else{
+            Membre createur = Membre.find("byEmail", session.get("username")).first();
+            Ville depart1 = Ville.find("byNom", depart).first();
+            Ville arrivee1 = Ville.find("byNom", arrivee).first();
+
+            if (depart1 == null) {
+                depart1 = new Ville(depart, departcp).save();
+            }
+            if (arrivee1 == null) {
+                arrivee1 = new Ville(arrivee, arriveecp).save();
+            }
+            Date date1 = Application.convertirStringDate(date);
+            Parcours p = new Parcours(createur, depart1, arrivee1, Float.parseFloat(prix),
+                    Integer.parseInt(nbplaces), date1, Integer.parseInt(heure),
+                    Integer.parseInt(min)).save();
+            JSONSerializer serializer = new JSONSerializer();
+            renderJSON(serializer.exclude("*.class").
+                    transform(new DateTransformer("dd/MM/yyyy"), "dateInscription").serialize(p));
         }
-        Date date = Application.convertirStringDate(params.get("date"));
-        Parcours p = new Parcours(createur, depart, arrivee, Float.parseFloat(params.get("prix")),
-                Integer.parseInt(params.get("nbplaces")), date, Integer.parseInt(params.get("heure")),
-                Integer.parseInt(params.get("min"))).save();
-        JSONSerializer serializer = new JSONSerializer();
-        renderJSON(serializer.exclude("*.class").
-                transform(new DateTransformer("dd/MM/yyyy"), "dateInscription").serialize(p));
     }
 
     //TODO => Inutilisé

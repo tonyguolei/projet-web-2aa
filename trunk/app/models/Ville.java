@@ -4,6 +4,7 @@ import java.util.*;
 import javax.persistence.*;
 
 import com.google.gson.annotations.Expose;
+import play.data.validation.Required;
 import play.db.jpa.*;
 
 /**
@@ -13,9 +14,9 @@ import play.db.jpa.*;
 
 @Entity
 public class Ville extends Model {
-    @Expose
+    @Required
     public String nom;
-    @Expose
+    @Required
     public String codePostal;
 
     /**

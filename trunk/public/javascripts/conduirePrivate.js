@@ -56,7 +56,9 @@ var rules = {
 function handle_submitForm() {
     var formData = {
         'depart': $('input[name=depart]').val(),
+        'departcp': $('input[name=departcp]').val(),
         'arrivee': $('input[name=arrivee]').val(),
+        'arriveecp': $('input[name=arriveecp]').val(),
         'date': $('input[name=date]').val(),
         'heure': $('input[name=heure]').val(),
         'min': $('input[name=min]').val(),
