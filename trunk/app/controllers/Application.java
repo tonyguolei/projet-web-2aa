@@ -81,7 +81,6 @@ public class Application extends Controller {
      */
     private static void tousLesParcoursActuels() {
         //TODO Regle pb dateParcours => date d'Aujourdhui
-        //TODO hors parcours créé par le membre
         //List<Parcours> listp = Parcours.find("supprime = ? and dateParcours >= ?",false,new Date()).fetch();
         List<Parcours> listp = null;
         if(Security.isConnected()){
@@ -128,10 +127,9 @@ public class Application extends Controller {
         textfind = textfind+ " and supprime = ? ";
         textfind = textfind+ " and dateParcours = ? ";
         List<Parcours> listp = null;
-
+        //TODO Regle pb dateParcours => date d'Aujourdhui
         if(Security.isConnected()){
             //ne pas renvoyer les parcours déjà réservés ni créés par lui meme
-            //TODO ne pas renvoyer les parcours créé par lui m
             Membre m = Membre.find("byEmail", session.get("username")).first();
             listp = Parcours.find(textfind+" and ? not in elements(membresInscrits) and createur != ?)",
                     "%"+ depart+"%","%"+ arrivee+"%",false,convertirStringDate(date),m,m).fetch();

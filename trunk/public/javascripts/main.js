@@ -9,7 +9,6 @@ var init;
 
 $(document).bind("ready", function () {
     testBrowser();
-    obtenirDate();
 
     $("#boutonSinscrire").bind("click", sinscrire);
 
@@ -32,7 +31,9 @@ $(document).bind("ready", function () {
 /*----------------------LIES A DES EVENEMENTS--------------------------*/
 function sinscrire(){
     $('.small.modal').modal('show');
-    obtenirDate();
+    $("#date").datepicker({
+        dateFormat: 'dd/mm/yy'
+    });
 }
 function obtenirDate(){
     $("#date").datepicker({

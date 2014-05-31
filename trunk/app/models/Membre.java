@@ -62,7 +62,16 @@ public class Membre extends Model {
         this.desinscrit = false;
         this.isAdmin = false;
     }
-
+    /**
+     * Créé un membre
+     * @param nom
+     * @param prenom
+     * @param motDePasse
+     * @param dateNaissance
+     * @param email
+     * @param sexe
+     * @param isAdmin
+     */
     public Membre(String nom, String prenom,String motDePasse, Date dateNaissance, String email,String sexe, boolean isAdmin) {
         this.nom = nom;
         this.prenom = prenom;
