@@ -74,26 +74,6 @@ public class Application extends Controller {
         verifieNonConnexion();
         render();
     }
-
-    public static void conduire() {
-        verifieNonConnexion();
-        render();
-    }
-
-    public static void sefaireconduire() {
-        verifieNonConnexion();
-        render();
-    }
-
-    public static void nous() {
-        verifieNonConnexion();
-        render();
-    }
-
-    public static void contact() {
-        verifieNonConnexion();
-        render();
-    }
     /*---------------Methodes contenu des pages -----------------------*/
 
     /**
@@ -223,7 +203,7 @@ public class Application extends Controller {
     }
 
     /**
-     *
+     * Convertir la chaine de caracteres en format Date
      * @param date
      * @return Date
      */

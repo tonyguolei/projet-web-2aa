@@ -14,7 +14,6 @@ var direction;
 $(document).bind('ready', function () {
     obtenirDate();
     gererEvenements();
-    ;
 });
 
 function gererEvenements() {
@@ -34,18 +33,25 @@ function obtenirDate() {
     $("#date").datepicker({
         dateFormat: 'dd/mm/yy'
     });
-    var myDate = new Date();
-    var month = myDate.getMonth() + 1;
-    var day = myDate.getDate();
 
-    if (month < 11) {
-        var prettyDate = day + '/0' + month + '/' + myDate.getFullYear();
+    if($("#date").val()==""){
+        var myDate = new Date();
+        var month = myDate.getMonth() + 1;
+        var day = myDate.getDate();
+
+        if (month < 11) {
+            var prettyDate = day + '/0' + month + '/' + myDate.getFullYear();
+        }
+        else {
+            var prettyDate = day + '/' + month + '/' + myDate.getFullYear();
+        }
+        $("#date").val(prettyDate);
+        return prettyDate;
     }
-    else {
-        var prettyDate = day + '/' + month + '/' + myDate.getFullYear();
+    else{
+        return $("#date").val();
     }
-    $("#date").val(prettyDate);
-    return prettyDate;
+
 }
 
 /*----------------------LIES A DES EVENEMENTS--------------------------*/
@@ -279,9 +285,9 @@ function afficherParcoursInfo(parcours) {
                 '<i class="circular inverted green truck icon"></i>Créateur' +
                 '<div class="ui list">'+
                     '<div class="item">'+
-                            '<div class="content">'+
+                            //'<div class="content">'+
                             parcours.createur.nom +' '+ parcours.createur.prenom +
-                           '</div>'+
+                           //'</div>'+
                     '</div>'+
                 '</div>'+
             '</div>' +

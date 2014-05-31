@@ -28,19 +28,19 @@
 
 </div>
 <div id="menu" class="ui menu">
-    <a class="active green inverted item" href="@{Application.index()}">
+    <a class="active green inverted item" id="accueil">
         <i class="home icon"></i> Accueil
     </a>
-    <a class="active blue item" href="@{Application.conduire()}">
+    <a class="active blue item" id="conduire">
         <i class="truck icon"></i> Conduire
     </a>
-    <a class="active teal item" href="@{Application.sefaireconduire()}">
+    <a class="active teal item" id="sefaireconduire">
         <i class="user icon"></i> Se faire conduire
     </a>
-    <a class="active purple item" href="@{Application.nous()}">
+    <a class="active purple item" id="quisommesnous">
         <i class="question icon"></i> Qui sommes-nous ?
     </a>
-    <a class="active red item" href="@{Application.contact()}">
+    <a class="active red item" id="contact">
         <i class="mail icon"></i> Contact
     </a>
 </div>
@@ -125,7 +125,7 @@
                 <div class="two fields">
                     <div class="field">
                         <label>Date de naissance</label>
-                        <input placeholder="Date de naissance" type="text" name="date" >
+                        <input placeholder="Date de naissance" type="text" name="date" id="date" >
                     </div>
                     <div class="field">
                         <label>Sexe</label>
