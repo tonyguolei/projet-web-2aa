@@ -33,6 +33,12 @@ font-family: Awesome;
     width:30%;
 }
 
+.image.perso{
+    width:10%;
+    height:10%;
+}
+
+
 /* Gestion des messages d'erreurs ou d'infos */
 #message_success_creer_parcours{
     display:none;

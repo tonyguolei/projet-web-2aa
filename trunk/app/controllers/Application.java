@@ -40,11 +40,11 @@ public class Application extends Controller {
             Ville v4 = new Ville("Grenoble", "38000").save();
             Ville v5 = new Ville("Lyon", "69000").save();
 
-            Membre m1 = new Membre("guo", "lei", "123456", convertirStringDate("10/10/1992"), "lei@gmail.com", "M").save();
-            Membre m2 = new Membre("laforest", "yann", "123456", convertirStringDate("06/01/1993"), "yann@gmail.com", "M").save();
-            Membre m3 = new Membre("grangé", "alice", "123456", convertirStringDate("05/01/1991"), "alice@gmail.com", "F").save();
+            Membre m1 = new Membre("guo", "lei", "123456", convertirStringDate("10/10/1992"), "lei@gmail.com", "M",true).save();
+            Membre m2 = new Membre("laforest", "yann", "123456", convertirStringDate("06/01/1993"), "yann@gmail.com", "M",true).save();
+            Membre m3 = new Membre("grangé", "alice", "123456", convertirStringDate("05/01/1991"), "alice@gmail.com", "F",true).save();
             Membre m4 = new Membre("viardot", "sébastien", "123456", convertirStringDate("15/05/1956"),
-                    "Sebastien.Viardot@grenoble-inp.fr", "H").save();
+                    "Sebastien.Viardot@grenoble-inp.fr", "H",true).save();
 
             Parcours p1 = new Parcours(m1, v1, v2, 8, 1, convertirStringDate("15/05/2014"), 14, 00).save();
             Parcours p2 = new Parcours(m2, v5, v3, 14, 2, convertirStringDate("10/06/2014"), 13, 50).save();
