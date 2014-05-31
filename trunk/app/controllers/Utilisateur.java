@@ -22,6 +22,11 @@ public class Utilisateur extends Controller {
         }
     }
 
+    @Catch(IllegalStateException.class)
+    public static void logIllegalState(Throwable throwable) {
+        Logger.error("Illegal state %s…", throwable);
+    }
+
     public static void deconnexion() {
         session.clear();
         Application.index();
@@ -78,6 +83,10 @@ public class Utilisateur extends Controller {
     }
 
     //------------------GESTION DES PARCOURS RESERVES-----------------------//
+
+    /**
+     * Annule la réservation d'un parcours faite par le membre connecté
+     */
     public static void annulerReservation() {
         String id = params.get("id");
         Membre m = Membre.find("byEmail", session.get("username")).first();
@@ -87,6 +96,9 @@ public class Utilisateur extends Controller {
         renderJSON(serializer.include("membresInscrits").serialize(m.lesParcoursChoisis));
     }
 
+    /**
+     * Permet de valider la réservation d'un parcours faite par le membre connecté
+     */
     public static void reserverParcours() {
         String id = params.get("id");
         Membre m = Membre.find("byEmail", session.get("username")).first();
@@ -96,6 +108,9 @@ public class Utilisateur extends Controller {
         renderJSON(serializer.transform(new DateTransformer("dd/MM/yyyy"), "dateInscription").serialize(m));
     }
 
+    /**
+     * Recupere tous les parcours réservés par le membre
+     */
     public static void recupererParcoursChoisis() {
         Membre m = Membre.find("byEmail", session.get("username")).first();
         JSONSerializer serializer = new JSONSerializer();
@@ -104,6 +119,10 @@ public class Utilisateur extends Controller {
     }
 
     //-------------------GESTION DES PARCOURS CREES---------------------------//
+
+    /**
+     * Supprime temporairement le parcours créé par le membre connecté
+     */
     public static void supprimerParcours() {
         String id = params.get("id");
         Membre m = Membre.find("byEmail", session.get("username")).first();
@@ -113,6 +132,9 @@ public class Utilisateur extends Controller {
         renderJSON(serializer.include("membresInscrits").serialize(m.lesParcoursCrees));
     }
 
+    /**
+     * Remet en ligne le parcours annulé précédemment par le membre connecté
+     */
     public static void reactiverParcours() {
         String id = params.get("id");
         Membre m = Membre.find("byEmail", session.get("username")).first();
@@ -122,6 +144,9 @@ public class Utilisateur extends Controller {
         renderJSON(serializer.include("membresInscrits").serialize(m.lesParcoursCrees));
     }
 
+    /**
+     * Recupere les parcours créés par le membre connecté
+     */
     public static void recupererParcoursCrees() {
         Membre m = Membre.find("byEmail", session.get("username")).first();
         JSONSerializer serializer = new JSONSerializer();
@@ -130,6 +155,10 @@ public class Utilisateur extends Controller {
     }
 
     /* COTE PARCOURS ---------------------------------*/
+
+    /**
+     * Recupere les informations définies pour le parcours
+     */
     public static void recupererParcoursInfo() {
         String id = params.get("id");
         Parcours p = Parcours.findById(Long.parseLong(id, 10));
@@ -138,6 +167,9 @@ public class Utilisateur extends Controller {
                 transform(new DateTransformer("dd/MM/yyyy"), "dateParcours").serialize(p));
     }
 
+    /**
+     * Permet de valider la création d'un parcours par le membre connecté
+     */
     public static void proposerParcours() {
         Membre createur = Membre.find("byEmail", session.get("username")).first();
         Ville depart = Ville.find("byNom", params.get("depart")).first();
@@ -178,12 +210,15 @@ public class Utilisateur extends Controller {
         renderJSON(serializer.exclude("*.class").serialize(p.createur));
     }
 
-
-    @Catch(IllegalStateException.class)
-    public static void logIllegalState(Throwable throwable) {
-        Logger.error("Illegal state %s…", throwable);
-    }
-
+    /**
+     * Modifie les informations personnelles du membre
+     * @param email
+     * @param prenom
+     * @param nom
+     * @param date
+     * @param sexe
+     * @param new_password
+     */
     public static void modifierMonProfil(String email, String prenom, String nom, String date, String sexe, String new_password) {
         validation.required(email);
         validation.email(email);
@@ -209,6 +244,9 @@ public class Utilisateur extends Controller {
         }
     }
 
+    /**
+     * Gestion de la partie admin
+     */
     public static void admin() {
         redirect("http://localhost:9000/admin");
     }

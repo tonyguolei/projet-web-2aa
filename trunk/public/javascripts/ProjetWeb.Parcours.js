@@ -49,7 +49,6 @@ ProjetWeb.Parcours.prototype = {
             data: {id: parcour_id}
         })
             .done(function(data) {
-                console.log(data);
                 self.constructor(data.id,data.depart,data.arrivee,data.prix,
                     data.nbPlacesInitiales,data.dateParcours,data.heure,
                     data.min,data.supprime,data.createur,data.membresInscrits);
@@ -68,7 +67,6 @@ ProjetWeb.Parcours.prototype = {
             data: { id: parcour_id }
         } )
             .done(function(data) {
-                console.log(data);
                 cb_success(data);
             })
             .fail(function(error) {
@@ -84,7 +82,6 @@ ProjetWeb.Parcours.prototype = {
             data: { id: parcour_id }
         } )
             .done(function(data) {
-                console.log(data);
                 cb_success(data);
             })
             .fail(function(error) {

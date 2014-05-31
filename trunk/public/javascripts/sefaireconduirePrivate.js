@@ -93,8 +93,8 @@ function consulterParcours(){
     var parcours1 = new ProjetWeb.Parcours();
     parcours1.recupererParcoursInfo(idp,
         function() {
-            //afficherCarte(parcours1);
-            //afficherParcoursInfo(parcours1);
+            afficherCarte(parcours1);
+            afficherParcoursInfo(parcours1);
         },
         function() {
             //gerer erreur

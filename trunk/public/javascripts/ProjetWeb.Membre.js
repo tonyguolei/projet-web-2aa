@@ -41,7 +41,6 @@ ProjetWeb.Membre.prototype = {
             url: "/recupererMembreInfo"
         })
             .done(function(data) {
-                console.log(data);
                 self.constructor(data.id, data.nom, data.prenom, data.dateNaissance, data.email,data.sexe,
                     data.dateInscription, data.lesParcoursCrees, data.lesParcoursChoisis);
                 cb_success(data);
@@ -59,7 +58,6 @@ ProjetWeb.Membre.prototype = {
             url: "/recupererParcoursCrees"
         })
             .done(function(data) {
-                console.log(data);
                 this.lesParcoursCrees = data;
                 cb_success(data);
             })
@@ -76,7 +74,6 @@ ProjetWeb.Membre.prototype = {
             url: "/recupererParcoursChoisis"
         })
             .done(function(data) {
-                console.log(data);
                 this.lesParcoursChoisis = data;
                 cb_success(data);
             })
@@ -112,7 +109,6 @@ ProjetWeb.Membre.prototype = {
             data: { id: parcour_id }
         } )
             .done(function(data) {
-                console.log(data);
                 //self.constructor(data.id, data.nom, data.prenom, data.dateNaissance, data.email,data.sexe,
                     //data.dateInscription, data.lesParcoursCrees, data.lesParcoursChoisis);
                 self.lesParcoursChoisis = data;

@@ -201,7 +201,7 @@ public class Application extends Controller {
     }
 
     /**
-     * Convertir la chaine de caracteres en format Date
+     * Convertit la chaine de caracteres en format Date
      * @param date
      * @return Date
      */
