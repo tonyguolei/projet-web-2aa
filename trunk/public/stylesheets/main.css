@@ -1,6 +1,7 @@
 
 *{
 font-family: Awesome;
+    font-size:small;
 }
 
 #logo{
@@ -14,14 +15,12 @@ font-family: Awesome;
 #main{
     width:100%;
 }
-#menugauche{
-   width:100%;
+#menugauche,#menuconnexion{
+   width:25%;
 }
-#menuconnexion{
-    width:25%;
-}
+
 #contenu{
-    width:70%;
+    width:75%;
 }
 #date{
     width:50%;

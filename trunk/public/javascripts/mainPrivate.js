@@ -95,6 +95,10 @@ function afficherParcoursInfo(parcours) {
         listmembres = listmembres + '<div class="item"><i class="user icon"></i>' +
             parcours.membresInscrits[i].prenom + ' ' + parcours.membresInscrits[i].nom + '</div>';
     }
+    if (parcours.membresInscrits.length==0){
+        listmembres = 'Aucun passager inscrit';
+    }
+
     $('#lieu').append(
         '<div class="ui one column page grid ">' +
             '<div class="ui column">' +

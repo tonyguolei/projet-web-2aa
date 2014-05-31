@@ -51,11 +51,10 @@
 
 <div id="main">
     <div class="ui grid">
-        <div class="three wide column">
-            <div class="ui vertical labeled icon menu" id="menugauche">
+        <div class="four wide column"  id="menugauche">
+            <div class="ui vertical labeled icon menu">
                 <h4 class="ui black block header">
-                    Bienvenue<br/>
-                    ${m.nom} ${m.prenom}
+                    Bienvenue ${m.nom} ${m.prenom}
                 </h4>
                 <a class="#{get 'selectmonprofil' /} black item" href="@{Utilisateur.monprofil()}">
                     <i class="user icon"></i>
@@ -76,9 +75,8 @@
                     Déconnexion
                 </a>
             </div>
-
         </div>
-        <div class="thirteen wide column" id="contenu">
+        <div class="twelve wide column" id="contenu">
         #{doLayout /}
         </div>
     </div>
