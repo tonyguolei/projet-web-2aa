@@ -123,6 +123,7 @@ function afficherMesParcoursCrees(membre) {
                 '</div>';
         }
         var nbplacesrestantes = pcrees.nbPlacesInitiales - pcrees.membresInscrits.length;
+
         $('#listeParcoursCrees').append(
             '<tr>' +
                 '<input type="hidden" name="pcreesid" value="' + pcrees.id + '"/>' +
@@ -131,7 +132,7 @@ function afficherMesParcoursCrees(membre) {
                 '<td>' +
                 '<div class="ui divided list">' +
                 //TODO Convertir date!
-                '<div class="item">' + pcrees.dateParcours + '</div>' +
+                '<div class="item">' + afficherDate(pcrees.dateParcours) + '</div>' +
                 '<div class="item">' + pcrees.heure + 'h' + pcrees.min + '</div>' +
                 '</div>' +
                 '</td>' +
@@ -174,7 +175,7 @@ function afficherMesParcoursChoisis(membre) {
                 '<td>' +
                 '<div class="ui divided list">' +
                 //TODO Convertir date en string
-                '<div class="item">' + pchoisis.dateParcours + '</div>' +
+                '<div class="item">' + afficherDate(pchoisis.dateParcours) + '</div>' +
                 '<div class="item">' + pchoisis.heure + 'h' + pchoisis.min + '</div>' +
                 '</div>' +
                 '</td>' +

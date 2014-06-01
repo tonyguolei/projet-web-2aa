@@ -47,6 +47,22 @@ function obtenirDate() {
 
 }
 
+function afficherDate(date){
+    var datetmp = new Date(date);
+
+    var myDate = datetmp;
+    var month = datetmp.getMonth() + 1;
+    var day = datetmp.getDate();
+
+    if (month < 11) {
+        var dateres = day + '/0' + month + '/' + myDate.getFullYear();
+    }
+    else {
+        var dateres = day + '/' + month + '/' + myDate.getFullYear();
+    }
+    return dateres;
+}
+
 /*----------------------LIES A DES EVENEMENTS--------------------------*/
 function rechercherVille(cp) {
     var parent = cp.parentNode;
@@ -141,7 +157,7 @@ function afficherParcoursInfo(parcours) {
             listmembres + '</div>' +
             '</div>' +
             '<div class="ui orange secondary segment">' +
-            '<p>Date: ' + parcours.dateparcours + '</p>' +
+            '<p>Date: ' + afficherDate(parcours.dateparcours) + '</p>' +
             '<p>Heure : ' + parcours.heure + 'h ' + parcours.min + '</p>' +
             '<p>Prix fixé: ' + parcours.prix + '€</p>' +
             '<p>Nombre de places proposées: ' + parcours.nbplacesinitiales + '</p>' +

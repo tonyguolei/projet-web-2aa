@@ -14,6 +14,7 @@ import javax.servlet.http.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 public class Utilisateur extends Controller {
 
@@ -37,37 +38,44 @@ public class Utilisateur extends Controller {
 
     public static void index() {
         Membre m = Membre.find("byEmail", session.get("username")).first();
-        render(m);
+        renderArgs.put("m", m);
+        render();
     }
 
     public static void conduire() {
         Membre m = Membre.find("byEmail", session.get("username")).first();
-        render(m);
+        renderArgs.put("m", m);
+        render();
     }
 
     public static void sefaireconduire() {
         Membre m = Membre.find("byEmail", session.get("username")).first();
-        render(m);
+        renderArgs.put("m", m);
+        render();
     }
 
     public static void nous() {
         Membre m = Membre.find("byEmail", session.get("username")).first();
-        render(m);
+        renderArgs.put("m", m);
+        render();
     }
 
     public static void contact() {
         Membre m = Membre.find("byEmail", session.get("username")).first();
-        render(m);
+        renderArgs.put("m", m);
+        render();
     }
 
     public static void monprofil() {
         Membre m = Membre.find("byEmail", session.get("username")).first();
-        render(m);
+        renderArgs.put("m", m);
+        render();
     }
 
     public static void mesparcours() {
         Membre m = Membre.find("byEmail", session.get("username")).first();
-        render(m);
+        renderArgs.put("m", m);
+        render();
     }
 
     /* COTE MEMBRE ----------------------------------*/
@@ -95,8 +103,14 @@ public class Utilisateur extends Controller {
         Membre m = Membre.find("byEmail", session.get("username")).first();
         Parcours p = Parcours.findById(Long.parseLong(id, 10));
         m.seDesinscrireParcours(p);
+
+        //recuperer ses futurs parcours réservés
+        List<Parcours> listp = Parcours.find(
+                "? in elements(membresInscrits) " +
+                "and dateParcours >= current_date() " +
+                "and createur != ? ",m,m).fetch();
         JSONSerializer serializer = new JSONSerializer();
-        renderJSON(serializer.include("membresInscrits").serialize(m.lesParcoursChoisis));
+        renderJSON(serializer.include("membresInscrits").serialize(listp));
     }
 
     /**
@@ -131,8 +145,14 @@ public class Utilisateur extends Controller {
         Membre m = Membre.find("byEmail", session.get("username")).first();
         Parcours p = Parcours.findById(Long.parseLong(id, 10));
         m.supprimerParcours(p);
+
+        //recuperer ses futurs parcours créés
+        List<Parcours> listp = Parcours.find(
+                "? not in elements(membresInscrits) " +
+                        "and dateParcours >= current_date() " +
+                        "and createur = ? ",m,m).fetch();
         JSONSerializer serializer = new JSONSerializer();
-        renderJSON(serializer.include("membresInscrits").serialize(m.lesParcoursCrees));
+        renderJSON(serializer.include("membresInscrits").serialize(listp));
     }
 
     /**
@@ -143,8 +163,14 @@ public class Utilisateur extends Controller {
         Membre m = Membre.find("byEmail", session.get("username")).first();
         Parcours p = Parcours.findById(Long.parseLong(id, 10));
         m.reactiverParcours(p);
+
+        //recuperer ses futurs parcours créés
+        List<Parcours> listp = Parcours.find(
+                "? not in elements(membresInscrits) " +
+                        "and dateParcours >= current_date() " +
+                        "and createur = ? ",m,m).fetch();
         JSONSerializer serializer = new JSONSerializer();
-        renderJSON(serializer.include("membresInscrits").serialize(m.lesParcoursCrees));
+        renderJSON(serializer.include("membresInscrits").serialize(listp));
     }
 
     /**
@@ -156,8 +182,6 @@ public class Utilisateur extends Controller {
         renderJSON(serializer.transform(new DateTransformer("dd/MM/yyyy"), "dateParcours")
                 .include("membresInscrits").serialize(m.lesParcoursCrees));
     }
-
-    /* COTE PARCOURS ---------------------------------*/
 
     /**
      * Recupere les informations définies pour le parcours
@@ -238,7 +262,7 @@ public class Utilisateur extends Controller {
 
 
     /**
-     * calculer l'age
+     * Calcule l'age du membre
      * @param date
      */
     public static Integer getAge(Date date) {
