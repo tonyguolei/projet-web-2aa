@@ -38,44 +38,51 @@ public class Utilisateur extends Controller {
 
     public static void index() {
         Membre m = Membre.find("byEmail", session.get("username")).first();
-        renderArgs.put("m", m);
+        renderArgs.put("prenom", m.prenom);
+        renderArgs.put("nom", m.nom);
         render();
     }
 
     public static void conduire() {
         Membre m = Membre.find("byEmail", session.get("username")).first();
-        renderArgs.put("m", m);
+        renderArgs.put("prenom", m.prenom);
+        renderArgs.put("nom", m.nom);
         render();
     }
 
     public static void sefaireconduire() {
         Membre m = Membre.find("byEmail", session.get("username")).first();
-        renderArgs.put("m", m);
+        renderArgs.put("prenom", m.prenom);
+        renderArgs.put("nom", m.nom);
         render();
     }
 
     public static void nous() {
         Membre m = Membre.find("byEmail", session.get("username")).first();
-        renderArgs.put("m", m);
+        renderArgs.put("prenom", m.prenom);
+        renderArgs.put("nom", m.nom);
         render();
     }
 
     public static void contact() {
         Membre m = Membre.find("byEmail", session.get("username")).first();
-        renderArgs.put("m", m);
+        renderArgs.put("prenom", m.prenom);
+        renderArgs.put("nom", m.nom);
         render();
     }
 
     public static void monprofil() {
         Membre m = Membre.find("byEmail", session.get("username")).first();
-        renderArgs.put("m", m);
-        render();
+        renderArgs.put("prenom", m.prenom);
+        renderArgs.put("nom", m.nom);
+        render(m);
     }
 
     public static void mesparcours() {
         Membre m = Membre.find("byEmail", session.get("username")).first();
-        renderArgs.put("m", m);
-        render();
+        renderArgs.put("prenom", m.prenom);
+        renderArgs.put("nom", m.nom);
+        render(m);
     }
 
     /* COTE MEMBRE ----------------------------------*/

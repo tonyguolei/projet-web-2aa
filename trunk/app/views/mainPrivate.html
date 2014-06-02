@@ -6,6 +6,7 @@
     <meta charset="${_response_encoding}">
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <script src="@{'/public/javascripts/semantic.js'}" type="text/javascript"
             charset="${_response_encoding}"></script>
     <script src="@{'/public/javascripts/ProjetWeb.Membre.js'}" type="text/javascript"
@@ -14,6 +15,7 @@
             charset="${_response_encoding}"></script>
     <script src="@{'/public/javascripts/mainPrivate.js'}" type="text/javascript"
             charset="${_response_encoding}"></script>
+
 #{get 'moreScripts' /}
     <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/semantic.css'}">
     <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
@@ -49,12 +51,12 @@
     </a>
 </div>
 
-<div id="main">
+<div id="mainprivate">
     <div class="ui grid">
         <div class="four wide column"  id="menugauche">
             <div class="ui vertical labeled icon menu">
                 <h4 class="ui black block header">
-                    Bienvenue ${m.nom} ${m.prenom}
+                    Bienvenue ${nom} ${prenom}
                 </h4>
                 <a class="#{get 'selectmonprofil' /} black item" href="@{Utilisateur.monprofil()}">
                     <i class="user icon"></i>
@@ -76,7 +78,7 @@
                 </a>
             </div>
         </div>
-        <div class="twelve wide column" id="contenu">
+        <div class="twelve wide column" id="contenuprivate">
         #{doLayout /}
         </div>
     </div>
