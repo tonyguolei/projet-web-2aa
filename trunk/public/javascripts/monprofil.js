@@ -54,10 +54,9 @@ var rules = {
 };
 
 var sexe_value;
-
+var mdp_sha1;
 function handle_submitForm() {
     //cripter mot de passe en sha1
-    var mdp_sha1 = CryptoJS.SHA1($('input[name=motdepasse]').val()).toString();
     var formData = {
         'email' : $('input[name=email]').attr('placeholder'),
         'prenom': $('input[name=prenom]').val(),
@@ -90,6 +89,10 @@ var settings = {
 
 $( document ).ready(function() {
     sexe_value = $('#default_sexe_value').text();
+    mdp_sha1 = $('#password_monprofil').val();
+    $( "#password_monprofil" ).keyup(function() {
+        mdp_sha1 = CryptoJS.SHA1($('#password_monprofil').val()).toString();
+    });
     $('#sexe_dropdown').dropdown({
         onChange: function(val) {
             sexe_value = val;

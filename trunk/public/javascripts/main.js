@@ -288,7 +288,7 @@ var rules_connexion = {
 
 function handle_submitForm_connexion() {
     //cripter mot de passe en sha1
-    var mdp_sha1 = CryptoJS.SHA1($('input[name=motdepasse]').val()).toString();
+    var mdp_sha1 = CryptoJS.SHA1($('input[name=motdepasseform]').val()).toString();
     $('#password_connexion').val(mdp_sha1);
 };
 
