@@ -11,7 +11,7 @@ $(document).bind("ready", function () {
     $("#boutonSinscrire").bind("click", sinscrire);
     $("#conduire").bind("click", conduire);
     $("#sefaireconduire").bind("click", sefaireconduire);
-    $("#accueil").bind("click", accueil);
+    //$("#accueil").bind("click", accueil);
     $("#quisommesnous").bind("click", quisommesnous);
     $("#contact").bind("click", contact);
 
@@ -53,16 +53,6 @@ function obtenirDate(){
 
 /*----------------------FONCTION----------------------------*/
 
-function accueil(){
-    $('#contenu').empty();
-    $('#contenu').append(
-        '<div class="ui green segment">'+
-            '<div class="ui green ribbon label">Accueil</div>'+
-            'Mettre du blabla sur le site'+
-            "(Qu'est-ce que c'est? créé qd? images...)"+
-            '</div>'
-    );
-}
 function sefaireconduire(){
     $('#contenu').empty();
     var tableauParcours = '<table class="ui sortable table segment" id="listeParcours">'+
@@ -109,6 +99,7 @@ function conduire(){
     $('#contenu').append(
         '<div class="ui blue segment">'+
             '<div class="ui blue ribbon label">Conduire</div>'+
+            'Devenez Premium pour proposer vos trajets à de potentiels covoitureurs ou covoitureuses dans la toute la France.'+
             '</div>'
     );
 }
@@ -117,8 +108,27 @@ function quisommesnous(){
     $('#contenu').append(
         '<div class="ui purple segment">'+
             '<div class="ui purple ribbon label">Qui sommes-nous?</div>'+
-            'Schéma équipe avec photo + description  !!'+
-            '</div>'
+            '<div class="ui four items">'+
+                '<div class="item">'+
+                    '<div class="image">'+
+                        '<img class="rounded ui image perso"  src="public/images/personnage/persofemme1.png">'+
+                        '</div>'+
+                        '<div class="content">Riri</div>'+
+                    '</div>'+
+                    '<div class="item">'+
+                        '<div class="image">'+
+                            '<img class="rounded ui image perso" src="public/images/personnage/persohomme1.png">'+
+                            '</div>'+
+                            '<div class="content">Fifi</div>'+
+                        '</div>'+
+                        '<div class="item">'+
+                            '<div class="image">'+
+                                '<img class="rounded ui image perso" src="/public/images/personnage/persohomme2.png">'+
+                                '</div>'+
+                                '<div class="content">Loulou</div>'+
+                            '</div>'+
+                        '</div>'+
+        '</div>'
     );
 }
 function contact(){

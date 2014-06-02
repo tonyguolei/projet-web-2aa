@@ -72,18 +72,25 @@ function handle_submitForm() {
         data: formData
     })
         .done(function(data) {
-            $("#message_success_modify_profil").show().delay(5000).fadeOut();
+            $("#message_success_modify_profil").show();
+            setTimeout(function()
+            {
+                $("#message_success_modify_profil").hide();
+            }, 5000);
+
+            //$("#message_success_modify_profil").show().delay(5000).fadeOut();
         })
         .fail(function (e) {
-            $("#message_failed_modify_profil").show().delay(5000).fadeOut();
+            //$("#message_failed_modify_profil").show().delay(5000).fadeOut();
         })
 };
 
 var settings = {
     inline : true,
     onSuccess : function(event) {
-        event.preventDefault();
+        //event.preventDefault();
         handle_submitForm();
+        alert("ok");
     }
 }
 

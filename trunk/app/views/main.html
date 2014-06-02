@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
     <script src="@{'/public/javascripts/semantic.js'}" type="text/javascript" charset="${_response_encoding}"></script>
     <script src="@{'/public/javascripts/main.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+
 #{get 'moreScripts' /}
     <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/semantic.css'}">
     <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
@@ -31,8 +32,8 @@
 </header>
 
 </div>
-<div id="menu" class="ui menu">
-    <a class="active green inverted item" id="accueil">
+<div id="menu" class="ui menu grid">
+    <a class="active green inverted item" href="@{Application.index()}">
         <i class="home icon"></i> Accueil
     </a>
     <a class="active blue item" id="conduire">

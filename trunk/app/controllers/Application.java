@@ -38,7 +38,7 @@ public class Application extends Controller {
 
             Ville v1 = new Ville("Annecy", "74000").save();
             Ville v2 = new Ville("Gap", "05000").save();
-            Ville v3 = new Ville("Marseille", "13000").save();
+            Ville v3 = new Ville("Marseille 06", "13006").save();
             Ville v4 = new Ville("Grenoble", "38000").save();
             Ville v5 = new Ville("Lyon", "69000").save();
 
