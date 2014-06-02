@@ -81,7 +81,7 @@ function handle_submitForm() {
 
 var settings = {
     inline : true,
-    onSuccess : function() {
+    onSuccess : function(event) {
         event.preventDefault();
         handle_submitForm();
     }

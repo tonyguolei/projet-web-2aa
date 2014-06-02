@@ -8,10 +8,7 @@
 var init;
 
 $(document).bind("ready", function () {
-    testBrowser();
-
     $("#boutonSinscrire").bind("click", sinscrire);
-
     $("#conduire").bind("click", conduire);
     $("#sefaireconduire").bind("click", sefaireconduire);
     $("#accueil").bind("click", accueil);
@@ -25,7 +22,8 @@ $(document).bind("ready", function () {
             sexe_value = val;
         }
     });
-    $('#formInscript').form(rules, settings);
+    $('#formInscript').form(rules_inscription, settings_inscription);
+    $('#formconnexion').form(rules_connexion, settings_connexion);
 });
 
 /*----------------------LIES A DES EVENEMENTS--------------------------*/
@@ -53,13 +51,6 @@ function obtenirDate(){
     return prettyDate;
 }
 
-function testBrowser(){
-    if ($.browser.mozilla) {
-        alert("Vous etre en train d'utiliser Firefox, merci d'utiliser chrome");
-    } else if ($.browser.msie) {
-        alert("Vous etre en train d'utiliser IE, merci d'utiliser chrome");
-    }
-}
 /*----------------------FONCTION----------------------------*/
 
 function accueil(){
@@ -191,7 +182,7 @@ function rechercherParcours(){
 
 /*----------------------FONCTION----------------------------*/
 
-var rules = {
+var rules_inscription = {
     prenom : {
         identifier : 'prenom',
         rules : [{
@@ -237,14 +228,16 @@ var rules = {
 };
 var sexe_value;
 
-function handle_submitForm() {
+function handle_submitForm_inscription() {
+    //cripter mot de passe en sha1
+    var mdp_sha1 = CryptoJS.SHA1($('input[name=motdepasse]').val()).toString();
     var formData = {
         'email' : $('input[name=email]').val(),
         'prenom': $('input[name=prenom]').val(),
         'nom': $('input[name=nom]').val(),
         'date': $('input[name=date]').val(),
         'sexe': sexe_value,
-        'motdepasse': $('input[name=motdepasse]').val()
+        'motdepasse':mdp_sha1
     };
     $.ajax({
         type : 'POST',
@@ -260,10 +253,47 @@ function handle_submitForm() {
         })
 };
 
-var settings = {
+var settings_inscription = {
+    inline : true,
+    onSuccess : function(event) {
+        event.preventDefault();
+        handle_submitForm_inscription();
+    }
+}
+
+
+var rules_connexion = {
+    emailform : {
+        identifier : 'emailform',
+        rules : [{
+            type : 'empty',
+            prompt : 'L\'email est vide'
+        }]
+    },
+    motdepasseform : {
+        identifier : 'motdepasseform',
+        rules : [
+            {
+                type : 'empty',
+                prompt : "Le mot de passe est vide"
+            },
+            {
+                type   : 'length[6]',
+                prompt : 'Le mot de passe est au mimimum de 6 lettres'
+            }
+
+        ]
+    }
+};
+
+function handle_submitForm_connexion() {
+    //cripter mot de passe en sha1
+    $('#password_connexion').val(CryptoJS.SHA1($('input[name=motdepasse]').val()).toString());
+};
+
+var settings_connexion = {
     inline : true,
     onSuccess : function() {
-        event.preventDefault();
-        handle_submitForm();
+        handle_submitForm_connexion();
     }
 }

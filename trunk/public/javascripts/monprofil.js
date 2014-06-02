@@ -56,13 +56,15 @@ var rules = {
 var sexe_value;
 
 function handle_submitForm() {
+    //cripter mot de passe en sha1
+    var mdp_sha1 = CryptoJS.SHA1($('input[name=motdepasse]').val()).toString();
     var formData = {
         'email' : $('input[name=email]').attr('placeholder'),
         'prenom': $('input[name=prenom]').val(),
         'nom': $('input[name=nom]').val(),
         'date': $('input[name=date]').val(),
         'sexe': sexe_value,
-        'new_password': $('input[name=new_password]').val()
+        'new_password': mdp_sha1
     };
 
     $.ajax({
@@ -80,7 +82,7 @@ function handle_submitForm() {
 
 var settings = {
     inline : true,
-    onSuccess : function() {
+    onSuccess : function(event) {
         event.preventDefault();
         handle_submitForm();
     }

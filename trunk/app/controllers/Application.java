@@ -42,10 +42,10 @@ public class Application extends Controller {
             Ville v4 = new Ville("Grenoble", "38000").save();
             Ville v5 = new Ville("Lyon", "69000").save();
 
-            Membre m1 = new Membre("guo", "lei", "123456", convertirStringDate("10/10/1992"), "lei@gmail.com", "M",true).save();
-            Membre m2 = new Membre("laforest", "yann", "123456", convertirStringDate("06/01/1993"), "yann@gmail.com", "M",true).save();
-            Membre m3 = new Membre("grangé", "alice", "123456", convertirStringDate("05/01/1991"), "alice@gmail.com", "F",true).save();
-            Membre m4 = new Membre("viardot", "sébastien", "123456", convertirStringDate("15/05/1956"),
+            Membre m1 = new Membre("guo", "lei", "7c4a8d09ca3762af61e59520943dc26494f8941b", convertirStringDate("10/10/1992"), "lei@gmail.com", "M",true).save();
+            Membre m2 = new Membre("laforest", "yann", "7c4a8d09ca3762af61e59520943dc26494f8941b", convertirStringDate("06/01/1993"), "yann@gmail.com", "M",true).save();
+            Membre m3 = new Membre("grangé", "alice", "7c4a8d09ca3762af61e59520943dc26494f8941b", convertirStringDate("05/01/1991"), "alice@gmail.com", "F",true).save();
+            Membre m4 = new Membre("viardot", "sébastien", "7c4a8d09ca3762af61e59520943dc26494f8941b", convertirStringDate("15/05/1956"),
                     "Sebastien.Viardot@grenoble-inp.fr", "H",true).save();
 
             Parcours p1 = new Parcours(m1, v1, v2, 8, 1, convertirStringDate("15/05/2014"), 14, 00).save();
@@ -237,6 +237,8 @@ public class Application extends Controller {
      * @param motdepasseform
      */
     public static void seconnecter(String emailform,String motdepasseform) {
+        System.out.println("test:" + emailform);
+        System.out.println("test:" + motdepasseform);
         if (Security.authenticate(emailform, motdepasseform)) {
             session.put("username",emailform);
             Utilisateur.index();
