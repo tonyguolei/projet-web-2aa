@@ -51,39 +51,6 @@ ProjetWeb.Membre.prototype = {
             })
     },
 
-    //TODO Recuperer les parcours créés - PAS UTILE
-    recupererParcoursCrees: function(cb_success, cb_error) {
-        var self = this;
-        $.ajax({
-            url: "/recupererParcoursCrees"
-        })
-            .done(function(data) {
-                this.lesParcoursCrees = data;
-                cb_success(data);
-            })
-            .fail(function(error) {
-                console.log("error recupererMembreInfo");
-                cb_error(error);
-            })
-    },
-
-    //TODO Recuperer les parchours choisis -PAS UTILE
-    recupererParcoursChoisis: function(cb_success, cb_error) {
-        var self = this;
-        $.ajax({
-            url: "/recupererParcoursChoisis"
-        })
-            .done(function(data) {
-                this.lesParcoursChoisis = data;
-                cb_success(data);
-            })
-            .fail(function(error) {
-                console.log("error recupererMembreInfo");
-                cb_error(error);
-            })
-    },
-    //creerParcours : function() {},
-
     reserverParcours : function(parcour_id, cb_success, cb_error) {
         var self = this;
         $.ajax( {

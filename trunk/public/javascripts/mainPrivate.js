@@ -20,8 +20,7 @@ $(document).bind('ready', function () {
         }, 1000);
     });
 });
-
-
+/*----------------------LIES A DES EVENEMENTS--------------------------*/
 function obtenirDate() {
     $("#date").datepicker({
         dateFormat: 'dd/mm/yy'
@@ -63,7 +62,6 @@ function afficherDate(date){
     return dateres;
 }
 
-/*----------------------LIES A DES EVENEMENTS--------------------------*/
 function rechercherVille(cp) {
     var parent = cp.parentNode;
     var type = parent.getAttribute("name");

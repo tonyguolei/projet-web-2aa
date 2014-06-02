@@ -85,21 +85,6 @@ public class Utilisateur extends Controller {
         render(m);
     }
 
-    /* COTE MEMBRE ----------------------------------*/
-    //TODO verifier si utilisé
-    public static void recupererMembreInfo() {
-        Membre m = Membre.find("byEmail", session.get("username")).first();
-        JSONSerializer serializer = new JSONSerializer();
-        renderJSON(serializer.include("lesParcoursCrees", "lesParcoursChoisis").exclude("*.class").
-                transform(new DateTransformer("dd/MM/yyyy"), "dateInscription").serialize(m));
-    }
-    //TODO Verifier si utilisé
-    public static void recupererMembreInfoPerso() {
-        Membre m = Membre.find("byEmail", session.get("username")).first();
-        JSONSerializer serializer = new JSONSerializer();
-        renderJSON(serializer.transform(new DateTransformer("dd/MM/yyyy"), "dateInscription").serialize(m));
-    }
-
     //------------------GESTION DES PARCOURS RESERVES-----------------------//
 
     /**
@@ -249,25 +234,6 @@ public class Utilisateur extends Controller {
         }
     }
 
-    //TODO => Inutilisé
-    public static void recupererMembresInscrits() {
-        String id = params.get("id");
-        Parcours p = Parcours.findById(Long.parseLong(id, 10));
-
-        JSONSerializer serializer = new JSONSerializer();
-        renderJSON(serializer.include("membresInscrits").exclude("*.class").
-                transform(new DateTransformer("dd/MM/yyyy"), "dateParcours").serialize(p));
-    }
-
-    //TODO => inutilisé
-    public static void recupererMembreCreateur() {
-        String id = params.get("id");
-        Parcours p = Parcours.findById(Long.parseLong(id, 10));
-        JSONSerializer serializer = new JSONSerializer();
-        renderJSON(serializer.exclude("*.class").serialize(p.createur));
-    }
-
-
     /**
      * Calcule l'age du membre
      * @param date
@@ -304,8 +270,8 @@ public class Utilisateur extends Controller {
         validation.min(getAge(Application.convertirStringDate(date)), 18);
         validation.past(Application.convertirStringDate(date));
         validation.required(sexe);
-        validation.required(new_password);
-        validation.minSize(new_password,6);
+        //validation.required(new_password);
+        //validation.minSize(new_password,6);
         if(validation.hasErrors()){
             throw new IllegalStateException("modifier mon profil erreur");
         }else{
@@ -314,7 +280,7 @@ public class Utilisateur extends Controller {
             m.nom = params.get("nom");
             m.dateNaissance = Application.convertirStringDate(params.get("date"));
             m.sexe = params.get("sexe");
-            m.motDePasse = params.get("new_password");
+            //m.motDePasse = params.get("new_password");
             m.save();
             JSONSerializer serializer = new JSONSerializer();
             renderJSON(serializer.serialize(m));

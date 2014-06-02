@@ -38,7 +38,7 @@ public class Application extends Controller {
 
             Ville v1 = new Ville("Annecy", "74000").save();
             Ville v2 = new Ville("Gap", "05000").save();
-            Ville v3 = new Ville("Marseille 06", "13006").save();
+            Ville v3 = new Ville("Valence", "26000").save();
             Ville v4 = new Ville("Grenoble", "38000").save();
             Ville v5 = new Ville("Lyon", "69000").save();
 
@@ -46,18 +46,20 @@ public class Application extends Controller {
             Membre m2 = new Membre("laforest", "yann", "7c4a8d09ca3762af61e59520943dc26494f8941b", convertirStringDate("06/01/1993"), "yann@gmail.com", "M",true).save();
             Membre m3 = new Membre("grangé", "alice", "7c4a8d09ca3762af61e59520943dc26494f8941b", convertirStringDate("05/01/1991"), "alice@gmail.com", "F",true).save();
             Membre m4 = new Membre("viardot", "sébastien", "7c4a8d09ca3762af61e59520943dc26494f8941b", convertirStringDate("15/05/1956"),
-                    "Sebastien.Viardot@grenoble-inp.fr", "H",true).save();
+                    "sebastien.viardot@grenoble-inp.fr", "H",true).save();
 
-            Parcours p1 = new Parcours(m1, v1, v2, 8, 1, convertirStringDate("15/05/2014"), 14, 00).save();
+            Parcours p1 = new Parcours(m4, v1, v2, 8, 1, convertirStringDate("15/05/2014"), 14, 00).save();
             Parcours p2 = new Parcours(m2, v5, v3, 14, 2, convertirStringDate("10/06/2014"), 13, 50).save();
             Parcours p3 = new Parcours(m3, v4, v1, 15, 3, convertirStringDate("20/02/2014"), 8, 15).save();
             Parcours p4 = new Parcours(m1, v1, v4, 4, 1, convertirStringDate("29/07/2014"),22, 18).save();
             Parcours p5 = new Parcours(m2, v2, v5, 17, 2, convertirStringDate("12/07/2014"),14, 17).save();
             Parcours p6 = new Parcours(m3, v3, v1, 18, 3, convertirStringDate("11/08/2014"),16, 30).save();
-            Parcours p7 = new Parcours(m2, v5, v4, 13, 3, convertirStringDate("30/06/2014"),17, 30).save();
+            Parcours p7 = new Parcours(m4, v5, v4, 13, 3, convertirStringDate("30/06/2014"),17, 30).save();
             Parcours p8 = new Parcours(m1, v1, v3, 13, 3, 14, 30).save();
             Parcours p9 = new Parcours(m1, v5, v2, 13, 3, 8, 30).save();
-            Parcours p10 = new Parcours(m2, v5, v4, 13, 3, convertirStringDate("05/01/2014"),18, 20).save();
+            Parcours p10 = new Parcours(m1, v5, v4, 10, 3, convertirStringDate("05/01/2014"),18, 20).save();
+            Parcours p11 = new Parcours(m2, v5, v4, 9, 3, convertirStringDate("05/01/2014"),14, 05).save();
+            Parcours p12 = new Parcours(m3, v5, v4, 7, 3, convertirStringDate("05/01/2014"),9, 17).save();
 
             p1.ajouterMembreInscrit(m2);
 
@@ -78,6 +80,8 @@ public class Application extends Controller {
             m2.supprimerParcours(p7);
 
             p10.ajouterMembreInscrit(m3);
+            p10.ajouterMembreInscrit(m4);
+            p6.ajouterMembreInscrit(m4);
     }
 
     /*----------------Affichage des pages coté public -----------------*/
@@ -94,7 +98,7 @@ public class Application extends Controller {
 
         List<Parcours> listp = null;
         if(Security.isConnected()){
-            //ne pas renvoyer les parcours deja réservés ni deja effectués
+            //ne pas renvoyer les parcours deja réservés ni deja effectués ou supprimés
             Membre m = Membre.find("byEmail", session.get("username")).first();
             listp = Parcours.find("supprime = ? " +
                     "and ? not in elements(membresInscrits) " +
@@ -102,7 +106,7 @@ public class Application extends Controller {
                     "and createur != ? ",false,m,m).fetch();
         }
         else{
-            //ne pas renvoyer les parcours deja effectués
+            //ne pas renvoyer les parcours deja effectués ou supprimés
             listp = Parcours.find("supprime = ? " +
                     "and dateParcours >= current_date() "
                     ,false).fetch();
@@ -197,9 +201,14 @@ public class Application extends Controller {
 
     /**
      * Gère l'inscription d'un nouveau membre
+     * @param nom
+     * @param prenom
+     * @param email
+     * @param date
+     * @param sexe
+     * @param motdepasse
      */
     public static void sinscrire(String nom, String prenom, String email, String date, String sexe, String motdepasse) {
-        System.out.println("test" + getAge(convertirStringDate(date)));
         validation.required(nom);
         validation.required(prenom);
         validation.required(email);
@@ -223,7 +232,7 @@ public class Application extends Controller {
                     //TODO Ca ne parche pas la ligne en desous, je fais autre moyen, si tu veux, tu peux modifier avec ta solution
                     //Application.seconnecter(email,motdepasse);
                 }else{
-                    throw new IllegalStateException("s'inscSrire erreur");
+                    throw new IllegalStateException("s'inscrire erreur");
                 }
             }else{
                 throw new IllegalStateException("s'inscrire erreur");
@@ -237,8 +246,6 @@ public class Application extends Controller {
      * @param motdepasseform
      */
     public static void seconnecter(String emailform,String motdepasseform) {
-        System.out.println("test:" + emailform);
-        System.out.println("test:" + motdepasseform);
         if (Security.authenticate(emailform, motdepasseform)) {
             session.put("username",emailform);
             Utilisateur.index();

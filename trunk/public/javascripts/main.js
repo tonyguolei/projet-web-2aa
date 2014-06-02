@@ -50,8 +50,15 @@ function obtenirDate(){
     $("#date").val(prettyDate);
     return prettyDate;
 }
+function reinitialiserChamps(){
+    document.getElementsByName("depart")[0].value = "";
+    document.getElementsByName("arrivee")[0].value = "";
+    obtenirDate();
+    init = true;
+    rechercherParcours();
+}
 
-/*----------------------FONCTION----------------------------*/
+/*----------------------FONCTION AFFICHAGE DES PAGES----------------------------*/
 
 function sefaireconduire(){
     $('#contenu').empty();
@@ -85,6 +92,7 @@ function sefaireconduire(){
             '<input type="text" name="date" id="date">'+
             '</div>'+
             '<button class="ui small button" id="boutonChercherParcours" name="boutonChercherParcours">Chercher</button>'+
+            '<button class="ui small button" id="boutonReinitChercher" name="boutonReinitChercher">Reinitialiser</button>'+
             '<div id="message_failed_search" class="ui primary inverted red segment">Aucun parcours n\'a été trouvé.</div>'+
             '</div>'+
             '</div>'+ tableauParcours +
@@ -93,6 +101,7 @@ function sefaireconduire(){
     obtenirDate();
     rechercherParcours();
     $("#boutonChercherParcours").bind("click", rechercherParcours);
+    $("#boutonReinitChercher").bind("click", reinitialiserChamps);
 }
 function conduire(){
     $('#contenu').empty();
@@ -149,8 +158,6 @@ function rechercherParcours(){
     if(init==true)
         init=false;
     else if (depart=="" & arrivee==""){
-        //TODO Aucune saisie
-        alert("aucune saisie");
         return;
     }
 
@@ -190,7 +197,7 @@ function rechercherParcours(){
         })
 }
 
-/*----------------------FONCTION----------------------------*/
+/*----------------------GESTION INSCRIPTION----------------------------*/
 
 var rules_inscription = {
     prenom : {
@@ -239,7 +246,7 @@ var rules_inscription = {
 var sexe_value;
 
 function handle_submitForm_inscription() {
-    //cripter mot de passe en sha1
+    //crypter mot de passe en sha1
     var mdp_sha1 = CryptoJS.SHA1($('input[name=motdepasse]').val()).toString();
     var formData = {
         'email' : $('input[name=email]').val(),
@@ -271,6 +278,7 @@ var settings_inscription = {
     }
 }
 
+/*----------------------GESTION CONNEXION----------------------------*/
 
 var rules_connexion = {
     emailform : {

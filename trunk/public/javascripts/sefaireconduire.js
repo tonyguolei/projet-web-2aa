@@ -20,8 +20,6 @@ function rechercherParcours(){
     if(init==true)
         init=false;
     else if (depart=="" & arrivee==""){
-        //TODO Aucune saisie
-        alert("aucune saisie");
         return;
     }
 

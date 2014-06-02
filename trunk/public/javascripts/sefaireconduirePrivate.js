@@ -12,6 +12,7 @@ var parcours1 = new ProjetWeb.Parcours();
 
 $(document).bind("ready", function () {
     rechercherParcours();
+    $("#boutonReinitChercher").bind("click", reinitialiserChamps);
     $("#boutonChercherParcours").bind("click", rechercherParcours);
     gererEvenementsRecherche();
 });
@@ -19,6 +20,13 @@ $(document).bind("ready", function () {
 function gererEvenementsRecherche(){
     $('.button.consulter1').bind('click', consulterParcours);
     $('.button.reserver').bind('click', reserverParcours);
+}
+function reinitialiserChamps(){
+    document.getElementsByName("depart")[0].value = "";
+    document.getElementsByName("arrivee")[0].value = "";
+    obtenirDate();
+    init = true;
+    rechercherParcours();
 }
 /*----------------------LIES A DES EVENEMENTS--------------------------*/
 function rechercherParcours(){
@@ -29,8 +37,6 @@ function rechercherParcours(){
     if(init==true)
         init=false;
     else if (depart=="" & arrivee==""){
-        //TODO Aucune saisie
-        alert("erreur de saisie");
         return;
     }
 

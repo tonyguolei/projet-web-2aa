@@ -55,7 +55,6 @@ function consulterParcoursMembre() {
 }
 function annulerReservationParcours() {
     //Annuler sa reservation
-
     if (confirm("Etes-vous sur de vouloir vous désinscrire de ce parcours ?")) {
         var tr = this.parentNode.parentNode.parentNode;
         var idp = tr.getElementsByTagName('input')[0].value;
@@ -131,7 +130,6 @@ function afficherMesParcoursCrees(membre) {
                 '<td>' + pcrees.arrivee.nom + '</td>' +
                 '<td>' +
                 '<div class="ui divided list">' +
-                //TODO Convertir date!
                 '<div class="item">' + afficherDate(pcrees.dateParcours) + '</div>' +
                 '<div class="item">' + pcrees.heure + 'h' + pcrees.min + '</div>' +
                 '</div>' +
@@ -174,7 +172,6 @@ function afficherMesParcoursChoisis(membre) {
                 '<td>' + pchoisis.arrivee.nom + '</td>' +
                 '<td>' +
                 '<div class="ui divided list">' +
-                //TODO Convertir date en string
                 '<div class="item">' + afficherDate(pchoisis.dateParcours) + '</div>' +
                 '<div class="item">' + pchoisis.heure + 'h' + pchoisis.min + '</div>' +
                 '</div>' +
