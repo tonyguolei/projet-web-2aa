@@ -55,11 +55,11 @@ public class Application extends Controller {
             Parcours p5 = new Parcours(m2, v2, v5, 17, 2, convertirStringDate("12/07/2014"),14, 17).save();
             Parcours p6 = new Parcours(m3, v3, v1, 18, 3, convertirStringDate("11/08/2014"),16, 30).save();
             Parcours p7 = new Parcours(m4, v5, v4, 13, 3, convertirStringDate("30/06/2014"),17, 30).save();
-            Parcours p8 = new Parcours(m1, v1, v3, 13, 3, 14, 30).save();
-            Parcours p9 = new Parcours(m1, v5, v2, 13, 3, 8, 30).save();
-            Parcours p10 = new Parcours(m1, v5, v4, 10, 3, convertirStringDate("05/01/2014"),18, 20).save();
-            Parcours p11 = new Parcours(m2, v5, v4, 9, 3, convertirStringDate("05/01/2014"),14, 05).save();
-            Parcours p12 = new Parcours(m3, v5, v4, 7, 3, convertirStringDate("05/01/2014"),9, 17).save();
+            Parcours p8 = new Parcours(m1, v1, v3, 13, 3, convertirStringDate("09/09/2014"),14, 30).save();
+            Parcours p9 = new Parcours(m1, v5, v2, 13, 3, convertirStringDate("05/06/2014"),8, 30).save();
+            Parcours p10 = new Parcours(m1, v5, v4, 10, 3, convertirStringDate("05/11/2014"),18, 20).save();
+            Parcours p11 = new Parcours(m2, v5, v4, 9, 3, convertirStringDate("08/10/2014"),14, 05).save();
+            Parcours p12 = new Parcours(m3, v5, v4, 7, 3, convertirStringDate("10/01/2014"),9, 17).save();
 
             p1.ajouterMembreInscrit(m2);
 
@@ -108,7 +108,7 @@ public class Application extends Controller {
         else{
             //ne pas renvoyer les parcours deja effectués ou supprimés
             listp = Parcours.find("supprime = ? " +
-                    "and dateParcours >= current_date() "
+                    "and dateParcours > current_date() "
                     ,false).fetch();
         }
         JSONSerializer serializer = new JSONSerializer();
@@ -154,10 +154,10 @@ public class Application extends Controller {
             listp = Parcours.find(textfind+" " +
                     "and ? not in elements(membresInscrits) " +
                     "and createur != ? ",
-                    "%"+ depart+"%","%"+ arrivee+"%",false,convertirStringDate(date),m,m).fetch();
+                    ""+ depart+"%",""+ arrivee+"%",false,convertirStringDate(date),m,m).fetch();
         }
         else{
-            listp = Parcours.find(textfind,"%"+ depart+"%","%"+ arrivee+"%",false,convertirStringDate(date)).fetch();
+            listp = Parcours.find(textfind,""+ depart+"%",""+ arrivee+"%",false,convertirStringDate(date)).fetch();
         }
 
         JSONSerializer serializer = new JSONSerializer();

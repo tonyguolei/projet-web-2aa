@@ -9,7 +9,6 @@ var init = true;
 
 $(document).bind("ready", function () {
     rechercherParcours();
-    $("#boutonChercherParcours").bind("click", rechercherParcours);
 });
 
 function rechercherParcours(){
