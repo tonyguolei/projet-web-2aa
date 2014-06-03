@@ -10,14 +10,10 @@
     background-image: url("/public/images/rond.jpg");
     background-size: 15px;
 }
-#routefond{
-
-}
 .sub.header h1{
     font-size:x-large;
     font-style: italic;
     color:white;
-    margin:2px 2px 2px 2px;
     background-image: url("/public/images/route/route_seule.png");
     background-repeat: repeat-x;
     background-size:contain;
@@ -43,8 +39,7 @@
 }
 #menu a{
     font-size:14px;
-    margin-left:2px;
-    margin-right:2px;
+
     border-left:1px solid grey;
     border-right:1px solid grey;
 }
