@@ -18,7 +18,8 @@
 
 #{get 'moreScripts' /}
     <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/semantic.css'}">
-    <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/main.css'}">
+    <link rel="stylesheet" media="only screen and (min-width: 769px), only screen and (min-device-width: 769px)" href="@{'/public/stylesheets/main.css'}">
+    <link rel="stylesheet" media="only screen and (max-width: 768px), only screen and (max-device-width: 768px)" href="@{'/public/stylesheets/main_mobile.css'}">
 #{get 'moreStyles' /}
 
 <body>
@@ -32,7 +33,7 @@
 </header>
 
 </div>
-<div id="menu" class="ui menu stackable grid">
+<div id="menu" class="ui menu grid">
     <a class="active green inverted item" href="@{Application.index()}">
         <i class="home icon"></i> Accueil
     </a>
@@ -51,7 +52,7 @@
 </div>
 
 <div id="main">
-      <div class="ui grid">
+      <div class="ui stackable grid">
                 <div class="three wide relaxed column" id="menuconnexion">
                     <div class="ui form">
                     <form id="formconnexion" action="@{Application.seconnecter()}" method="post">
