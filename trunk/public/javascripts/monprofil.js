@@ -24,7 +24,7 @@ var rules = {
             prompt : 'La date de naissance est vide'
         }]
     },
-    /*new_password : {
+    new_password : {
         identifier : 'new_password',
         rules : [
             {
@@ -50,7 +50,7 @@ var rules = {
                 prompt : 'Le mot de passe n\'est pas cohérant'
             }
         ]
-    } */
+    }
 };
 
 var sexe_value;
@@ -62,8 +62,8 @@ function handle_submitForm() {
         'prenom': $('input[name=prenom]').val(),
         'nom': $('input[name=nom]').val(),
         'date': $('input[name=date]').val(),
-        'sexe': sexe_value
-        //'new_password': mdp_sha1
+        'sexe': sexe_value,
+        'new_password': mdp_sha1
     };
 
     $.ajax({
@@ -89,10 +89,10 @@ var settings = {
 
 $( document ).ready(function() {
     sexe_value = $('#default_sexe_value').text();
-    /*mdp_sha1 = $('#password_monprofil').val();
+    mdp_sha1 = $('#password_monprofil').val();
     $( "#password_monprofil" ).keyup(function() {
         mdp_sha1 = CryptoJS.SHA1($('#password_monprofil').val()).toString();
-    });*/
+    });
     $('#sexe_dropdown').dropdown({
         onChange: function(val) {
             sexe_value = val;

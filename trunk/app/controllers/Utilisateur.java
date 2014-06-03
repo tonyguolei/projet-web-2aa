@@ -270,8 +270,8 @@ public class Utilisateur extends Controller {
         validation.min(getAge(Application.convertirStringDate(date)), 18);
         validation.past(Application.convertirStringDate(date));
         validation.required(sexe);
-        //validation.required(new_password);
-        //validation.minSize(new_password,6);
+        validation.required(new_password);
+        validation.minSize(new_password,6);
         if(validation.hasErrors()){
             throw new IllegalStateException("modifier mon profil erreur");
         }else{
@@ -280,7 +280,7 @@ public class Utilisateur extends Controller {
             m.nom = params.get("nom");
             m.dateNaissance = Application.convertirStringDate(params.get("date"));
             m.sexe = params.get("sexe");
-            //m.motDePasse = params.get("new_password");
+            m.motDePasse = params.get("new_password");
             m.save();
             JSONSerializer serializer = new JSONSerializer();
             renderJSON(serializer.serialize(m));
