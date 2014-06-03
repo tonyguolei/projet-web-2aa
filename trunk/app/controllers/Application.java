@@ -229,7 +229,6 @@ public class Application extends Controller {
                 //Aucun membre existant avec cet email
                 Membre m = new Membre(nom, prenom, motdepasse, daten, email, sexe).save();
                 if(m!=null){
-                    //TODO Ca ne parche pas la ligne en desous, je fais autre moyen, si tu veux, tu peux modifier avec ta solution
                     //Application.seconnecter(email,motdepasse);
                 }else{
                     throw new IllegalStateException("s'inscrire erreur");

@@ -1,26 +1,48 @@
 
 *{
-font-family: Awesome;
+    font-family: Awesome;
     font-size:small;
 }
 
+.sub.header{
+    text-align:center;
+    background-repeat: repeat;
+    background-image: url("/public/images/rond.jpg");
+    background-size: 15px;
+}
+.sub.header h1{
+    font-size:x-large;
+    font-style: italic;
+}
 #logo{
     width:20%;
     height:20%;
-}
 
-#piedpage{
-    width: 80%;
 }
-#main{
+#main,#mainprivate{
     width:100%;
 }
-#menugauche,#menuconnexion{
-   width:25%;
+#menuconnexion{
+   width:20%;
 }
-
+#menu{
+   text-align:center;
+   border-bottom:2px solid lightgrey;
+}
+#menu a{
+    margin-left:2px;
+    margin-right:2px;
+    border-left:1px solid grey;
+    border-right:1px solid grey;
+}
 #contenu{
-    width:75%;
+    width:80%;
+}
+#menugauche{
+    width:15%;
+}
+#contenuprivate{
+    width:80%;
 }
 #date{
     width:50%;
@@ -36,7 +58,13 @@ font-family: Awesome;
     width:10%;
     height:10%;
 }
-
+.image.route{
+    width:50%;
+    height:50%;
+}
+#footer{
+    text-align:center;
+}
 
 /* Gestion des messages d'erreurs ou d'infos */
 #message_success_sinscrire{

@@ -195,7 +195,6 @@ public class Membre extends Model {
         Iterator<Parcours> itr = lesParcoursCrees.iterator();
         while(itr.hasNext()) {
             Parcours p = itr.next();
-            //TODO Prendre les parcours avec la dateParcours < dateAujourdhui
             p.supprime = true;
             p.save();
         }
@@ -204,50 +203,10 @@ public class Membre extends Model {
         Iterator<Parcours> itr1 = lesParcoursChoisis.iterator();
         while(itr.hasNext()) {
             Parcours p = itr.next();
-            //TODO Prendre les parcours avec la dateParcours < dateAujourdhui
             p.membresInscrits.remove(this);
             p.save();
         }
         this.save();
     }
 
-    /**
-     * Modifie la date de naissance
-     * @param dateNaissance
-     */
-    public void modifierDateNaissance(Date dateNaissance) {
-        this.dateNaissance = dateNaissance;
-    }
-
-    /**
-     * Modifie le mot de passe du membre
-     * @param motDePasse
-     */
-    public void modifierMotDePasse(String motDePasse) {
-        this.motDePasse = motDePasse;
-    }
-
-    /**
-     * Modifie le prénom du membre
-     * @param prenom
-     */
-    public void modifierPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    /**
-     * Modifie le nom du membre
-     * @param nom
-     */
-    public void modifierNom(String nom) {
-        this.nom = nom;
-    }
-
-    /**
-     * Modifie le sexe du membre
-     * @param sexe
-     */
-    public void modifierSexe(String sexe){
-        this.sexe = sexe;
-    }
 }

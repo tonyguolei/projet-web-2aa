@@ -23,12 +23,5 @@ public class VilleTest extends UnitTest {
         assertEquals(v2.nom,"Lyon");
         assertEquals(v2.codePostal,"69006");
     }
-    @Test
-    public void ville_to_string(){
-        Ville v1 = Ville.find("byCodePostal","69680").first();
-        Ville v2 = Ville.find("byCodePostal","69006").first();
-        v1.toString();
-        v2.toString();
 
-    }
 }
