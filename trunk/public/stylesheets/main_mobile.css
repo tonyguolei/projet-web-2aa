@@ -1,3 +1,64 @@
+.ui.form .field > label {
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.ui.buttons .button, .ui.button {
+    font-size: 8px;
+}
+
+.ui.small.buttons .button, .ui.small.buttons .or, .ui.small.button {
+    font-size: 8px;
+}
+
+.ui.form textarea, .ui.form input[type="text"], .ui.form input[type="email"], .ui.form input[type="date"], .ui.form input[type="password"], .ui.form input[type="number"], .ui.form input[type="url"], .ui.form input[type="tel"] {
+    font-size: 0.8em;
+}
+
+.sub.header h1{
+    font-size:x-large;
+    font-style: italic;
+    display: inline-block;
+}
+
+img, .ui.grid > .row > .column > img {
+    width:auto;
+}
+#logo{
+    margin-right: 5%;
+    width:20%;
+    height:20%;
+    display: inline-block;
+}
+
+#menu {
+    border-bottom: 0px
+}
+#menu a {
+    font-size: 13px;
+    font-weight: bold;
+    margin-left: 0px;
+    margin-right: 0px;
+    border-bottom: 1px solid grey;
+}
+
+#menugauche_contenu {
+   width:100%;
+}
+
+#menugauche_contenu a {
+    font-size: 12px;
+    display: inline-block;
+}
+
+#boutonSeconnecter{
+    display: inline-table;
+}
+
+#boutonSinscrire {
+    display: inline-table;
+}
+
 #message_success_sinscrire{
     display:none;
 }

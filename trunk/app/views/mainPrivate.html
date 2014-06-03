@@ -18,8 +18,8 @@
 
 #{get 'moreScripts' /}
     <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/semantic.css'}">
-    <link rel="stylesheet" media="only screen and (min-width: 769px), only screen and (min-device-width: 769px)" href="@{'/public/stylesheets/main.css'}">
-    <link rel="stylesheet" media="only screen and (max-width: 768px), only screen and (max-device-width: 768px)" href="@{'/public/stylesheets/main_mobile.css'}">
+    <link rel="stylesheet" media="only screen and (min-width: 768px), only screen and (min-device-width: 768px)" href="@{'/public/stylesheets/main.css'}">
+    <link rel="stylesheet" media="only screen and (max-width: 767px), only screen and (max-device-width: 767px)" href="@{'/public/stylesheets/main_mobile.css'}">
     <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 #{get 'moreStyles' /}
 </head>
@@ -55,7 +55,7 @@
 <div id="mainprivate">
     <div class="ui stackable grid">
         <div class="two wide relaxed column"  id="menugauche">
-            <div class="ui vertical labeled icon menu">
+            <div id="menugauche_contenu" class="ui vertical labeled icon menu">
                 <h4 class="ui black block header">
                     Bienvenue ${nom} ${prenom}
                 </h4>
