@@ -121,16 +121,16 @@ function afficherMesParcoursCrees(membre) {
         $('#listeParcoursCrees').append(
             '<tr>' +
                 '<input type="hidden" name="pcreesid" value="' + pcrees.id + '"/>' +
-                '<td>' + pcrees.depart.nom + '</td>' +
-                '<td>' + pcrees.arrivee.nom + '</td>' +
+                '<td><strong class=\'titre_parcour_mobile\'>Départ: &nbsp;&nbsp;&nbsp;&nbsp;</strong>' + pcrees.depart.nom + '</td>' +
+                '<td><strong class=\'titre_parcour_mobile\'>Arrivée: &nbsp;&nbsp;</strong>' + pcrees.arrivee.nom + '</td>' +
                 '<td>' +
                 '<div class="ui divided list">' +
-                '<div>' + afficherDate(pcrees.dateParcours) + '</div>' +
-                '<div>' + pcrees.heure + 'h' + pcrees.min + '</div>' +
+                '<div><strong class=\'titre_parcour_mobile\'>Date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>' + afficherDate(pcrees.dateParcours) + '</div>' +
+                '<div><strong class=\'titre_parcour_mobile\'>heure: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>' + pcrees.heure + 'h' + pcrees.min + '</div>' +
                 '</div>' +
                 '</td>' +
-                '<td>' + nbplacesrestantes + '</td>' +
-                '<td>' + pcrees.prix + '</td>' +
+                '<td><strong class=\'titre_parcour_mobile\'>Place: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>' + nbplacesrestantes + '</td>' +
+                '<td><strong class=\'titre_parcour_mobile\'>Prix: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>' + pcrees.prix + '</td>' +
                 '<td>' +
                 '<div class="ui vertical buttons">' +
                 '<div class="ui small blue button consulter">' +
@@ -164,15 +164,15 @@ function afficherMesParcoursChoisis(membre) {
         $('#listeParcoursChoisis').append(
             '<tr>' +
                 '<input type="hidden" name="pcreesid" value="' + pchoisis.id + '"/>' +
-                '<td>' + pchoisis.depart.nom + '</td>' +
-                '<td>' + pchoisis.arrivee.nom + '</td>' +
+                '<td><strong class=\'titre_parcour_mobile\'>Départ: &nbsp;&nbsp;&nbsp;&nbsp;</strong>' + pchoisis.depart.nom + '</td>' +
+                '<td><strong class=\'titre_parcour_mobile\'>Arrivée: &nbsp;&nbsp;</strong>' + pchoisis.arrivee.nom + '</td>' +
                 '<td>' +
                 '<div class="ui divided list">' +
-                '<div>' + afficherDate(pchoisis.dateParcours) + '</div>' +
-                '<div>' + pchoisis.heure + 'h' + pchoisis.min + '</div>' +
+                '<div><strong class=\'titre_parcour_mobile\'>Date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>' + afficherDate(pchoisis.dateParcours) + '</div>' +
+                '<div><strong class=\'titre_parcour_mobile\'>heure: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>' + pchoisis.heure + 'h' + pchoisis.min + '</div>' +
                 '</div>' +
                 '</td>' +
-                '<td>' + pchoisis.prix + '</td>' +
+                '<td><strong class=\'titre_parcour_mobile\'>Prix: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>' + pchoisis.prix + '</td>' +
                 '<td>' +
                 '<div class="ui vertical buttons">' +
                 '<div class="ui small blue button consulter">' +

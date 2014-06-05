@@ -70,16 +70,16 @@ function rechercherParcours(){
                     $("#tabcontenu").append(
                         "<tr>"+
                             "<input name='idparcours' type='hidden' value='" +value.id + "'/>"+
-                            "<td>"+ value.depart.nom +"</td>"+
-                            "<td>"+ value.arrivee.nom +"</td>"+
+                            "<td><strong class='titre_parcour_mobile'>Départ: &nbsp;&nbsp;&nbsp;&nbsp;</strong>"+ value.depart.nom +"</td>"+
+                            "<td><strong class='titre_parcour_mobile'>Arrivée: &nbsp;&nbsp;</strong>"+ value.arrivee.nom +"</td>"+
                             "<td>"+
                             "<div class='ui divided list'>" +
-                            "<div>"+value.dateParcours+"</div>"+
-                            "<div>"+value.heure + "h" + value.min + "</div>" +
+                            "<div><strong class='titre_parcour_mobile'>Date: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>"+value.dateParcours+"</div>"+
+                            "<div><strong class='titre_parcour_mobile'>heure: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>"+value.heure + "h" + value.min + "</div>" +
                             "</div>" +
                             "</td>"+
-                            "<td>"+ nbplacesrestantes + "/" + value.nbPlacesInitiales+"</td>"+
-                            "<td>"+ value.prix +"</td>"+
+                            "<td><strong class='titre_parcour_mobile'>Place: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>"+ nbplacesrestantes + "/" + value.nbPlacesInitiales+"</td>"+
+                            "<td><strong class='titre_parcour_mobile'>Prix: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</strong>"+ value.prix +"</td>"+
                             listoptions +
                             "</tr>"
                     );

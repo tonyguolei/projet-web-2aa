@@ -18,17 +18,14 @@
 .sub.header h1{
     font-size:x-large;
     font-style: italic;
-    display: inline-block;
 }
 
 img, .ui.grid > .row > .column > img {
     width:auto;
 }
 #logo{
-    margin-right: 5%;
-    width:20%;
-    height:20%;
-    display: inline-block;
+    width:40%;
+    height:40%;
 }
 
 #menu {
@@ -88,4 +85,7 @@ img, .ui.grid > .row > .column > img {
 }
 #message_failed_reservation{
     display:none;
+}
+.titre_parcour_mobile {
+    display:inline-block;
 }
