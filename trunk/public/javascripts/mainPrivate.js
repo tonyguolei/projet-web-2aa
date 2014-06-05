@@ -12,6 +12,9 @@ var calculate;
 var direction;
 
 $(document).bind('ready', function () {
+    $("#btn_facebook").bind("click", ouvrireFacebook);
+    $("#btn_googleplus").bind("click", ouvrireGoogleplus);
+    $("#btn_twitter").bind("click", ouvrireTwitter);
     obtenirDate();
     $(".cp").bind("keyup", function () {
         var inputcp = this;
@@ -21,6 +24,18 @@ $(document).bind('ready', function () {
     });
 });
 /*----------------------LIES A DES EVENEMENTS--------------------------*/
+function ouvrireFacebook(){
+    window.open('http://www.facebook.com', '', '');
+    return false;
+}
+function ouvrireGoogleplus(){
+    window.open('https://plus.google.com/up/search', '', '');
+    return false;
+}
+function ouvrireTwitter(){
+    window.open('http://twitter.com/', '', '');
+    return false;
+}
 function obtenirDate() {
     $("#date").datepicker({
         dateFormat: 'dd/mm/yy'

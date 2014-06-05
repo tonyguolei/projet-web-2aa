@@ -17,6 +17,9 @@ $(document).bind("ready", function () {
     $("#contactpublic").hide();
     $("#conduirepublic").hide();
     $("#sefaireconduirepublic").hide();
+    $("#btn_facebook").bind("click", ouvrireFacebook);
+    $("#btn_googleplus").bind("click", ouvrireGoogleplus);
+    $("#btn_twitter").bind("click", ouvrireTwitter);
 
     //affecter valeur par defaut pour sexe
     sexe_value = $('#default_sexe_value').text();
@@ -30,6 +33,18 @@ $(document).bind("ready", function () {
 });
 
 /*----------------------LIES A DES EVENEMENTS--------------------------*/
+function ouvrireFacebook(){
+    window.open('http://www.facebook.com', '', '');
+    return false;
+}
+function ouvrireGoogleplus(){
+    window.open('https://plus.google.com/up/search', '', '');
+    return false;
+}
+function ouvrireTwitter(){
+    window.open('http://twitter.com/', '', '');
+    return false;
+}
 function sinscrire(){
     $('.small.modal').modal('show');
     $("#date").datepicker({
