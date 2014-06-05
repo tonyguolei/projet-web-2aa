@@ -8,6 +8,10 @@ import models.Parcours;
 import models.*;
 import oauth.signpost.http.HttpRequest;
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.mail.DefaultAuthenticator;
+import org.apache.commons.mail.Email;
+import org.apache.commons.mail.EmailException;
+import org.apache.commons.mail.SimpleEmail;
 import org.joda.time.DateTime;
 import play.*;
 import play.mvc.*;
@@ -43,11 +47,14 @@ public class Application extends Controller {
         Ville v4 = new Ville("Grenoble", "38000").save();
         Ville v5 = new Ville("Lyon", "69000").save();
 
-        Membre m1 = new Membre("guo", "lei", "7c4a8d09ca3762af61e59520943dc26494f8941b", convertirStringDate("10/10/1992"), "lei@gmail.com", "M", true).save();
-        Membre m2 = new Membre("laforest", "yann", "7c4a8d09ca3762af61e59520943dc26494f8941b", convertirStringDate("06/01/1993"), "yann@gmail.com", "M", true).save();
-        Membre m3 = new Membre("grangé", "alice", "7c4a8d09ca3762af61e59520943dc26494f8941b", convertirStringDate("05/01/1991"), "alice@gmail.com", "F", true).save();
-        Membre m4 = new Membre("viardot", "sébastien", "7c4a8d09ca3762af61e59520943dc26494f8941b", convertirStringDate("15/05/1956"),
-                "sebastien.viardot@grenoble-inp.fr", "H", true).save();
+        Membre m1 = new Membre("guo", "lei", "7c4a8d09ca3762af61e59520943dc26494f8941b",
+                convertirStringDate("10/10/1992"), "lei@gmail.com", "M", true).save();
+        Membre m2 = new Membre("laforest", "yann", "7c4a8d09ca3762af61e59520943dc26494f8941b",
+                convertirStringDate("06/01/1993"), "yann@gmail.com", "M", true).save();
+        Membre m3 = new Membre("grangé", "alice", "7c4a8d09ca3762af61e59520943dc26494f8941b",
+                convertirStringDate("05/01/1991"), "alice@gmail.com", "F", true).save();
+        Membre m4 = new Membre("viardot", "sébastien", "7c4a8d09ca3762af61e59520943dc26494f8941b",
+                convertirStringDate("15/05/1956"),"sebastien.viardot@grenoble-inp.fr", "H", true).save();
 
         Parcours p1 = new Parcours(m4, v1, v2, 8, 1, convertirStringDate("15/05/2014"), 14, 00).save();
         Parcours p2 = new Parcours(m2, v5, v3, 14, 2, convertirStringDate("10/06/2014"), 13, 50).save();
@@ -83,6 +90,25 @@ public class Application extends Controller {
         p10.ajouterMembreInscrit(m3);
         p10.ajouterMembreInscrit(m4);
         p6.ajouterMembreInscrit(m4);
+    }
+    public static void envoyerEmail(String dest){
+
+        try{
+            Email email = new SimpleEmail();
+            email.setFrom("inscription@autovollant.fr");
+            email.addTo(dest);
+            email.setSubject("Inscription sur AutoMatic !");
+            email.setMsg("Bonjour, Vous êtes dorénavant membre premium sur notre site Auto'Matic." +
+                    "Cordialement,Toute l'équipe d'AutoVolant");
+            email.setHostName("smtp.googlemail.com");
+            email.setSmtpPort(465);
+            email.setAuthenticator(new DefaultAuthenticator("autovollant", "auto123456"));
+            email.setSSL(true);
+            email.send();
+        } catch (EmailException e) {
+            System.out.println("erreur envoi email");
+            e.printStackTrace();
+        }
     }
 
     /*----------------Affichage des pages  -----------------*/
@@ -134,7 +160,6 @@ public class Application extends Controller {
             //nom saisi pour la ville de depart
             textfind = "depart.nom like ? ";
             depart = StringUtils.capitalize(depart);
-            ;
         }
         if (arrivee.matches("[0-9]+")) {
             //code postal saisi pour la ville darrivee
@@ -175,30 +200,17 @@ public class Application extends Controller {
         if (depart.equalsIgnoreCase("") && arrivee.equalsIgnoreCase("")) {
             tousLesParcoursActuels();
         } else {
-            certainsParcoursActuels(depart, arrivee, date);
+            Date auj = new Date();
+            if(convertirStringDate(date).before(auj)){
+                tousLesParcoursActuels();
+            }
+            else{
+                certainsParcoursActuels(depart, arrivee, date);
+            }
         }
     }
 
-    /**
-     * calculer l'age
-     *
-     * @param date
-     */
-    public static Integer getAge(Date date) {
-        Integer returnAge = null;
-        try {
-            LocalDate personBirthdate = new LocalDate(date);
-            LocalDate sysDateDate = new LocalDate(new Date());
-            Period period = new Period(personBirthdate, sysDateDate, PeriodType
-                    .yearMonthDay());
-            returnAge = new Integer(period.getYears());
-        } catch (Exception e) {
-            System.out.println("Error while calculating Age … " + e);
-        }
-        return returnAge;
-    }
-
-    /**
+     /**
      * Gère l'inscription d'un nouveau membre
      *
      * @param nom
@@ -229,6 +241,7 @@ public class Application extends Controller {
                 Membre m = new Membre(nom, prenom, motdepasse, daten, email, sexe).save();
                 if (m != null) {
                     //Application.seconnecter(email,motdepasse);
+                    envoyerEmail(email);
                 } else {
                     throw new IllegalStateException("s'inscrire erreur");
                 }
@@ -268,6 +281,25 @@ public class Application extends Controller {
             e.printStackTrace();
         }
         return new Date();
+    }
+
+    /**
+     * Calcule l'age
+     *
+     * @param date
+     */
+    public static Integer getAge(Date date) {
+        Integer returnAge = null;
+        try {
+            LocalDate personBirthdate = new LocalDate(date);
+            LocalDate sysDateDate = new LocalDate(new Date());
+            Period period = new Period(personBirthdate, sysDateDate, PeriodType
+                    .yearMonthDay());
+            returnAge = new Integer(period.getYears());
+        } catch (Exception e) {
+            System.out.println("Error while calculating Age … " + e);
+        }
+        return returnAge;
     }
 
 }

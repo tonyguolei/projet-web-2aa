@@ -45,7 +45,6 @@ public class ParcoursTest extends UnitTest {
         assertEquals(p1.prix, 10, 0);
     }
 
-
     @Test
     public void parcours_ajouterMembreInscrit() {
         Membre m2 = Membre.find("byEmail", "alice@gmail.com").first();

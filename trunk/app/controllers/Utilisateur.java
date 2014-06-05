@@ -41,6 +41,10 @@ public class Utilisateur extends Controller {
         Membre m = Membre.find("byEmail", session.get("username")).first();
         renderArgs.put("prenom", m.prenom);
         renderArgs.put("nom", m.nom);
+        renderArgs.put("dateInscription",m.dateInscription);
+        renderArgs.put("nbparcourschoisis",m.lesParcoursChoisis.size());
+        renderArgs.put("nbparcourscrees",m.lesParcoursCrees.size());
+        renderArgs.put("nbmembres",Membre.findAll().size());
         render();
     }
 
@@ -93,26 +97,6 @@ public class Utilisateur extends Controller {
     }
 
     //------------------GESTION DES PARCOURS RESERVES-----------------------//
-
-    public static void envoyerEmail(String dest){
-
-        try{
-            Email email = new SimpleEmail();
-            email.setFrom("inscription@autovolant.fr");
-            email.addTo(dest);
-            email.setSubject("subject");
-            email.setMsg("Bonjour,<br/> Vous êtes dorénavant membre premium sur notre site Auto'Matic." +
-                    "<br/>Cordialement,<br/>Toute l'équipe d'AutoVolant");
-            email.setHostName("smtp.googlemail.com");
-            email.setSmtpPort(465);
-            //email.setAuthenticator(new DefaultAuthenticator("autovolant", ""));
-            email.setSSL(true);
-            email.send();
-        } catch (EmailException e) {
-            System.out.println("erreur envoi email");
-            e.printStackTrace();
-        }
-    }
 
     /**
      * Annule la réservation d'un parcours faite par le membre connecté
@@ -224,7 +208,8 @@ public class Utilisateur extends Controller {
      * @param prix
      * @param nbplaces
      */
-    public static void proposerParcours(String depart, String departcp, String arrivee, String arriveecp, String date, String heure, String min, String prix, String nbplaces) {
+    public static void proposerParcours(String depart, String departcp, String arrivee, String arriveecp,
+                                        String date, String heure, String min, String prix, String nbplaces) {
         validation.required(depart);
         validation.required(arrivee);
         validation.required(date);
@@ -288,7 +273,8 @@ public class Utilisateur extends Controller {
      * @param sexe
      * @param new_password
      */
-    public static void modifierMonProfil(String email, String prenom, String nom, String date, String sexe, String new_password) {
+    public static void modifierMonProfil(String email, String prenom, String nom, String date,
+                                         String sexe, String new_password) {
         validation.required(email);
         validation.email(email);
         validation.required(prenom);

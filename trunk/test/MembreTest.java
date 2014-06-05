@@ -5,6 +5,7 @@
  * Time: 23:57
  * To change this template use File | Settings | File Templates.
  */
+import controllers.Application;
 import org.junit.*;
 import java.util.*;
 import play.test.*;
@@ -12,9 +13,8 @@ import models.*;
 
 public class MembreTest extends UnitTest  {
 
-        @Test
+        @Before
         public void membre_creation(){
-
             Membre m1 = Membre.find("byEmail", "lei@gmail.com").first();
             if(m1==null)
                 m1 = new Membre("guo", "lei", "123456", new Date(), "lei@gmail.com", "M").save();
@@ -53,7 +53,6 @@ public class MembreTest extends UnitTest  {
 
             m2.supprimerParcours(p3);
             assert(p3.supprime == true);
-
         }
 
         @Test

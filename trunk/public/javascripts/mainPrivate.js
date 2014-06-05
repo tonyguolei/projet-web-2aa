@@ -129,28 +129,23 @@ function afficherParcoursInfo(parcours) {
     }
 
     $('#lieu').append(
-        '<div class="ui one column page grid ">' +
+        '<div class="ui two column page grid ">' +
             '<div class="ui column">' +
-                '<div class="ui large label">' +
-                    '<i class=" circular inverted map marker icon"></i>Départ' +
-                '</div>'+
-                '<div class="ui small label">' +
-                    '<p>'+parcours.depart.nom + ' [ '+
-                    parcours.depart.codePostal+' ] </p>'+
+                '<div class="ui large grey label">' +
+                '<i class=" circular inverted map marker icon"></i>Départ'+
+                 '<p>'+parcours.depart.nom + ' ['+
+                 parcours.depart.codePostal+'] </p>'+
                 '</div>' +
             '</div>' +
-        '</div>' +
-            '<div class="ui one column page grid ">' +
             '<div class="ui column">' +
-            '<div class="ui large label">' +
-            '<i class=" circular inverted map marker icon"></i>Arrivée' +
-            '</div>'+
-            '<div class="ui small label">' +
+            '<div class="ui large grey label">' +
+            '<i class=" circular inverted map marker icon"></i>Arrivée'+
             '<p>'+parcours.arrivee.nom + ' ['+
-             parcours.arrivee.codePostal+' ] </p>'+
+            parcours.arrivee.codePostal+'] </p>'+
             '</div>' +
             '</div>' +
-            '</div>'
+        '</div>'+
+    '</div>'
     );
 
     $('#resparcours').append(

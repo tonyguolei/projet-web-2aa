@@ -1,15 +1,6 @@
 *{ You can use plain selenium command using the selenium tag }*
 
 #{selenium}
-    //Charge la Base, et connecte un utilisateur enregistré
-    clearSession()
-    open('/initbase')
-    open('/')
-    type('emailform','yann@gmail.com')
-    type('motdepasseform','123456')
-    clickAndWait('boutonSeconnecter')
-    assertTextPresent('Bienvenue laforest yann')
-
     //Inscription d'un utilisateur
     open('/')
     click('boutonSinscrire')
