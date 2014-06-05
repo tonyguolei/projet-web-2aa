@@ -23,7 +23,7 @@ public class Utilisateur extends Controller {
     public static void isConnected() {
         //redirection si le membre n'est plus en ligne
         if (!Security.isConnected()) {
-            Application.index();
+            Application.index(null);
         }
     }
 
@@ -34,7 +34,7 @@ public class Utilisateur extends Controller {
 
     public static void deconnexion() {
         session.clear();
-        Application.index();
+        Application.index(null);
     }
 
     public static void index() {

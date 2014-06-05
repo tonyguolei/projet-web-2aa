@@ -30,6 +30,7 @@ $(document).bind("ready", function () {
     });
     $('#formInscript').form(rules_inscription, settings_inscription);
     $('#formconnexion').form(rules_connexion, settings_connexion);
+    $("#message_failed_seconnecter").delay(5000).fadeOut();
 });
 
 /*----------------------LIES A DES EVENEMENTS--------------------------*/

@@ -24,6 +24,9 @@
                     <div class="three wide relaxed column" id="menuconnexion">
                         <div class="ui form">
                         <form id="formconnexion" action="@{Application.seconnecter()}" method="post">
+                        #{if erreur }
+                            <div id="message_failed_seconnecter" class="ui primary inverted red segment">Votre compte n'exsite pas</div>
+                        #{/if}
                         <div class="field">
                             <label>Votre email</label>
                             <div class="ui left labeled icon input">

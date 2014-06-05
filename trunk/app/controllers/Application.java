@@ -112,10 +112,12 @@ public class Application extends Controller {
     }
 
     /*----------------Affichage des pages  -----------------*/
-    public static void index() {
+    public static void index(String erreur) {
         verifieNonConnexion();
-        render();
+        System.out.println(erreur);
+        render(erreur);
     }
+
     /*---------------Methodes contenu des pages -----------------------*/
 
     /**
@@ -262,7 +264,7 @@ public class Application extends Controller {
             session.put("username", emailform);
             Utilisateur.index();
         } else {
-            Application.index();
+            Application.index("Votre compte n'exsite pas");
         }
     }
 
