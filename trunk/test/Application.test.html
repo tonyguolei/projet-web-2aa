@@ -13,11 +13,53 @@
     //Inscription d'un utilisateur
     open('/')
     click('boutonSinscrire')
-    type('prenom','Françoise')
+    type('prenom','François')
     type('nom','Pignon')
-    type('date','07/01/1995')
     type('sexe','H')
-    type("email","fran@pignon.com")
-    clickAndWait('boutonValidationSinscrire')
+    type('email','fran@pignon.com')
+    type('motdepasse','123456')
+    type('date','07/01/1995')
+    click('boutonValidationSinscrire')
+    assertTextPresent('Vous avez crée un compte!!!')
+    open('/')
+
+    //Réinscription de l'utilisateur : erreur
+    click('boutonSinscrire')
+    type('prenom','François')
+    type('nom','Pignon')
+    type('sexe','H')
+    type('email','fran@pignon.com')
+    type('motdepasse','123456')
+    type('date','07/01/1995')
+    click('boutonValidationSinscrire')
+    assertTextPresent('Vous avez une erreur de creation d'un compte!!!')
+
+    //Connexion du nouvel utilisateur
+    open('/')
+    type('emailform','fran@pignon.com')
+    type('motdepasseform','123456')
+    clickAndWait('boutonSeconnecter')
+    assertTextPresent('Bienvenue Pignon François')
+
+    //Tests page Conduire
+    open('/Utilisateur/Conduire')
+
+    //Tests page Accueil
+    open('/Utilisateur/Index')
+    assertTextPresent('Accueil')
+
+    //Tests page Se faire conduire
+    open('Utilisateur/sefaireconduire')
+    assertTextPresent('Se faire conduire')
+    type('depart','Lyon')
+    type('arrivee','Valence')
+    type('date','10/06/2014')
+    click('boutonChercherParcours')
+
+    //Tests page Qui sommes nous?
+    open('Utilisateur/nous')
+    assertTextPresent('Qui sommes-nous?')
+     //type('departcp','38400')
+    //waitForText('Selectionner')
 
 #{/selenium}
