@@ -163,8 +163,8 @@ function rechercherParcours(){
                             "<td>"+ value.arrivee.nom +"</td>"+
                             "<td>" +
                             "<div class='ui divided list'>" +
-                            "<div class='item'>"+value.dateParcours+"</div>"+
-                            "<div class='item'>"+value.heure + "h" + value.min + "</div>" +
+                            "<div>"+value.dateParcours+"</div>"+
+                            "<div>"+value.heure + "h" + value.min + "</div>" +
                             "</div>" +
                             "</td>"+
                             "<td>" + value.nbPlacesInitiales+"</td>"+

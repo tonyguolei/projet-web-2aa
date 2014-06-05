@@ -125,8 +125,8 @@ function afficherMesParcoursCrees(membre) {
                 '<td>' + pcrees.arrivee.nom + '</td>' +
                 '<td>' +
                 '<div class="ui divided list">' +
-                '<div class="item">' + afficherDate(pcrees.dateParcours) + '</div>' +
-                '<div class="item">' + pcrees.heure + 'h' + pcrees.min + '</div>' +
+                '<div>' + afficherDate(pcrees.dateParcours) + '</div>' +
+                '<div>' + pcrees.heure + 'h' + pcrees.min + '</div>' +
                 '</div>' +
                 '</td>' +
                 '<td>' + nbplacesrestantes + '</td>' +
@@ -168,8 +168,8 @@ function afficherMesParcoursChoisis(membre) {
                 '<td>' + pchoisis.arrivee.nom + '</td>' +
                 '<td>' +
                 '<div class="ui divided list">' +
-                '<div class="item">' + afficherDate(pchoisis.dateParcours) + '</div>' +
-                '<div class="item">' + pchoisis.heure + 'h' + pchoisis.min + '</div>' +
+                '<div>' + afficherDate(pchoisis.dateParcours) + '</div>' +
+                '<div>' + pchoisis.heure + 'h' + pchoisis.min + '</div>' +
                 '</div>' +
                 '</td>' +
                 '<td>' + pchoisis.prix + '</td>' +
