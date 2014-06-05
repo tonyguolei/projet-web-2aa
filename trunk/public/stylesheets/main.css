@@ -39,7 +39,6 @@
 }
 #menu a{
     font-size:14px;
-
     border-left:1px solid grey;
     border-right:1px solid grey;
 }
@@ -54,9 +53,6 @@
 }
 #date{
     width:50%;
-}
-.cp{
-
 }
 #sexe_dropdown{
     width:30%;

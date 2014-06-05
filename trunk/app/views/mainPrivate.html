@@ -23,35 +23,9 @@
     <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
 #{get 'moreStyles' /}
 </head>
-
 <body>
-<header id="header">
-    <h1 class="ui green header">
-        <div class="sub header">
-            <img alt="Logo Auto'matic" id="logo" src="/public/images/logoAutoMatic.png"/>
-            <h1>Laissez-nous vous conduire !</h1>
-        </div>
-    </h1>
-</header>
-
-<div id="menu" class="ui menu grid">
-    <a class="active green inverted item" href="@{Utilisateur.index()}">
-        <i class="home icon"></i> Accueil
-    </a>
-    <a class="active blue item" href="@{Utilisateur.conduire()}">
-        <i class="truck icon"></i> Conduire
-    </a>
-    <a class="active teal item" href="@{Utilisateur.sefaireconduire()}">
-        <i class="user icon"></i> Se faire conduire
-    </a>
-    <a class="active purple item" href="@{Utilisateur.nous()}">
-        <i class="question icon"></i> Qui sommes-nous ?
-    </a>
-    <a class="active red item" href="@{Utilisateur.contact()}">
-        <i class="mail icon"></i> Contact
-    </a>
-</div>
-
+#{hautpage /}
+#{menuprive /}
 <div id="mainprivate">
     <div class="ui stackable grid">
         <div class="two wide relaxed column"  id="menugauche">
@@ -67,7 +41,7 @@
                     <i class="dashboard icon"></i>
                     Mes parcours
                 </a>
-                #{secure.check 'admin'}
+            #{secure.check 'admin'}
                 <a class="blue item" href="@{Utilisateur.admin()}">
                     <i class="doctor icon"></i>
                     Admin Espace
@@ -84,21 +58,6 @@
         </div>
     </div>
 </div>
-
-<div class="ui divider" id="piedpage"></div>
-<footer id="footer">
-    <div class="ui facebook button">
-        <i class="facebook icon"></i>
-        Facebook
-    </div>
-    <div class="ui google plus button">
-        <i class="google plus icon"></i>
-        Google Plus
-    </div>
-    <div class="ui twitter button">
-        <i class="twitter icon"></i>
-        Twitter
-    </div>
-</footer>
+#{piedpage /}
 </body>
 </html>

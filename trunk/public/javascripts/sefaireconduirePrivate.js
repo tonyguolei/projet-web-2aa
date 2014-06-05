@@ -115,7 +115,7 @@ function reserverParcours(){
     var membre1 = new ProjetWeb.Membre();
     membre1.reserverParcours(idp,
         function() {
-            init=true;
+            init = true;
             rechercherParcours();
         },
         function() {

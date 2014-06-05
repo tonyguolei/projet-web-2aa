@@ -10,34 +10,11 @@ $(document).bind('ready', function () {
     $('#parcoursactuels').bind('click', afficherMesFutursParcours);
     $('#parcoursprecedents').bind('click', afficherMesParcoursPrecedents);
     afficherMesFutursParcours();
-    gererEvenements();
-});
-
-function gererEvenements() {
     $('.button.consulter').bind('click', consulterParcoursMembre);
-    $('.button.annuler').bind('click', supprimerParcoursCree);
     $('.button.desinscrire').bind('click', annulerReservationParcours);
+    $('.button.annuler').bind('click', supprimerParcoursCree);
     $('.button.reactiver').bind('click', reactiverParcoursCree);
-}
-
-function afficherMesFutursParcours(){
-    $('#parcoursprecedents').attr("class","item");
-    $(this).attr("class","active item");
-
-    $('#listeParcoursCrees_2').hide();
-    $('#listeParcoursChoisis_2').hide();
-    $('#listeParcoursCrees').show();
-    $('#listeParcoursChoisis').show();
-}
-function afficherMesParcoursPrecedents(){
-    $('#parcoursactuels').attr("class","item");
-    $(this).attr("class","active item");
-
-    $('#listeParcoursCrees').hide();
-    $('#listeParcoursChoisis').hide();
-    $('#listeParcoursCrees_2').show();
-    $('#listeParcoursChoisis_2').show();
-}
+});
 
 function consulterParcoursMembre() {
     //Consulter un parcours (créé ou réservé)
@@ -102,9 +79,27 @@ function reactiverParcoursCree() {
             });
     }
 }
-
-
 /*----------------------FONCTION----------------------------*/
+function afficherMesFutursParcours(){
+    $('#parcoursprecedents').attr("class","item");
+    $(this).attr("class","active item");
+
+    $('#listeParcoursCrees_2').hide();
+    $('#listeParcoursChoisis_2').hide();
+    $('#listeParcoursCrees').show();
+    $('#listeParcoursChoisis').show();
+}
+
+function afficherMesParcoursPrecedents(){
+    $('#parcoursactuels').attr("class","item");
+    $(this).attr("class","active item");
+
+    $('#listeParcoursCrees').hide();
+    $('#listeParcoursChoisis').hide();
+    $('#listeParcoursCrees_2').show();
+    $('#listeParcoursChoisis_2').show();
+}
+
 function afficherMesParcoursCrees(membre) {
     $('#listeParcoursCrees').empty();
 
@@ -147,7 +142,8 @@ function afficherMesParcoursCrees(membre) {
                 '</tr>'
         );
     }
-    gererEvenements();
+    $('.button.annuler').bind('click', supprimerParcoursCree);
+    $('.button.reactiver').bind('click', reactiverParcoursCree);
 }
 
 function afficherMesParcoursChoisis(membre) {
@@ -189,5 +185,6 @@ function afficherMesParcoursChoisis(membre) {
         );
 
     }
-    gererEvenements();
+    $('.button.consulter').bind('click', consulterParcoursMembre);
+    $('.button.desinscrire').bind('click', annulerReservationParcours);
 }

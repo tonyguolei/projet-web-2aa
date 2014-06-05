@@ -11,11 +11,14 @@ $(document).bind("ready", function () {
     $("#boutonSinscrire").bind("click", sinscrire);
     $("#conduire").bind("click", conduire);
     $("#sefaireconduire").bind("click", sefaireconduire);
-    //$("#accueil").bind("click", accueil);
     $("#quisommesnous").bind("click", quisommesnous);
     $("#contact").bind("click", contact);
+    $("#nouspublic").hide();
+    $("#contactpublic").hide();
+    $("#conduirepublic").hide();
+    $("#sefaireconduirepublic").hide();
 
-    //affectuer valeur par defaut pour sexe
+    //affecter valeur par defaut pour sexe
     sexe_value = $('#default_sexe_value').text();
     $('#sexe_dropdown').dropdown({
         onChange: function(val) {
@@ -61,7 +64,12 @@ function reinitialiserChamps(){
 /*----------------------FONCTION AFFICHAGE DES PAGES----------------------------*/
 
 function sefaireconduire(){
-    $('#contenu').empty();
+    $("#accueilpublic").hide();
+    $("#nouspublic").hide();
+    $("#contactpublic").hide();
+    $("#conduirepublic").hide();
+    $('#sefaireconduirepublic').empty();
+
     var tableauParcours = '<table class="ui sortable table segment" id="listeParcours">'+
         '<thead><tr>'+
         '<th>Départ</th>'+
@@ -74,7 +82,7 @@ function sefaireconduire(){
         '<tbody id="tabcontenu">'+
         '</tbody>'+
         '</table>';
-    $('#contenu').append(
+    $('#sefaireconduirepublic').append(
         '<div class="ui teal segment">'+
             '<div class="ui teal ribbon label">Se faire conduire</div>'+
             '<div class="ui fluid form segment">'+
@@ -100,114 +108,29 @@ function sefaireconduire(){
     init = true;
     obtenirDate();
     rechercherParcours();
+    $('#sefaireconduirepublic').show();
     $("#boutonChercherParcours").bind("click", rechercherParcours);
     $("#boutonReinitChercher").bind("click", reinitialiserChamps);
 }
 function conduire(){
-    $('#contenu').empty();
-    $('#contenu').append(
-        '<div class="ui blue segment">'+
-            '<div class="ui blue ribbon label">Conduire</div>'+
-            'Devenez Premium pour proposer vos trajets à de potentiels covoitureurs ou covoitureuses dans la toute la France.'+
-            '</div>'
-    );
+    $("#conduirepublic").show();
+    $("#accueilpublic").hide();
+    $("#nouspublic").hide();
+    $("#contactpublic").hide();
+    $("#sefaireconduirepublic").empty();
 }
 function quisommesnous(){
-    $('#contenu').empty();
-    $('#contenu').append(
-        '<div class="ui purple segment">'+
-            '<div class="ui purple ribbon label">Qui sommes-nous?</div>'+
-            '<div class="ui four items">'+
-                '<div class="item">'+
-                    '<div class="image">'+
-                        '<img class="rounded ui image perso"  src="public/images/personnage/persofemme1.png">'+
-                        '</div>'+
-                        '<div class="content">Riri</div>'+
-                    '</div>'+
-                    '<div class="item">'+
-                        '<div class="image">'+
-                            '<img class="rounded ui image perso" src="public/images/personnage/persohomme1.png">'+
-                            '</div>'+
-                            '<div class="content">Fifi</div>'+
-                        '</div>'+
-                        '<div class="item">'+
-                            '<div class="image">'+
-                                '<img class="rounded ui image perso" src="/public/images/personnage/persohomme2.png">'+
-                                '</div>'+
-                                '<div class="content">Loulou</div>'+
-                            '</div>'+
-                        '</div>'+
-        '</div>'
-    );
+    $("#nouspublic").show();
+    $("#conduirepublic").hide();
+    $("#accueilpublic").hide();
+    $("#contactpublic").hide();
+    $("#sefaireconduirepublic").empty();
 }
 function contact(){
-    $('#contenu').empty();
-    $('#contenu').append(
-        '<div class="ui red segment">'+
-            '<div class="ui red ribbon label">Contact</div>'+
-            "<h1>AutoVollant</h1>"+
-            '<div class="two column stackable ui grid">'+
-        '<div class="column">'+
-            '<h2>Notre entreprise</h2>'+
-            '<div class="ui list">'+
-            '<div class="item">'+
-            '<div class="content">'+
-            '<div class="header">Adresse</div>'+
-                    '681 Rue de la Passerelle'+
-                    "38400 Saint-Martin-d'Hères"+
-    '</div>'+
-        '</div>'+
-        '<div class="item">'+
-        '<div class="content">'+
-        '<div class="header">Téléphone</div>'+
-                    '04 76 57 45 00'+
-    '</div>'+
-        '</div>'+
-        '<div class="item">'+
-        '<div class="content">'+
-        '<div class="header">Email</div>'+
-                    'contact@autovollant.fr'+
-    '</div>'+
-        '</div>'+
-        '</div>'+
-        '</div>'+
-        '<div class="column">'+
-        '<h2>Nos horaires</h2>'+
-        '<div class="ui list">'+
-        '<div class="item">'+
-        '<div class="content">'+
-        '<div class="header">Lundi</div>'+
-            '9h/12h - 14h/17h'+
-    '</div>'+
-        '</div>'+
-        '<div class="item">'+
-        '<div class="content">'+
-        '<div class="header">Mardi</div>'+
-        '8h/12h - 14h/17h'+
-    '</div>'+
-        '</div>'+
-        '<div class="item">'+
-        '<div class="content">'+
-        '<div class="header">Mercredi</div>'+
-        '8h/12h - 14h/17h'+
-    '</div>'+
-        '</div>'+
-        '<div class="item">'+
-        '<div class="content">'+
-        '<div class="header">Jeudi</div>'+
-        '8h/12h - 14h/17h'+
-    '</div>'+
-        '</div><div class="item">'+
-        '<div class="content">'+
-        '<div class="header">Vendredi</div>'+
-    '9h/12h - 14h/16h'+
-    '</div>'+
-        '</div>'+
-        '</div>'+
-        '</div>'+
-    '</div>'+
-    '</div>'
-    );
+    $("#contactpublic").show();
+    $("#accueilpublic").hide();
+    $("#nouspublic").hide();
+    $("#sefaireconduirepublic").empty();
 }
 /*----------------------FONCTION DE RECHERCHE DE PARCOURS--------------------------*/
 function rechercherParcours(){

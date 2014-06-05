@@ -3,18 +3,19 @@ package controllers;
 import flexjson.JSONSerializer;
 import flexjson.transformer.DateTransformer;
 import models.*;
+import org.apache.commons.mail.DefaultAuthenticator;
+import org.apache.commons.mail.Email;
+import org.apache.commons.mail.SimpleEmail;
 import org.joda.time.LocalDate;
 import org.joda.time.Period;
 import org.joda.time.PeriodType;
 import play.*;
-import play.db.jpa.*;
 import play.mvc.*;
+import play.libs.Mail;
 
-import javax.servlet.http.*;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import org.apache.commons.mail.EmailException;
 
 public class Utilisateur extends Controller {
 
@@ -75,17 +76,43 @@ public class Utilisateur extends Controller {
         Membre m = Membre.find("byEmail", session.get("username")).first();
         renderArgs.put("prenom", m.prenom);
         renderArgs.put("nom", m.nom);
-        render(m);
+        renderArgs.put("email", m.email);
+        renderArgs.put("dateNaissance", m.dateNaissance);
+        renderArgs.put("motDePasse", m.motDePasse);
+        renderArgs.put("sexe", m.sexe);
+        render();
     }
 
     public static void mesparcours() {
         Membre m = Membre.find("byEmail", session.get("username")).first();
         renderArgs.put("prenom", m.prenom);
         renderArgs.put("nom", m.nom);
-        render(m);
+        renderArgs.put("lesParcoursChoisis", m.lesParcoursChoisis);
+        renderArgs.put("lesParcoursCrees", m.lesParcoursCrees);
+        render();
     }
 
     //------------------GESTION DES PARCOURS RESERVES-----------------------//
+
+    public static void envoyerEmail(String dest){
+
+        try{
+            Email email = new SimpleEmail();
+            email.setFrom("inscription@autovolant.fr");
+            email.addTo(dest);
+            email.setSubject("subject");
+            email.setMsg("Bonjour,<br/> Vous êtes dorénavant membre premium sur notre site Auto'Matic." +
+                    "<br/>Cordialement,<br/>Toute l'équipe d'AutoVolant");
+            email.setHostName("smtp.googlemail.com");
+            email.setSmtpPort(465);
+            //email.setAuthenticator(new DefaultAuthenticator("autovolant", ""));
+            email.setSSL(true);
+            email.send();
+        } catch (EmailException e) {
+            System.out.println("erreur envoi email");
+            e.printStackTrace();
+        }
+    }
 
     /**
      * Annule la réservation d'un parcours faite par le membre connecté

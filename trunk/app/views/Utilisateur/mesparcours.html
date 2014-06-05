@@ -16,7 +16,7 @@
 <div class="ui orange raised segment">
     <div class="ui orange ribbon label">Mes trajets réservés</div>
     <div id="p_proposes">
-    #{if m}
+    #{if lesParcoursChoisis}
         <table class="ui sortable table segment" >
             <thead>
             <tr>
@@ -28,7 +28,7 @@
             </tr>
             </thead>
             <tbody id="listeParcoursChoisis">
-                #{list items:m.lesParcoursChoisis, as:'pchoisis'}
+                #{list items:lesParcoursChoisis, as:'pchoisis'}
                     #{if pchoisis.dateParcours < new Date() }
                     #{/if}
                     #{else }
@@ -64,7 +64,7 @@
                 #{/list}
             </tbody>
             <tbody id="listeParcoursChoisis_2">
-                #{list items:m.lesParcoursChoisis, as:'pchoisis'}
+                #{list items:lesParcoursChoisis, as:'pchoisis'}
                     #{if pchoisis.dateParcours >= new Date() }
                     #{/if}
                     #{else }
@@ -96,13 +96,13 @@
         </table>
     #{/if}
     #{else }
-        Erreur sur la page
+        Aucun parcours réservé
     #{/else}
     </div>
     <br/>
     <div class="ui orange ribbon label">Mes trajets proposés</div>
     <div id="p_crees">
-    #{if m!=null}
+    #{if lesParcoursCrees}
         <table class="ui sortable table segment" >
             <thead>
             <tr>
@@ -115,7 +115,7 @@
             </tr>
             </thead>
             <tbody id="listeParcoursCrees">
-                #{list items:m.lesParcoursCrees, as:'pcrees'}
+                #{list items:lesParcoursCrees, as:'pcrees'}
                 #{if pcrees.dateParcours < new Date() }
                 #{/if}
                 #{else }
@@ -153,7 +153,7 @@
                 #{/list}
             </tbody>
             <tbody id="listeParcoursCrees_2">
-                #{list items:m.lesParcoursCrees, as:'pcrees'}
+                #{list items:lesParcoursCrees, as:'pcrees'}
                     #{if pcrees.dateParcours >= new Date() }
                     #{/if}
                     #{else }
@@ -186,7 +186,7 @@
         </table>
     #{/if}
     #{else }
-        Erreur sur la page
+        Aucun parcours créé
     #{/else}
     </div>
 </div>

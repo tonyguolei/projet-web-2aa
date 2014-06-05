@@ -14,11 +14,11 @@
             <div class="two fields ui message">
                 <div class="field">
                     <label>Prénom</label>
-                    <input name="prenom" type="text" value="${m.prenom}">
+                    <input name="prenom" type="text" value="${prenom}">
                 </div>
                 <div class="field">
                     <label>Nom</label>
-                    <input name="nom" type="text" value="${m.nom}">
+                    <input name="nom" type="text" value="${nom}">
                 </div>
             </div>
             <div class="ui blue message">
@@ -26,13 +26,13 @@
             <div class="two fields ui blue message">
                 <div class="field">
                     <label>Date de naissance</label>
-                    <input name="date" id="date" type="text" value="${m.dateNaissance.format('dd/MM/yyyy')}">
+                    <input name="date" id="date" type="text" value="${dateNaissance.format('dd/MM/yyyy')}">
                 </div>
                 <div class="field">
                     <label>Sexe</label>
                     <div id="sexe_dropdown" class="ui fluid selection dropdown">
                         <input name="sexe" type="hidden">
-                        <div id="default_sexe_value" class="default text">${m.sexe}</div>
+                        <div id="default_sexe_value" class="default text">${sexe}</div>
                         <i class="dropdown icon"></i>
                         <div class="menu">
                             <div class="item" data-value="M">M</div>
@@ -44,15 +44,15 @@
 
             <div class="field">
                 <label>Email</label>
-                <input placeholder="${m.email}" name="email" type="text" readonly="readonly">
+                <input placeholder="${email}" name="email" type="text" readonly="readonly">
             </div>
             <div class="field ui blue message">
                 <label>Nouveau mot de passe</label>
-                <input id="password_monprofil" type="password" name="new_password" value=${m.motDePasse}>
+                <input id="password_monprofil" type="password" name="new_password" value=${motDePasse}>
             </div>
             <div class="field ui blue message">
                 <label>Confirmer mot de passe</label>
-                <input type="password" name="confirm_password" value=${m.motDePasse}>
+                <input type="password" name="confirm_password" value=${motDePasse}>
             </div>
         </div>
 
