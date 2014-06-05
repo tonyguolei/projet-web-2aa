@@ -167,8 +167,8 @@ function afficherParcoursInfo(parcours) {
 }
 
 function afficherCarte(parcours) {
-    $('.raised.segment').empty();
-    $('.raised.segment').append(
+    $("#affichageParcours").empty();
+    $('#affichageParcours').append(
         '<div class="ui two column top aligned relaxed grid basic segment">' +
             '<div class="column">' +
             '<div class="" id="lieu" >' +
@@ -188,6 +188,7 @@ function afficherCarte(parcours) {
     );
     initialize();
     calculate(parcours);
+    $('#affichageParcours').modal('show');
 }
 
 /*-----------------------GESTION MAP--------------------------*/

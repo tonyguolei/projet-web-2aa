@@ -85,26 +85,31 @@ function sefaireconduire(){
     $('#sefaireconduirepublic').append(
         '<div class="ui teal segment">'+
             '<div class="ui teal ribbon label">Se faire conduire</div>'+
-            '<div class="ui fluid form segment">'+
-            '<div class="ui three fields message">'+
-            '<div class="field">'+
-            '<label>Ville de départ</label>'+
-            '<input placeholder="Exemple : Grenoble, 38000" type="text" name="depart">'+
+            '<div id="rechercheParcours">'+
+                '<div class="ui fluid form segment">'+
+                '<div class="ui three fields message">'+
+                '<div class="field">'+
+                '<label>Ville de départ</label>'+
+                '<input placeholder="Exemple : Grenoble, 38000" type="text" name="depart">'+
+                '</div>'+
+                '<div class="field">'+
+                '<label>Ville d\'arrivée</label>'+
+                '<input placeholder="Exemple : Annecy, 74000" type="text" name="arrivee">'+
+                '</div>'+
+                '<div class="field">'+
+                '<label>Date</label>'+
+                '<input type="text" name="date" id="date">'+
+                '</div>'+
+                '<button class="ui small button" id="boutonChercherParcours" name="boutonChercherParcours">Chercher</button>'+
+                '<button class="ui small button" id="boutonReinitChercher" name="boutonReinitChercher">Reinitialiser</button>'+
+                '<div id="message_failed_search" class="ui primary inverted red segment">Aucun parcours n\'a été trouvé.</div>'+
+                '</div>'+
+                '</div>'+ tableauParcours +
+                '</div>'+
             '</div>'+
-            '<div class="field">'+
-            '<label>Ville d\'arrivée</label>'+
-            '<input placeholder="Exemple : Annecy, 74000" type="text" name="arrivee">'+
-            '</div>'+
-            '<div class="field">'+
-            '<label>Date</label>'+
-            '<input type="text" name="date" id="date">'+
-            '</div>'+
-            '<button class="ui small button" id="boutonChercherParcours" name="boutonChercherParcours">Chercher</button>'+
-            '<button class="ui small button" id="boutonReinitChercher" name="boutonReinitChercher">Reinitialiser</button>'+
-            '<div id="message_failed_search" class="ui primary inverted red segment">Aucun parcours n\'a été trouvé.</div>'+
-            '</div>'+
-            '</div>'+ tableauParcours +
-            '</div>');
+            '<div id="affichageParcours">'+
+            '</div>'
+    );
     init = true;
     obtenirDate();
     rechercherParcours();

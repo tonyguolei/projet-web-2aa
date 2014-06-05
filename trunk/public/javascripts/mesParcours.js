@@ -83,7 +83,7 @@ function reactiverParcoursCree() {
 function afficherMesFutursParcours(){
     $('#parcoursprecedents').attr("class","item");
     $(this).attr("class","active item");
-
+    $("#affichageListeParcours").show();
     $('#listeParcoursCrees_2').hide();
     $('#listeParcoursChoisis_2').hide();
     $('#listeParcoursCrees').show();
@@ -93,7 +93,7 @@ function afficherMesFutursParcours(){
 function afficherMesParcoursPrecedents(){
     $('#parcoursactuels').attr("class","item");
     $(this).attr("class","active item");
-
+    $("#affichageListeParcours").show();
     $('#listeParcoursCrees').hide();
     $('#listeParcoursChoisis').hide();
     $('#listeParcoursCrees_2').show();
