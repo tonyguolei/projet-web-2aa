@@ -1,0 +1,38 @@
+#{selenium}
+
+    //Tests page Se faire conduire
+    setSpeed(500)
+    open('Utilisateur/sefaireconduire')
+    assertTextPresent('Se faire conduire')
+    type('depart','Lyon')
+    type('arrivee','Valence')
+    type('date','10/06/2014')
+    click('boutonChercherParcours')
+
+    click('boutonReinitChercher')
+    type('depart','Valence')
+    type('arrivee','Annecy')
+    type('date','11/08/2014')
+    click('boutonChercherParcours')
+    click('//tbody[@id='tabcontenu']/tr/td[6]/div/div')
+    assertTextPresent('Passagers')
+
+    open('Utilisateur/sefaireconduire')
+    click('//tbody[@id='tabcontenu']/tr[4]/td[6]/div/div[2]')
+    assertConfirmation('Etes-vous sur de vouloir vous inscrire sur ce parcours ?')
+
+
+#{/selenium}
+
+#{selenium}
+
+    //Test de "Mes parcours"
+    open('utilisateur/mesparcours')
+    assertTextPresent('Valence')
+    assertTextPresent('Annecy')
+    click('//tbody[@id='listeParcoursChoisis']/tr/td[5]/div/div[2]')
+    assertConfirmation('Etes-vous sur de vouloir vous désinscrire de ce parcours ?')
+    open('utilisateur/mesparcours')
+    assertTextPresent('Aucun parcours réservé')
+
+#{/selenium}

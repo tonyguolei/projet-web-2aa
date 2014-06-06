@@ -1,0 +1,12 @@
+#{selenium}
+
+    //Connexion du nouvel utilisateur
+
+    setSpeed(500)
+    open('/')
+    type('emailform','fran@pignon.com')
+    type('motdepasseform','123456')
+    clickAndWait('boutonSeconnecter')
+    assertTextPresent('Bienvenue Pignon François')
+
+#{/selenium}

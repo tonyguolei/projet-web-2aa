@@ -1,0 +1,18 @@
+#{selenium}
+
+    //Inscription d'un utilisateur
+    setSpeed(500)
+    open('/initbase')
+    open('/')
+    click('boutonSinscrire')
+    type('prenom','François')
+    type('nom','Pignon')
+    type('sexe','H')
+    type('email','fran@pignon.com')
+    type('motdepasse','123456')
+    type('date','07/01/1995')
+    click('boutonValidationSinscrire')
+    assertTextPresent('Vous avez crée un compte!!!')
+    open('/')
+
+#{/selenium}
