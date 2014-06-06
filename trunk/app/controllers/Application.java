@@ -107,7 +107,7 @@ public class Application extends Controller {
             email.send();
         } catch (EmailException e) {
             //System.out.println("erreur envoi email");
-            Application.index();
+            Application.index(null);
             //e.printStackTrace();
         }
     }
