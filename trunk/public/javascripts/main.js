@@ -252,6 +252,7 @@ var sexe_value;
 function handle_submitForm_inscription() {
     //crypter mot de passe en sha1
     var mdp_sha1 = CryptoJS.SHA1($('input[name=motdepasse]').val()).toString();
+
     var formData = {
         'email' : $('input[name=email]').val(),
         'prenom': $('input[name=prenom]').val(),

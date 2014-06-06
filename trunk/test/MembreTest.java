@@ -27,6 +27,26 @@ public class MembreTest extends UnitTest  {
         }
 
         @Test
+        public void membre_modifierInfos(){
+            Membre m1=Membre.find("byEmail","alice@gmail.com").first();
+            m1.motDePasse="MyMdp";
+            m1.save();
+            assertEquals(m1.motDePasse,"MyMdp");
+            m1.prenom="Toto";
+            m1.save();
+            assertEquals(m1.prenom,"Toto");
+            m1.nom="Total";
+            m1.save();
+            assertEquals(m1.nom,"Total");
+            m1.dateNaissance=controllers.Application.convertirStringDate("07/10/1992");
+            m1.save();
+            assertEquals(m1.dateNaissance,controllers.Application.convertirStringDate("07/10/1992"));
+            m1.sexe="F";
+            m1.save();
+            assertEquals(m1.sexe,"F");
+        }
+
+        @Test
         public void membre_assert_creation(){
             Membre m1 = Membre.find("byEmail","lei@gmail.com").first();
             assertNotNull(m1);
@@ -50,7 +70,6 @@ public class MembreTest extends UnitTest  {
             assertNotNull(p2);
             assertNotNull(p3);
             assert(m2.lesParcoursCrees.size()==3);
-
             m2.supprimerParcours(p3);
             assert(p3.supprime == true);
         }

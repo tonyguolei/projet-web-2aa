@@ -179,7 +179,7 @@ function afficherParcoursInfo(parcours) {
 function afficherCarte(parcours) {
     $("#affichageParcours").empty();
     $('#affichageParcours').append(
-        '<div class="ui two column top aligned relaxed grid basic segment">' +
+        '<div class="ui two column stackable grid basic segment">' +
             '<div class="column">' +
             '<div class="" id="lieu" >' +
             '</div>' +
@@ -194,7 +194,7 @@ function afficherCarte(parcours) {
                     '</div>' +
                 '</div>' +
             '</div>' +
-            '</div>'
+        '</div>'
     );
     initialize();
     calculate(parcours);
