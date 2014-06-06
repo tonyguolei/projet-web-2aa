@@ -106,8 +106,9 @@ public class Application extends Controller {
             email.setSSL(true);
             email.send();
         } catch (EmailException e) {
-            System.out.println("erreur envoi email");
-            e.printStackTrace();
+            //System.out.println("erreur envoi email");
+            Application.index();
+            //e.printStackTrace();
         }
     }
 
