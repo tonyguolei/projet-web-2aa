@@ -4,6 +4,33 @@
     setSpeed(500)
     open('/Utilisateur/Conduire')
    // type('departcp','38400')
-    keyDown('departcp',"/51/56/52/48/48/48")
-    waitForText('coincoin')
+    focus('name=departcp')
+    type('departcp','38400')
+    keyDown('name=departcp','\51')
+    keyUp('name=departcp','\51')
+    waitForTextPresent('Selectionner')
+    click('//form[@id='formProproserParcours']/div[4]/div/div/div')
+    click('class=item')
+
+    focus('name=arriveecp')
+    type('arriveecp','69006')
+    keyDown('name=arriveecp','\51')
+    keyUp('name=arriveecp','\51')
+    waitForTextPresent('Selectionner')
+    click('//form[@id='formProproserParcours']/div[4]/div/div[2]/div')
+    click('class=item')
+
+    type('date','10/12/2014')
+    type('heure','18')
+    type('min','30')
+    type('prix','6')
+    type('nbplaces','4')
+    click('boutonProposer')
+    assertTextPresent('Vous avez crée un parcours!!!')
+
+    //Verification du parcours cree
+    open('/utilisateur/mesparcours')
+    assertTextPresent('Saint-Martin-d')
+    assertTextPresent('Lyon 06')
+
 #{/selenium}
