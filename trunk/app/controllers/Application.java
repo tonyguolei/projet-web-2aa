@@ -54,7 +54,7 @@ public class Application extends Controller {
         Membre m3 = new Membre("grangé", "alice", "7c4a8d09ca3762af61e59520943dc26494f8941b",
                 convertirStringDate("05/01/1991"), "alice@gmail.com", "F", true).save();
         Membre m4 = new Membre("viardot", "sébastien", "7c4a8d09ca3762af61e59520943dc26494f8941b",
-                convertirStringDate("15/05/1956"),"sebastien.viardot@grenoble-inp.fr", "H", true).save();
+                convertirStringDate("15/05/1956"), "sebastien.viardot@grenoble-inp.fr", "H", true).save();
 
         Parcours p1 = new Parcours(m4, v1, v2, 8, 1, convertirStringDate("15/05/2014"), 14, 00).save();
         Parcours p2 = new Parcours(m2, v5, v3, 14, 2, convertirStringDate("10/06/2014"), 13, 50).save();
@@ -91,9 +91,10 @@ public class Application extends Controller {
         p10.ajouterMembreInscrit(m4);
         p6.ajouterMembreInscrit(m4);
     }
-    public static void envoyerEmail(String dest){
 
-        try{
+    public static void envoyerEmail(String dest) {
+
+        try {
             Email email = new SimpleEmail();
             email.setFrom("inscription@autovollant.fr");
             email.addTo(dest);
@@ -108,6 +109,7 @@ public class Application extends Controller {
         } catch (EmailException e) {
             //System.out.println("erreur envoi email");
             Application.index(null);
+            //Application.index();
             //e.printStackTrace();
         }
     }
@@ -115,7 +117,7 @@ public class Application extends Controller {
     /*----------------Affichage des pages  -----------------*/
     public static void index(String erreur) {
         verifieNonConnexion();
-        System.out.println(erreur);
+        //System.out.println(erreur);
         render(erreur);
     }
 
@@ -204,16 +206,15 @@ public class Application extends Controller {
             tousLesParcoursActuels();
         } else {
             Date auj = new Date();
-            if(convertirStringDate(date).before(auj)){
+            if (convertirStringDate(date).before(auj)) {
                 tousLesParcoursActuels();
-            }
-            else{
+            } else {
                 certainsParcoursActuels(depart, arrivee, date);
             }
         }
     }
 
-     /**
+    /**
      * Gère l'inscription d'un nouveau membre
      *
      * @param nom
@@ -244,7 +245,7 @@ public class Application extends Controller {
                 Membre m = new Membre(nom, prenom, motdepasse, daten, email, sexe).save();
                 if (m != null) {
                     //Application.seconnecter(email,motdepasse);
-                    envoyerEmail(email);
+                    //envoyerEmail(email);
                 } else {
                     throw new IllegalStateException("s'inscrire erreur");
                 }
@@ -261,11 +262,12 @@ public class Application extends Controller {
      * @param motdepasseform
      */
     public static void seconnecter(String emailform, String motdepasseform) {
+
         if (Security.authenticate(emailform, motdepasseform)) {
             session.put("username", emailform);
             Utilisateur.index();
         } else {
-            Application.index("Votre compte n'exsite pas");
+            Application.index("Votre compte n'existe pas");
         }
     }
 

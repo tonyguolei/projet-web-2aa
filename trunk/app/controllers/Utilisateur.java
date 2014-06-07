@@ -39,13 +39,16 @@ public class Utilisateur extends Controller {
 
     public static void index() {
         Membre m = Membre.find("byEmail", session.get("username")).first();
-        renderArgs.put("prenom", m.prenom);
-        renderArgs.put("nom", m.nom);
-        renderArgs.put("dateInscription",m.dateInscription);
-        renderArgs.put("nbparcourschoisis",m.lesParcoursChoisis.size());
-        renderArgs.put("nbparcourscrees",m.lesParcoursCrees.size());
-        renderArgs.put("nbmembres",Membre.findAll().size());
-        render();
+        if (m!=null){
+            renderArgs.put("prenom", m.prenom);
+            renderArgs.put("nom", m.nom);
+            renderArgs.put("dateInscription",m.dateInscription);
+            renderArgs.put("nbparcourschoisis",m.lesParcoursChoisis.size());
+            renderArgs.put("nbparcourscrees",m.lesParcoursCrees.size());
+            renderArgs.put("nbmembres",Membre.findAll().size());
+            render();
+        }
+        Application.index(null);
     }
 
     public static void conduire() {
