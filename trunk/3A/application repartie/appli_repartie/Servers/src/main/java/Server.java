@@ -10,9 +10,9 @@ import java.net.Socket;
 
 public class Server {
 
-    private int port = 10000;
+    private ServerSocket server;
 
-    public Server() {
+    public Server(int port) {
         try {
             createSocketServer(port);
         } catch (IOException e) {
@@ -20,9 +20,17 @@ public class Server {
         }
     }
 
+    public ServerSocket getServer() {
+        return server;
+    }
+
+    public void setServer(ServerSocket server) {
+        this.server = server;
+    }
+
     private void createSocketServer(int port) throws IOException {
 
-        ServerSocket server = new ServerSocket(port);
+        setServer(new ServerSocket(port));
 
         while (true) {
             Socket socket = server.accept();
@@ -66,6 +74,6 @@ public class Server {
     }
 
     public static void main(String[] args) {
-            new Server();
+            new Server(10000);
     }
 }
