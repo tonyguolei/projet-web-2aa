@@ -16,7 +16,6 @@ public class User {
 
     //constructeur
     public User(String addressServer, int port) throws Exception{
-
         this.addressServer = addressServer;
         this.port = port;
 
