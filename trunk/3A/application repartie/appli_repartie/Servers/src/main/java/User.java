@@ -6,6 +6,7 @@ import java.net.Socket;
 enum Status { WAIT, PLAY, DISCONNECT };
 
 public class User {
+
     //les parametres d'user
     private String pseudo;
     private Socket socket;
