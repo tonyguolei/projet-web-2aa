@@ -7,12 +7,23 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Server {
 
+    //les parametres d'user
     private ServerSocket server;
+    private int sId;
+    private List<User> UsersWait = new ArrayList<User>();
+    private List<User> UsersPlay = new ArrayList<User>();
+    private int neighborServer;
 
-    public Server(int port) {
+    //TODO liste db
+
+    public Server(int sId, int port) {
+        this.sId = sId;
+
         try {
             createSocketServer(port);
         } catch (IOException e) {
@@ -47,7 +58,7 @@ public class Server {
                     in = new BufferedReader(new InputStreamReader(user.getInputStream()));
                     out = new PrintWriter(user.getOutputStream());
 
-                    while (true) {
+                    while (in != null && out != null) {
                         String msg = in.readLine();
                         System.out.println(msg);
                         out.println("Server received " + msg);
@@ -57,7 +68,9 @@ public class Server {
                         }
                     }
                 } catch(IOException ex) {
-                    ex.printStackTrace();
+                    //ex.printStackTrace();
+                    //Todo envelever l'utilisateur quand il est disconnected
+                    System.out.print("User disconnected");
                 } finally {
                     try {
                         in.close();
@@ -74,6 +87,6 @@ public class Server {
     }
 
     public static void main(String[] args) {
-            new Server(10000);
+            new Server(Integer.parseInt(args[0]), 10000);
     }
 }
